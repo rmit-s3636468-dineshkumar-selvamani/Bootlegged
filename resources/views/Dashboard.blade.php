@@ -103,6 +103,7 @@ ul.topnav li.right {float: right;}
   <li><a href="/mylistings">My Listing</a></li>
   <li><a href="#contact">Opportunities</a></li>
    <li><a href="#cart">My Cart</a></li>
+   <li><a href="/addlistings">Add Listing</a></li>
   <li><a href="#profile">Edit Profile</a></li>
   
   <li class="right"><a href="{{URL::to('logout')}}">Logout</a></li>

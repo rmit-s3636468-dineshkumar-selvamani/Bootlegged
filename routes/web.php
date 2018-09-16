@@ -60,3 +60,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Route::get('/mylistings', 'MyListingsController@index')->name('mylistings');
+
+Route::get('/addlistings', 'AddListingsController@index')->name('addlistings');
+Route::post('create','AddListingsController@insert');
