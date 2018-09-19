@@ -4,26 +4,21 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AddListings extends Model
+class ProductBrand extends Model
 {
-    
-
-	/**
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-         'manu_id','product_id','mListing_type','mListing_qty','mListing_unitPrice','mListing_totalPrice','mListing_expiry','mListing_vintage','mListing_condition','mListing_active'
+        'brand_id', 'brand_Name'
     ];
 
-     protected $table = 'manu_listings';
+    protected $table = 'product_brands';
     /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
-   
-
-
 }

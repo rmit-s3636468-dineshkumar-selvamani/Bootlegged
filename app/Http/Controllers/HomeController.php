@@ -54,6 +54,7 @@ class HomeController extends Controller
                     ->select('products.product_id','products.product_itemName')
                     ->get();
 
+
             If (!empty($request->input('page'))) {
             $page = $request->input('page');
         } else {
@@ -110,6 +111,56 @@ class HomeController extends Controller
 
         return view('MyListings')->with('products',$products);
         }
+        
+    }
+
+    public function filter(Request $request,$id)
+    {   
+        if(Auth::user()->type == "StoreOwner")
+        {   
+            
+            $name= DB::table('products')
+                    ->select('products.product_id','products.product_itemName')
+                    ->get();
+
+                    
+            If (!empty($request->input('page'))) {
+            $page = $request->input('page');
+        } else {
+            $page = "1";
+        }
+            $perpage = "9";
+            $offset = ($page - 1) * $perpage;
+
+            $strprods = DB::table('manu_listings')
+            ->select('id','manu_id','product_id','mListing_type','mListing_qty','mListing_unitPrice','mListing_totalPrice','mListing_expiry','mListing_vintage','mListing_condition','mListing_active')
+            ->where('mListing_active',1)
+            ->where('mListing_type', $id);
+
+            $products = DB::table('store_listings')
+            ->select('id','store_id','product_id','sListing_type','sListing_qty','sListing_unitPrice','sListing_totalPrice','sListing_expiry','sListing_vintage','sListing_condition','sListing_active')
+            ->where('store_id', '!=', Auth::user()->store_id )
+            ->where('sListing_active',1)
+            ->where('sListing_type', $id)
+            ->unionall($strprods)
+
+            ->skip($offset)
+            ->take($perpage)
+            ->get();
+
+             $numrows = StoreListing::where('store_id', '!=', Auth::user()->store_id)->where('sListing_active','1')->get()->count();
+             $t1 = "b"; 
+
+             $pagelinks = LengthPager::makeLengthAware($products, $numrows, $perpage, ['t1' => $t1]);
+            
+           
+          
+
+        return view('dashboard')-> with(['name'=>$name,'pagelinks'=>$pagelinks,'products'=>$products]);
+        
+        }
+
+       
         
     }
 }

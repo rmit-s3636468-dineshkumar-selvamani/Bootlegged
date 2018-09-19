@@ -5,9 +5,10 @@
         <!doctype html>
         <html lang="{{ app()->getLocale() }}">
         <head>
+          <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="HandheldFriendly" content="true">
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
 
@@ -43,6 +44,21 @@
           }
 
           /* Dropdown Button */
+          /* Tablet Landscape */
+@media screen and (max-width: 1060px) {
+    #primary { width:67%; }
+    #secondary { width:30%; margin-left:3%;}  
+}
+
+/* Tabled Portrait */
+@media screen and (max-width: 768px) {
+    #primary { width:100%; }
+    #secondary { width:100%; margin:0; border:none; }
+}
+/*img { max-width: 100%; }*/
+/*@media (min-width: 640px) { body {font-size:1rem;} } 
+@media (min-width:960px) { body {font-size:1.2rem;} } 
+@media (min-width:1100px) { body {font-size:1.5rem;} } */
 .dropbtn {
    /* background-color: #3498DB;*/
    background: rgba(230, 194, 0); 
@@ -62,7 +78,6 @@
     /*background-color: #2980B9;*/
     background: rgba(211, 188, 63);
 
-}
 
 /* The container <div> - needed to position the dropdown content */
 .dropdown {

@@ -19,11 +19,18 @@
         <script src="js/modernizr.custom.js"></script>
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </head>
     <style>
 body {margin: 0;
-background-image: url(images/beer.jpg);
-}
+      background-color: rgb(26,27,31);
+      /*background-image: url(Images/back.jpg);*/
+      }
+
 ul.topnav {
     list-style-type: none;
     margin: 0;
@@ -31,7 +38,9 @@ ul.topnav {
     overflow: hidden;
     background-color: #333;
 }
+
 ul.topnav li {float: left;}
+
 ul.topnav li a {
     display: block;
     color: white;
@@ -39,140 +48,209 @@ ul.topnav li a {
     padding: 14px 16px;
     text-decoration: none;
 }
+
 ul.topnav li a:hover:not(.active) {background-color: #111;}
+
 ul.topnav li a.active {background: rgba(211, 188, 63);}
+
 ul.topnav li.right {float: right;}
+
 @media screen and (max-width: 600px){
     ul.topnav li.right, 
     ul.topnav li {float: none;}
 }
+
 #pagination{
     display: inline-block;
 }
-/* Full-width input fields */
-input[type=text], input[type=password] {
-    width: 100%;
-    height: 80%;
-    padding: 15px;
-    margin: 5px 0 22px 0;
-    display: inline-block;
-    border: none;
-    background: #f1f1f1;
+
+.page-item.active .page-link {
+    z-index: 1;
+    color: black;
+    /*background-color: gold;*/
+    background: rgba(211, 188, 63);
+    border-color: gold;
 }
-/* Add a background color when the inputs get focus */
-input[type=text]:focus, input[type=password]:focus {
-    background-color: #ddd;
-    outline: none;
+
+.page-link {
+    position: relative;
+    display: block;
+    padding: .5rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: black;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
 }
-/* Set a style for all buttons */
-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    opacity: 0.9;
+
+ .modal-content, .modal-header{
+  background-color: rgb(33,35,39);
 }
-button:hover {
-    opacity:1;
+
+body {
+  margin: 0;
+  font-family: "Lato", sans-serif;
 }
-/* Extra styles for the cancel button */
-.cancelbtn {
-    padding: 14px 20px;
-    background-color: #f44336;
+
+.sidebar {
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: #f1f1f1;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(33,35,39);
 }
-/* Float cancel and signup buttons and add an equal width */
-.cancelbtn, .signupbtn {
-  float: left;
-  width: 50%;
-}
-/* Add padding to container elements */
-.container {
-    padding: 16px;
-}
-/* The Modal (background) */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: #474e5d;
-    padding-top: 50px;
-}
-/* Modal Content/Box */
-.modal-content {
-    background-color: #fefefe;
-    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-    border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
-}
-/* Style the horizontal ruler */
-hr {
-    border: 1px solid #f1f1f1;
-    margin-bottom: 25px;
+
+.sidebar a {
+  display: block;
+  color: black;
+  padding: 16px;
+  text-decoration: none;
 }
  
-/* The Close Button (x) */
-.close {
-    position: absolute;
-    right: 35px;
-    top: 15px;
-    font-size: 40px;
-    font-weight: bold;
-    color: #f1f1f1;
+.sidebar a.active {
+  background-color: rgba(211, 188, 63);
+  color: black;
 }
-.close:hover,
-.close:focus {
-    color: #f44336;
-    cursor: pointer;
+
+.sidebar a:hover:not(.active) {
+  background-color: #555;
+  color: white;
 }
-/* Clear floats */
-.clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
+
+div.content {
+  margin-left: 200px;
+  padding: 1px 16px;
+  height: 1000px;
+  color: white;
 }
-/* Change styles for cancel button and signup button on extra small screens */
-@media screen and (max-width: 300px) {
-    .cancelbtn, .signupbtn {
-       width: 100%;
-    }
+
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {float: left;}
+  div.content {margin-left: 0;}
 }
+
+@media screen and (max-width: 400px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
+  }
+}
+
+.logo{
+                 
+                 visibility: visible;
+                 position: absolute;
+                 height: 125px;
+                 width: 175px;
+                 float: left;
+                 margin-top: -15px;
+                 margin-left: 10px;
+
+
+
+                 
+             }
+
+             .filter{
+
+              position: relative;
+              margin-left: 250px;
+
+             }
+
+             
+
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu>.dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -6px;
+    margin-left: -1px;
+    -webkit-border-radius: 0 6px 6px 6px;
+    -moz-border-radius: 0 6px 6px;
+    border-radius: 0 6px 6px 6px;
+}
+
+.dropdown-submenu:hover>.dropdown-menu {
+    display: block;
+}
+
+.dropdown-submenu>a:after {
+    display: block;
+    content: " ";
+    float: right;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px 0 5px 5px;
+    border-left-color: #ccc;
+    margin-top: 5px;
+    margin-right: -10px;
+}
+
+.dropdown-submenu:hover>a:after {
+    border-left-color: #fff;
+}
+
+.dropdown-submenu.pull-left {
+    float: none;
+}
+
+.dropdown-submenu.pull-left>.dropdown-menu {
+    left: -100%;
+    margin-left: 10px;
+    -webkit-border-radius: 6px 0 6px 6px;
+    -moz-border-radius: 6px 0 6px 6px;
+    border-radius: 6px 0 6px 6px;
+}
+
+.product{
+  min-height: 430px;
+}
+
 </style>
     <body>
-        <ul class="topnav">
-@if( Auth::user()->type == 'StoreOwner')
-  <li><a  href="home">Product Listing</a></li>
-  @endif
-    <li><a class="active" href="/mylistings">My Listing</a></li>
-  <li><a href="#contact">Opportunities</a></li>
-   <li><a href="#cart">My Cart</a></li>
-   <li><a href="/addlistings">Add Listing</a></li>
-  <li><a href="#profile">Edit Profile</a></li>
-  <li class="right"><a href="{{URL::to('logout')}}">Logout</a></li>
-</ul>
-        <!-- Compare basket -->
-        <div class="compare-basket">
-            <button class="action action--button action--compare"><i class="fa fa-check"></i><span class="action__text">Compare</span></button>
-        </div>
+       <div class="sidebar">
+  <img style=" position: absolute; display: inline;" class="logo"  alt ="logo" src="/Images/logo1.png">
+  <a  href="#home" style="margin-top: 90px; color: white; text-align: center;">Welcome,<br> {{Auth::user()->business_name}}</a>
+   
+  @if( Auth::user()->type == 'StoreOwner')
+  <a  href="/home" style="color: white;">Market Place</a>
+   @endif
+  <a href="/mylistings" class="active" >My Listing</a>
+  <a href="/addlistings" style="color: white;">Add Listing</a>
+  <a href="#contact" style="color: white;">Opportunities</a>
+  <hr style="border-style: groove;
+    border-width: 1px;"> 
+  <a href="#about" style="color: white;">Edit Profile</a>
+  
+  <a href="#contact" style="color: white;">My Cart</a>
+  
+  <a href="{{URL::to('logout')}}" style="color: white;">Logout</a>
+</div>
+        
+        
         <!-- Main view -->
         <div class="view">
             <!-- Blueprint header -->
-            <header class="bp-header cf">
-                <!-- <span>Blueprint <span class="bp-icon bp-icon-about" data-content="The Blueprints are a collection of basic and minimal website concepts, components, plugins and layouts with minimal style for easy adaption and usage, or simply for inspiration."></span></span> -->
-                <h1>My Listing</h1>
-                <!-- <nav>
-                    <a href="http://tympanus.net/Blueprints/GridGallery/" class="bp-icon bp-icon-prev" data-info="previous Blueprint"><span>Previous Blueprint</span></a> -->
-                    <!--a href="" class="bp-icon bp-icon-next" data-info="next Blueprint"><span>Next Blueprint</span></a-->
-                    <!-- <a href="http://tympanus.net/codrops/?p=24096" class="bp-icon bp-icon-drop" data-info="back to the Codrops article"><span>back to the Codrops article</span></a>
-                    <a href="http://tympanus.net/codrops/category/blueprints/" class="bp-icon bp-icon-archive" data-info="Blueprints archive"><span>Go to the archive</span></a>
-                </nav> -->
+           <div class="view" style="margin-left: 14%;">
+            <!-- Blueprint header -->
+            <header class="bp-header cf" style="color: white;">
+                
+                <h1>My Listings</h1>
+                
             </header>
             <!-- Product grid -->
             <section class="grid">
@@ -180,37 +258,48 @@ hr {
                 <!-- Products -->
                 @if( Auth::user()->type == 'StoreOwner')       
                          @foreach($products as $item)
-                <div class="product">
-                    <div class="product__info">
-                        @if($item->sListing_type == "Wine")
-                        <img class="product__image" src="images/2.png" alt="Product 1" />
-                        @elseif($item->sListing_type == "Vodka")
-                        <img class="product__image" src="images/6.png" alt="Product 1" />
-                        @elseif($item->sListing_type == "Rum")
-                        <img class="product__image" src="images/4.png" alt="Product 1" />
-                        @elseif($item->sListing_type == "Gin")
-                        <img class="product__image" src="images/5.png" alt="Product 1" />
-                        @elseif($item->sListing_type == "Whiskey")
-                        <img class="product__image" src="images/1.png" alt="Product 1" />
-                        @elseif($item->sListing_type == "Beer")
-                        <img class="product__image" src="images/7.png" alt="Product 1" />
-                        @else
-                         <img class="product__image" src="images/8.png" alt="Product 1" />
-                        @endif
-                        <h3 class="product__title">{{$item->sListing_type}}</h3>
-                        <span class="product__year extra highlight">{{$item->sListing_type}}</span>
-                        <span class="product__region extra highlight">{{$item->sListing_qty}}</span>
-                        <span class="product__varietal extra highlight">{{$item->sListing_condition}} </span>
-                        <span class="product__alcohol extra highlight">{{$item->sListing_expiry}}</span>
-                        <span class="product__price highlight">${{$item->sListing_totalPrice}}</span>
-                        <button class="action action--button action--buy" onclick="document.getElementById({{$item->id}}).style.display='block'" style="width:auto;"><i class="fa fa-check"></i><span class="action__text" >Edit Details</span></button>
-                    </div>
-                    <label class="action action--compare-add"><input class="check-hidden" type="checkbox" /><i class="fa fa-plus"></i><i class="fa fa-check"></i><span class="action__text action__text--invisible">Add to compare</span></label>
-                </div>
-                
-                @endforeach
+                            @foreach($name as $itemname)
+                                @if($itemname->product_id == $item->product_id)
+                                    <div class="product">
+                                        <div class="product__info">
+                                            @if($item->sListing_type == "Wine")
+                                            <img class="product__image" src="images/2.png" alt="Product 1" />
+                                            @elseif($item->sListing_type == "Vodka")
+                                            <img class="product__image" src="images/6.png" alt="Product 1" />
+                                            @elseif($item->sListing_type == "Rum")
+                                            <img class="product__image" src="images/4.png" alt="Product 1" />
+                                            @elseif($item->sListing_type == "Gin")
+                                            <img class="product__image" src="images/5.png" alt="Product 1" />
+                                            @elseif($item->sListing_type == "Whiskey")
+                                            <img class="product__image" src="images/1.png" alt="Product 1" />
+                                            @elseif($item->sListing_type == "Beer")
+                                            <img class="product__image" src="images/7.png" alt="Product 1" />
+                                            @else
+                                             <img class="product__image" src="images/8.png" alt="Product 1" />
+                                            @endif
+                                            <h6 class="product__price highlight" style="color: white">{{$itemname->product_itemName}}</h6><br>
+                                            <h6 class="product__price highlight" style="color: white">Quantity - {{$item->sListing_qty}}</h6>
+                                            <span class="product__price extra highlight">Type - {{$item->sListing_type}} </span>
+                                            <span class="product__price extra highlight">Unit Price - {{$item->sListing_unitPrice}} </span>
+                                            <span class="product__price extra highlight">Expiry - {{$item->sListing_expiry}} </span>
+                                            <span class="product__price extra highlight">Vintage - {{$item->sListing_vintage}} </span>
+                                            <span class="product__price extra highlight">Condition - {{$item->sListing_condition}} </span>
+                                            <span class="product__price highlight"> Price : $ {{$item->sListing_totalPrice}}</span>
+                                            <button class="action action--button action--buy" data-toggle="modal" 
+                                        data-target="#prod_details" data-prodname="{{$itemname->product_itemName}}" data-type="{{$item->sListing_type}}" data-total_qty="{{ $item->sListing_qty }} " 
+                                        data-unit="{{ $item->sListing_unitPrice }}" data-total="{{ $item->sListing_totalPrice }}" 
+                                        data-expiry="{{ $item->sListing_expiry }}" data-vintage="{{ $item->sListing_vintage }}"
+                                        data-condition="{{ $item->sListing_condition }}" onmouseover="" style="cursor: pointer;" style="width:auto;"><i class="fa fa-check"></i><span class="action__text" >Edit Details</span></button>
+                                        </div>
+                                       
+                                   </div>
+                                @endif
+                            @endforeach
+                        @endforeach
                 @else
                   @foreach($products as $item)
+                    @foreach($name as $itemname)
+                                @if($itemname->product_id == $item->product_id)
                 <div class="product">
                     <div class="product__info">
                         @if($item->mListing_type == "Wine")
@@ -228,59 +317,85 @@ hr {
                         @else
                          <img class="product__image" src="images/8.png" alt="Product 1" />
                         @endif
-                        <h3 class="product__title">{{$item->mListing_type}}</h3>
-                        <span class="product__year extra highlight">{{$item->mListing_type}}</span>
-                        <span class="product__region extra highlight">{{$item->mListing_qty}}</span>
-                        <span class="product__varietal extra highlight">{{$item->mListing_condition}} </span>
-                        <span class="product__alcohol extra highlight">{{$item->mListing_expiry}}</span>
-                        <span class="product__price highlight">${{$item->mListing_totalPrice}}</span>
-                        <button class="action action--button action--buy" onclick="document.getElementById({{$item->id}}).style.display='block'" style="width:auto;"><i class="fa fa-check"></i><span class="action__text" >Edit Details</span></button>
+                        <h6 class="product__price highlight" style="color: white">Quantity - {{$item->mListing_qty}}</h6>
+                        <span class="product__price extra highlight">Type - {{$item->mListing_type}} </span>
+                        <span class="product__price extra highlight">Unit Price - {{$item->mListing_unitPrice}} </span>
+                        <span class="product__price extra highlight">Expiry - {{$item->mListing_expiry}} </span>
+                        <span class="product__price extra highlight">Vintage - {{$item->mListing_vintage}} </span>
+                        <span class="product__price extra highlight">Condition - {{$item->mListing_condition}} </span>
+                        <span class="product__price highlight"> Price : $ {{$item->mListing_totalPrice}}</span>
+                        <button class="action action--button action--buy" data-toggle="modal" 
+                    data-target="#prod_details" data-prodname="{{$itemname->product_itemName}}" data-type="{{$item->sListing_type}}" data-total_qty="{{ $item->sListing_qty }} " 
+                    data-unit="{{ $item->sListing_unitPrice }}" data-total="{{ $item->sListing_totalPrice }}" 
+                    data-expiry="{{ $item->sListing_expiry }}" data-vintage="{{ $item->sListing_vintage }}"
+                    data-condition="{{ $item->sListing_condition }}" onmouseover="" style="cursor: pointer;" style="width:auto;"><i class="fa fa-check"></i><span class="action__text" >Edit Details</span></button>
                     </div>
-                    <label class="action action--compare-add"><input class="check-hidden" type="checkbox" /><i class="fa fa-plus"></i><i class="fa fa-check"></i><span class="action__text action__text--invisible">Add to compare</span></label>
+                   
                 </div>
-                
+                            @endif
+                        @endforeach
                 @endforeach
                 @endif
                             </section>
         </div><!-- /view -->
     
-        <section class="compare">
-            <button class="action action--close"><i class="fa fa-remove"></i><span class="action__text action__text--invisible">Close comparison overlay</span></button>
-        </section>
+        
     <!-- product compare wrapper -->
-    @foreach($products as $item)
-        <div id="1" class="modal">
-        <span onclick="document.getElementById('1').style.display='none'" class="close" title="Close Modal">&times;</span>
-        <form class="modal-content" action="/action_page.php">
-        <div class="container">
-        <h1>Product Details</h1>
-        <hr>
-        <label for="product__title"><b>Product Type</b></label>
-        <input type="text" placeholder="Enter Product Type" name="product__title" value = "{{$item->mListing_type}}" required>
-        <label for="quantity"><b>Quantity</b></label>
-        <input type="text" placeholder="Enter Quantity" name="quantity" value = "{{$item->mListing_qty}}" required>
-        <label for="total_price"><b>Product Price</b></label>
-        <input type="text" placeholder="Product Price" name="total_price" value = "{{$item->mListing_totalPrice}}" required>
-        <div class="clearfix">
-        <button type="button" onclick="document.getElementById('1').style.display='none'" class="cancelbtn">Cancel</button>
-        <button type="submit" class="signupbtn">Save</button>
-        @endforeach
+
+    <!-- Modal View -->
+    <div class="modal fade" id="prod_details" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle" style="color: white;">Modal title</h5>
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body table-responsive">
+
+                @include('modalTable')
+                
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+        <button type="button" class="btn btn-primary" style="background-color: rgba(211, 188, 63); border-color: rgba(211, 188, 63);"><i class="fa fa-check"></i>Save</button>
       </div>
     </div>
-  </form>
+  </div>
 </div>
-<script>
-// Get the modal
-var modal = document.getElementById('1');
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-</script>
-        <script src="js/classie.js"></script>
-        <script src="js/main.js"></script>
+    </div>
+
+
+    
+        <script type="text/javascript">
+        $('#prod_details').on('show.bs.modal', function (event) {
+
+            
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var name = button.data('prodname') // Extract info from data-* attributes
+  var type = button.data('type')
+  var tqty = button.data('total_qty')
+  var unitPrice = button.data('unit')
+  var totalPrice = button.data('total')
+  var expiry = button.data('expiry')
+  var vintage = button.data('vintage')
+  var condition = button.data('condition')
+
+  var modal = $(this)
+
+  modal.find('.modal-title').text(name)
+  modal.find('.modal-body #type').val(type);
+  modal.find('.modal-body #tqty').val(tqty);
+  modal.find('.modal-body #unitPrice').val(unitPrice);
+  modal.find('.modal-body #totalPrice').val(totalPrice);
+  modal.find('.modal-body #expiry').val(expiry);
+  modal.find('.modal-body #vintage').val(vintage);
+   modal.find('.modal-body #condition').val(condition);
+})
+    </script>
+        
         <div class="pagination">
         {{ $products->links() }}
     </div>

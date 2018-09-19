@@ -62,4 +62,9 @@ Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('/mylistings', 'MyListingsController@index')->name('mylistings');
 
 Route::get('/addlistings', 'AddListingsController@index')->name('addlistings');
+
+Route::get('filter/{id}', 'HomeController@filter');
+
+
+
 Route::post('create','AddListingsController@insert');
