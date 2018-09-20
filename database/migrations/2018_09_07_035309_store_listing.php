@@ -16,7 +16,7 @@ class StoreListing extends Migration
         Schema::create('store_listings', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('store_id');
-            $table->bigInteger('product_id');
+            $table->integer('product_id')->unsigned();
             $table->string('sListing_type');
             $table->bigInteger('sListing_qty');
             $table->double('sListing_unitPrice');
@@ -26,7 +26,6 @@ class StoreListing extends Migration
             $table->string('sListing_condition');
             $table->boolean('sListing_active');
 
-               $table->foreign('store_id')->references('store_id')->on('Store');
             $table->timestamps();
 
         });

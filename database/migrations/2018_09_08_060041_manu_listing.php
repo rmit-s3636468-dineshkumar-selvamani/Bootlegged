@@ -16,7 +16,7 @@ class ManuListing extends Migration
          Schema::create('manu_listings', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('manu_id');
-            $table->bigInteger('product_id');
+            $table->integer('product_id')->unsigned();
             $table->string('mListing_type');
             $table->bigInteger('mListing_qty');
             $table->double('mListing_unitPrice');
@@ -28,8 +28,6 @@ class ManuListing extends Migration
             $table->bigInteger('mListing_seller');
             $table->timestamps();
 
-             $table->foreign('manu_id')->references('manu_id')->on('Manufacturers');
-             // $table->foreign('product_id')->references('store_id')->on('Store');
 
         });
     }

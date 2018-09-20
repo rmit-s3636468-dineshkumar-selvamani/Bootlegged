@@ -28,7 +28,6 @@ class RegStoreOwnerDetails extends Migration
             $table->string('store_license');
             $table->double('store_Stripeid');
 
-            $table->foreign('businessGroup_Id')->references('group_id')->on('businessGroups');
             $table->timestamps();
 
         });
