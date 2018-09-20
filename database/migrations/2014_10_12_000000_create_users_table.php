@@ -25,8 +25,6 @@ class CreateUsersTable extends Migration
             $table->string('type');
             $table->string('permissions');
 
-            $table->foreign('store_id')->references('store_id')->on('Store');
-            $table->foreign('manu_id')->references('manu_id')->on('Manufacturers');
             $table->rememberToken();
             $table->timestamps();
         });

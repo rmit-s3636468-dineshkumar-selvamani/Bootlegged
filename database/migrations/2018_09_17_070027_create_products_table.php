@@ -14,23 +14,20 @@ class CreateProductsTable extends Migration
     public function up()
     {
         Schema::create('products', function (Blueprint $table) {
-
             $table->increments('product_id');
+
             $table->string('product_itemName');
             $table->string('product_baseItemName');
             $table->string('product_packCode');
             $table->string('product_packCodeName');
             $table->string('product_packageId');
             $table->string('product_packageName');
-            $table->unsignedInteger('product_brandId');
-            $table->unsignedInteger('product_subBrandId');
-            $table->string('product_netqty');
+            $table->integer('product_brandId')->unsigned();;
+            $table->integer('product_subBrandId')->unsigned();;
+            $table->string('product_netQty');
             $table->string('product_innersPerOuters');
 
-            
             $table->timestamps();
-
-             // $table->foreign('manu_id')->references('manu_id')->on('Manufacturers');
         });
     }
 
