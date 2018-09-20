@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProductsBrandTable extends Migration
+class CreateProductSubBrandsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateProductsBrandTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_brands', function (Blueprint $table) {
-            $table->increments('brand_id');
-            $table->string('brand_Name');
+        Schema::create('product_sub_brands', function (Blueprint $table) {
+            $table->increments('subBrand_id');
+            $table->string('subBrand_Name');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreateProductsBrandTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_brands');
+        Schema::dropIfExists('product_sub_brands');
     }
 }

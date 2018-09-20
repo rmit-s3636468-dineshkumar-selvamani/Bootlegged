@@ -27,9 +27,6 @@ class CreateProductsTable extends Migration
             $table->string('product_netQty');
             $table->string('product_innersPerOuters');
 
-            // $table->foreign('product_brandId')->references('brand_id')->on('product_brands');
-            // $table->foreign('product_subBrandId')->references('subBrand_id')->on('product_sub_brands');
-
             $table->timestamps();
         });
     }
