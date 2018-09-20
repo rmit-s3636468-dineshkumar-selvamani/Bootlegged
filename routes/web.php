@@ -63,7 +63,13 @@ Route::get('/mylistings', 'MyListingsController@index')->name('mylistings');
 
 Route::get('/addlistings', 'AddListingsController@index')->name('addlistings');
 
-Route::get('filter/{id}', 'HomeController@filter');
+
+Route::get('/filter/{id}', 'HomeController@filter');
+
+//AUtocomplete
+
+Route::get('/search','HomeController@search');
+
 
 
 

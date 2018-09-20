@@ -4,7 +4,7 @@
       
           <div class="btn-group">
 
-  <button type="button" class="btn btn-secondary" onclick="filter/{Red Wine}">Red Wine</button>
+  <a href="/filter/Red Wine"><button type="button" class="btn btn-secondary">Red Wine</button>
   <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <span class="sr-only">Toggle Dropdown</span>
   </button>

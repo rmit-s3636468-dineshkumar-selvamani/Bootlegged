@@ -29,9 +29,13 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-		
 
-		<!-- Modernizr is used for flexbox fallback -->
+  
+
+		<!-- AutoCOmplete -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+		
 
 
 		<!-- Modal -->
@@ -41,7 +45,7 @@
 
 	<style>
 body {margin: 0;
-      background-color: rgb(26,27,31);
+      /*background-color: rgb(26,27,31);*/
       /*background-image: url(Images/back.jpg);*/
       }
 
@@ -241,23 +245,14 @@ div.content {
 }
 
 
+        
+
+
 </style>
 
 	<body>
 
-		<!-- <ul class="topnav">
-			@if( Auth::user()->type == 'StoreOwner')
-  <li><a class="active" href="/home">Market Place</a></li>
-  @endif
-  <li><a href="/mylistings">My Listing</a></li>
-  <li><a href="#contact">Opportunities</a></li>
-   <li><a href="#cart">My Cart</a></li>
-   <li><a href="/addlistings">Add Listing</a></li>
-  <li><a href="#profile">Edit Profile</a></li>
-  
-  <li class="right"><a href="{{URL::to('logout')}}">Logout</a></li>
-  <li class="right"><a href="">Welcome, {{Auth::user()->business_name}}</a></li>
-</ul> -->
+		
 		
 
 		@include('sideNavBar')
@@ -276,8 +271,59 @@ div.content {
 				<h1>Market Place</h1>
 				
 			</header>
-
-       @include('filter')
+      
+      <div class="container">
+ 
+<div class="row">
+ 
+<div class="panel panel-default">
+ 
+<div class="panel-heading">
+ 
+<h3>Products info </h3>
+ 
+</div>
+ 
+<div class="panel-body">
+ 
+<div class="form-group">
+ 
+<input type="text" class="form-controller" id="search" name="search"></input>
+ 
+</div>
+ 
+<table class="table table-bordered table-hover">
+ 
+<thead>
+ 
+<tr>
+ 
+<th>ID</th>
+ 
+<th>Product Name</th>
+ 
+<th>Description</th>
+ 
+<th>Price</th>
+ 
+</tr>
+ 
+</thead>
+ 
+<tbody>
+ 
+</tbody>
+ 
+</table>
+ 
+</div>
+ 
+</div>
+ 
+</div>
+ 
+</div>
+ 
 				
 			<!-- Product grid -->
 			<section class="grid" style="margin-top: -70px;">
@@ -433,6 +479,39 @@ div.content {
 </div>
 	</div>
 
+  <script type="text/javascript">
+ 
+$('#search').on('keyup',function(){
+ 
+$value=$(this).val();
+ 
+$.ajax({
+ 
+type : 'get',
+ 
+url : '{{URL::to('search')}}',
+ 
+data:{'search':$value},
+ 
+success:function(data){
+ 
+$('tbody').html(data);
+ 
+}
+ 
+});
+ 
+ 
+ 
+})
+ 
+</script>
+ 
+<script type="text/javascript">
+ 
+$.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
+ 
+</script>
 
 	<script type="text/javascript">
 		$('#prod_details').on('show.bs.modal', function (event) {
@@ -460,6 +539,9 @@ div.content {
    modal.find('.modal-body #condition').val(condition);
 })
 	</script>
+
+    <script type="text/javascript" src="js/filter"></script>
+ 
 	</body>
 
 	

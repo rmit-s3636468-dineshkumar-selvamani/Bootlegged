@@ -317,6 +317,8 @@ div.content {
                         @else
                          <img class="product__image" src="images/8.png" alt="Product 1" />
                         @endif
+                        <h6 class="product__price highlight" style="color: white">{{$itemname->product_itemName}}</h6><br>
+
                         <h6 class="product__price highlight" style="color: white">Quantity - {{$item->mListing_qty}}</h6>
                         <span class="product__price extra highlight">Type - {{$item->mListing_type}} </span>
                         <span class="product__price extra highlight">Unit Price - {{$item->mListing_unitPrice}} </span>
