@@ -26,11 +26,14 @@ class MyListingsController extends Controller
      */
     public function index()
     {   
-         
+             $name= DB::table('products')
+                    ->select('products.product_id','products.product_itemName')
+                    ->get();
+
             $products = StoreListing::where('store_id', Auth::user()->store_id )->paginate(9);;
         //  // $products = DB::table('store_listings');
 
 
-        return view('MyListings')->with('products',$products);
+        return view('MyListings')->with(['name'=>$name,'products'=>$products]);
     }
 }

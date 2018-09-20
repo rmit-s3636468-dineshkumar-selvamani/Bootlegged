@@ -67,21 +67,100 @@ form{
   padding-left: 300px;
 }
 
+.sidebar {
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: #f1f1f1;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(33,35,39);
+}
+
+.sidebar a {
+  display: block;
+  color: black;
+  padding: 16px;
+  text-decoration: none;
+}
+ 
+.sidebar a.active {
+  background-color: rgba(211, 188, 63);
+  color: black;
+}
+
+.sidebar a:hover:not(.active) {
+  background-color: #555;
+  color: white;
+}
+
+div.content {
+  margin-left: 200px;
+  padding: 1px 16px;
+  height: 1000px;
+  color: white;
+}
+
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {float: left;}
+  div.content {margin-left: 0;}
+}
+
+@media screen and (max-width: 400px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
+  }
+}
+
+.logo{
+                 
+                 visibility: visible;
+                 position: absolute;
+                 height: 125px;
+                 width: 175px;
+                 float: left;
+                 margin-top: -15px;
+                 margin-left: 10px;
+
+
+
+                 
+             }
+
+
 </style>	
 
 	<body>
 
-		<ul class="topnav">
-  <li><a href="/home">Product Listing</a></li>
-  <li><a href="/mylistings">My Listing</a></li>
-  <li><a href="#contact">Opportunities</a></li> 
-   <li><a href="#cart">My Cart</a></li>
-  <li><a href="#profile">Edit Profile</a></li>
-  <li><a class="active" href="/addlistings">Add Listing</a></li>
-  <li class="right"><a href="#logout">Logout</a></li>
-</ul>
+		
+    <div class="sidebar">
+  <img style=" position: absolute; display: inline;" class="logo"  alt ="logo" src="/Images/logo1.png">
+  <a  href="#home" style="margin-top: 90px; color: white; text-align: center;">Welcome,<br> {{Auth::user()->business_name}}</a>
+   
+  @if( Auth::user()->type == 'StoreOwner')
+  <a  href="/home" style="color: white;">Market Place</a>
+   @endif
+  <a href="/mylistings" style="color: white;">My Listing</a>
+  <a href="/addlistings" class="active">Add Listing</a>
+  <a href="#contact" style="color: white;">Opportunities</a>
+  <hr style="border-style: groove;
+    border-width: 1px;"> 
+  <a href="#about" style="color: white;">Edit Profile</a>
+  
+  <a href="#contact" style="color: white;">My Cart</a>
+  
+  <a href="{{URL::to('logout')}}" style="color: white;">Logout</a>
+</div>
 <div>
   <form action = "/create" method = "post">
+    <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
   <div class="form-group row">
     <label for="producttype" class="col-4 col-form-label">Product Type</label> 
     <div class="col-3">
@@ -124,9 +203,9 @@ form{
     </div>
   </div>
   <div class="form-group row">
-    <label for="text" class="col-4 col-form-label">Product Condition</label> 
+    <label for="condition" class="col-4 col-form-label">Product Condition</label> 
     <div class="col-3">
-      <input id="text" required="required" required="required" name="text" type="text" class="form-control here">
+      <input id="condition"  required="required" name="condition" type="text" class="form-control here">
     </div>
   </div>
   <div class="form-group row">
