@@ -29,8 +29,13 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
+
+  
+
+		<!-- AutoCOmplete -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
 		
-		<!-- Modernizr is used for flexbox fallback -->
 
 
 		<!-- Modal -->
@@ -39,7 +44,10 @@
 	</head>
 
 	<style>
-body {margin: 0;}
+body {margin: 0;
+      /*background-color: rgb(26,27,31);*/
+      /*background-image: url(Images/back.jpg);*/
+      }
 
 ul.topnav {
     list-style-type: none;
@@ -92,39 +100,230 @@ ul.topnav li.right {float: right;}
     background-color: #fff;
     border: 1px solid #dee2e6;
 }
+
+ .modal-content, .modal-header{
+  background-color: rgb(33,35,39);
+}
+
+body {
+  margin: 0;
+  font-family: "Lato", sans-serif;
+}
+
+.sidebar {
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: #f1f1f1;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(33,35,39);
+}
+
+.sidebar a {
+  display: block;
+  color: black;
+  padding: 16px;
+  text-decoration: none;
+}
+ 
+.sidebar a.active {
+  background-color: rgba(211, 188, 63);
+  color: black;
+}
+
+.sidebar a:hover:not(.active) {
+  background-color: #555;
+  color: white;
+}
+
+div.content {
+  margin-left: 200px;
+  padding: 1px 16px;
+  height: 1000px;
+  color: white;
+}
+
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {float: left;}
+  div.content {margin-left: 0;}
+}
+
+@media screen and (max-width: 400px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
+  }
+}
+
+.logo{
+                 
+                 visibility: visible;
+                 position: absolute;
+                 height: 125px;
+                 width: 175px;
+                 float: left;
+                 margin-top: -15px;
+                 margin-left: 10px;
+
+
+
+                 
+             }
+
+             .filter{
+
+              position: relative;
+              margin-left: 250px;
+
+             }
+
+             
+
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu>.dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -6px;
+    margin-left: -1px;
+    -webkit-border-radius: 0 6px 6px 6px;
+    -moz-border-radius: 0 6px 6px;
+    border-radius: 0 6px 6px 6px;
+}
+
+.dropdown-submenu:hover>.dropdown-menu {
+    display: block;
+}
+
+.dropdown-submenu>a:after {
+    display: block;
+    content: " ";
+    float: right;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px 0 5px 5px;
+    border-left-color: #ccc;
+    margin-top: 5px;
+    margin-right: -10px;
+}
+
+.dropdown-submenu:hover>a:after {
+    border-left-color: #fff;
+}
+
+.dropdown-submenu.pull-left {
+    float: none;
+}
+
+.dropdown-submenu.pull-left>.dropdown-menu {
+    left: -100%;
+    margin-left: 10px;
+    -webkit-border-radius: 6px 0 6px 6px;
+    -moz-border-radius: 6px 0 6px 6px;
+    border-radius: 6px 0 6px 6px;
+}
+
+.product .product__info{
+  min-height: 00px;
+}
+
+.product__name{
+
+  min-height: 40px;
+  max-height: 50px;
+}
+
+
+        
+
+
 </style>
 
 	<body>
 
-		<ul class="topnav">
-			@if( Auth::user()->type == 'StoreOwner')
-  <li><a class="active" href="/home">Market Place</a></li>
-  @endif
-  <li><a href="/mylistings">My Listing</a></li>
-  <li><a href="#contact">Opportunities</a></li>
-   <li><a href="#cart">My Cart</a></li>
-   <li><a href="/addlistings">Add Listing</a></li>
-  <li><a href="#profile">Edit Profile</a></li>
-  
-  <li class="right"><a href="{{URL::to('logout')}}">Logout</a></li>
-  <li class="right"><a href="">Welcome, {{Auth::user()->business_name}}</a></li>
-</ul>
+		
 		
 
-		
-		<!-- Compare basket -->
+		@include('sideNavBar')
+
+   <!-- Compare basket -->
 		<div class="compare-basket">
 			<button class="action action--button action--compare"><i class="fa fa-check"></i><span class="action__text">Compare</span></button>
 		</div>
+
+
 		<!-- Main view -->
-		<div class="view">
+		<div class="view" style="margin-left: 14%;">
 			<!-- Blueprint header -->
-			<header class="bp-header cf">
+			<header class="bp-header cf" style="color: white;">
 				
 				<h1>Market Place</h1>
 				
 			</header>
-
+      
+      <div class="container">
+ 
+<div class="row">
+ 
+<div class="panel panel-default">
+ 
+<div class="panel-heading">
+ 
+<h3>Products info </h3>
+ 
+</div>
+ 
+<div class="panel-body">
+ 
+<div class="form-group">
+ 
+<input type="text" class="form-controller" id="search" name="search"></input>
+ 
+</div>
+ 
+<table class="table table-bordered table-hover">
+ 
+<thead>
+ 
+<tr>
+ 
+<th>ID</th>
+ 
+<th>Product Name</th>
+ 
+<th>Description</th>
+ 
+<th>Price</th>
+ 
+</tr>
+ 
+</thead>
+ 
+<tbody>
+ 
+</tbody>
+ 
+</table>
+ 
+</div>
+ 
+</div>
+ 
+</div>
+ 
+</div>
+ 
 				
 			<!-- Product grid -->
 			<section class="grid" style="margin-top: -70px;">
@@ -161,8 +360,8 @@ ul.topnav li.right {float: right;}
                         @else
                          <img class="product__image" src="images/8.png" alt="Product 1" />
                         @endif						
-						<h6 class="product__price highlight" style="color: white">{{$itemname->product_itemName}}</h6><br>
-						<h6 class="product__price highlight" style="color: white">Quantity - {{$item->sListing_qty}}</h6>
+						<h6 class="product__name highlight" style="color: white">{{$itemname->product_itemName}}</h6><br>
+						<h6 class="product__quantity highlight" style="color: white">Quantity - {{$item->sListing_qty}}</h6>
 						<span class="product__price extra highlight">Type - {{$item->sListing_type}} </span>
 						<span class="product__price extra highlight">Unit Price - {{$item->sListing_unitPrice}} </span>
 						<span class="product__price extra highlight">Expiry - {{$item->sListing_expiry}} </span>
@@ -185,7 +384,7 @@ ul.topnav li.right {float: right;}
 				
 
 				<?php if($count==0) { ?>
-				<h3> No products to display </h3>
+				<h3 style="color: white;"> No products to display </h3>
 			<?php } ?>
 			
 
@@ -203,12 +402,12 @@ ul.topnav li.right {float: right;}
 		<script src="js/main.js"></script>
 		
 
-		
-		<div style="margin-left: 45%; margin-top: -70px; ">
+		 
+		<div style="margin-left: 50%; margin-top: -70px; ">
 			
 				<?php
 
-
+        if($count!=0)
 				echo $pagelinks; ?>
 						
 						</div>
@@ -220,11 +419,11 @@ ul.topnav li.right {float: right;}
 
 <!-- Modal -->
 <div class="modal fade" id="prod_details" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-dialog modal-dialog-centered" role="document" >
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <h5 class="modal-title" id="exampleModalLongTitle" style="color: white;">Modal title</h5>
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -235,38 +434,38 @@ ul.topnav li.right {float: right;}
         			
         			<tr>
         		<td><label>Product Type: </label></td>
-        		<td><input type="text" id="type" style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39);" readonly ></td>
+        		<td><input type="text" id="type" style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39); border: 0px;" readonly ></td>
         			</tr>
         			
         			<tr>
         		
         		<td><label>Total Quantity: </label></td>
-        		<td><input type="text" id="tqty" style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39);"readonly></td>
+        		<td><input type="text" id="tqty" style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39); border: 0px;"readonly></td>
         			</tr>
         			
         			<tr>
         		<td><label>Unit Price: </label></td>
-        		<td><input type="text" id="unitPrice" style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39);" readonly></td>
+        		<td><input type="text" id="unitPrice" style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39); border: 0px;" readonly></td>
         			</tr>
 
         			<tr>
         		<td><label>Total Price: </label></td>
-        		<td><input type="text" id="totalPrice" style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39);"readonly></td>
+        		<td><input type="text" id="totalPrice" style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39); border: 0px;"readonly></td>
         			</tr>
 
         			<tr>
         		<td><label>Expiry: </label></td>
-        		<td><input type="text" id="expiry" style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39);" readonly></td>
+        		<td><input type="text" id="expiry" style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39); border: 0px;" readonly></td>
         			</tr>
 
         			<tr>
         		<td><label>Vintage: </label></td>
-        		<td><input type="text" id="vintage" style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39);" readonly></td>
+        		<td><input type="text" id="vintage" style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39); border: 0px;" readonly></td>
         			</tr>
 
         			<tr>
         		<td><label>Condition: </label></td>
-        		<td><input type="text" id="condition" style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39);" readonly></td>
+        		<td><input type="text" id="condition" style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39); border: 0px;" readonly></td>
         			</tr>
         	</table>
       </div>
@@ -280,6 +479,39 @@ ul.topnav li.right {float: right;}
 </div>
 	</div>
 
+  <script type="text/javascript">
+ 
+$('#search').on('keyup',function(){
+ 
+$value=$(this).val();
+ 
+$.ajax({
+ 
+type : 'get',
+ 
+url : '{{URL::to('search')}}',
+ 
+data:{'search':$value},
+ 
+success:function(data){
+ 
+$('tbody').html(data);
+ 
+}
+ 
+});
+ 
+ 
+ 
+})
+ 
+</script>
+ 
+<script type="text/javascript">
+ 
+$.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
+ 
+</script>
 
 	<script type="text/javascript">
 		$('#prod_details').on('show.bs.modal', function (event) {
@@ -307,6 +539,9 @@ ul.topnav li.right {float: right;}
    modal.find('.modal-body #condition').val(condition);
 })
 	</script>
+
+    <script type="text/javascript" src="js/filter"></script>
+ 
 	</body>
 
 	

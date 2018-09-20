@@ -36,12 +36,26 @@ class AddListingsController extends Controller
 
     public function insert(Request $request)
     {
-      $name = $request->input('productname');
-      $storeid = '1';
-      $productid = '6';
-      DB::insert('insert into store_listings (store_id,product_id,sListing_type) values(?,?,?)',[$storeid],
-        [$productid],[$name]);
+
+      $products = $request -> all();
+      $storeid = '20';
+      $product_id = '1';
+
+      $user = AddListings::create([
+            'manu_id' => $storeid,
+            'product_id' => $product_id,
+            'mListing_type' => $products['producttype'],
+            'mListing_qty' => $products['product_quantity'],
+            'mListing_unitPrice' => $products['unitprice'],
+            'mListing_totalPrice' => $products['totalprice'],
+            'mListing_expiry' => $products['expiry'],
+            'mListing_vintage' => $products['vintage'],
+            'mListing_condition' => $products['condition'],
+            'mListing_active' => '1'
+        ]);
+      echo $storeid;
       echo "Record inserted successfully.<br/>";
-      echo '<a href = "/insert">Click Here</a> to go back.';
-   }
+      // echo "<a href = ''/addlistings">Click Here</a> to go back."; 
+   
+}
 }
