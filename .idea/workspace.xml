@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="83a7d8fe-e4f4-4aed-87ba-91762e598146" name="Default Changelist" comment="" />
+    <list default="true" id="83a7d8fe-e4f4-4aed-87ba-91762e598146" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2018_09_02_060338_reg_store_owner_details.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2018_09_02_060338_reg_store_owner_details.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2018_09_07_035309_store_listing.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2018_09_07_035309_store_listing.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2018_09_08_060041_manu_listing.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2018_09_08_060041_manu_listing.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2018_09_18_041735_create_products_sub_brand_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2018_09_18_042444_create_products_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2018_09_18_043850_create_products_brand_table.php" beforeDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +60,7 @@
         <entry file="file://$PROJECT_DIR$/database/migrations/2018_09_07_035309_store_listing.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="213">
-              <caret line="29" column="33" lean-forward="true" selection-start-line="29" selection-start-column="33" selection-end-line="29" selection-end-column="33" />
+              <caret line="28" column="33" selection-start-line="28" selection-start-column="33" selection-end-line="28" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -225,12 +233,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1537406275272</updated>
-      <workItem from="1537406277616" duration="3863000" />
+      <workItem from="1537406277616" duration="4207000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3863000" />
+    <option name="totallyTimeSpent" value="4207000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -296,7 +304,7 @@
     <entry file="file://$PROJECT_DIR$/database/migrations/2018_09_07_035309_store_listing.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="213">
-          <caret line="29" column="33" lean-forward="true" selection-start-line="29" selection-start-column="33" selection-end-line="29" selection-end-column="33" />
+          <caret line="28" column="33" selection-start-line="28" selection-start-column="33" selection-end-line="28" selection-end-column="33" />
         </state>
       </provider>
     </entry>

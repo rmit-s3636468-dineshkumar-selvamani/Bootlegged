@@ -16,7 +16,7 @@ class StoreListing extends Migration
         Schema::create('store_listings', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('store_id');
-            $table->integer('sproduct_id')->unsigned();
+            $table->integer('product_id')->unsigned();
             $table->string('sListing_type');
             $table->bigInteger('sListing_qty');
             $table->double('sListing_unitPrice');
