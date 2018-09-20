@@ -16,7 +16,7 @@ class ManuListing extends Migration
          Schema::create('manu_listings', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('manu_id');
-            $table->integer('product_id')->unsigned();
+            $table->integer('mproduct_id')->unsigned();
             $table->string('mListing_type');
             $table->bigInteger('mListing_qty');
             $table->double('mListing_unitPrice');
