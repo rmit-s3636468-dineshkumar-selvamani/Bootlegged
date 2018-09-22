@@ -17,25 +17,33 @@
 		<meta name="author" content="Codrops" />
 		<link rel="shortcut icon" href="favicon.ico">
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-		<link rel="stylesheet" type="text/css" href="css/demo.css" />
-		<link rel="stylesheet" type="text/css" href="css/component.css" />
+		<link rel="stylesheet" type="text/css" href="{{ asset('css/demo.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/component.css') }}" />
 
 
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 
 
-		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
 
 
   
 
-		<!-- AutoCOmplete -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+		<!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+		  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
 
-		
+    <!-- Import typeahead.js -->
+    <script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
+ 
+    <!-- TypeAhead -->
+
+    
 
 
 		<!-- Modal -->
@@ -197,7 +205,7 @@ div.content {
     margin-left: -1px;
     -webkit-border-radius: 0 6px 6px 6px;
     -moz-border-radius: 0 6px 6px;
-    border-radius: 0 6px 6px 6px;
+    border-radius: 0 6px 6px 6px;       
 }
 
 .dropdown-submenu:hover>.dropdown-menu {
@@ -242,12 +250,90 @@ div.content {
 
   min-height: 40px;
   max-height: 50px;
+  max-width: 210px;
+
+}
+
+.product{
+
+  max-width: 210px;
 }
 
 
+
+/*.twitter-typeahead,
+        .tt-hint,
+        .tt-input,
+        .tt-menu{
+            width: auto ! important;
+            font-weight: normal;
         
+        }*/
+/*Big Box*/
+.twitter-typeahead {
+      display: block;
+      width: 100%; //BS 3 needs this to inherit this for children
+
+      .tt-query,
+      .tt-hint {
+        margin-bottom: 0;
+      }
+
+      .tt-dropdown-menu {
+        z-index: @zindex-dropdown;
+        min-width: 326px;
+        padding: 5px 0;
+        margin: 2px 0 0; // override default ul
+        font-size: @font-size-base;
+        text-align: left; // Ensures proper alignment if parent has it changed (e.g., modal footer)
+        background-color: @dropdown-bg;
+        border: 1px solid @dropdown-fallback-border; // IE8 fallback
+        border: 1px solid @dropdown-border;
+        border-radius: @border-radius-base;
+        .box-shadow(0 6px 12px rgba(0, 0, 0, .175));
+        background-clip: padding-box;
+
+        .tt-suggestions {
+
+          .tt-suggestion {
+            padding: 3px 12px;
+            font-weight: normal;
+            line-height: @line-height-base;
+            color: @dropdown-link-color;
+            white-space: nowrap; // prevent links from randomly breaking onto new lines
+          }
+
+          .tt-suggestion.tt-cursor {
+            color: @dropdown-link-hover-color;
+            background-color: @dropdown-link-hover-bg;
+          }
+
+          .tt-suggestion p {
+            margin: 0;
+          }
+        }
+      }
+    }
 
 
+
+/*Small box*/
+/*span.twitter-typeahead
+  width: 100%
+
+.tt-input
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075)
+
+.tt-menu
+  @extend .list-group
+  box-shadow: 0 5px 10px rgba(0,0,0,.2)
+  width: 100%
+
+.tt-suggestion
+  @extend .list-group-item
+
+.tt-selectable
+  @extend .list-group-item-action*/
 </style>
 
 	<body>
@@ -266,65 +352,39 @@ div.content {
 		<!-- Main view -->
 		<div class="view" style="margin-left: 14%;">
 			<!-- Blueprint header -->
-			<header class="bp-header cf" style="color: white;">
+			<header class="bp-header cf">
 				
 				<h1>Market Place</h1>
 				
 			</header>
-      
-      <div class="container">
+
+       <div class="container">
  
-<div class="row">
- 
-<div class="panel panel-default">
- 
-<div class="panel-heading">
- 
-<h3>Products info </h3>
- 
+      <div class="starter-template" style="align-text:center">
+       
+        <input type="text" class="typeahead form-control" id="search" placeholder="Search by product name" autocomplete="off" >
+      </div>
+       
 </div>
- 
-<div class="panel-body">
- 
-<div class="form-group">
- 
-<input type="text" class="form-controller" id="search" name="search"></input>
- 
-</div>
- 
-<table class="table table-bordered table-hover">
- 
-<thead>
- 
-<tr>
- 
-<th>ID</th>
- 
-<th>Product Name</th>
- 
-<th>Description</th>
- 
-<th>Price</th>
- 
-</tr>
- 
-</thead>
- 
-<tbody>
- 
-</tbody>
- 
-</table>
- 
-</div>
- 
-</div>
- 
-</div>
- 
-</div>
- 
-				
+<br><br>
+			
+  <div class="dropdown" style="margin-left: 500px; margin-top: 10px; display: inline; ">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Filter by Type
+            </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="/filter/Red Wine">Red Wine</a>
+            <a class="dropdown-item" href="/filter/White Wine">White Wine</a>
+            <a class="dropdown-item" href="/filter/Beer">Beer</a>
+            <a class="dropdown-item" href="/filter/Cider">Cider</a>
+            <a class="dropdown-item" href="/filter/Spirits">Spirits</a>
+            <a class="dropdown-item" href="/filter/Sparkling">Sparkling</a>
+            <a class="dropdown-item" href="/filter/Pre-Mixed">Pre-Mixed</a>
+          </div>
+        </div>  
+
+
+
 			<!-- Product grid -->
 			<section class="grid" style="margin-top: -70px;">
 
@@ -333,41 +393,40 @@ div.content {
 
 				<?php $count = 0; ?>
 				@foreach($products as $item)
-					@foreach($name as $itemname)
-						@if($itemname->product_id == $item->product_id)
+					
 						
 				<div class="product" >
 					<div class="product__info" data-toggle="modal" 
-					data-target="#prod_details" data-prodname="{{$itemname->product_itemName}}" data-type="{{$item->sListing_type}}" data-total_qty="{{ $item->sListing_qty }} " 
-					data-unit="{{ $item->sListing_unitPrice }}" data-total="{{ $item->sListing_totalPrice }}" 
-					data-expiry="{{ $item->sListing_expiry }}" data-vintage="{{ $item->sListing_vintage }}"
-					data-condition="{{ $item->sListing_condition }}" onmouseover="" style="cursor: pointer;">
+					data-target="#prod_details" data-prodname="{{$item->product_itemName}}" data-type="{{$item->listing_type}}" data-total_qty="{{ $item->listing_qty }} " 
+					data-unit="{{ $item->listing_unitPrice }}" data-total="{{ $item->listing_totalPrice }}" 
+					data-expiry="{{ $item->listing_expiry }}" data-vintage="{{ $item->listing_vintage }}"
+					data-condition="{{ $item->listing_condition }}" onmouseover="" style="cursor: pointer;">
 						
 
 
-						@if($item->sListing_type == "Wine")
-                        <img class="product__image" src="images/2.png" alt="Product 1" />
-                        @elseif($item->sListing_type == "Vodka")
-                        <img class="product__image" src="images/6.png" alt="Product 1" />
-                        @elseif($item->sListing_type == "Rum")
-                        <img class="product__image" src="images/4.png" alt="Product 1" />
-                        @elseif($item->sListing_type == "Brandy")
-                        <img class="product__image" src="images/5.png" alt="Product 1" />
-                        @elseif($item->sListing_type == "Whiskey")
-                        <img class="product__image" src="images/1.png" alt="Product 1" />
-                        @elseif($item->sListing_type == "Beer")
-                        <img class="product__image" src="images/7.png" alt="Product 1" />
+						@if($item->listing_type == "Red Wine")
+                        <img class="product__image" src="{{ asset('images/1.png') }}" alt="Product 1" />
+                        @elseif($item->listing_type == "White Wine")
+                        <img class="product__image" src="{{ asset('images/2.png') }}" alt="Product 1" />
+                        @elseif($item->listing_type == "Beer")
+                        <img class="product__image" src="{{ asset('images/1.png') }}" alt="Product 1" />
+                        @elseif($item->listing_type == "Spirits")
+                        <img class="product__image" src="{{ asset('images/8.png') }}" alt="Product 1" />
+                        @elseif($item->listing_type == "Whiskey")
+                        <img class="product__image" src="{{ asset('images/1.png') }}" alt="Product 1" />
+                        @elseif($item->listing_type == "Cider")
+                        <img class="product__image" src="{{ asset('images/1.png') }}" alt="Product 1" />
                         @else
-                         <img class="product__image" src="images/8.png" alt="Product 1" />
+                         <img class="product__image" src="{{ asset('images/1.png') }}" alt="Product 1" />
                         @endif						
-						<h6 class="product__name highlight" style="color: white">{{$itemname->product_itemName}}</h6><br>
-						<h6 class="product__quantity highlight" style="color: white">Quantity - {{$item->sListing_qty}}</h6>
-						<span class="product__price extra highlight">Type - {{$item->sListing_type}} </span>
-						<span class="product__price extra highlight">Unit Price - {{$item->sListing_unitPrice}} </span>
-						<span class="product__price extra highlight">Expiry - {{$item->sListing_expiry}} </span>
-						<span class="product__price extra highlight">Vintage - {{$item->sListing_vintage}} </span>
-						<span class="product__price extra highlight">Condition - {{$item->sListing_condition}} </span>
-						<span class="product__price highlight"> Price : $ {{$item->sListing_totalPrice}}</span>
+						<h6 class="product__name highlight" style="color: white">{{$item->product_itemName}}</h6><br>
+						<h6 class="product__quantity highlight" style="color: white">Quantity - {{$item->listing_qty}}</h6>
+						<span class="product__price extra highlight">Type - {{$item->listing_type}} </span>
+						<span class="product__price extra highlight">Unit Price - {{$item->listing_unitPrice}} </span>
+						<span class="product__price extra highlight">Expiry - {{$item->listing_expiry}} </span>
+						<span class="product__price extra highlight">Vintage - {{$item->listing_vintage}} </span>
+						<span class="product__price extra highlight">Condition - {{$item->listing_condition}} </span>
+						<span class="product__price highlight"> Price : $ {{$item->listing_totalPrice}}</span>
 						
 						<a href="/mylistings"><button class="action action--button action--buy" ><i class="fa fa-shopping-cart"></i><span class="action__text">Add to cart</span></button></a>
 
@@ -378,13 +437,12 @@ div.content {
 
 				</div>
 					<?php $count++; ?>
-					@endif
-					@endforeach
+					
 				@endforeach
 				
 
 				<?php if($count==0) { ?>
-				<h3 style="color: white;"> No products to display </h3>
+				<h3> No products to display </h3>
 			<?php } ?>
 			
 
@@ -405,10 +463,7 @@ div.content {
 		 
 		<div style="margin-left: 50%; margin-top: -70px; ">
 			
-				<?php
-
-        if($count!=0)
-				echo $pagelinks; ?>
+				{{ $products->links() }}
 						
 						</div>
 	
@@ -480,43 +535,9 @@ div.content {
 	</div>
 
   <script type="text/javascript">
- 
-$('#search').on('keyup',function(){
- 
-$value=$(this).val();
- 
-$.ajax({
- 
-type : 'get',
- 
-url : '{{URL::to('search')}}',
- 
-data:{'search':$value},
- 
-success:function(data){
- 
-$('tbody').html(data);
- 
-}
- 
-});
- 
- 
- 
-})
- 
-</script>
- 
-<script type="text/javascript">
- 
-$.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
- 
-</script>
+    $('#prod_details').on('show.bs.modal', function (event) {
 
-	<script type="text/javascript">
-		$('#prod_details').on('show.bs.modal', function (event) {
-
-			
+      
   var button = $(event.relatedTarget) // Button that triggered the modal
   var name = button.data('prodname') // Extract info from data-* attributes
   var type = button.data('type')
@@ -538,9 +559,52 @@ $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
   modal.find('.modal-body #vintage').val(vintage);
    modal.find('.modal-body #condition').val(condition);
 })
-	</script>
+  </script>
 
-    <script type="text/javascript" src="js/filter"></script>
+
+  <script>
+        $(document).ready(function() {
+            var bloodhound = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.whitespace,
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '/user/find?q=%QUERY%',
+                    wildcard: '%QUERY%'
+                },
+            });
+            
+            $('#search').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 1
+            }, {
+                name: 'product_itemName',
+                source: bloodhound,
+                display: function(data) {
+                    return data.product_itemName  //Input value to be set when you select a suggestion. 
+                },
+                templates: {
+                    empty: [
+                        '<div class="list-group search-results-dropdown"><div class="list-group-item">Nothing found.</div></div>'
+                    ],
+                    header: [
+                        '<div class="list-group search-results-dropdown">'
+                    ],
+                    suggestion: function(data) {
+                    return '<a href="/filterName/'+ data.product_id + '"><div style="font-weight:normal; margin-top:-10px ! important;" class="list-group-item">' + data.product_itemName + '</div></a></div>'
+                    }
+                }
+            });
+        });
+    </script>
+ 
+
+
+	<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+
+    
  
 	</body>
 

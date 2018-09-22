@@ -3,7 +3,7 @@
   <a  href="/home" style="margin-top: 90px; color: white; text-align: center;">Welcome,<br> {{Auth::user()->business_name}}</a>
    
   @if( Auth::user()->type == 'StoreOwner')
-  <a class="active" href="#home">Market Place</a>
+  <a class="active" href="/home">Market Place</a>
    @endif
   <a href="/mylistings" style="color: white;">My Listing</a>
   <a href="/addlistings" style="color: white;">Add Listing</a>

@@ -64,11 +64,16 @@ Route::get('/mylistings', 'MyListingsController@index')->name('mylistings');
 Route::get('/addlistings', 'AddListingsController@index')->name('addlistings');
 
 
-Route::get('/filter/{id}', 'HomeController@filter');
+Route::get('/filter/{id}', 'HomeController@filter')->name("dashboard/filter");
+
+Route::get('/filterName/{id}', 'HomeController@filterName')->name("dashboard/filter");
 
 //AUtocomplete
 
-Route::get('/search','HomeController@search');
+Route::get('/user/find', 'HomeController@searchUsers');
+ 
+
+
 
 
 
