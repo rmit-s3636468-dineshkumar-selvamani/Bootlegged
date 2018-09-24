@@ -19,6 +19,16 @@ class AddListingForeignkeys extends Migration
             $table->foreign('lmanu_id')->references('manu_id')->on('Manufacturers');
             $table->foreign('lproduct_id')->references('product_id')->on('products');
         });
+
+        Schema::table('manu_transactions', function (Blueprint $table) {
+
+            $table->foreign('mListingId')->references('id')->on('listings');
+        });
+
+        Schema::table('store_transactions', function (Blueprint $table) {
+
+            $table->foreign('sListingId')->references('id')->on('listings');
+        });
     }
 
     /**

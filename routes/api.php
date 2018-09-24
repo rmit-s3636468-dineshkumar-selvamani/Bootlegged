@@ -16,9 +16,3 @@ use app\StoreListing;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-Route::get('/search',function(){
- $query = Input::get('query');
- $users = StoreListing::where('sListing_type','like','%'.$query.'%')->get();
- return response()->json($users);
-});

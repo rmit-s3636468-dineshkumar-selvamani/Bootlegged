@@ -26,18 +26,6 @@ class AddForeignKeys extends Migration
         });
 
 
-        Schema::table('store_listings', function (Blueprint $table) {
-
-            $table->foreign('store_id')->references('store_id')->on('Store');
-
-        });
-
-
-        Schema::table('manu_listings', function (Blueprint $table) {
-
-            $table->foreign('manu_id')->references('manu_id')->on('Manufacturers');
-
-        });
     }
 
     /**
