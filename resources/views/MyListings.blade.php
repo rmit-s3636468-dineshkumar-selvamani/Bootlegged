@@ -261,40 +261,37 @@ div.content {
                             
                                     <div class="product">
                                         <div class="product__info">
-                                            @if($item->listing_type == "Red Wine")
+                                            @if($item->Listing_type == "Red Wine")
                                             <img class="product__image" src="images/2.png" alt="Product 1" />
-                                            @elseif($item->listing_type == "Vodka")
+                                            @elseif($item->Listing_type == "Vodka")
                                             <img class="product__image" src="images/6.png" alt="Product 1" />
-                                            @elseif($item->listing_type == "Rum")
+                                            @elseif($item->Listing_type == "Rum")
                                             <img class="product__image" src="images/4.png" alt="Product 1" />
-                                            @elseif($item->listing_type == "Gin")
+                                            @elseif($item->Listing_type == "Gin")
                                             <img class="product__image" src="images/5.png" alt="Product 1" />
-                                            @elseif($item->listing_type == "Whiskey")
+                                            @elseif($item->Listing_type == "Whiskey")
                                             <img class="product__image" src="images/1.png" alt="Product 1" />
-                                            @elseif($item->listing_type == "Beer")
+                                            @elseif($item->Listing_type == "Beer")
                                             <img class="product__image" src="images/7.png" alt="Product 1" />
                                             @else
                                              <img class="product__image" src="images/8.png" alt="Product 1" />
                                             @endif
                                             <h6 class="product__price highlight" style="color: white">{{$item->product_itemName}}</h6><br>
-                                            <h6 class="product__price highlight" style="color: white">Quantity - {{$item->listing_qty}}</h6>
-                                            <span class="product__price extra highlight">Type - {{$item->listing_type}} </span>
-                                            <span class="product__price extra highlight">Unit Price - {{$item->listing_unitPrice}} </span>
-                                            <span class="product__price extra highlight">Expiry - {{$item->listing_expiry}} </span>
-                                            <span class="product__price extra highlight">Vintage - {{$item->listing_vintage}} </span>
-                                            <span class="product__price extra highlight">Condition - {{$item->listing_condition}} </span>
-                                            <span class="product__price highlight"> Price : $ {{$item->listing_totalPrice}}</span>
+                                            <h6 class="product__price highlight" style="color: white">Quantity - {{$item->Listing_qty}}</h6>
+                                            <span class="product__price extra highlight">Type - {{$item->Listing_type}} </span>
+                                            <span class="product__price extra highlight">Unit Price - {{$item->Listing_unitPrice}} </span>
+                                            <span class="product__price extra highlight">Expiry - {{$item->Listing_expiry}} </span>
+                                            <span class="product__price extra highlight">Vintage - {{$item->Listing_vintage}} </span>
+                                            <span class="product__price extra highlight">Condition - {{$item->Listing_condition}} </span>
+                                            <span class="product__price highlight"> Price : $ {{$item->Listing_totalPrice}}</span>
                                             <button class="action action--button action--buy" data-toggle="modal" 
-                                        data-target="#prod_details" data-prodname="{{$item->product_itemName}}" data-type="{{$item->sListing_type}}" data-total_qty="{{ $item->sListing_qty }} " 
-                                        data-unit="{{ $item->sListing_unitPrice }}" data-total="{{ $item->sListing_totalPrice }}" 
-                                        data-expiry="{{ $item->sListing_expiry }}" data-vintage="{{ $item->sListing_vintage }}"
-                                        data-condition="{{ $item->sListing_condition }}" onmouseover="" style="cursor: pointer;" style="width:auto;"><i class="fa fa-check"></i><span class="action__text" style ="width: 80px;" >Remove</span></button>
+                                        data-target="#remove" data-listid="{{$item->id}}" data-prodId="{{$item->id}}"  onmouseover="" style="cursor: pointer;" style="width:auto;"><i class="fa fa-check"></i><span class="action__text" style ="width: 80px;" >Remove</span></button>
 
                                             <button class="action action--button action--buy" data-toggle="modal" 
-                                        data-target="#prod_details" data-prodname="{{$item->product_itemName}}" data-type="{{$item->listing_type}}" data-total_qty="{{ $item->listing_qty }} " 
-                                        data-unit="{{ $item->listing_unitPrice }}" data-total="{{ $item->listing_totalPrice }}" 
-                                        data-expiry="{{ $item->listing_expiry }}" data-vintage="{{ $item->listing_vintage }}"
-                                        data-condition="{{ $item->listing_condition }}" onmouseover="" style="cursor: pointer;" style="width:auto;"><i class="fa fa-check"></i><span class="action__text" >Edit Details</span></button>
+                                        data-target="#update" data-prodname="{{$item->product_itemName}}" data-type="{{$item->Listing_type}}" data-total_qty="{{ $item->Listing_qty }} " data-prodId="{{$item->id}}" data-listid="{{$item->id}}"
+                                        data-unit="{{ $item->Listing_unitPrice }}" data-total="{{ $item->Listing_totalPrice }}" 
+                                        data-expiry="{{ $item->Listing_expiry }}" data-vintage="{{ $item->Listing_vintage }}"
+                                        data-condition="{{ $item->Listing_condition }}" onmouseover="" style="cursor: pointer;" style="width:auto;"><i class="fa fa-check"></i><span class="action__text" >Edit Details</span></button>
                                         </div>
                                        
                                    </div>
@@ -307,8 +304,8 @@ div.content {
         
     <!-- product compare wrapper -->
 
-    <!-- Modal View -->
-    <div class="modal fade" id="prod_details" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <!-- Modal View for Edit -->
+    <div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document" >
     <div class="modal-content">
       <div class="modal-header">
@@ -317,15 +314,18 @@ div.content {
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+     
       <div class="modal-body table-responsive">
-
+         <form action="{{URL::to('update')}}" method="post">
+          {{csrf_field()}}
                 @include('modalTable')
-                
+       <input type="hidden" id="prodId" name="prodId" value="">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         
-        <button type="button" class="btn btn-primary" style="background-color: rgba(211, 188, 63); border-color: rgba(211, 188, 63);"><i class="fa fa-check"></i>Save</button>
+        <button type="submit" class="btn btn-primary" style="background-color: rgba(211, 188, 63); border-color: rgba(211, 188, 63);"><i class="fa fa-check"></i>Save</button>
+         </form>        
       </div>
     </div>
   </div>
@@ -333,9 +333,40 @@ div.content {
     </div>
 
 
+<!-- Modal View for Remove-->
+    <div class="modal fade" id="remove" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle" style="color: white;">Delete Product</h5>
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body table-responsive">
+        <form action="{{URL::to('removeproduct')}}" method="post">
+          
+        {{csrf_field()}}
+              <p class="text-center" style="color: white;"> 
+                Are you sure you want to delete this?</p>
+                <input type="hidden" id="prodId" name="prodId" value="">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">No, Cancel</button>
+        
+        <button type="submit" class="btn btn-primary" style="background-color: rgba(211, 188, 63); border-color: rgba(211, 188, 63);"><i class="fa fa-check"></i>Yes, Delete</button>
+        
+    </form>
+      
+      </div>
+    </div>
+  </div>
+</div>
+    </div>
+
     
         <script type="text/javascript">
-        $('#prod_details').on('show.bs.modal', function (event) {
+        $('#update').on('show.bs.modal', function (event) {
 
             
   var button = $(event.relatedTarget) // Button that triggered the modal
@@ -347,10 +378,11 @@ div.content {
   var expiry = button.data('expiry')
   var vintage = button.data('vintage')
   var condition = button.data('condition')
+  var id = button.data('listid')
 
   var modal = $(this)
 
-  modal.find('.modal-title').text(name)
+  modal.find('.modal-title').text(name);
   modal.find('.modal-body #type').val(type);
   modal.find('.modal-body #tqty').val(tqty);
   modal.find('.modal-body #unitPrice').val(unitPrice);
@@ -358,6 +390,21 @@ div.content {
   modal.find('.modal-body #expiry').val(expiry);
   modal.find('.modal-body #vintage').val(vintage);
    modal.find('.modal-body #condition').val(condition);
+  modal.find('.modal-body #prodId').val(id);
+})
+    </script>
+
+    <script type="text/javascript">
+        $('#remove').on('show.bs.modal', function (event) {
+
+            
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var id = button.data('listid') // Extract info from data-* attributes
+  
+  var modal = $(this)
+
+  modal.find('.modal-body #prodId').val(id);
+
 })
     </script>
         

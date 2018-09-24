@@ -96,3 +96,10 @@ Route::get('/upload', 'FormuploadController@index');
 Route::post('upload', 'FormuploadController@upload');
 
 Route::get('/downloads', 'DownloadFileController@download');
+
+
+// Delete Product
+
+Route::post('removeproduct', 'MyListingsController@remove')->name('mylistings');
+
+Route::post('update', 'MyListingsController@saveprod')->name('mylistings');
