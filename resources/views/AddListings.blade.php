@@ -145,18 +145,18 @@ div.content {
   <a  href="#home" style="margin-top: 90px; color: white; text-align: center;">Welcome,<br> {{Auth::user()->business_name}}</a>
    
   @if( Auth::user()->type == 'StoreOwner')
-            <a  href="/home" style="color: white;">Market Place</a>
-             @endif
-            <a href="/mylistings" style="color: white;">My Listing</a>
-            <a href="/uploadchoose" class="active">Add Listing</a>
-            <a href="#contact" style="color: white;">Opportunities</a>
-            <hr style="border-style: groove;
-              border-width: 1px;"> 
-            <a href="#about" style="color: white;">Edit Profile</a>
-            
-            <a href="#contact" style="color: white;">My Cart</a>
-            
-            <a href="{{URL::to('logout')}}" style="color: white;">Logout</a>
+  <a  href="/home" style="color: white;">Market Place</a>
+   @endif
+  <a href="/mylistings" style="color: white;">My Listing</a>
+  <a href="/uploadchoose" class="active">Add Listing</a>
+  <a href="#contact" style="color: white;">Opportunities</a>
+  <hr style="border-style: groove;
+    border-width: 1px;"> 
+  <a href="#about" style="color: white;">Edit Profile</a>
+  
+  <a href="#contact" style="color: white;">My Cart</a>
+  
+  <a href="{{URL::to('logout')}}" style="color: white;">Logout</a>
 </div>
 <div>
   <form action = "/create" method = "post">
@@ -222,7 +222,6 @@ div.content {
       <button name="submit" type="submit" class="btn btn-primary">Add Product</button>
     </div>
   </div>
-  
 </form>
 
 </div>

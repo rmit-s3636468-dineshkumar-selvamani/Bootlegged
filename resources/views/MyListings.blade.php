@@ -27,7 +27,7 @@
     </head>
     <style>
 body {margin: 0;
-      background-color: rgb(26,27,31);
+      /*background-color: rgb(26,27,31);*/
       /*background-image: url(Images/back.jpg);*/
       }
 
@@ -234,7 +234,7 @@ div.content {
   <a href="#contact" style="color: white;">Opportunities</a>
   <hr style="border-style: groove;
     border-width: 1px;"> 
-  <a href="#about" style="color: white;">Edit Profile</a>
+  <a href="/editProfile" style="color: white;">Edit Profile</a>
   
   <a href="#contact" style="color: white;">My Cart</a>
   
@@ -247,7 +247,7 @@ div.content {
             <!-- Blueprint header -->
            <div class="view" style="margin-left: 14%;">
             <!-- Blueprint header -->
-            <header class="bp-header cf" style="color: white;">
+            <header class="bp-header cf" >
                 
                 <h1>My Listings</h1>
                 
@@ -256,101 +256,51 @@ div.content {
             <section class="grid">
                 <section class="grid">
                 <!-- Products -->
-                @if( Auth::user()->type == 'StoreOwner')       
+              
                          @foreach($products as $item)
-                            @foreach($name as $itemname)
-                                @if($itemname->product_id == $item->sproduct_id)
+                            
                                     <div class="product">
                                         <div class="product__info">
-                                            @if($item->sListing_type == "Wine")
+                                            @if($item->listing_type == "Red Wine")
                                             <img class="product__image" src="images/2.png" alt="Product 1" />
-                                            @elseif($item->sListing_type == "Vodka")
+                                            @elseif($item->listing_type == "Vodka")
                                             <img class="product__image" src="images/6.png" alt="Product 1" />
-                                            @elseif($item->sListing_type == "Rum")
+                                            @elseif($item->listing_type == "Rum")
                                             <img class="product__image" src="images/4.png" alt="Product 1" />
-                                            @elseif($item->sListing_type == "Gin")
+                                            @elseif($item->listing_type == "Gin")
                                             <img class="product__image" src="images/5.png" alt="Product 1" />
-                                            @elseif($item->sListing_type == "Whiskey")
+                                            @elseif($item->listing_type == "Whiskey")
                                             <img class="product__image" src="images/1.png" alt="Product 1" />
-                                            @elseif($item->sListing_type == "Beer")
+                                            @elseif($item->listing_type == "Beer")
                                             <img class="product__image" src="images/7.png" alt="Product 1" />
                                             @else
                                              <img class="product__image" src="images/8.png" alt="Product 1" />
                                             @endif
-                                            <h6 class="product__price highlight" style="color: white">{{$itemname->product_itemName}}</h6><br>
-                                            <h6 class="product__price highlight" style="color: white">Quantity - {{$item->sListing_qty}}</h6>
-                                            <span class="product__price extra highlight">Type - {{$item->sListing_type}} </span>
-                                            <span class="product__price extra highlight">Unit Price - {{$item->sListing_unitPrice}} </span>
-                                            <span class="product__price extra highlight">Expiry - {{$item->sListing_expiry}} </span>
-                                            <span class="product__price extra highlight">Vintage - {{$item->sListing_vintage}} </span>
-                                            <span class="product__price extra highlight">Condition - {{$item->sListing_condition}} </span>
-
-                                            <span class="product__price highlight"> Price : $ {{$item->sListing_totalPrice}}</span>
+                                            <h6 class="product__price highlight" style="color: white">{{$item->product_itemName}}</h6><br>
+                                            <h6 class="product__price highlight" style="color: white">Quantity - {{$item->listing_qty}}</h6>
+                                            <span class="product__price extra highlight">Type - {{$item->listing_type}} </span>
+                                            <span class="product__price extra highlight">Unit Price - {{$item->listing_unitPrice}} </span>
+                                            <span class="product__price extra highlight">Expiry - {{$item->listing_expiry}} </span>
+                                            <span class="product__price extra highlight">Vintage - {{$item->listing_vintage}} </span>
+                                            <span class="product__price extra highlight">Condition - {{$item->listing_condition}} </span>
+                                            <span class="product__price highlight"> Price : $ {{$item->listing_totalPrice}}</span>
                                             <button class="action action--button action--buy" data-toggle="modal" 
-                                        data-target="#prod_details" data-prodname="{{$itemname->product_itemName}}" data-type="{{$item->sListing_type}}" data-total_qty="{{ $item->sListing_qty }} " 
+                                        data-target="#prod_details" data-prodname="{{$item->product_itemName}}" data-type="{{$item->sListing_type}}" data-total_qty="{{ $item->sListing_qty }} " 
                                         data-unit="{{ $item->sListing_unitPrice }}" data-total="{{ $item->sListing_totalPrice }}" 
                                         data-expiry="{{ $item->sListing_expiry }}" data-vintage="{{ $item->sListing_vintage }}"
                                         data-condition="{{ $item->sListing_condition }}" onmouseover="" style="cursor: pointer;" style="width:auto;"><i class="fa fa-check"></i><span class="action__text" style ="width: 80px;" >Remove</span></button>
-                                            <button class="action action--button action--buy" data-toggle="modal" 
-                                        data-target="#prod_details" data-prodname="{{$itemname->product_itemName}}" data-type="{{$item->sListing_type}}" data-total_qty="{{ $item->sListing_qty }} " 
-                                        data-unit="{{ $item->sListing_unitPrice }}" data-total="{{ $item->sListing_totalPrice }}" 
-                                        data-expiry="{{ $item->sListing_expiry }}" data-vintage="{{ $item->sListing_vintage }}"
-                                        data-condition="{{ $item->sListing_condition }}" onmouseover="" style="cursor: pointer;" style="width:auto;"><i class="fa fa-check"></i><span class="action__text" >Edit Details</span></button>
 
+                                            <button class="action action--button action--buy" data-toggle="modal" 
+                                        data-target="#prod_details" data-prodname="{{$item->product_itemName}}" data-type="{{$item->listing_type}}" data-total_qty="{{ $item->listing_qty }} " 
+                                        data-unit="{{ $item->listing_unitPrice }}" data-total="{{ $item->listing_totalPrice }}" 
+                                        data-expiry="{{ $item->listing_expiry }}" data-vintage="{{ $item->listing_vintage }}"
+                                        data-condition="{{ $item->listing_condition }}" onmouseover="" style="cursor: pointer;" style="width:auto;"><i class="fa fa-check"></i><span class="action__text" >Edit Details</span></button>
                                         </div>
                                        
                                    </div>
-                                @endif
-                            @endforeach
+                                
                         @endforeach
-                @else
-                  @foreach($products as $item)
-                    @foreach($name as $itemname)
-                                @if($itemname->product_id == $item->mproduct_id)
-                <div class="product">
-                    <div class="product__info">
-                        @if($item->mListing_type == "Wine")
-                        <img class="product__image" src="images/2.png" alt="Product 1" />
-                        @elseif($item->mListing_type == "Vodka")
-                        <img class="product__image" src="images/6.png" alt="Product 1" />
-                        @elseif($item->mListing_type == "Rum")
-                        <img class="product__image" src="images/4.png" alt="Product 1" />
-                        @elseif($item->mListing_type == "Gin")
-                        <img class="product__image" src="images/5.png" alt="Product 1" />
-                        @elseif($item->mListing_type == "Whiskey")
-                        <img class="product__image" src="images/1.png" alt="Product 1" />
-                        @elseif($item->mListing_type == "Beer")
-                        <img class="product__image" src="images/7.png" alt="Product 1" />
-                        @else
-                         <img class="product__image" src="images/8.png" alt="Product 1" />
-                        @endif
-                        <h6 class="product__price highlight" style="color: white">{{$itemname->product_itemName}}</h6><br>
-
-                        <h6 class="product__price highlight" style="color: white">Quantity - {{$item->mListing_qty}}</h6>
-                        <span class="product__price extra highlight">Type - {{$item->mListing_type}} </span>
-                        <span class="product__price extra highlight">Unit Price - {{$item->mListing_unitPrice}} </span>
-                        <span class="product__price extra highlight">Expiry - {{$item->mListing_expiry}} </span>
-                        <span class="product__price extra highlight">Vintage - {{$item->mListing_vintage}} </span>
-                        <span class="product__price extra highlight">Condition - {{$item->mListing_condition}} </span>
-                        <span class="product__price highlight"> Price : $ {{$item->mListing_totalPrice}}</span>
-                        <button class="action action--button action--buy" data-toggle="modal" 
-                    data-target="#prod_details" data-prodname="{{$itemname->product_itemName}}" data-type="{{$item->sListing_type}}" data-total_qty="{{ $item->sListing_qty }} " 
-                    data-unit="{{ $item->sListing_unitPrice }}" data-total="{{ $item->sListing_totalPrice }}" 
-                    data-expiry="{{ $item->sListing_expiry }}" data-vintage="{{ $item->sListing_vintage }}"
-                    data-condition="{{ $item->sListing_condition }}" onmouseover="" style="cursor: pointer;" style="width:auto;"><i class="fa fa-check"></i><span class="action__text" style ="width: 80px;" >Remove</span></button>
-                        <button class="action action--button action--buy" data-toggle="modal" 
-                    data-target="#prod_details" data-prodname="{{$itemname->product_itemName}}" data-type="{{$item->sListing_type}}" data-total_qty="{{ $item->sListing_qty }} " 
-                    data-unit="{{ $item->sListing_unitPrice }}" data-total="{{ $item->sListing_totalPrice }}" 
-                    data-expiry="{{ $item->sListing_expiry }}" data-vintage="{{ $item->sListing_vintage }}"
-                    data-condition="{{ $item->sListing_condition }}" onmouseover="" style="cursor: pointer;" style="width:auto;"><i class="fa fa-check"></i><span class="action__text" >Edit Details</span></button>
-                    
-                    </div>
-                   
-                </div>
-                            @endif
-                        @endforeach
-                @endforeach
-                @endif
+              
                             </section>
         </div><!-- /view -->
     
@@ -414,6 +364,5 @@ div.content {
         <div class="pagination">
         {{ $products->links() }}
     </div>
-    
     </body>
 </html>

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
-
+use app\StoreListing;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,4 +15,10 @@ use Illuminate\Http\Request;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::get('/search',function(){
+ $query = Input::get('query');
+ $users = StoreListing::where('sListing_type','like','%'.$query.'%')->get();
+ return response()->json($users);
 });

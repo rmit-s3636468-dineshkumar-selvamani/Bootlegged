@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProductSubBrandsTable extends Migration
+
+class CreateProductsSubBrandTable extends Migration
+
 {
     /**
      * Run the migrations.

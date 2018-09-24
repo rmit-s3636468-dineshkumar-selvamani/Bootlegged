@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use App\StoreListing;
+use App\ProductListing;
 use Auth;
 class MyListingsController extends Controller
 {
@@ -26,14 +26,30 @@ class MyListingsController extends Controller
      */
     public function index()
     {   
-             $name= DB::table('products')
-                    ->select('products.product_id','products.product_itemName')
-                    ->get();
-
-            $products = StoreListing::where('store_id', Auth::user()->store_id )->paginate(9);;
+            if(Auth::user()->type == "StoreOwner")
+            {
+            $products = ProductListing::where('lstore_id',Auth::user()->store_id )
+             ->join('products', 'products.product_id', '=', 'product_listings.lproduct_id')
+             ->paginate(9);
+            
         //  // $products = DB::table('store_listings');
 
 
-        return view('MyListings')->with(['name'=>$name,'products'=>$products]);
+
+        return view('MyListings')->with(['products'=>$products]);
+
+            }
+            else
+            {
+                 $products = ProductListing::where('lmanu_id', '=', Auth::user()->manu_id ) 
+            ->join('products', 'products.product_id', '=', 'product_listings.lproduct_id')
+            ->paginate(9);
+         
+           
+
+            return view('MyListings')->with(['products'=>$products]);
+            }
+
+
     }
 }

@@ -171,6 +171,21 @@
                     <input class="form_box" type="text" name="manu_address" placeholder="Address Line " id="manu_address" required><br><br>
                     <input class="form_box" type="text" name="manu_suburb" placeholder="Suburb" id="manu_suburb"required><br><br>
                     <input class="form_box" type="text" name="manu_state" placeholder="State(VIC,NSW,WA,QLD,SA,TAS)" id="manu_state"required><br><br>
+
+                     <!-- <div class="col" style="margin-left: -14px; width: 345px; ">
+                <div class="ui-select">
+                  <select id="user_time_zone" class="form-control">
+                    <option value="VIC" selected="selected">VIC</option>
+                    <option value="NSW">NSW</option>
+                    <option value="WA">WA</option>
+                    <option value="QLD">QLD</option>
+                    <option value="SA">SA</option>
+                    <option value="TAS">TAS</option>
+                  
+                  </select>
+                </div>
+              </div>
+            <br> -->
                     <input class="form_box" type="number" name="manu_postcode" placeholder="Post Code" id="manu_postcode"required><br><br>
                     <input class="form_box" type="number" name="manu_phone" placeholder="Contact Number" id="manu_phone"required><br><br>
                      <input class="form_box" type="text" name="manu_abn" placeholder="ABN Number" id="manu_abn"required><br><br>
