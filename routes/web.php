@@ -72,10 +72,27 @@ Route::get('/filterName/{id}', 'HomeController@filterName')->name("dashboard/fil
 
 Route::get('/user/find', 'HomeController@searchUsers');
  
+Route::get('/editProfile', 'EditProfileController@index')->name('editProfile');
 
+Route::post('/store_editProfile', ['as' => 'store_editProfile', 'uses' => 'EditProfileController@saveStore']);
+
+Route::post('/manu_Editrofile', ['as' => 'manu_Editrofile', 'uses' => 'EditProfileController@saveManu']);
 
 
 
 
 
 Route::post('create','AddListingsController@insert');
+
+
+
+//File Upload
+Route::get('uploadchoose', function(){
+    return View('uploadchoose'); // Your Blade template name
+});
+
+Route::get('/upload', 'FormuploadController@index');
+
+Route::post('upload', 'FormuploadController@upload');
+
+Route::get('/downloads', 'DownloadFileController@download');

@@ -6,11 +6,11 @@
   <a class="active" href="/home">Market Place</a>
    @endif
   <a href="/mylistings" style="color: white;">My Listing</a>
-  <a href="/addlistings" style="color: white;">Add Listing</a>
+  <a href="/uploadchoose" style="color: white;">Add Listing</a>
   <a href="#contact" style="color: white;">Opportunities</a>
   <hr style="border-style: groove;
     border-width: 1px;"> 
-  <a href="#about" style="color: white;">Edit Profile</a>
+  <a href="/editProfile" style="color: white;">Edit Profile</a>
   
   <a href="#contact" style="color: white;">My Cart</a>
   

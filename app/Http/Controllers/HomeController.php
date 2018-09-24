@@ -129,7 +129,7 @@ class HomeController extends Controller
             ->where([
                         ['listing_active', '=', '1'],
                         ['lproduct_id', '=', $id],
-                         ['lstore_id', '!=', Auth::user()->store_id]
+                        // ['lstore_id', '!=', Auth::user()->store_id]
                       ])
             // ->where('listing_active',1)
             // ->where('listing_type','=',$id)

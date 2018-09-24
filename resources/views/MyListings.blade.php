@@ -230,11 +230,11 @@ div.content {
   <a  href="/home" style="color: white;">Market Place</a>
    @endif
   <a href="/mylistings" class="active" >My Listing</a>
-  <a href="/addlistings" style="color: white;">Add Listing</a>
+  <a href="/uploadchoose" style="color: white;">Add Listing</a>
   <a href="#contact" style="color: white;">Opportunities</a>
   <hr style="border-style: groove;
     border-width: 1px;"> 
-  <a href="#about" style="color: white;">Edit Profile</a>
+  <a href="/editProfile" style="color: white;">Edit Profile</a>
   
   <a href="#contact" style="color: white;">My Cart</a>
   
@@ -284,6 +284,12 @@ div.content {
                                             <span class="product__price extra highlight">Vintage - {{$item->listing_vintage}} </span>
                                             <span class="product__price extra highlight">Condition - {{$item->listing_condition}} </span>
                                             <span class="product__price highlight"> Price : $ {{$item->listing_totalPrice}}</span>
+                                            <button class="action action--button action--buy" data-toggle="modal" 
+                                        data-target="#prod_details" data-prodname="{{$item->product_itemName}}" data-type="{{$item->sListing_type}}" data-total_qty="{{ $item->sListing_qty }} " 
+                                        data-unit="{{ $item->sListing_unitPrice }}" data-total="{{ $item->sListing_totalPrice }}" 
+                                        data-expiry="{{ $item->sListing_expiry }}" data-vintage="{{ $item->sListing_vintage }}"
+                                        data-condition="{{ $item->sListing_condition }}" onmouseover="" style="cursor: pointer;" style="width:auto;"><i class="fa fa-check"></i><span class="action__text" style ="width: 80px;" >Remove</span></button>
+
                                             <button class="action action--button action--buy" data-toggle="modal" 
                                         data-target="#prod_details" data-prodname="{{$item->product_itemName}}" data-type="{{$item->listing_type}}" data-total_qty="{{ $item->listing_qty }} " 
                                         data-unit="{{ $item->listing_unitPrice }}" data-total="{{ $item->listing_totalPrice }}" 

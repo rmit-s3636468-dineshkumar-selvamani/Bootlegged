@@ -26,14 +26,30 @@ class MyListingsController extends Controller
      */
     public function index()
     {   
-            
-
+            if(Auth::user()->type == "StoreOwner")
+            {
             $products = ProductListing::where('lstore_id',Auth::user()->store_id )
              ->join('products', 'products.product_id', '=', 'product_listings.lproduct_id')
              ->paginate(9);
+            
         //  // $products = DB::table('store_listings');
 
 
+
         return view('MyListings')->with(['products'=>$products]);
+
+            }
+            else
+            {
+                 $products = ProductListing::where('lmanu_id', '=', Auth::user()->manu_id ) 
+            ->join('products', 'products.product_id', '=', 'product_listings.lproduct_id')
+            ->paginate(9);
+         
+           
+
+            return view('MyListings')->with(['products'=>$products]);
+            }
+
+
     }
 }

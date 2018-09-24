@@ -171,6 +171,24 @@
                     <input class="form_box" type="text" name="store_address" placeholder="Address Line " id="store_address" required><br><br>
                     <input class="form_box" type="text" name="store_suburb" placeholder="Suburb" id="store_suburb"required><br><br>
                     <input class="form_box" type="text" name="store_state" placeholder="State(VIC,NSW,WA,QLD,SA,TAS)" id="store_state"required><br><br>
+
+
+             
+              <!-- <div class="col" style="margin-left: -14px; width: 345px; ">
+                <div class="ui-select">
+                  <select id="user_time_zone" class="form-control">
+                    <option value="VIC" selected="selected">VIC</option>
+                    <option value="NSW">NSW</option>
+                    <option value="WA">WA</option>
+                    <option value="QLD">QLD</option>
+                    <option value="SA">SA</option>
+                    <option value="TAS">TAS</option>
+                  
+                  </select>
+                </div>
+              </div>
+            <br> -->
+
                     <input class="form_box" type="number" name="store_postcode" placeholder="Post Code" id="store_postcode"required><br><br>
                     <input class="form_box" type="number" name="store_phone" placeholder="Contact Number" required><br><br>
                     <input class="form_box" type="text" name="store_abn" placeholder="ABN Number" id="store_abn"required><br><br>

@@ -362,7 +362,7 @@ div.content {
  
       <div class="starter-template" style="align-text:center">
        
-        <input type="text" class="typeahead form-control" id="search" placeholder="Search by product name" autocomplete="off" >
+        <input type="text" class="typeahead form-control" id="search" placeholder="Search by product Name" autocomplete="off" >
       </div>
        
 </div>
