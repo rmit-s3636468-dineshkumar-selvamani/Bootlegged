@@ -16,9 +16,5 @@ class Product extends Model
     ];
 
      protected $table = 'products';
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     **/
+    
 }
