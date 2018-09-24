@@ -230,7 +230,7 @@ div.content {
   <a  href="/home" style="color: white;">Market Place</a>
    @endif
   <a href="/mylistings" class="active" >My Listing</a>
-  <a href="/addlistings" style="color: white;">Add Listing</a>
+  <a href="/uploadchoose" style="color: white;">Add Listing</a>
   <a href="#contact" style="color: white;">Opportunities</a>
   <hr style="border-style: groove;
     border-width: 1px;"> 
@@ -259,7 +259,7 @@ div.content {
                 @if( Auth::user()->type == 'StoreOwner')       
                          @foreach($products as $item)
                             @foreach($name as $itemname)
-                                @if($itemname->product_id == $item->product_id)
+                                @if($itemname->product_id == $item->sproduct_id)
                                     <div class="product">
                                         <div class="product__info">
                                             @if($item->sListing_type == "Wine")
@@ -284,12 +284,19 @@ div.content {
                                             <span class="product__price extra highlight">Expiry - {{$item->sListing_expiry}} </span>
                                             <span class="product__price extra highlight">Vintage - {{$item->sListing_vintage}} </span>
                                             <span class="product__price extra highlight">Condition - {{$item->sListing_condition}} </span>
+
                                             <span class="product__price highlight"> Price : $ {{$item->sListing_totalPrice}}</span>
                                             <button class="action action--button action--buy" data-toggle="modal" 
                                         data-target="#prod_details" data-prodname="{{$itemname->product_itemName}}" data-type="{{$item->sListing_type}}" data-total_qty="{{ $item->sListing_qty }} " 
                                         data-unit="{{ $item->sListing_unitPrice }}" data-total="{{ $item->sListing_totalPrice }}" 
                                         data-expiry="{{ $item->sListing_expiry }}" data-vintage="{{ $item->sListing_vintage }}"
+                                        data-condition="{{ $item->sListing_condition }}" onmouseover="" style="cursor: pointer;" style="width:auto;"><i class="fa fa-check"></i><span class="action__text" style ="width: 80px;" >Remove</span></button>
+                                            <button class="action action--button action--buy" data-toggle="modal" 
+                                        data-target="#prod_details" data-prodname="{{$itemname->product_itemName}}" data-type="{{$item->sListing_type}}" data-total_qty="{{ $item->sListing_qty }} " 
+                                        data-unit="{{ $item->sListing_unitPrice }}" data-total="{{ $item->sListing_totalPrice }}" 
+                                        data-expiry="{{ $item->sListing_expiry }}" data-vintage="{{ $item->sListing_vintage }}"
                                         data-condition="{{ $item->sListing_condition }}" onmouseover="" style="cursor: pointer;" style="width:auto;"><i class="fa fa-check"></i><span class="action__text" >Edit Details</span></button>
+
                                         </div>
                                        
                                    </div>
@@ -299,7 +306,7 @@ div.content {
                 @else
                   @foreach($products as $item)
                     @foreach($name as $itemname)
-                                @if($itemname->product_id == $item->product_id)
+                                @if($itemname->product_id == $item->mproduct_id)
                 <div class="product">
                     <div class="product__info">
                         @if($item->mListing_type == "Wine")
@@ -330,7 +337,13 @@ div.content {
                     data-target="#prod_details" data-prodname="{{$itemname->product_itemName}}" data-type="{{$item->sListing_type}}" data-total_qty="{{ $item->sListing_qty }} " 
                     data-unit="{{ $item->sListing_unitPrice }}" data-total="{{ $item->sListing_totalPrice }}" 
                     data-expiry="{{ $item->sListing_expiry }}" data-vintage="{{ $item->sListing_vintage }}"
+                    data-condition="{{ $item->sListing_condition }}" onmouseover="" style="cursor: pointer;" style="width:auto;"><i class="fa fa-check"></i><span class="action__text" style ="width: 80px;" >Remove</span></button>
+                        <button class="action action--button action--buy" data-toggle="modal" 
+                    data-target="#prod_details" data-prodname="{{$itemname->product_itemName}}" data-type="{{$item->sListing_type}}" data-total_qty="{{ $item->sListing_qty }} " 
+                    data-unit="{{ $item->sListing_unitPrice }}" data-total="{{ $item->sListing_totalPrice }}" 
+                    data-expiry="{{ $item->sListing_expiry }}" data-vintage="{{ $item->sListing_vintage }}"
                     data-condition="{{ $item->sListing_condition }}" onmouseover="" style="cursor: pointer;" style="width:auto;"><i class="fa fa-check"></i><span class="action__text" >Edit Details</span></button>
+                    
                     </div>
                    
                 </div>
@@ -401,5 +414,6 @@ div.content {
         <div class="pagination">
         {{ $products->links() }}
     </div>
+    
     </body>
 </html>

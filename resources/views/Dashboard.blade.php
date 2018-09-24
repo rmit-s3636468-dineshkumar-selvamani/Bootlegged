@@ -334,7 +334,7 @@ div.content {
 				<?php $count = 0; ?>
 				@foreach($products as $item)
 					@foreach($name as $itemname)
-						@if($itemname->product_id == $item->product_id)
+						@if($itemname->product_id == $item->sproduct_id)
 						
 				<div class="product" >
 					<div class="product__info" data-toggle="modal" 
