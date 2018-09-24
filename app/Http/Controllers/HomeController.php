@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\StoreListing;
-use App\ProductListing;
+use App\Listings;
 use App\Product;
 use App\User;
 use Auth;
@@ -41,11 +41,11 @@ class HomeController extends Controller
     {   
         if(Auth::user()->type == "StoreOwner")
         {   
-            $products = DB::table('product_listings')
-            ->where('listing_active',1)
+            $products = DB::table('listings')
+            ->where('Listing_active',1)
             ->where('lstore_id', '!=', Auth::user()->store_id )
             ->orWhereNull('lstore_id')
-            ->join('products', 'products.product_id', '=', 'product_listings.lproduct_id')
+            ->join('products', 'products.product_id', '=', 'listings.lproduct_id')
             ->paginate(3);
 
            
@@ -56,8 +56,8 @@ class HomeController extends Controller
 
         else
         {
-            $products = ProductListing::where('lmanu_id', '=', Auth::user()->manu_id ) 
-            ->join('products', 'products.product_id', '=', 'product_listings.lproduct_id')
+            $products = Listings::where('lmanu_id', '=', Auth::user()->manu_id ) 
+            ->join('products', 'products.product_id', '=', 'listings.lproduct_id')
             ->paginate(9);
          
            
@@ -91,11 +91,11 @@ class HomeController extends Controller
         if(Auth::user()->type == "StoreOwner")
         {   
             
-            $products = DB::table('product_listings')
+            $products = DB::table('listings')
             // ->select('id','manu_id','product_id','mListing_type','mListing_qty','mListing_unitPrice','mListing_totalPrice','mListing_expiry','mListing_vintage','mListing_condition','mListing_active')
             ->where([
-                        ['listing_active', '=', '1'],
-                        ['listing_type', '=', $id],
+                        ['Listing_active', '=', '1'],
+                        ['Listing_type', '=', $id],
                         //['lstore_id', '!=', Auth::user()->store_id]
                       ])
             // ->where('listing_active',1)
@@ -103,7 +103,7 @@ class HomeController extends Controller
             // ->where('lstore_id', '!=', 'Auth::user()->store_id' )
             // ->orWhereNull('lstore_id')
             
-            ->join('products', 'products.product_id', '=', 'product_listings.lproduct_id')
+            ->join('products', 'products.product_id', '=', 'listings.lproduct_id')
             ->paginate(3);
 
            
@@ -124,10 +124,10 @@ class HomeController extends Controller
 
 
             
-            $products = DB::table('product_listings')
+            $products = DB::table('listings')
             // ->select('id','manu_id','product_id','mListing_type','mListing_qty','mListing_unitPrice','mListing_totalPrice','mListing_expiry','mListing_vintage','mListing_condition','mListing_active')
             ->where([
-                        ['listing_active', '=', '1'],
+                        ['Listing_active', '=', '1'],
                         ['lproduct_id', '=', $id],
                         // ['lstore_id', '!=', Auth::user()->store_id]
                       ])
@@ -136,7 +136,7 @@ class HomeController extends Controller
             // ->where('lstore_id', '!=', 'Auth::user()->store_id' )
             // ->orWhereNull('lstore_id')
             
-            ->join('products', 'products.product_id', '=', 'product_listings.lproduct_id')
+            ->join('products', 'products.product_id', '=', 'listings.lproduct_id')
             ->paginate(3);
 
            

@@ -24,13 +24,23 @@
 
 
 
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+      <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
+
+    <!-- Import typeahead.js -->
+    <script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
+ 
+
 		<!-- Modernizr is used for flexbox fallback -->
 		<script src="js/modernizr.custom.js"></script>
 	</head>
 
 	<style>
 body {margin: 0;
-
+background-color: white;
 }
 
 ul.topnav {
@@ -133,6 +143,23 @@ div.content {
 
                  
              }
+span.twitter-typeahead
+  width: 100%
+
+.tt-input
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075)
+
+.tt-menu
+  @extend .list-group
+  box-shadow: 0 5px 10px rgba(0,0,0,.2)
+  width: 100%
+
+.tt-suggestion
+  @extend .list-group-item
+
+.tt-selectable
+  @extend .list-group-item-action
+
 
 
 </style>	
@@ -152,78 +179,137 @@ div.content {
   <a href="#contact" style="color: white;">Opportunities</a>
   <hr style="border-style: groove;
     border-width: 1px;"> 
-  <a href="#about" style="color: white;">Edit Profile</a>
+  <a href="/editProfile" style="color: white;">Edit Profile</a>
   
   <a href="#contact" style="color: white;">My Cart</a>
   
   <a href="{{URL::to('logout')}}" style="color: white;">Logout</a>
 </div>
 <div>
+  <div class="view" style="margin-left: 14%;">
+      <!-- Blueprint header -->
+      <header class="bp-header cf">
+        
+        <h1 style = "color:black">Add Product</h1>
+        
+      </header>
   <form action = "/create" method = "post">
     <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
   <div class="form-group row">
-    <label for="producttype" class="col-4 col-form-label">Product Type</label> 
+    <label for="producttype" style = "color:black" class="col-4 col-form-label">Product Name</label> 
     <div class="col-3">
-      <div class="input-group">
-        <input id="producttype" name="producttype" placeholder="------- Select Product Type -------" type="text" required="required" class="form-control here"> 
-        <div class="input-group-addon append">
-          <i class="fa fa-angle-down"></i>
-        </div>
+      
+        <div class="starter-template" style="align-text:center">
+       
+        <input type="text" style="width:227px;" name="productname"  class="typeahead form-control" id="search" placeholder="Search by product Name" autocomplete="on" >
+        <p style = "color:black; font-size : 12px;">Cant find your product? Please <a style = "color:blue;" href="" >add</a> here.</p>
+      
       </div>
     </div>
   </div>
   <div class="form-group row">
-    <label for="product_quantity" class="col-4 col-form-label">Product Quantity</label> 
+    <label for="producttype"  style = "color:black" class="col-4 col-form-label">Product type</label> 
+    <div class="col-3">
+      <select id="producttype" style="width:287px;" name="producttype" class="custom-select">
+        <option value="Red Wine">Red Wine</option>
+        <option value="White Wine">White Wine</option>
+        <option value="Cider">Cider</option>
+        <option value="Beer">Beer</option>
+        <option value="Spirits">Spirits</option>
+        <option value="Sparkling">Sparkling</option>
+        <option value="Pre-Mixed">Pre-Mixed</option>
+      </select>
+    </div>
+  </div> 
+  <div class="form-group row">
+    <label for="product_quantity" style = "color:black" class="col-4 col-form-label">Product Quantity</label> 
     <div class="col-3">
       <input id="product_quantity" required="required" name="product_quantity" type="text" class="form-control here">
     </div>
   </div>
   <div class="form-group row">
-    <label for="unitprice" class="col-4 col-form-label">Product Unit Price</label> 
+    <label for="unitprice" style = "color:black" class="col-4 col-form-label">Product Unit Price</label> 
     <div class="col-3">
       <input id="unitprice" required="required" name="unitprice" type="text" class="form-control here">
     </div>
   </div>
   <div class="form-group row">
-    <label for="totalprice" class="col-4 col-form-label">Product Total Price</label> 
+    <label for="totalprice" style = "color:black" class="col-4 col-form-label">Product Total Price</label> 
     <div class="col-3">
       <input id="totalprice" required="required" name="totalprice" type="text" class="form-control here">
     </div>
   </div>
   <div class="form-group row">
-    <label for="expiry" class="col-4 col-form-label">Product Expiry</label> 
+    <label for="expiry" style = "color:black" class="col-4 col-form-label">Product Expiry</label> 
     <div class="col-3">
       <input id="expiry" name="expiry" type="text" class="form-control here">
     </div>
   </div>
   <div class="form-group row">
-    <label for="vintage" class="col-4 col-form-label">Vintage</label> 
+    <label for="vintage" style = "color:black" class="col-4 col-form-label">Vintage</label> 
     <div class="col-3">
       <input id="vintage" name="vintage" type="text" class="form-control here">
     </div>
   </div>
   <div class="form-group row">
-    <label for="condition" class="col-4 col-form-label">Product Condition</label> 
+    <label for="condition" style = "color:black" class="col-4 col-form-label">Product Condition</label> 
     <div class="col-3">
       <input id="condition"  required="required" name="condition" type="text" class="form-control here">
     </div>
   </div>
+  
   <div class="form-group row">
-    <label for="select" class="col-4 col-form-label">Product active</label> 
+    <label for="productimage" style = "color:black" class="col-4 col-form-label">Product Image</label> 
     <div class="col-3">
-      <select id="select" name="select" class="custom-select">
-        <option value="yes">Yes</option>
-        <option value="no">No</option>
-      </select>
+      <input id="productimage"  name="productimage" type="file" class="form-control here">
     </div>
-  </div> 
+  </div>
   <div class="form-group row">
     <div class="offset-4 col-3">
       <button name="submit" type="submit" class="btn btn-primary">Add Product</button>
     </div>
   </div>
 </form>
-
 </div>
+</div>
+
+ <script>
+        $(document).ready(function() {
+            var bloodhound = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.whitespace,
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '/user/find?q=%QUERY%',
+                    wildcard: '%QUERY%'
+                },
+            });
+            
+            $('#search').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 1
+            }, {
+                name: 'product_itemName',
+                source: bloodhound,
+                display: function(data) {
+                    return data.product_itemName  //Input value to be set when you select a suggestion. 
+                },
+                templates: {
+                    empty: [
+                        '<div class="list-group search-results-dropdown"><div class="list-group-item">Nothing found.</div></div>'
+                    ],
+                    header: [
+                        '<div class="list-group search-results-dropdown">'
+                    ],
+                    suggestion: function(data) {
+                    return '<div style="font-weight:normal; margin-top:-10px ! important;" class="list-group-item">' + data.product_itemName + '</div></div>'
+                    }
+                }
+            });
+        });
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 	</body>
 </html>

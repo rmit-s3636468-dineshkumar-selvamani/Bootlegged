@@ -294,7 +294,6 @@ div.content {
         background-clip: padding-box;
 
         .tt-suggestions {
-
           .tt-suggestion {
             padding: 3px 12px;
             font-weight: normal;
@@ -314,6 +313,7 @@ div.content {
         }
       }
     }
+
 
 
 
@@ -362,7 +362,7 @@ div.content {
  
       <div class="starter-template" style="align-text:center">
        
-        <input type="text" class="typeahead form-control" id="search" placeholder="Search by product Name" autocomplete="off" >
+        <input type="text" class="typeahead form-control" id="search" placeholder="Search by product Name" autocomplete="on"  >
       </div>
        
 </div>
@@ -397,36 +397,36 @@ div.content {
 						
 				<div class="product" >
 					<div class="product__info" data-toggle="modal" 
-					data-target="#prod_details" data-prodname="{{$item->product_itemName}}" data-type="{{$item->listing_type}}" data-total_qty="{{ $item->listing_qty }} " 
-					data-unit="{{ $item->listing_unitPrice }}" data-total="{{ $item->listing_totalPrice }}" 
-					data-expiry="{{ $item->listing_expiry }}" data-vintage="{{ $item->listing_vintage }}"
-					data-condition="{{ $item->listing_condition }}" onmouseover="" style="cursor: pointer;">
+					data-target="#prod_details" data-prodname="{{$item->product_itemName}}" data-type="{{$item->Listing_type}}" data-total_qty="{{ $item->Listing_qty }} " 
+					data-unit="{{ $item->Listing_unitPrice }}" data-total="{{ $item->Listing_totalPrice }}" 
+					data-expiry="{{ $item->Listing_expiry }}" data-vintage="{{ $item->Listing_vintage }}"
+					data-condition="{{ $item->Listing_condition }}" onmouseover="" style="cursor: pointer;">
 						
 
 
-						@if($item->listing_type == "Red Wine")
+						@if($item->Listing_type == "Red Wine")
                         <img class="product__image" src="{{ asset('images/1.png') }}" alt="Product 1" />
-                        @elseif($item->listing_type == "White Wine")
+                        @elseif($item->Listing_type == "White Wine")
                         <img class="product__image" src="{{ asset('images/2.png') }}" alt="Product 1" />
-                        @elseif($item->listing_type == "Beer")
+                        @elseif($item->Listing_type == "Beer")
                         <img class="product__image" src="{{ asset('images/1.png') }}" alt="Product 1" />
-                        @elseif($item->listing_type == "Spirits")
+                        @elseif($item->Listing_type == "Spirits")
                         <img class="product__image" src="{{ asset('images/8.png') }}" alt="Product 1" />
-                        @elseif($item->listing_type == "Whiskey")
+                        @elseif($item->Listing_type == "Whiskey")
                         <img class="product__image" src="{{ asset('images/1.png') }}" alt="Product 1" />
-                        @elseif($item->listing_type == "Cider")
+                        @elseif($item->Listing_type == "Cider")
                         <img class="product__image" src="{{ asset('images/1.png') }}" alt="Product 1" />
                         @else
                          <img class="product__image" src="{{ asset('images/1.png') }}" alt="Product 1" />
                         @endif						
 						<h6 class="product__name highlight" style="color: white">{{$item->product_itemName}}</h6><br>
-						<h6 class="product__quantity highlight" style="color: white">Quantity - {{$item->listing_qty}}</h6>
-						<span class="product__price extra highlight">Type - {{$item->listing_type}} </span>
-						<span class="product__price extra highlight">Unit Price - {{$item->listing_unitPrice}} </span>
-						<span class="product__price extra highlight">Expiry - {{$item->listing_expiry}} </span>
-						<span class="product__price extra highlight">Vintage - {{$item->listing_vintage}} </span>
-						<span class="product__price extra highlight">Condition - {{$item->listing_condition}} </span>
-						<span class="product__price highlight"> Price : $ {{$item->listing_totalPrice}}</span>
+						<h6 class="product__quantity highlight" style="color: white">Quantity - {{$item->Listing_qty}}</h6>
+						<span class="product__price extra highlight">Type - {{$item->Listing_type}} </span>
+						<span class="product__price extra highlight">Unit Price - {{$item->Listing_unitPrice}} </span>
+						<span class="product__price extra highlight">Expiry - {{$item->Listing_expiry}} </span>
+						<span class="product__price extra highlight">Vintage - {{$item->Listing_vintage}} </span>
+						<span class="product__price extra highlight">Condition - {{$item->Listing_condition}} </span>
+						<span class="product__price highlight"> Price : $ {{$item->Listing_totalPrice}}</span>
 						
 						<a href="/mylistings"><button class="action action--button action--buy" ><i class="fa fa-shopping-cart"></i><span class="action__text">Add to cart</span></button></a>
 
