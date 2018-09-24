@@ -14,7 +14,7 @@ class Storelisting extends Model
      * @var array
      */
     protected $fillable = [
-         'id','store_id','product_id','sListing_type','sListing_qty','sListing_unitPrice','sListing_totalPrice','sListing_expiry','sListing_vintage','sListing_condition','sListing_active'
+         'id','store_id','sproduct_id','sListing_type','sListing_qty','sListing_unitPrice','sListing_totalPrice','sListing_expiry','sListing_vintage','sListing_condition','sListing_active'
     ];
 
      protected $table = 'store_listings';

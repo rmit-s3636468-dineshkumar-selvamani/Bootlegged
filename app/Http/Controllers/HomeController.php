@@ -58,11 +58,11 @@ class HomeController extends Controller
             $offset = ($page - 1) * $perpage;
 
             $strprods = DB::table('manu_listings')
-            ->select('id','manu_id','product_id','mListing_type','mListing_qty','mListing_unitPrice','mListing_totalPrice','mListing_expiry','mListing_vintage','mListing_condition','mListing_active')
+            ->select('id','manu_id','mproduct_id','mListing_type','mListing_qty','mListing_unitPrice','mListing_totalPrice','mListing_expiry','mListing_vintage','mListing_condition','mListing_active')
             ->where('mListing_active',1);
 
             $products = DB::table('store_listings')
-            ->select('id','store_id','product_id','sListing_type','sListing_qty','sListing_unitPrice','sListing_totalPrice','sListing_expiry','sListing_vintage','sListing_condition','sListing_active')
+            ->select('id','store_id','sproduct_id','sListing_type','sListing_qty','sListing_unitPrice','sListing_totalPrice','sListing_expiry','sListing_vintage','sListing_condition','sListing_active')
             ->where('store_id', '!=', Auth::user()->store_id )
             ->where('sListing_active',1)
             ->unionall($strprods)

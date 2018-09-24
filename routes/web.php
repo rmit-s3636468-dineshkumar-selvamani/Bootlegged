@@ -74,3 +74,17 @@ Route::get('/search','HomeController@search');
 
 
 Route::post('create','AddListingsController@insert');
+
+
+//File Upload
+Route::get('uploadchoose', function(){
+    return View('uploadchoose'); // Your Blade template name
+});
+
+Route::get('/upload', 'FormuploadController@index');
+
+Route::post('upload', 'FormuploadController@upload');
+
+Route::get('/downloads', 'DownloadFileController@download');
+
+
