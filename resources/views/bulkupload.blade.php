@@ -26,6 +26,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </head>
     <style>
+
+
     html,body{
       height:100%;
     }
@@ -35,7 +37,8 @@
       width:100%;
       display: table;
       font-weight: 100;
-      font-family: 'Lato';
+      /*font-family: 'Lato';*/
+      font-family: "Lato", sans-serif;
     }
     .container{
        text-align: center;
@@ -50,31 +53,133 @@
       font-size: 96px;
     }
     .downloadfile{
-       text-align: center;
-       padding-top: 100px;
-       padding-left: 200px;
-       vertical-align: middle;
+       
+      /* padding-top: 50px;
+       padding-left: 0px;*/
+       
     }
+    .sidebar {
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: #f1f1f1;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(33,35,39);
+}
+
+.sidebar a {
+  display: block;
+  color: black;
+  padding: 16px;
+  text-decoration: none;
+}
+ 
+.sidebar a.active {
+  background-color: rgba(211, 188, 63);
+  color: black;
+}
+
+.sidebar a:hover:not(.active) {
+  background-color: #555;
+  color: white;
+}
+
+div.content {
+  margin-left: 200px;
+  padding: 1px 16px;
+  height: 1000px;
+  color: white;
+}
+
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {float: left;}
+  div.content {margin-left: 0;}
+}
+
+@media screen and (max-width: 400px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
+  }
+}
+
+.logo{
+                 
+                 visibility: visible;
+                 position: absolute;
+                 height: 125px;
+                 width: 175px;
+                 float: left;
+                 margin-top: -15px;
+                 margin-left: 10px;
+
+
+
+                 
+             }
+
   </style>
     <body>
-      <div class="downloadfile">
-        <a href="/downloads" class="btn btn-large pull-right"><i class="icon-download-alt"> </i> Download Template </a>
+     <div class="sidebar">
+  <img style=" position: absolute; display: inline;" class="logo"  alt ="logo" src="/Images/logo1.png">
+  <a  href="#home" style="margin-top: 90px; color: white; text-align: center;">Welcome,<br> {{Auth::user()->business_name}}</a>
+   
+  @if( Auth::user()->type == 'StoreOwner')
+  <a  href="/home" style="color: white;">Market Place</a>
+   @endif
+  <a href="/mylistings" style="color: white;" >My Listing</a>
+  <a href="/uploadchoose" class="active" >Add Listing</a>
+  <a href="#contact" style="color: white;">Opportunities</a>
+  <hr style="border-style: groove;
+    border-width: 1px;"> 
+  <a href="/editProfile" style="color: white;">Edit Profile</a>
+  
+  <a href="#contact" style="color: white;">My Cart</a>
+  
+  <a href="{{URL::to('logout')}}" style="color: white;">Logout</a>
+</div>
+      <div class="view" style="margin-left: 14%;">
+      <!-- Blueprint header -->
+      <header class="bp-header cf">
+        
+        <h1>Bulk Upload</h1><br><br><br>
+
+         <div class="downloadfile">
+          <p> First download the template given in the link below</p><br>
+        <a href="/downloads">  Download Template </a><br><br> 
+
+        <p>Enter all the product details in the given template and upload it back.</p>
       </div>
-      <div class="container">
+
+        <div class="container" style="color: black;">
         <div class = "content">
           <h1>File Upload</h1><br>
           <form action = "{{URL::to('upload')}}" method = "post" enctype="multipart/form-data">  
-            <label>Select file to upload:</label>
-            <input type="file"  name="file" id="file"><br><br>
+            <label style="color: black; margin-left: 100px;">Select file to upload:</label>
+            <input style="color: black;" type="file"  name="file" id="file">
             <span id="error"></span>
-            <div>
+            <div style=" margin-top: 30px;"> 
                <input type="submit" class="btn btn-info {{$errors->has('submit') ? 'has-error' : ''}}" value= "Upload" name="submit" id="submit"><span class="glyphicon glyphicon-arrow-up"></span>
-              
               </div>
+              
             <input type="hidden" name="_token" value="{{csrf_token()}}">
           </form>
         </div>
       </div>
+
+
+        </header> 
+     
+     
+      
+      
 
 
     </body>

@@ -62,7 +62,7 @@ class MyListingsController extends Controller
 
         $cat->delete();
 
-        return back();
+        return back()->with('message', 'Product Deleted Successfully');
 
       
     }

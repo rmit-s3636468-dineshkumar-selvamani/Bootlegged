@@ -80,11 +80,11 @@ class AddListingsController extends Controller
         ]);
 }
      
-
+      return back()->with('message', 'Product Added to MarketPlace');
       
-      echo $request -> get ('producttype');
-      echo "Record inserted successfully.<br/>";
-      // echo "<a href = ''/addlistings">Click Here</a> to go back."; 
+      // echo $request -> get ('producttype');
+      // echo "Record inserted successfully.<br/>";
+      // // echo "<a href = ''/addlistings">Click Here</a> to go back."; 
    
 }
 }

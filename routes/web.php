@@ -103,3 +103,7 @@ Route::get('/downloads', 'DownloadFileController@download');
 Route::post('removeproduct', 'MyListingsController@remove')->name('mylistings');
 
 Route::post('update', 'MyListingsController@saveprod')->name('mylistings');
+
+Route::get('newprod', function(){
+    return View('newprod'); // Your Blade template name
+});

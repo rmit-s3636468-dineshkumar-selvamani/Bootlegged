@@ -250,7 +250,14 @@ div.content {
             <header class="bp-header cf" >
                 
                 <h1>My Listings</h1>
-                
+                 @if(session()->has('message'))
+                 <div class="alert alert-info alert-dismissable">
+             
+            <i class="fa fa-coffee"></i>
+            <strong>MESSAGE : </strong> {{ session()->get('message') }}
+          </div>
+   
+@endif
             </header>
             <!-- Product grid -->
             <section class="grid">
@@ -301,7 +308,7 @@ div.content {
                             </section>
         </div><!-- /view -->
     
-        
+      
     <!-- product compare wrapper -->
 
     <!-- Modal View for Edit -->
