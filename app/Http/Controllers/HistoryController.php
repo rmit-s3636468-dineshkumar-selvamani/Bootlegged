@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\manuTransactions;
+use App\storeTransactions;
 use Illuminate\Http\Request;
+use Auth;
+use Illuminate\Support\Facades\DB;
 
 class HistoryController extends Controller
 {
