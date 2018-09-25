@@ -150,12 +150,19 @@ div.content {
       <header class="bp-header cf">
         
         <h1>Bulk Upload</h1><br><br><br>
-
+         @if(session()->has('message'))
+                 <div class="alert alert-info alert-dismissable">
+             
+            <i class="fa fa-coffee"></i>
+            <strong>MESSAGE : </strong> {{ session()->get('message') }}
+          </div>
+   
+@endif
          <div class="downloadfile">
-          <p> First download the template given in the link below</p><br>
+          <p> Please download the template given in the link below</p><br>
         <a href="/downloads">  Download Template </a><br><br> 
 
-        <p>Enter all the product details in the given template and upload it back.</p>
+        <p>Enter all the product details in the given template and upload it.</p>
       </div>
 
         <div class="container" style="color: black;">

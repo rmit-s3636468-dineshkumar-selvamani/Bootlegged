@@ -352,7 +352,7 @@ div.content {
 		<!-- Main view -->
 		<div class="view" style="margin-left: 14%;">
 			<!-- Blueprint header -->
-			<header class="bp-header cf">
+			<header class="bp-header cf" >
 				
 				<h1>Market Place</h1>
 				
@@ -368,7 +368,7 @@ div.content {
 </div>
 <br><br>
 			
-  <div class="dropdown" style="margin-left: 500px; margin-top: 10px; display: inline; ">
+  <div class="dropdown" style="margin-left: 550px; margin-top: 10px; display: inline; ">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Filter by Type
             </button>
@@ -403,13 +403,15 @@ div.content {
 					data-condition="{{ $item->Listing_condition }}" onmouseover="" style="cursor: pointer;">
 						
           
-          <img class="product__image" src="{{ asset($item->image) }}  ?>" />
+          <img src="data:image/jpeg;base64,'.base64_encode($item->image).'" height="200" width="200" class="product__image" />
+
+        
 						<!-- @if($item->Listing_type == "Red Wine")
                         <img class="product__image" src="{{ asset('images/1.png') }}" alt="Product 1" />
                         @elseif($item->Listing_type == "White Wine")
                         <img class="product__image" src="{{ asset('images/2.png') }}" alt="Product 1" />
                         @elseif($item->Listing_type == "Beer")
-                        <img class="product__image" src="{{ asset('images/1.png') }}" alt="Product 1" />
+                        <img class="product__image" src="{{ asset('images/about.png') }}" alt="Product 1" />
                         @elseif($item->Listing_type == "Spirits")
                         <img class="product__image" src="{{ asset('images/8.png') }}" alt="Product 1" />
                         @elseif($item->Listing_type == "Whiskey")
@@ -418,7 +420,7 @@ div.content {
                         <img class="product__image" src="{{ asset('images/1.png') }}" alt="Product 1" />
                         @else
                          <img class="product__image" src="{{ asset('images/1.png') }}" alt="Product 1" />
-                        @endif	 -->					
+                        @endif			 -->			
 						<h6 class="product__name highlight" style="color: white">{{$item->product_itemName}}</h6><br>
 						<h6 class="product__quantity highlight" style="color: white">Quantity - {{$item->Listing_qty}}</h6>
 						<span class="product__price extra highlight">Type - {{$item->Listing_type}} </span>
@@ -437,6 +439,7 @@ div.content {
 
 				</div>
 					<?php $count++; ?>
+         
 					
 				@endforeach
 				

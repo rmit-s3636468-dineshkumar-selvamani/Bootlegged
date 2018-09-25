@@ -33,7 +33,7 @@ class FormuploadController extends Controller
             $file = $request->file('file');
             $file->move ('uploads',$file->getClientOriginalName());
 
-            echo '<img src= "uploads/' . $file->getClientOriginalName() . '"/>';
+             return back()->with('message', 'File Uploaded Successfully');
         }
     }
     else{

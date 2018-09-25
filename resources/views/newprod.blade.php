@@ -193,6 +193,7 @@ span.twitter-typeahead
         <h1 style = "color:black">Enter New Product Details</h1>
         
       </header>
+      <div style="margin-top: -50px;">
   <form action = "/create" method = "post">
     <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
   <div class="form-group row">
@@ -279,7 +280,7 @@ span.twitter-typeahead
 </form>
 </div>
 </div>
-
+</div>
 
 
    
