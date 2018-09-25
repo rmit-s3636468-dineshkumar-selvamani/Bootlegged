@@ -78,6 +78,8 @@ Route::post('/store_editProfile', ['as' => 'store_editProfile', 'uses' => 'EditP
 
 Route::post('/manu_Editrofile', ['as' => 'manu_Editrofile', 'uses' => 'EditProfileController@saveManu']);
 
+Route::get('/history', 'HistoryController@index');
+
 
 
 
