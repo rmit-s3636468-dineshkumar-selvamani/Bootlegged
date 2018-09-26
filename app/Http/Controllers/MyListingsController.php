@@ -7,6 +7,7 @@ use App\Listings;
 use Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\File;
+use Image;
 
 class MyListingsController extends Controller
 {
@@ -73,29 +74,13 @@ class MyListingsController extends Controller
     public function saveprod(Request $req)
     {
      
-        // $cat = Listings::findOrFail($req -> get ('prodId'));
-
-        // $cat->update($req->all());
-
-        // if($req->get('pimage'))
-        // {   
-        //     echo 'BlahBlah';
-        //     // $file = addslashes(file_get_contents($_FILES[$req->file('image')]["tmp_name"]));  
-
-        //     $req->file('pimage');
-
-        //     Storage::putFile('public',$req->get('pimage'));
-        // }
-
-        // Storage::putFile($req->pimage, new File('public/css/'));
-
-
-         // echo $req->file('pimage');
+        
+        $base64 = base64_encode($req->file('pimage'));
 
         Listings::where('id',$req->get('prodId'))
-        ->update(['Listing_totalPrice' => $req->get('totalPrice'), 'Listing_unitPrice' => $req->get('unitPrice'),'Listing_type' => $req->get('type'),'Listing_qty' => $req->get('tqty'),'Listing_expiry' => $req->get('expiry'),'Listing_vintage' => $req->get('vintage'),'Listing_condition' => $req->get('condition'),'image' => $req->pimage, 'Listing_active' => $req -> get('status')]);
+        ->update(['Listing_totalPrice' => $req->get('totalPrice'), 'Listing_unitPrice' => $req->get('unitPrice'),'Listing_type' => $req->get('type'),'Listing_qty' => $req->get('tqty'),'Listing_expiry' => $req->get('expiry'),'Listing_vintage' => $req->get('vintage'),'Listing_condition' => $req->get('condition'),'image' => $req->get('pimage'), 'Listing_active' => $req -> get('status')]);
 
-        return back();
+        return back()->with('message', 'Product Deleted Successfully');;
 
       
     }

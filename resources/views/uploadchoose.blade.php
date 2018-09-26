@@ -13,7 +13,13 @@
 
         <link href="https://fonts.googleapis.com/css?family=Yrsa" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="css/app.css">
-        
+        <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/demo.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/component.css') }}" />
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   
 
         <!-- Styles -->
@@ -191,6 +197,7 @@ div.content {
    @endif
   <a href="/mylistings" style="color: white;" >My Listing</a>
   <a href="/uploadchoose" class="active" >Add Listing</a>
+  <a href="history" style="color: white;">History</a>
   <a href="#contact" style="color: white;">Opportunities</a>
   <hr style="border-style: groove;
     border-width: 1px;"> 

@@ -233,6 +233,7 @@ div.content {
    @endif
   <a href="/mylistings" class="active" >My Listing</a>
   <a href="/uploadchoose" style="color: white;">Add Listing</a>
+  <a href="history" style="color: white;">History</a>
   <a href="#contact" style="color: white;">Opportunities</a>
   <hr style="border-style: groove;
     border-width: 1px;"> 
@@ -325,8 +326,10 @@ div.content {
       </div>
      
       <div class="modal-body table-responsive">
-         <form action="{{URL::to('update')}}" method="post" enctype="multipart/formdata">
-          {{csrf_field()}}
+         <form action="{{URL::to('update')}}" method="post" enctype="multipart/form-data">
+         
+          <input type="hidden" name="_token" value="{{csrf_token()}}">
+
                 @include('modalTable')
        <input type="hidden" id="prodId" name="prodId" value="">
       </div>
