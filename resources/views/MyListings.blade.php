@@ -316,7 +316,7 @@ div.content {
       </div>
      
       <div class="modal-body table-responsive">
-         <form action="{{URL::to('update')}}" method="post">
+         <form action="{{URL::to('update')}}" method="post" enctype="multipart/form-data">
           {{csrf_field()}}
                 @include('modalTable')
        <input type="hidden" id="prodId" name="prodId" value="">

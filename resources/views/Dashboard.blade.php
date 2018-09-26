@@ -402,9 +402,9 @@ div.content {
 					data-expiry="{{ $item->Listing_expiry }}" data-vintage="{{ $item->Listing_vintage }}"
 					data-condition="{{ $item->Listing_condition }}" onmouseover="" style="cursor: pointer;">
 						
+          <img src = "{{url('storage/'.$item->image)}}" class="product__image"/>
 
-
-						@if($item->Listing_type == "Red Wine")
+						<!-- @if($item->Listing_type == "Red Wine")
                         <img class="product__image" src="{{ asset('images/1.png') }}" alt="Product 1" />
                         @elseif($item->Listing_type == "White Wine")
                         <img class="product__image" src="{{ asset('images/2.png') }}" alt="Product 1" />
@@ -418,7 +418,7 @@ div.content {
                         <img class="product__image" src="{{ asset('images/1.png') }}" alt="Product 1" />
                         @else
                          <img class="product__image" src="{{ asset('images/1.png') }}" alt="Product 1" />
-                        @endif						
+                        @endif	 -->					
 						<h6 class="product__name highlight" style="color: white">{{$item->product_itemName}}</h6><br>
 						<h6 class="product__quantity highlight" style="color: white">Quantity - {{$item->Listing_qty}}</h6>
 						<span class="product__price extra highlight">Type - {{$item->Listing_type}} </span>
