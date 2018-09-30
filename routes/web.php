@@ -105,3 +105,13 @@ Route::get('/downloads', 'DownloadFileController@download');
 Route::post('removeproduct', 'MyListingsController@remove')->name('mylistings');
 
 Route::post('update', 'MyListingsController@saveprod')->name('mylistings');
+
+
+//Cart Index
+Route::get('/cart', 'CartController@index')->name('cart.index');
+// Add item to cart
+Route::get('/addToCart/{id}', 'CartController@addToCart')->name('cart.add-item');
+//Clear Cart
+Route::get('/clearCart', 'CartController@clearCart')->name('cart.clear');
+// Cart Checkout
+//Route::get('/checkout', 'CheckoutController@checkout')->name('cart.checkout');

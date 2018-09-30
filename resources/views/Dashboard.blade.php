@@ -428,7 +428,7 @@ div.content {
 						<span class="product__price extra highlight">Condition - {{$item->Listing_condition}} </span>
 						<span class="product__price highlight"> Price : $ {{$item->Listing_totalPrice}}</span>
 						
-						<a href="/mylistings"><button class="action action--button action--buy" ><i class="fa fa-shopping-cart"></i><span class="action__text">Add to cart</span></button></a>
+						<a href="{{route('cart.add-item',['id' => $item -> id])}}"><button class="action action--button action--buy" ><i class="fa fa-shopping-cart"></i><span class="action__text">Add to cart</span></button></a>
 
 						
 						
