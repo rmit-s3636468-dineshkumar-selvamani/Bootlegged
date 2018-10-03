@@ -148,6 +148,7 @@ div.content {
    @endif
   <a href="/mylistings" style="color: white;">My Listing</a>
   <a href="/uploadchoose" style="color: white;">Add Listing</a>
+  <a href="history" style="color: white;">History</a>
   <a href="#contact" style="color: white;">Opportunities</a>
   <hr style="border-style: groove;
     border-width: 1px;"> 
@@ -180,12 +181,14 @@ div.content {
            @csrf
 
         <!-- edit form column -->
+
         <div class="col-md-14 personal-info">
           <div class="alert alert-info alert-dismissable">
              
             <i class="fa fa-coffee"></i>
             <strong>ALERT : </strong> Do not refresh or move to any other page before you save the changes. 
           </div>
+
           <h3>Personal info</h3>
           
           <form class="form-horizontal" role="form">
@@ -204,13 +207,13 @@ div.content {
             <div class="form-group">
               <label class="col-md-3 control-label">Password:</label>
               <div class="col-md-8">
-                <input class="form-control" name="store_password" type="Password" value="">
+                <input class="form-control" name="store_password" type="Password" placeholder="Enter New Password" >
               </div>
             </div>
             <div class="form-group">
               <label class="col-md-5 control-label">Confirm password:</label>
               <div class="col-md-8">
-                <input class="form-control" name="store_password_confirmation" type="password" value="">
+                <input class="form-control" name="store_password_confirmation" type="password" placeholder="Confirm New Password">
               </div>
             </div>
             <div class="form-group">
@@ -230,7 +233,7 @@ div.content {
               <label class="col-lg-3 control-label">State</label>
               <div class="col-lg-8">
                 <div class="ui-select">
-                  <select id="store_state" class="form-control">
+                  <select id="store_state" name="store_state" class="form-control">
                     @if($details->store_state == 'VIC')
                     <option value="VIC" selected="selected">VIC</option>
                     <option value="NSW">NSW</option>
@@ -288,20 +291,20 @@ div.content {
             <div class="form-group">
               <label class="col-md-3 control-label">Postcode</label>
               <div class="col-md-8">
-                <input class="form-control" name="store_postcode" type="text" value="{{$details->store_postcode}}">
+                <input class="form-control" name="store_postcode" type="number" value="{{$details->store_postcode}}">
               </div>
             </div>
 
              <div class="form-group">
               <label class="col-md-5 control-label">Contact Number</label>
               <div class="col-md-8">
-                <input class="form-control" name="store_phone" type="text" value="{{$details->store_phone}}">
+                <input class="form-control" name="store_phone" type="number" value="{{$details->store_phone}}">
               </div>
             </div>
              <div class="form-group">
               <label class="col-md-3 control-label">ABN </label>
               <div class="col-md-8">
-                <input class="form-control" name="store_abn" type="text" value="{{$details->store_abn}}">
+                <input class="form-control" name="store_abn" type="number" value="{{$details->store_abn}}">
               </div>
             </div>
              <div class="form-group">
@@ -332,7 +335,7 @@ div.content {
 </form>
 
 @else
- <form action="{{ route('manu_Editrofile') }}" method="POST" id="manu_editProfile">
+ <form action="{{ route('manu_editProfile') }}" method="POST" id="manu_editProfile">
  @csrf
 
     <div class="col-md-9 personal-info">
@@ -345,7 +348,7 @@ div.content {
           
           <form class="form-horizontal" role="form">
             <div class="form-group">
-              <label class="col-lg-3 control-label">Business name:</label>
+              <label class="col-lg-5 control-label">Business name:</label>
               <div class="col-lg-8">
                 <input class="form-control" name="manu_name" type="text" value="{{$details->manu_name}}">
               </div>
@@ -359,13 +362,13 @@ div.content {
             <div class="form-group">
               <label class="col-md-3 control-label">Password:</label>
               <div class="col-md-8">
-                <input class="form-control" name="manu_password" type="Password" value="">
+                <input class="form-control" name="manu_password" type="Password" placeholder="Enter New Password">
               </div>
             </div>
             <div class="form-group">
-              <label class="col-md-3 control-label">Confirm password:</label>
+              <label class="col-md-5 control-label">Confirm password:</label>
               <div class="col-md-8">
-                <input class="form-control" name="manu_password_confirmation" type="password" value="">
+                <input class="form-control" name="manu_password_confirmation" type="password" placeholder="Confirm New Password">
               </div>
             </div>
             <div class="form-group">
@@ -385,7 +388,7 @@ div.content {
               <label class="col-lg-3 control-label">State</label>
               <div class="col-lg-8">
                 <div class="ui-select">
-                  <select id="manu_state" class="form-control">
+                  <select id="manu_state" name="manu_state" class="form-control">
                     @if($details->manu_state == 'VIC')
                     <option value="VIC" selected="selected">VIC</option>
                     <option value="NSW">NSW</option>
@@ -448,7 +451,7 @@ div.content {
             </div>
 
              <div class="form-group">
-              <label class="col-md-3 control-label">Contact Number</label>
+              <label class="col-md-5 control-label">Contact Number</label>
               <div class="col-md-8">
                 <input class="form-control" name="manu_phone" type="text" value="{{$details->manu_phone}}">
               </div>
@@ -460,13 +463,13 @@ div.content {
               </div>
             </div>
              <div class="form-group">
-              <label class="col-md-3 control-label">License Number</label>
+              <label class="col-md-5 control-label">License Number</label>
               <div class="col-md-8">
                 <input class="form-control" name="manu_license" type="text" value="{{$details->manu_license}}">
               </div>
             </div>
              <div class="form-group">
-              <label class="col-md-3 control-label">Stripe ID</label>
+              <label class="col-md-5 control-label">Stripe ID</label>
               <div class="col-md-8">
                 <input class="form-control" name="manu_stripeid" type="text" value="{{$details->manu_Stripeid}}">
               </div>

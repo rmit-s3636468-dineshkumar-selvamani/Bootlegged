@@ -203,7 +203,7 @@ span.twitter-typeahead
 @endif
       </header>
       <div style="margin-top: -50px; color: black;">
-  <form action = "/create" method = "post">
+  <form action = "/create" method = "post" enctype="multipart/form-data">
     <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
   <div class="form-group row">
     <label for="producttype" style = "color:black" class="col-4 col-form-label">Product Name</label> 
@@ -234,31 +234,31 @@ span.twitter-typeahead
   <div class="form-group row">
     <label for="product_quantity" style = "color:black" class="col-4 col-form-label">Product Quantity</label> 
     <div class="col-3">
-      <input id="product_quantity" required="required" name="product_quantity" type="text" class="form-control here">
+      <input id="product_quantity" required="required" name="product_quantity" type="number" class="form-control here">
     </div>
   </div>
   <div class="form-group row">
     <label for="unitprice" style = "color:black" class="col-4 col-form-label">Product Unit Price</label> 
     <div class="col-3">
-      <input id="unitprice" required="required" name="unitprice" type="text" class="form-control here">
+      <input id="unitprice" required="required" name="unitprice" type="number" class="form-control here">
     </div>
   </div>
   <div class="form-group row">
     <label for="totalprice" style = "color:black" class="col-4 col-form-label">Product Total Price</label> 
     <div class="col-3">
-      <input id="totalprice" required="required" name="totalprice" type="text" class="form-control here">
+      <input id="totalprice" required="required" name="totalprice" type="number" class="form-control here">
     </div>
   </div>
   <div class="form-group row">
     <label for="expiry" style = "color:black" class="col-4 col-form-label">Product Expiry</label> 
     <div class="col-3">
-      <input id="expiry" name="expiry" type="text" class="form-control here">
+      <input id="expiry" name="expiry" type="text" class="form-control here" placeholder="YYYY-MM-DD">
     </div>
   </div>
   <div class="form-group row">
     <label for="vintage" style = "color:black" class="col-4 col-form-label">Vintage</label> 
     <div class="col-3">
-      <input id="vintage" name="vintage" type="text" class="form-control here">
+      <input id="vintage" name="vintage" type="text" class="form-control here" placeholder="eg. 20 Years">
     </div>
   </div>
   <div class="form-group row">

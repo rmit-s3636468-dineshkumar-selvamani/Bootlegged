@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Listings;
 use Auth;
 
+
 use DateTime;
 use Illuminate\Support\Facades\Storage;
 
@@ -74,22 +75,57 @@ class MyListingsController extends Controller
     public function saveprod(Request $req)
     {
      
-        
+            $image_name = Listings::where('id',$req->get('prodId'))->pluck('image');
        
 
-      
-            $file = $req->file('pimage');
-         
-        $fileName = date("Ymdhisa").'.'.$file->getCLientOriginalExtension();
-        $req->file('pimage')->storeAs('public',$fileName);
-        
+            if($req->hasFile('pimage'))
+            {
+                    $file = $req->file('pimage');
+                 
+                $fileName = date("Ymdhisa").'.'.$file->getCLientOriginalExtension();
+                $req->file('pimage')->storeAs('public',$fileName);
+                
 
-       Listings::where('id',$req->get('prodId'))
-        ->update(['Listing_totalPrice' => $req->get('totalPrice'), 'Listing_unitPrice' => $req->get('unitPrice'),'Listing_type' => $req->get('type'),'Listing_qty' => $req->get('tqty'),'Listing_expiry' => $req->get('expiry'),'Listing_vintage' => $req->get('vintage'),'Listing_condition' => $req->get('condition'),'image' => $fileName, 'Listing_active' => $req -> get('status')]);
+               Listings::where('id',$req->get('prodId'))
+                ->update(['Listing_totalPrice' => $req->get('totalPrice'), 'Listing_unitPrice' => $req->get('unitPrice'),'Listing_type' => $req->get('type'),'Listing_qty' => $req->get('tqty'),'Listing_expiry' => $req->get('expiry'),'Listing_vintage' => $req->get('vintage'),'Listing_condition' => $req->get('condition'),'image' => $fileName, 'Listing_active' => $req -> get('status')]);
 
-       return back()->with('message','Product Updated Successfully');
+                Storage::delete($image_name[0]);
+                unlink(storage_path('app/public/'.$image_name[0]));
+            }
+
+            elseif($image_name == '')
+            
+               
+            {      Listings::where('id',$req->get('prodId'))
+                             ->update(['Listing_totalPrice' => $req->get('totalPrice'),
+                                     'Listing_unitPrice' => $req->get('unitPrice'),
+                                     'Listing_type' => $req->get('type'),
+                                     'Listing_qty' => $req->get('tqty'),
+                                     'Listing_expiry' => $req->get('expiry'),
+                                     'Listing_vintage' => $req->get('vintage'),
+                                     'Listing_condition' => $req->get('condition'),
+                                     'image' => '',
+                                      'Listing_active' => $req -> get('status')]);
 
 
+            }
+                else
+             {
+                    Listings::where('id',$req->get('prodId'))
+                        ->update(['Listing_totalPrice' => $req->get('totalPrice'),
+                                 'Listing_unitPrice' => $req->get('unitPrice'),
+                                 'Listing_type' => $req->get('type'),
+                                 'Listing_qty' => $req->get('tqty'),
+                                 'Listing_expiry' => $req->get('expiry'),
+                                 'Listing_vintage' => $req->get('vintage'),
+                                 'Listing_condition' => $req->get('condition'),
+                                 'image' => $image_name[0], 
+                                 'Listing_active' => $req -> get('status')]);
+
+            }
+            
+
+        return back()->with('message','Product Updated Successfully');
       
     }
 }

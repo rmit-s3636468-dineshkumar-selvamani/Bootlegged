@@ -176,6 +176,7 @@ span.twitter-typeahead
    @endif
   <a href="/mylistings" style="color: white;">My Listing</a>
   <a href="/uploadchoose" class="active">Add Listing</a>
+  <a href="/history" style="color: white;">History</a>
   <a href="#contact" style="color: white;">Opportunities</a>
   <hr style="border-style: groove;
     border-width: 1px;"> 
@@ -191,15 +192,22 @@ span.twitter-typeahead
       <header class="bp-header cf">
         
         <h1 style = "color:black">Enter New Product Details</h1>
-        
+           @if(session()->has('message'))
+                 <div class="alert alert-info alert-dismissable">
+             
+            <i class="fa fa-coffee"></i>
+            <strong>MESSAGE : </strong> {{ session()->get('message') }}
+          </div>
+   
+@endif
       </header>
       <div style="margin-top: -50px;">
-  <form action = "/create" method = "post">
+  <form action = "/createnewprod" method = "post">
     <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
   <div class="form-group row">
     <label for="producttype" style = "color:black" class="col-4 col-form-label">Product Name</label> 
     <div class="col-3"> 
-        <input type="text"  name="productname" class="typeahead form-control" id="search" placeholder="eg.name ml nos" autocomplete="on" >     
+        <input type="text"  name="productname" class="typeahead form-control" id="search" placeholder="eg.name ml nos" required="required"  >     
     </div>
   </div>
   <div class="form-group row">
@@ -270,8 +278,13 @@ span.twitter-typeahead
       <input id="condition"  required="required" name="condition" type="text" class="form-control here">
     </div>
   </div>
-  
- 
+   <div class="form-group row">
+    <label for="condition" style = "color:black" class="col-4 col-form-label">Barcode ID</label> 
+    <div class="col-3">
+      <input id="barcodeid"  required="required" name="barcodeid" type="number" class="form-control here">
+    </div>
+  </div>
+ <br>
   <div class="form-group row">
     <div class="offset-4 col-3">
       <button name="submit" type="submit" class="btn btn-primary">Add Product</button>
