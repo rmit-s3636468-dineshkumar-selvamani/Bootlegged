@@ -2,7 +2,10 @@
                     
                     <tr>
                 <td><label>Product Type: </label></td>
-                <td><input type="text" id="type" name="type" style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39); "  ></td>
+                <td>
+                    <input type="text" id="type" name="type" style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39); "  >
+                  
+                </td>
                     </tr>
                     
                     <tr>
@@ -12,12 +15,12 @@
                     </tr>
                     
                     <tr>
-                <td><label>Unit Price: </label></td>
+                <td><label>Unit Price: &nbsp;&nbsp;&nbsp;&nbsp;   $</label></td>
                 <td><input type="text" id="unitPrice" name="unitPrice" style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39); " ></td>
                     </tr>
 
                     <tr>
-                <td><label>Total Price: </label></td>
+                <td><label>Total Price:   &nbsp;&nbsp;   $</label></td>
                 <td><input type="text" name="totalPrice" id="totalPrice" style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39); "></td>
                     </tr>
 
@@ -38,9 +41,12 @@
                     <tr>
                 <td><label>Prouct Status: </label></td>
                 <td>
+                   
                     <select  id="status" name="status"   style="width:287px;"  class="custom-select">
-                    <option value="1">Active</option>
+                    <option value="1" selected="selected">Active</option>
                     <option value="0">Inactive</option></td>
+                 
+                    
                     </tr>
                     <tr>
                 <td><label>Image: </label></td>

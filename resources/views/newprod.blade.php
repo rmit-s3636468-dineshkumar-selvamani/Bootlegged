@@ -178,7 +178,6 @@ span.twitter-typeahead
   <a href="/uploadchoose" class="active">Add Listing</a>
   <a href="/history" style="color: white;">History</a>
   <a href="#contact" style="color: white;">Opportunities</a>
-
   <hr style="border-style: groove;
     border-width: 1px;"> 
   <a href="/editProfile" style="color: white;">Edit Profile</a>
@@ -192,8 +191,8 @@ span.twitter-typeahead
       <!-- Blueprint header -->
       <header class="bp-header cf">
         
-        <h1 style = "color:black">Add Product</h1>
-         @if(session()->has('message'))
+        <h1 style = "color:black">Enter New Product Details</h1>
+           @if(session()->has('message'))
                  <div class="alert alert-info alert-dismissable">
              
             <i class="fa fa-coffee"></i>
@@ -202,19 +201,13 @@ span.twitter-typeahead
    
 @endif
       </header>
-      <div style="margin-top: -50px; color: black;">
-  <form action = "/create" method = "post" enctype="multipart/form-data">
+      <div style="margin-top: -50px;">
+  <form action = "/createnewprod" method = "post">
     <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
   <div class="form-group row">
     <label for="producttype" style = "color:black" class="col-4 col-form-label">Product Name</label> 
-    <div class="col-3">
-      
-        <div class="starter-template" style="align-text:center">
-       
-        <input type="text" style="width:227px;" name="productname"  class="typeahead form-control" id="search" placeholder="Search by product Name" autocomplete="on" >
-        <p style = "color:black; font-size : 12px;">Cant find your product? Please <a style = "color:blue;" href="/newprod" >add</a> here.</p>
-      
-      </div>
+    <div class="col-3"> 
+        <input type="text"  name="productname" class="typeahead form-control" id="search" placeholder="eg.name ml nos" required="required"  >     
     </div>
   </div>
   <div class="form-group row">
@@ -232,33 +225,51 @@ span.twitter-typeahead
     </div>
   </div> 
   <div class="form-group row">
+    <label for="product_quantity" style = "color:black" class="col-4 col-form-label">Product Brand</label> 
+    <div class="col-3">
+      <input id="product_brand" required="required" name="product_brand" type="text" class="form-control here">
+    </div>
+  </div>
+   <div class="form-group row">
+    <label for="product_quantity" style = "color:black" class="col-4 col-form-label">Product Sub Brand</label> 
+    <div class="col-3">
+      <input id="product_subbrand" required="required" name="product_subbrand" type="text" class="form-control here">
+    </div>
+  </div>
+<div class="form-group row">
+    <label for="product_quantity" style = "color:black" class="col-4 col-form-label">Product Package Name</label> 
+    <div class="col-3">
+      <input id="product_packname" required="required" name="product_packname" type="text" class="form-control here">
+    </div>
+  </div>
+  <div class="form-group row">
     <label for="product_quantity" style = "color:black" class="col-4 col-form-label">Product Quantity</label> 
     <div class="col-3">
-      <input id="product_quantity" required="required" name="product_quantity" type="number" class="form-control here">
+      <input id="product_quantity" required="required" name="product_quantity" type="text" class="form-control here">
     </div>
   </div>
   <div class="form-group row">
     <label for="unitprice" style = "color:black" class="col-4 col-form-label">Product Unit Price</label> 
     <div class="col-3">
-      <input id="unitprice" required="required" name="unitprice" type="number" class="form-control here">
+      <input id="unitprice" required="required" name="unitprice" type="text" class="form-control here">
     </div>
   </div>
   <div class="form-group row">
     <label for="totalprice" style = "color:black" class="col-4 col-form-label">Product Total Price</label> 
     <div class="col-3">
-      <input id="totalprice" required="required" name="totalprice" type="number" class="form-control here">
+      <input id="totalprice" required="required" name="totalprice" type="text" class="form-control here">
     </div>
   </div>
   <div class="form-group row">
     <label for="expiry" style = "color:black" class="col-4 col-form-label">Product Expiry</label> 
     <div class="col-3">
-      <input id="expiry" name="expiry" type="text" class="form-control here" placeholder="YYYY-MM-DD">
+      <input id="expiry" name="expiry" type="text" class="form-control here">
     </div>
   </div>
   <div class="form-group row">
     <label for="vintage" style = "color:black" class="col-4 col-form-label">Vintage</label> 
     <div class="col-3">
-      <input id="vintage" name="vintage" type="text" class="form-control here" placeholder="eg. 20 Years">
+      <input id="vintage" name="vintage" type="text" class="form-control here">
     </div>
   </div>
   <div class="form-group row">
@@ -267,13 +278,13 @@ span.twitter-typeahead
       <input id="condition"  required="required" name="condition" type="text" class="form-control here">
     </div>
   </div>
-  
-  <div class="form-group row">
-    <label for="productimage" style = "color:black" class="col-4 col-form-label">Product Image</label> 
+   <div class="form-group row">
+    <label for="condition" style = "color:black" class="col-4 col-form-label">Barcode ID</label> 
     <div class="col-3">
-      <input id="productimage"  name="productimage" type="file" class="form-control here">
+      <input id="barcodeid"  required="required" name="barcodeid" type="number" class="form-control here">
     </div>
   </div>
+ <br>
   <div class="form-group row">
     <div class="offset-4 col-3">
       <button name="submit" type="submit" class="btn btn-primary">Add Product</button>
@@ -283,64 +294,9 @@ span.twitter-typeahead
 </div>
 </div>
 </div>
- <script>
-        $(document).ready(function() {
-            var bloodhound = new Bloodhound({
-                datumTokenizer: Bloodhound.tokenizers.whitespace,
-                queryTokenizer: Bloodhound.tokenizers.whitespace,
-                remote: {
-                    url: '/user/find?q=%QUERY%',
-                    wildcard: '%QUERY%'
-                },
-            });
-            
-            $('#search').typeahead({
-                hint: true,
-                highlight: true,
-                minLength: 1
-            }, {
-                name: 'product_itemName',
-                source: bloodhound,
-                display: function(data) {
-                    return data.product_itemName  //Input value to be set when you select a suggestion. 
-                },
-                templates: {
-                    empty: [
-                        '<div class="list-group search-results-dropdown"><div class="list-group-item">Nothing found.</div></div>'
-                    ],
-                    header: [
-                        '<div class="list-group search-results-dropdown">'
-                    ],
-                    suggestion: function(data) {
-                    return '<div style="font-weight:normal; margin-top:-10px ! important;" class="list-group-item">' + data.product_itemName + '</div></div>'
-                    }
-                }
-            });
-        });
-    </script>
 
-    <!-- <script>  
- $(document).ready(function(){  
-      $('#submit').click(function(){  
-           var image_name = $('#productimage').val();  
-           if(image_name == '')  
-           {  
-                alert("Please Select Image");  
-                return false;  
-           }  
-           else  
-           {  
-                var extension = $('#image').val().split('.').pop().toLowerCase();  
-                if(jQuery.inArray(extension, ['gif','png','jpg','jpeg']) == -1)  
-                {  
-                     alert('Invalid Image File');  
-                     $('#image').val('');  
-                     return false;  
-                }  
-           }  
-      });  
- });  
- </script>   -->
+
+   
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>

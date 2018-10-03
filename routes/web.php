@@ -76,12 +76,14 @@ Route::get('/editProfile', 'EditProfileController@index')->name('editProfile');
 
 Route::post('/store_editProfile', ['as' => 'store_editProfile', 'uses' => 'EditProfileController@saveStore']);
 
-Route::post('/manu_Editrofile', ['as' => 'manu_Editrofile', 'uses' => 'EditProfileController@saveManu']);
+Route::post('/manu_editrofile', ['as' => 'manu_editProfile', 'uses' => 'EditProfileController@saveManu']);
 
 Route::get('/history', 'HistoryController@index');
 
 
 
+//Add new product
+Route::post('/createnewprod', ['as' => 'createnewprod', 'uses' => 'AddNewProductController@savenewprod']);
 
 
 Route::post('create','AddListingsController@insert');
@@ -105,3 +107,12 @@ Route::get('/downloads', 'DownloadFileController@download');
 Route::post('removeproduct', 'MyListingsController@remove')->name('mylistings');
 
 Route::post('update', 'MyListingsController@saveprod')->name('mylistings');
+
+Route::get('newprod', function(){
+    return View('newprod'); // Your Blade template name
+});
+
+
+//Forget Password
+
+

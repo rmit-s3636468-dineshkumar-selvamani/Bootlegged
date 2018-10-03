@@ -242,22 +242,33 @@ div.content {
     border-radius: 6px 0 6px 6px;
 }
 
-.product .product__info{
-  min-height: 00px;
-}
+  
 
 .product__name{
 
-  min-height: 40px;
-  max-height: 50px;
+  min-height: 60px;
+  max-height: 80px;
   max-width: 210px;
+  
+}
+.product__image{
 
+  /*min-height: 260px;*/
+  /*max-height: 260px;*/
+  max-width: 200px ;
+ 
+  height: 200px;
 }
 
-.product{
+.product__price{
 
+  /*min-height: 30px;*/
+  /*max-height: 30px;*/
   max-width: 210px;
+
+  height :15px;
 }
+
 
 
 
@@ -352,7 +363,7 @@ div.content {
 		<!-- Main view -->
 		<div class="view" style="margin-left: 14%;">
 			<!-- Blueprint header -->
-			<header class="bp-header cf">
+			<header class="bp-header cf" >
 				
 				<h1>Market Place</h1>
 				
@@ -368,7 +379,7 @@ div.content {
 </div>
 <br><br>
 			
-  <div class="dropdown" style="margin-left: 500px; margin-top: 10px; display: inline; ">
+  <div class="dropdown" style="margin-left: 550px; margin-top: 10px; display: inline; ">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Filter by Type
             </button>
@@ -398,27 +409,19 @@ div.content {
 				<div class="product" >
 					<div class="product__info" data-toggle="modal" 
 					data-target="#prod_details" data-prodname="{{$item->product_itemName}}" data-type="{{$item->Listing_type}}" data-total_qty="{{ $item->Listing_qty }} " 
-					data-unit="{{ $item->Listing_unitPrice }}" data-total="{{ $item->Listing_totalPrice }}" 
+					data-unit=" ${{number_format($item->Listing_unitPrice, 2) }}" data-total="${{number_format($item->Listing_totalPrice, 2)}}" 
 					data-expiry="{{ $item->Listing_expiry }}" data-vintage="{{ $item->Listing_vintage }}"
 					data-condition="{{ $item->Listing_condition }}" onmouseover="" style="cursor: pointer;">
 						
-          <img src = "{{url('storage/'.$item->image)}}" class="product__image"/>
+          @if($item->image != '')
+          
+             <img src = "{{url('storage/'.$item->image)}}" class="product__image"/>
+          
+          @else
+             <img class="product__image" src="{{ asset('images/1.png') }}" alt="Product 1" style="height: 160px; width: 160px;" />
 
-						<!-- @if($item->Listing_type == "Red Wine")
-                        <img class="product__image" src="{{ asset('images/1.png') }}" alt="Product 1" />
-                        @elseif($item->Listing_type == "White Wine")
-                        <img class="product__image" src="{{ asset('images/2.png') }}" alt="Product 1" />
-                        @elseif($item->Listing_type == "Beer")
-                        <img class="product__image" src="{{ asset('images/1.png') }}" alt="Product 1" />
-                        @elseif($item->Listing_type == "Spirits")
-                        <img class="product__image" src="{{ asset('images/8.png') }}" alt="Product 1" />
-                        @elseif($item->Listing_type == "Whiskey")
-                        <img class="product__image" src="{{ asset('images/1.png') }}" alt="Product 1" />
-                        @elseif($item->Listing_type == "Cider")
-                        <img class="product__image" src="{{ asset('images/1.png') }}" alt="Product 1" />
-                        @else
-                         <img class="product__image" src="{{ asset('images/1.png') }}" alt="Product 1" />
-                        @endif	 -->					
+          @endif			 			
+
 						<h6 class="product__name highlight" style="color: white">{{$item->product_itemName}}</h6><br>
 						<h6 class="product__quantity highlight" style="color: white">Quantity - {{$item->Listing_qty}}</h6>
 						<span class="product__price extra highlight">Type - {{$item->Listing_type}} </span>
@@ -426,7 +429,7 @@ div.content {
 						<span class="product__price extra highlight">Expiry - {{$item->Listing_expiry}} </span>
 						<span class="product__price extra highlight">Vintage - {{$item->Listing_vintage}} </span>
 						<span class="product__price extra highlight">Condition - {{$item->Listing_condition}} </span>
-						<span class="product__price highlight"> Price : $ {{$item->Listing_totalPrice}}</span>
+						<span class="product__price highlight"> Price : $ {{number_format($item->Listing_totalPrice, 2)}}</span>
 						
 						<a href="/mylistings"><button class="action action--button action--buy" ><i class="fa fa-shopping-cart"></i><span class="action__text">Add to cart</span></button></a>
 
@@ -437,6 +440,7 @@ div.content {
 
 				</div>
 					<?php $count++; ?>
+         
 					
 				@endforeach
 				
@@ -500,12 +504,12 @@ div.content {
         			
         			<tr>
         		<td><label>Unit Price: </label></td>
-        		<td><input type="text" id="unitPrice" style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39); border: 0px;" readonly></td>
+        		<td><input type="text" id="unitPrice" style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39); border: 0px;" readonly> </td>
         			</tr>
 
         			<tr>
         		<td><label>Total Price: </label></td>
-        		<td><input type="text" id="totalPrice" style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39); border: 0px;"readonly></td>
+        		<td><input type="text" id="totalPrice" style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39); border: 0px;"readonly> </td>
         			</tr>
 
         			<tr>
@@ -596,6 +600,8 @@ div.content {
                 }
             });
         });
+
+
     </script>
  
 

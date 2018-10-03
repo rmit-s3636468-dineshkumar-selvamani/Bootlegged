@@ -5,8 +5,11 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Listings;
 use Auth;
+
+
 use DateTime;
 use Illuminate\Support\Facades\Storage;
+
 class MyListingsController extends Controller
 {
     /**
@@ -64,7 +67,7 @@ class MyListingsController extends Controller
 
         $cat->delete();
 
-        return back();
+        return back()->with('message', 'Product Deleted Successfully');
 
       
     }
@@ -72,31 +75,57 @@ class MyListingsController extends Controller
     public function saveprod(Request $req)
     {
      
-        // $cat = Listings::findOrFail($req -> get ('prodId'));
+            $image_name = Listings::where('id',$req->get('prodId'))->pluck('image');
+       
 
-        // $cat->update($req->all());
+            if($req->hasFile('pimage'))
+            {
+                    $file = $req->file('pimage');
+                 
+                $fileName = date("Ymdhisa").'.'.$file->getCLientOriginalExtension();
+                $req->file('pimage')->storeAs('public',$fileName);
+                
 
-       // dd($req->all());
+               Listings::where('id',$req->get('prodId'))
+                ->update(['Listing_totalPrice' => $req->get('totalPrice'), 'Listing_unitPrice' => $req->get('unitPrice'),'Listing_type' => $req->get('type'),'Listing_qty' => $req->get('tqty'),'Listing_expiry' => $req->get('expiry'),'Listing_vintage' => $req->get('vintage'),'Listing_condition' => $req->get('condition'),'image' => $fileName, 'Listing_active' => $req -> get('status')]);
 
-      //  $file = addslashes(file_get_contents($_FILES['pimage']["tmp_name"]));
+                Storage::delete($image_name[0]);
+                unlink(storage_path('app/public/'.$image_name[0]));
+            }
 
-        //Storage::putFile('public',$req->file('pimage'));
-       // $filename = pathinfo($_FILES['pimage']['name'], PATHINFO_FILENAME);
-       // echo $file;
+            elseif($image_name == '')
+            
+               
+            {      Listings::where('id',$req->get('prodId'))
+                             ->update(['Listing_totalPrice' => $req->get('totalPrice'),
+                                     'Listing_unitPrice' => $req->get('unitPrice'),
+                                     'Listing_type' => $req->get('type'),
+                                     'Listing_qty' => $req->get('tqty'),
+                                     'Listing_expiry' => $req->get('expiry'),
+                                     'Listing_vintage' => $req->get('vintage'),
+                                     'Listing_condition' => $req->get('condition'),
+                                     'image' => '',
+                                      'Listing_active' => $req -> get('status')]);
 
-        //if($req->hasFile('pimage')){
-            $file = $req->file('pimage');
-          //  $file->move('public', $file->getClientOriginalName());
-        //}
-        $fileName = date("Ymdhisa").'.'.$file->getCLientOriginalExtension();
-        $req->file('pimage')->storeAs('public',$fileName);
-        echo $fileName;
 
-       Listings::where('id',$req->get('prodId'))
-        ->update(['Listing_totalPrice' => $req->get('totalPrice'), 'Listing_unitPrice' => $req->get('unitPrice'),'Listing_type' => $req->get('type'),'Listing_qty' => $req->get('tqty'),'Listing_expiry' => $req->get('expiry'),'Listing_vintage' => $req->get('vintage'),'Listing_condition' => $req->get('condition'),'image' => $fileName, 'Listing_active' => $req -> get('status')]);
+            }
+                else
+             {
+                    Listings::where('id',$req->get('prodId'))
+                        ->update(['Listing_totalPrice' => $req->get('totalPrice'),
+                                 'Listing_unitPrice' => $req->get('unitPrice'),
+                                 'Listing_type' => $req->get('type'),
+                                 'Listing_qty' => $req->get('tqty'),
+                                 'Listing_expiry' => $req->get('expiry'),
+                                 'Listing_vintage' => $req->get('vintage'),
+                                 'Listing_condition' => $req->get('condition'),
+                                 'image' => $image_name[0], 
+                                 'Listing_active' => $req -> get('status')]);
 
-       return back();
+            }
+            
 
+        return back()->with('message','Product Updated Successfully');
       
     }
 }

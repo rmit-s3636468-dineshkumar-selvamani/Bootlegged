@@ -29,15 +29,19 @@ class FormuploadController extends Controller
       'file'   => 'max:10240|required|mimes:csv,xlsx',
     ))){
         if($request->file('file')->isValid()){
-            echo 'Uploaded</br>';
+           
             $file = $request->file('file');
             $file->move ('uploads',$file->getClientOriginalName());
 
-            echo '<img src= "uploads/' . $file->getClientOriginalName() . '"/>';
+             return back()->with('message', 'File Uploaded Successfully');
+        }
+        else
+        {
+            return back()->with('message', 'No file or wrong file Uploaded');
         }
     }
     else{
-         return redirect("/upload")->with("alert", "error message to user interface");
+         return back()->with('message', 'No file or wrong file Uploaded');
     }
     }
 
