@@ -76,12 +76,14 @@ Route::get('/editProfile', 'EditProfileController@index')->name('editProfile');
 
 Route::post('/store_editProfile', ['as' => 'store_editProfile', 'uses' => 'EditProfileController@saveStore']);
 
-Route::post('/manu_Editrofile', ['as' => 'manu_Editrofile', 'uses' => 'EditProfileController@saveManu']);
+Route::post('/manu_editrofile', ['as' => 'manu_editProfile', 'uses' => 'EditProfileController@saveManu']);
 
 Route::get('/history', 'HistoryController@index');
 
 
 
+//Add new product
+Route::post('/createnewprod', ['as' => 'createnewprod', 'uses' => 'AddNewProductController@savenewprod']);
 
 
 Route::post('create','AddListingsController@insert');
@@ -106,12 +108,11 @@ Route::post('removeproduct', 'MyListingsController@remove')->name('mylistings');
 
 Route::post('update', 'MyListingsController@saveprod')->name('mylistings');
 
+Route::get('newprod', function(){
+    return View('newprod'); // Your Blade template name
+});
 
-//Cart Index
-Route::get('/cart', 'CartController@index')->name('cart.index');
-// Add item to cart
-Route::get('/addToCart/{id}', 'CartController@addToCart')->name('cart.add-item');
-//Clear Cart
-Route::get('/clearCart', 'CartController@clearCart')->name('cart.clear');
-// Cart Checkout
-//Route::get('/checkout', 'CheckoutController@checkout')->name('cart.checkout');
+
+//Forget Password
+
+

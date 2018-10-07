@@ -146,9 +146,10 @@
           
          <div class="about" id="about" style="margin-top: -450px;">
 
-                <div class="card-header">{{ __('Login') }}</div><br><br>
-
-                <div class="card-body">
+                <!-- <div class="card-header">{{ __('Login') }}</div> -->
+                <br><br><br><br><br>
+                <h2 style="margin-top: -60px; text-align: center;"> Login</h2> 
+                <div class="card-body" style="margin-left: -100px;">
                     <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
                         @csrf
 

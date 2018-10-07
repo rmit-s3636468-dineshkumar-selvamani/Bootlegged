@@ -217,7 +217,33 @@ div.content {
 }
 
 .product{
-  min-height: 430px;
+  /*min-height: 00px;*/
+  /*height: 520px;*/
+}
+
+.product__name{
+
+  min-height: 60px;
+  max-height: 80px;
+  max-width: 210px;
+  
+}
+.product__image{
+
+  /*min-height: 260px;*/
+  /*max-height: 260px;*/
+  max-width: 200px ;
+ 
+  height: 200px;
+}
+
+.product__price{
+
+  /*min-height: 30px;*/
+  /*max-height: 30px;*/
+  max-width: 210px;
+
+  height :25px;
 }
 
 </style>
@@ -231,6 +257,7 @@ div.content {
    @endif
   <a href="/mylistings" class="active" >My Listing</a>
   <a href="/uploadchoose" style="color: white;">Add Listing</a>
+  <a href="/history" style="color: white;">History</a>
   <a href="#contact" style="color: white;">Opportunities</a>
   <hr style="border-style: groove;
     border-width: 1px;"> 
@@ -261,21 +288,14 @@ div.content {
                             
                                     <div class="product">
                                         <div class="product__info">
-                                            @if($item->Listing_type == "Red Wine")
-                                            <img class="product__image" src="images/2.png" alt="Product 1" />
-                                            @elseif($item->Listing_type == "Vodka")
-                                            <img class="product__image" src="images/6.png" alt="Product 1" />
-                                            @elseif($item->Listing_type == "Rum")
-                                            <img class="product__image" src="images/4.png" alt="Product 1" />
-                                            @elseif($item->Listing_type == "Gin")
-                                            <img class="product__image" src="images/5.png" alt="Product 1" />
-                                            @elseif($item->Listing_type == "Whiskey")
-                                            <img class="product__image" src="images/1.png" alt="Product 1" />
-                                            @elseif($item->Listing_type == "Beer")
-                                            <img class="product__image" src="images/7.png" alt="Product 1" />
-                                            @else
-                                             <img class="product__image" src="images/8.png" alt="Product 1" />
-                                            @endif
+                                             @if($item->image != '')
+          
+             <img src = "{{url('storage/'.$item->image)}}" class="product__image"/>
+          
+          @else
+             <img class="product__image" src="{{ asset('images/1.png') }}" alt="Product 1" style="height: 160px; width: 160px;" />
+
+          @endif    
                                             <h6 class="product__price highlight" style="color: white">{{$item->product_itemName}}</h6><br>
                                             <h6 class="product__price highlight" style="color: white">Quantity - {{$item->Listing_qty}}</h6>
                                             <span class="product__price extra highlight">Type - {{$item->Listing_type}} </span>
@@ -283,15 +303,15 @@ div.content {
                                             <span class="product__price extra highlight">Expiry - {{$item->Listing_expiry}} </span>
                                             <span class="product__price extra highlight">Vintage - {{$item->Listing_vintage}} </span>
                                             <span class="product__price extra highlight">Condition - {{$item->Listing_condition}} </span>
-                                            <span class="product__price highlight"> Price : $ {{$item->Listing_totalPrice}}</span>
+                                            <span class="product__price highlight"> Price : $ {{number_format($item->Listing_totalPrice, 2)}}</span>
                                             <button class="action action--button action--buy" data-toggle="modal" 
                                         data-target="#remove" data-listid="{{$item->id}}" data-prodId="{{$item->id}}"  onmouseover="" style="cursor: pointer;" style="width:auto;"><i class="fa fa-check"></i><span class="action__text" style ="width: 80px;" >Remove</span></button>
 
                                             <button class="action action--button action--buy" data-toggle="modal" 
                                         data-target="#update" data-prodname="{{$item->product_itemName}}" data-type="{{$item->Listing_type}}" data-total_qty="{{ $item->Listing_qty }} " data-prodId="{{$item->id}}" data-listid="{{$item->id}}"
-                                        data-unit="{{ $item->Listing_unitPrice }}" data-total="{{ $item->Listing_totalPrice }}" 
+                                        data-unit="{{number_format($item->Listing_unitPrice, 2) }}" data-total="{{number_format($item->Listing_totalPrice, 2)}}" 
                                         data-expiry="{{ $item->Listing_expiry }}" data-vintage="{{ $item->Listing_vintage }}"
-                                        data-condition="{{ $item->Listing_condition }}" onmouseover="" style="cursor: pointer;" style="width:auto;"><i class="fa fa-check"></i><span class="action__text" >Edit Details</span></button>
+                                        data-condition="{{ $item->Listing_condition }}" data-status="{{$item->Listing_active }}"onmouseover="" style="cursor: pointer;" style="width:auto;"><i class="fa fa-check"></i><span class="action__text" >Edit Details</span></button>
                                         </div>
                                        
                                    </div>
@@ -378,6 +398,7 @@ div.content {
   var expiry = button.data('expiry')
   var vintage = button.data('vintage')
   var condition = button.data('condition')
+  var status = button.data('status')
   var id = button.data('listid')
 
   var modal = $(this)
@@ -390,6 +411,7 @@ div.content {
   modal.find('.modal-body #expiry').val(expiry);
   modal.find('.modal-body #vintage').val(vintage);
    modal.find('.modal-body #condition').val(condition);
+   modal.find('.modal-body #status').val(status);
   modal.find('.modal-body #prodId').val(id);
 })
     </script>
