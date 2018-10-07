@@ -89,8 +89,10 @@ class MyListingsController extends Controller
                Listings::where('id',$req->get('prodId'))
                 ->update(['Listing_totalPrice' => $req->get('totalPrice'), 'Listing_unitPrice' => $req->get('unitPrice'),'Listing_type' => $req->get('type'),'Listing_qty' => $req->get('tqty'),'Listing_expiry' => $req->get('expiry'),'Listing_vintage' => $req->get('vintage'),'Listing_condition' => $req->get('condition'),'image' => $fileName, 'Listing_active' => $req -> get('status')]);
 
-                Storage::delete($image_name[0]);
-                unlink(storage_path('app/public/'.$image_name[0]));
+                if($image_name[0] != '')
+               { Storage::delete($image_name[0]);
+                 unlink(storage_path('app/public/'.$image_name[0]));
+                }
             }
 
             elseif($image_name == '')

@@ -3,7 +3,7 @@
                     <tr>
                 <td><label>Product Type: </label></td>
                 <td>
-                    <input type="text" id="type" name="type" style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39); "  >
+                    <input type="text" id="type" name="type" style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39); " readonly >
                   
                 </td>
                     </tr>

@@ -41,16 +41,31 @@ class HomeController extends Controller
     {   
         if(Auth::user()->type == "StoreOwner")
         {   
-            $products = DB::table('listings')
-            ->where('Listing_active',1)
-            ->where('lstore_id', '!=', Auth::user()->store_id )
-            ->orWhereNull('lstore_id')
-            ->join('products', 'products.product_id', '=', 'listings.lproduct_id')
-            ->paginate(3);
+            // $products = DB::table('listings')
+            //   ->where('Listing_active',1)
+            //      ->inRandomOrder()
 
+            //   // ->where('lstore_id', '!=', Auth::user()->store_id )
+            //   // ->orWhereNull('lstore_id')
+            //   // ->orWhereNull('lmanu_id')
+            // ->join('products', 'products.product_id', '=', 'listings.lproduct_id')
+            // // 
+            
+             
+            // ->paginate(9);
+
+
+           $products = DB::table('listings')
+            ->where('Listing_active', '=', 1)
+            ->where(function ($query) {
+                $query->where('lstore_id', '!=', Auth::user()->store_id )
+                      ->orWhereNull('lstore_id');
+            })
+             ->join('products', 'products.product_id', '=', 'listings.lproduct_id')
+           ->paginate(9);
            
 
-        return view('dashboard')-> with(['products'=>$products]);
+             return view('dashboard')-> with(['products'=>$products]);
         
         }
 
@@ -91,24 +106,40 @@ class HomeController extends Controller
         if(Auth::user()->type == "StoreOwner")
         {   
             
-            $products = DB::table('listings')
-            // ->select('id','manu_id','product_id','mListing_type','mListing_qty','mListing_unitPrice','mListing_totalPrice','mListing_expiry','mListing_vintage','mListing_condition','mListing_active')
-            ->where([
-                        ['Listing_active', '=', '1'],
-                        ['Listing_type', '=', $id],
-                        //['lstore_id', '!=', Auth::user()->store_id]
-                      ])
-            // ->where('listing_active',1)
-            // ->where('listing_type','=',$id)
-            // ->where('lstore_id', '!=', 'Auth::user()->store_id' )
-            // ->orWhereNull('lstore_id')
+            // $products = DB::table('listings')
+            // // ->select('id','manu_id','product_id','mListing_type','mListing_qty','mListing_unitPrice','mListing_totalPrice','mListing_expiry','mListing_vintage','mListing_condition','mListing_active')
+            // ->where([
+            //             ['Listing_active', '=', '1'],
+            //             ['Listing_type', '=', $id],
+            //             //['lstore_id', '!=', Auth::user()->store_id]
+            //           ])
+            // // ->where('listing_active',1)
+            // // ->where('listing_type','=',$id)
+            // // ->where('lstore_id', '!=', 'Auth::user()->store_id' )
+            // // ->orWhereNull('lstore_id')
             
-            ->join('products', 'products.product_id', '=', 'listings.lproduct_id')
-            ->paginate(3);
+            // ->join('products', 'products.product_id', '=', 'listings.lproduct_id')
+            // ->paginate(3);
 
+            // $products = DB::table('listings')
            
+            //  // ->where('lstore_id', '!=', Auth::user()->store_id )
+            // // ->orWhereNull('lstore_id','')
+            // ->where('Listing_active',1)
+            //  ->where('Listing_type', '=', $id)
+            // ->join('products', 'products.product_id', '=', 'listings.lproduct_id')
            
-          
+            // ->paginate(3);
+           
+             $products = DB::table('listings')
+            ->where('Listing_active', '=', 1)
+            ->where('Listing_type', '=', $id)
+            ->where(function ($query) {
+                $query->where('lstore_id', '!=', Auth::user()->store_id )
+                      ->orWhereNull('lstore_id');
+            })
+             ->join('products', 'products.product_id', '=', 'listings.lproduct_id')
+           ->paginate(9);
 
         return view('dashboard')->with(['products'=>$products]);
 
@@ -124,21 +155,64 @@ class HomeController extends Controller
 
 
             
-            $products = DB::table('listings')
-            // ->select('id','manu_id','product_id','mListing_type','mListing_qty','mListing_unitPrice','mListing_totalPrice','mListing_expiry','mListing_vintage','mListing_condition','mListing_active')
-            ->where([
-                        ['Listing_active', '=', '1'],
-                        ['lproduct_id', '=', $id],
-                        // ['lstore_id', '!=', Auth::user()->store_id]
-                      ])
-            // ->where('listing_active',1)
-            // ->where('listing_type','=',$id)
-            // ->where('lstore_id', '!=', 'Auth::user()->store_id' )
-            // ->orWhereNull('lstore_id')
+            // $products = DB::table('listings')
+            // // ->select('id','manu_id','product_id','mListing_type','mListing_qty','mListing_unitPrice','mListing_totalPrice','mListing_expiry','mListing_vintage','mListing_condition','mListing_active')
+            // ->where([
+            //             ['Listing_active', '=', '1'],
+            //             ['lproduct_id', '=', $id],
+            //             // ['lstore_id', '!=', Auth::user()->store_id]
+            //           ])
+            // // ->where('listing_active',1)
+            // // ->where('listing_type','=',$id)
+            // // ->where('lstore_id', '!=', 'Auth::user()->store_id' )
+            // // ->orWhereNull('lstore_id')
             
-            ->join('products', 'products.product_id', '=', 'listings.lproduct_id')
-            ->paginate(3);
+            // ->join('products', 'products.product_id', '=', 'listings.lproduct_id')
+            // ->paginate(3);
 
+            //  $products = DB::table('listings')
+            // ->join('products', 'products.product_id', '=', 'listings.lproduct_id')
+           
+            // // ->where('lstore_id', '!=', Auth::user()->store_id )
+            // // ->orWhereNull('lstore_id','')
+            // ->where('listings.Listing_active',1)
+            //  ->where('listings.lproduct_id', '=', $id)
+
+            // ->paginate(3);
+           
+           $products = DB::table('listings')
+            ->where('Listing_active', '=', 1)
+           ->where('lproduct_id', '=', $id)
+            ->where(function ($query) {
+                $query->where('lstore_id', '!=', Auth::user()->store_id )
+                      ->orWhereNull('lstore_id');
+            })
+             ->join('products', 'products.product_id', '=', 'listings.lproduct_id')
+           ->paginate(9);
+          
+
+        return view('dashboard')->with(['products'=>$products]);
+
+            // return \App::make('redirect')->back()->with(['name'=>$name,'products'=>$products]);
+        
+        }    
+    }
+
+     public function filterEnter(Request $request)
+    {   
+        if(Auth::user()->type == "StoreOwner")
+        {   
+
+             $products = DB::table('listings')
+           
+                // ->where('lstore_id', '!=', Auth::user()->store_id )
+
+
+                // ->orWhereNull('lstore_id','')
+            ->join('products', 'products.product_id', '=', 'listings.lproduct_id')
+            ->where('Listing_active',1)
+             ->where('product_itemName', '=', $request->get('search'))
+            ->paginate(3);
            
            
           

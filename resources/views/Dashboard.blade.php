@@ -266,7 +266,7 @@ div.content {
   /*max-height: 30px;*/
   max-width: 210px;
 
-  height :15px;
+  height :60px;
 }
 
 
@@ -355,9 +355,9 @@ div.content {
 		@include('sideNavBar')
 
    <!-- Compare basket -->
-		<div class="compare-basket">
+		<!-- <div class="compare-basket">
 			<button class="action action--button action--compare"><i class="fa fa-check"></i><span class="action__text">Compare</span></button>
-		</div>
+		</div> -->
 
 
 		<!-- Main view -->
@@ -372,8 +372,11 @@ div.content {
        <div class="container">
  
       <div class="starter-template" style="align-text:center">
-       
-        <input type="text" class="typeahead form-control" id="search" placeholder="Search by product Name" autocomplete="on"  >
+       <form action="/filter" method="get">
+        <input type="text" class="typeahead form-control" name="search" id="search" placeholder="Search by product Name" autocomplete="on"  >
+        <input type="submit" value="Submit" style="display: none">
+        </form>
+
       </div>
        
 </div>
@@ -436,7 +439,7 @@ div.content {
 						
 						
 					</div>
-					<label class="action action--compare-add"><input class="check-hidden" type="checkbox" /><i class="fa fa-plus"></i><i class="fa fa-check"></i><span class="action__text action__text--invisible">Add to compare</span></label>
+					<!-- <label class="action action--compare-add"><input class="check-hidden" type="checkbox" /><i class="fa fa-plus"></i><i class="fa fa-check"></i><span class="action__text action__text--invisible">Add to compare</span></label> -->
 
 				</div>
 					<?php $count++; ?>
@@ -595,9 +598,14 @@ div.content {
                         '<div class="list-group search-results-dropdown">'
                     ],
                     suggestion: function(data) {
+                      
+                   
                     return '<a href="/filterName/'+ data.product_id + '"><div style="font-weight:normal; margin-top:-10px ! important;" class="list-group-item">' + data.product_itemName + '</div></a></div>'
+                   
                     }
+
                 }
+
             });
         });
 

@@ -19,8 +19,8 @@
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"> 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" type="text/css" href="css/demo.css" />
-		<link rel="stylesheet" type="text/css" href="css/component.css" />
+		<link rel="stylesheet" type="text/css" href="{{ asset('css/demo.css') }}" />
+		<link rel="stylesheet" type="text/css" href="{{ asset('css/component.css') }}" />
 
 
 
@@ -202,6 +202,8 @@ span.twitter-typeahead
    
 @endif
       </header>
+
+     
       <div style="margin-top: -50px; color: black;">
   <form action = "/create" method = "post" enctype="multipart/form-data">
     <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
@@ -210,17 +212,20 @@ span.twitter-typeahead
     <div class="col-3">
       
         <div class="starter-template" style="align-text:center">
-       
-        <input type="text" style="width:227px;" name="productname"  class="typeahead form-control" id="search" placeholder="Search by product Name" autocomplete="on" >
+       @if($product_type[0] == '')
+        <input type="text" style="width:227px;" name="productname"  class="typeahead form-control" id="search" placeholder="Search by product Name" autocomplete="on" required="required">
+        @else
+         <input type="text" style="width:227px;" name="productname"  class="typeahead form-control" id="search" placeholder="Search by product Name" autocomplete="on" required="required" value="{{$product_name[0]}}">
+         @endif
         <p style = "color:black; font-size : 12px;">Cant find your product? Please <a style = "color:blue;" href="/newprod" >add</a> here.</p>
-      
+        
       </div>
     </div>
   </div>
   <div class="form-group row">
     <label for="producttype"  style = "color:black" class="col-4 col-form-label">Product type</label> 
     <div class="col-3">
-      <select id="producttype" style="width:287px;" name="producttype" class="custom-select">
+     <!--  <select id="producttype" style="width:287px;" name="producttype" class="custom-select">
         <option value="Red Wine">Red Wine</option>
         <option value="White Wine">White Wine</option>
         <option value="Cider">Cider</option>
@@ -228,7 +233,12 @@ span.twitter-typeahead
         <option value="Spirits">Spirits</option>
         <option value="Sparkling">Sparkling</option>
         <option value="Pre-Mixed">Pre-Mixed</option>
-      </select>
+      </select> -->
+      @if($product_type[0] == '')
+           <input id="producttype" required="required" name="producttype" type="text" class="form-control here" readonly>
+      @else
+        <input id="producttype" required="required" name="producttype" type="text" class="form-control here" value="{{$product_type[0]}}" readonly>
+      @endif
     </div>
   </div> 
   <div class="form-group row">
@@ -283,6 +293,8 @@ span.twitter-typeahead
 </div>
 </div>
 </div>
+
+ 
  <script>
         $(document).ready(function() {
             var bloodhound = new Bloodhound({
@@ -312,14 +324,18 @@ span.twitter-typeahead
                         '<div class="list-group search-results-dropdown">'
                     ],
                     suggestion: function(data) {
-                    return '<div style="font-weight:normal; margin-top:-10px ! important;" class="list-group-item">' + data.product_itemName + '</div></div>'
+                    // return '<div style="font-weight:normal; margin-top:-10px ! important;" class="list-group-item">' + data.product_itemName + '</div></div>'
+
+                     return '<a href="/autofill/'+ data.product_id + '"><div style="font-weight:normal; margin-top:-10px ! important; color:black;" class="list-group-item">' + data.product_itemName + '</div></a></div>'
                     }
                 }
             });
         });
     </script>
 
-    <!-- <script>  
+   
+
+   <!--  <script>  
  $(document).ready(function(){  
       $('#submit').click(function(){  
            var image_name = $('#productimage').val();  

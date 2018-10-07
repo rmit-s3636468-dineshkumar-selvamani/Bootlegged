@@ -8,6 +8,7 @@ use App\Listings;
 use App\Product;
 use Auth;
 use Intervention\Image\ImageManagerStatic as Image;
+use Response;
 
 class AddListingsController extends Controller
 {
@@ -31,11 +32,12 @@ class AddListingsController extends Controller
    public function index()
    {
 
-       //$products = AddListings::paginate(4);
-       //  // $products = DB::table('store_listings');
-
-
-       return view('AddListings');
+      
+    // $product_type = DB::table('categoryone')->where('id',0)->pluck('cat1_name');
+       $product_type = array('','');
+       $product_name = array('','');
+      // echo $product_type;
+       return view('AddListings',['product_type' => $product_type,'product_name' => $product_name]);
    }
 
    public function insert(Request $request)
@@ -170,4 +172,24 @@ class AddListingsController extends Controller
 
 
 }
+
+          public function autofillType($id)
+          {
+
+               $product_cat1 = DB::table('products')->where('product_id',$id)->pluck('catone');
+
+               // $product_name = DB::table('products')->where('product_id',$id)->pluck('product_itemName');
+
+               $product_type = DB::table('categoryone')->where('id',$product_cat1)->pluck('cat1_name');
+               $product_name = DB::table('products')->where('product_id',$id)->pluck('product_itemName');
+
+               // $prod = compact($product_type);
+
+                 // return Response::json(['success'=>true, 'info'=> $product_type[0]]);
+             
+                return view('AddListings',['product_type' => $product_type,'product_name' => $product_name]);
+            
+
+
+          }
 }
