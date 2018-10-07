@@ -10,6 +10,7 @@ class Cart
 
     public function __construct($oldCart)
     {
+
         if ($oldCart) {
             $this->items = $oldCart->items;
             $this->totalQuantity = $oldCart->totalQuantity;
@@ -35,4 +36,28 @@ class Cart
         $this->totalPrice += $item ->Listing_unitPrice;
     }
 
+    public function updateItem($id, $qty) {
+
+
+        if ($this->items[$id]['Listing_qty'] <= 0) {
+            unset($this->items[$id]);
+        }else{
+            $this->totalQuantity -= $this->items[$id]['Listing_qty'];
+            $this->totalPrice -=$this->items[$id]['Listing_unitPrice'];
+
+            $this->items[$id]['Listing_qty'] = $qty;
+            $this->items[$id]['Listing_unitPrice'] = $this->items[$id]['Listing_qty']* $this->items[$id]['item']['Listing_unitPrice'];
+
+            $this->totalQuantity += $qty;
+            $this->totalPrice +=  $this->items[$id]['Listing_unitPrice'];
+
+        }
+    }
+
+
+    public function removeItem($id) {
+        $this->totalQuantity -= $this->items[$id]['Listing_qty'];
+        $this->totalPrice -= $this->items[$id]['Listing_unitPrice'];
+        unset($this->items[$id]);
+    }
 }

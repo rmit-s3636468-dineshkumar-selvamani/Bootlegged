@@ -18,7 +18,9 @@
               content="blueprint, template, html, css, javascript, grid, layout, effect, product comparison"/>
         <meta name="author" content="Codrops"/>
         <link rel="shortcut icon" href="favicon.ico">
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+              integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+              crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/demo.css') }}"/>
         <link rel="stylesheet" type="text/css" href="{{ asset('css/component.css') }}"/>
 
@@ -28,10 +30,7 @@
               crossorigin="anonymous">
 
 
-        <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
-
+        <script src="https://js.stripe.com/v3/"></script>
 
         <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -328,10 +327,6 @@
             margin: 0;
         }
 
-        }
-        }
-        }
-
         /*Small box*/
         /*span.twitter-typeahead
           width: 100%
@@ -364,6 +359,26 @@
         <header class="bp-header cf">
 
             <h1>Shopping Cart</h1>
+            @if(Session::has('cart'))
+
+
+                <button class="action action--button action--buy " disabled><span
+                            class="product__price highlight ">Total Item : {{$totalQuantity}}</span></button>
+
+                <a>
+                    <button class="action action--button action--buy "><span
+                                class="product__price highlight">Total Price : $ {{$totalPrice}}</span></button>
+                </a>
+                <a href="{{route('cart.clear')}}">
+                    <button class="action action--button action--buy"><span
+                                class="action__text text-danger">Clear Cart</span></button>
+                </a>
+
+                <a href="#">
+                    <button class="action action--button action--buy "><span
+                                class="action__text">Checkout</span></button>
+                </a>
+
 
         </header>
 
@@ -376,54 +391,60 @@
 
             <section class="grid">
                 <!-- Products -->
+                @foreach($products as $product)
 
-                @if(Session::has('cart'))
-                    @foreach($products as $product)
-
-
-                        <div class="product">
-                            <div class="product__info">
-
-
-                                <img class="product__image" src="{{ asset('images/1.png') }}" alt="Product 1"/>
-                                <h6 class="product__name highlight"
-                                    style="color: white">{{$product['item']['product_itemName']}}</h6>
-                                <br>
-                                <h6 class="product__quantity highlight" style="color: white">Quantity
-                                    - {{$product['Listing_qty']}}</h6>
-                                <span class="product__price extra highlight">Type - {{$product['item']['Listing_type']}} </span>
-                                <span class="product__price extra highlight">Unit Price - {{$product['item']['Listing_unitPrice']}} </span>
-                                <span class="product__price extra highlight">Expiry - {{$product['item']['Listing_expiry']}} </span>
-                                <span class="product__price extra highlight">Vintage - {{$product['item']['Listing_vintage']}} </span>
-                                <span class="product__price extra highlight">Condition - {{$product['item']['Listing_condition']}} </span>
-                                <span class="product__price highlight"> Price : $ {{$product['Listing_unitPrice']}}</span>
-
-
-                            </div>
-
-                        </div>
-                    @endforeach
                     <div class="product">
-                        <div class="product__info" data-toggle="modal"
-                             data-target="#checkout"
-                             data-totalQty="{{$totalQuantity}}"
-                             data-totalPrice="{{$totalPrice}}"
-                             onmouseover=""
-                             style="cursor: pointer;">
+                        <div class="product__info">
 
-                            <span class="product__price highlight">Total Quantity - {{$totalQuantity}} </span>
-                            <span class="product__price highlight">Total Price - {{$totalPrice}} </span>
-                            <a href="{{route('cart.clear')}}">
-                                <button class="action action--button action--buy"><span
-                                            class="action__text">Clear Cart</span></button>
+
+                            <img class="product__image" src="{{ asset('images/1.png') }}" alt="Product 1"/>
+                            <h6 class="product__name highlight"
+                                style="color: white">{{$product['item']['product_itemName']}}</h6>
+                            <br>
+                            <h6 class="product__quantity highlight" style="color: white"> Stock Quantity Available
+                                - {{$product['item']['Listing_qty']}} </h6>
+
+                            <span class="product__price extra highlight">Type - {{$product['item']['Listing_type']}} </span>
+                            <span class="product__price extra highlight">Unit Price - {{$product['item']['Listing_unitPrice']}} </span>
+                            <span class="product__price extra highlight">Expiry - {{$product['item']['Listing_expiry']}} </span>
+                            <span class="product__price extra highlight">Vintage - {{$product['item']['Listing_vintage']}} </span>
+                            <span class="product__price extra highlight">Condition - {{$product['item']['Listing_condition']}} </span>
+                            <span class="product__price highlight"> Price : $ {{$product['item']['Listing_unitPrice']}}
+                                each</span>
+                            <form method="post" action="{{ URL::to('/updateItem')}}" id="cart-qty-form">
+                                {{ csrf_field() }}
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="product__price highlight input-group-text"
+                                        > Quantity</span>
+                                    </div>
+
+                                    <input type="hidden" name="cart-id" value="{{$product['item']['id']}}">
+                                    <input class="cart-item-qty product__price highlight input-group form-control text-center h-40"
+                                           min="1" max="{{$product['item']['Listing_qty']}}" type="number"
+                                           name="cart-item-qty"
+                                           value="{{$product['Listing_qty']}}" id="cart-item-id"
+                                           placeholder="{{$product['Listing_qty']}}"></div>
+
+
+                                <button class="action action--button action--buy" type="submit"><i
+                                            class="fa fa-ban"></i><span
+                                            class="action__text">Update Quantity</span></button>
+
+                            </form>
+
+                            <a href="{{route('cart.remove',['id' => $product['item']['id']])}}">
+                                <button class="action action--button action--buy"><i
+                                            class="fa fa-ban"></i><span
+                                            class="action__text">Remove</span></button>
                             </a>
-                            <a href="#">
-                                <button class="action action--button action--buy "><span
-                                            class="action__text">Checkout</span></button>
-                            </a>
+
+
                         </div>
 
                     </div>
+                @endforeach
+
                 @else
 
                     <h3> No products to display </h3>
@@ -431,209 +452,172 @@
 
 
             </section>
-        </section>
 
-        <div class="modal fade" id="prod_details" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-             aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle" style="color: white;">Modal title</h5>
-                        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body table-responsive">
-
-
-                        <table class="table table-dark">
-
-                            <tr>
-                                <td><label>Product Type: </label></td>
-                                <td><input type="text" id="type"
-                                           style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39); border: 0px;"
-                                           readonly></td>
-                            </tr>
-
-                            <tr>
-
-                                <td><label>Total Quantity: </label></td>
-                                <td><input type="text" id="tqty"
-                                           style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39); border: 0px;"
-                                           readonly></td>
-                            </tr>
-
-                            <tr>
-                                <td><label>Unit Price: </label></td>
-                                <td><input type="text" id="unitPrice"
-                                           style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39); border: 0px;"
-                                           readonly></td>
-                            </tr>
-
-                            <tr>
-                                <td><label>Total Price: </label></td>
-                                <td><input type="text" id="totalPrice"
-                                           style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39); border: 0px;"
-                                           readonly></td>
-                            </tr>
-
-                            <tr>
-                                <td><label>Expiry: </label></td>
-                                <td><input type="text" id="expiry"
-                                           style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39); border: 0px;"
-                                           readonly></td>
-                            </tr>
-
-                            <tr>
-                                <td><label>Vintage: </label></td>
-                                <td><input type="text" id="vintage"
-                                           style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39); border: 0px;"
-                                           readonly></td>
-                            </tr>
-
-                            <tr>
-                                <td><label>Condition: </label></td>
-                                <td><input type="text" id="condition"
-                                           style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39); border: 0px;"
-                                           readonly></td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade" id="checkout" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-             aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-
-                <div class="modal-content">
-                    <form action="#" method="post" id="checkout-form">
+            <div class="modal fade" id="prod_details" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalCenterTitle"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle" style="color: white;">Checkout
-                                Summary</h5>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <h5 class="modal-title" id="exampleModalLongTitle" style="color: white;">Modal title</h5>
+                            <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
+                            <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
                         <div class="modal-body table-responsive">
-                            <div id="charge-error"
-                                 class="alert alert-danger {{ !Session::has('error') ? 'hidden' : ''  }}">
-                                {{ Session::get('error') }}
-                            </div>
+
 
                             <table class="table table-dark">
 
                                 <tr>
-                                    <div class="form-group">
-                                        <td><label for="name">Name: </label></td>
-                                        <td><input type="text" id="name" class="form-control" required name="name"></td>
-                                    </div>
+                                    <td><label>Product Type: </label></td>
+                                    <td><input type="text" id="type"
+                                               style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39); border: 0px;"
+                                               readonly></td>
                                 </tr>
 
                                 <tr>
-                                    <div class="form-group">
-                                        <td><label for="address">Address: </label></td>
-                                        <td><input type="text" id="address" class="form-control form-control-lg" required
-                                                   name="address"></td>
-                                    </div>
+
+                                    <td><label>Total Quantity: </label></td>
+                                    <td><input type="text" id="tqty"
+                                               style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39); border: 0px;"
+                                               readonly></td>
                                 </tr>
 
                                 <tr>
-                                    <div class="form-group">
-                                        <td><label for="card-name">Card Holder Name: </label></td>
-                                        <td><input type="text" id="card-name" class="form-control" required></td>
-                                    </div>
+                                    <td><label>Unit Price: </label></td>
+                                    <td><input type="text" id="unitPrice"
+                                               style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39); border: 0px;"
+                                               readonly></td>
                                 </tr>
 
                                 <tr>
-                                    <div class="form-group">
-                                        <td><label for="card-number">Credit Card Number: </label></td>
-                                        <td><input type="text" id="card-number" class="form-control" required></td>
-                                    </div>
+                                    <td><label>Total Price: </label></td>
+                                    <td><input type="text" id="totalPrice"
+                                               style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39); border: 0px;"
+                                               readonly></td>
                                 </tr>
 
                                 <tr>
-                                    <div class="form-group">
-                                        <td><label for="card-expiry-month">Expiration Month: </label></td>
-                                        <td><input type="text" id="card-expiry-month" class="form-control" required>
-                                        </td>
-                                    </div>
+                                    <td><label>Expiry: </label></td>
+                                    <td><input type="text" id="expiry"
+                                               style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39); border: 0px;"
+                                               readonly></td>
                                 </tr>
 
                                 <tr>
-                                    <div class="form-group">
-                                        <td><label for="card-expiry-year">Expiration Year: </label></td>
-                                        <td><input type="text" id="card-expiry-year" class="form-control" required></td>
-                                    </div>
+                                    <td><label>Vintage: </label></td>
+                                    <td><input type="text" id="vintage"
+                                               style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39); border: 0px;"
+                                               readonly></td>
                                 </tr>
 
                                 <tr>
-                                    <div class="form-group">
-                                        <td><label for="card-cvc">CVC: </label></td>
-                                        <td><input type="text" id="card-cvc" class="form-control" required></td>
-                                    </div>
+                                    <td><label>Condition: </label></td>
+                                    <td><input type="text" id="condition"
+                                               style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39); border: 0px;"
+                                               readonly></td>
                                 </tr>
-
                             </table>
                         </div>
                         <div class="modal-footer">
-                            {{ csrf_field() }}
-                            <button type="button" class="btn btn-primary btn-group-lg"
-                                    style="background-color: rgba(211, 188, 63); border-color: rgba(211, 188, 63);">
-                                Pay
-                            </button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
-
-                    </form>
+                    </div>
                 </div>
-
             </div>
-        </div>
+
+            <div class="modal fade" id="checkout" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+
+                    <div class="modal-content">
+                        <form action="{{ route('cart.checkout') }}" method="post" id="pa-form">
+                            {{ csrf_field() }}
+                            <div class="modal-header">
+
+                                <h5 class="modal-title" id="exampleModalLongTitle" style="color: white;">Payment
+                                    Form</h5>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                            <div class="modal-body table-responsive">
+                                <div id="charge-error"
+                                     class="alert alert-danger {{ !Session::has('error') ? 'hidden' : ''  }}">
+                                    {{ Session::get('error') }}
+                                </div>
+
+                                <table class="table table-dark">
+
+                                    <tr>
+                                        <div class="form-group">
+                                            <td><label for="email">Email: </label></td>
+                                            <td><input type="email" id="email" class="form-control" required></td>
+                                        </div>
+                                    </tr>
+
+                                    <tr>
+                                        <div class="form-group">
+                                            <td><label for="card-name">Card Holder Name: </label></td>
+                                            <td><input type="text" id="card-name" class="form-control" required></td>
+                                        </div>
+                                    </tr>
+
+                                    <tr>
+                                        <div class="form-group">
+                                            <td><label for="address">Address: </label></td>
+                                            <td><input type="text" id="address" class="form-control form-control-lg"
+                                                       required
+                                                       name="address"></td>
+                                        </div>
+                                    </tr>
+
+
+                                    <tr>
+                                        <div class="form-group">
+                                            <td><label for="card-number">Credit Card Number: </label></td>
+                                            <td><input type="text" id="card-number" class="form-control" required></td>
+                                        </div>
+                                    </tr>
+
+                                    <tr>
+                                        <div class="form-group">
+                                            <td><label for="card-expiry-month">Expiration Month: </label></td>
+                                            <td><input type="text" id="card-expiry-month" class="form-control" required>
+                                            </td>
+                                        </div>
+                                    </tr>
+
+                                    <tr>
+                                        <div class="form-group">
+                                            <td><label for="card-expiry-year">Expiration Year: </label></td>
+                                            <td><input type="text" id="card-expiry-year" class="form-control" required>
+                                            </td>
+                                        </div>
+                                    </tr>
+
+                                    <tr>
+                                        <div class="form-group">
+                                            <td><label for="card-ccv">CVC: </label></td>
+                                            <td><input type="text" id="card-cvc" class="form-control" required></td>
+                                        </div>
+                                    </tr>
+
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success btn-group-lg"
+                                        style="background-color: rgba(211, 188, 63); border-color: rgba(211, 188, 63);">
+                                    Submit Payment
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>
 
     </div>
-
-    <script type="text/javascript">
-        $('#prod_details').on('show.bs.modal', function (event) {
-
-
-            var button = $(event.relatedTarget) // Button that triggered the modal
-            var name = button.data('prodname') // Extract info from data-* attributes
-            var type = button.data('type')
-            var tqty = button.data('total_qty')
-            var unitPrice = button.data('unit')
-            var totalPrice = button.data('total')
-            var expiry = button.data('expiry')
-            var vintage = button.data('vintage')
-            var condition = button.data('condition')
-
-            var modal = $(this)
-
-            modal.find('.modal-title').text(name)
-            modal.find('.modal-body #type').val(type);
-            modal.find('.modal-body #tqty').val(tqty);
-            modal.find('.modal-body #unitPrice').val(unitPrice);
-            modal.find('.modal-body #totalPrice').val(totalPrice);
-            modal.find('.modal-body #expiry').val(expiry);
-            modal.find('.modal-body #vintage').val(vintage);
-            modal.find('.modal-body #condition').val(condition);
-        })
-    </script>
-
-    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
-            integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
-            crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
-            integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
-            crossorigin="anonymous"></script>
-
-
-    </body>
-
-
-    </html>
 
     <script type="text/javascript">
         $('#prod_details').on('show.bs.modal', function (event) {
@@ -679,8 +663,6 @@
         })
     </script>
 
-    <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
-    <!--<script type="text/javascript" src="{{ URL::to('src/js/checkout.js') }}"></script>-->
 
     <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
@@ -689,7 +671,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
             integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
             crossorigin="anonymous"></script>
-
+    <script type="text/javascript" src="/javascripts/jquery-3.1.1.min.js"></script>
 
     </body>
 

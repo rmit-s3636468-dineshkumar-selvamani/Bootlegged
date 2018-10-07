@@ -25,6 +25,7 @@ class CartController extends Controller
 
     public function addToCart(Request $request, $id)
     {
+
         $product = Listings::where('id', $id )
             ->join('products', 'products.product_id', '=', 'listings.lproduct_id')
             ->first();
@@ -36,6 +37,44 @@ class CartController extends Controller
         $request->session()->put('cart', $cart);
         // To check whether the cart is storing the correct data
         //dd($request->session()->get('cart'));
+
+
+        return redirect()->back();
+    }
+
+
+    public function updateItem(Request $request) {
+
+
+        $id = $request ->input('cart-id');
+        $updateQty = $request->input('cart-item-qty');
+
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->updateItem($id,$updateQty);
+
+
+        if (count($cart->items) > 0) {
+            Session::put('cart', $cart);
+        } else {
+            Session::forget('cart');
+        }
+        return back();
+
+
+    }
+
+    public function removeItem($id) {
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->removeItem($id);
+
+        if (count($cart->items) > 0) {
+            Session::put('cart', $cart);
+        } else {
+            Session::forget('cart');
+        }
+
         return redirect()->back();
     }
 
