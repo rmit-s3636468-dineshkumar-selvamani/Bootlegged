@@ -80,6 +80,10 @@ Route::post('/manu_editrofile', ['as' => 'manu_editProfile', 'uses' => 'EditProf
 
 Route::get('/history', 'HistoryController@index');
 
+Route::get('/slowstock', 'SlowStockController@index');
+
+Route::get('/addlistingFromSlow', 'AddListingsController@addFromSlow');
+
 
 
 //Add new product
