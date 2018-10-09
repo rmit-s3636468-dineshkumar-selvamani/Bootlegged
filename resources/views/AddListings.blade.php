@@ -177,6 +177,7 @@ span.twitter-typeahead
   <a href="/mylistings" style="color: white;">My Listing</a>
   <a href="/uploadchoose" class="active">Add Listing</a>
   <a href="/history" style="color: white;">History</a>
+  <a href="slowstock" style="color: white;">Slow Movers</a>
   <a href="#contact" style="color: white;">Opportunities</a>
 
   <hr style="border-style: groove;
@@ -210,8 +211,13 @@ span.twitter-typeahead
     <div class="col-3">
       
         <div class="starter-template" style="align-text:center">
-       
+
+          @if(isset($name))
+            <input type="text" style="width:227px;" value='{{$name}}' name="productname"  class="typeahead form-control" id="search">
+
+          @else
         <input type="text" style="width:227px;" name="productname"  class="typeahead form-control" id="search" placeholder="Search by product Name" autocomplete="on" >
+          @endif
         <p style = "color:black; font-size : 12px;">Cant find your product? Please <a style = "color:blue;" href="/newprod" >add</a> here.</p>
       
       </div>
@@ -234,13 +240,22 @@ span.twitter-typeahead
   <div class="form-group row">
     <label for="product_quantity" style = "color:black" class="col-4 col-form-label">Product Quantity</label> 
     <div class="col-3">
+      @if(isset($quantity))
+        <input id="product_quantity" required="required" name="product_quantity" type="number" class="form-control here" value="{{$quantity}}">
+
+      @else
       <input id="product_quantity" required="required" name="product_quantity" type="number" class="form-control here">
+      @endif
     </div>
   </div>
   <div class="form-group row">
     <label for="unitprice" style = "color:black" class="col-4 col-form-label">Product Unit Price</label> 
     <div class="col-3">
+      @if(isset($costprice))
+        <input id="unitprice" required="required" name="unitprice" type="number" class="form-control here" value="{{$costprice}}">
+      @else
       <input id="unitprice" required="required" name="unitprice" type="number" class="form-control here">
+      @endif
     </div>
   </div>
   <div class="form-group row">
