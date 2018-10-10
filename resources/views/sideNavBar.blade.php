@@ -13,8 +13,8 @@
   <hr style="border-style: groove;
     border-width: 1px;"> 
   <a href="/editProfile" style="color: white;">Edit Profile</a>
-
-  <a href="/cart" style="color: white;">My Cart <span class="badge">{{ Session::has('cart') ? Session::get('cart')->totalQuantity : '' }}
-
+  
+  <a href="#contact" style="color: white;">My Cart</a>
+  
   <a href="{{URL::to('logout')}}" style="color: white;">Logout</a>
 </div>
