@@ -48,7 +48,7 @@ class SlowStockController extends Controller
 
         }
         else {
-            $slowStock = DB::table('product_sales')->where('manu_id', Auth::user()->manu_id)
+            $slowStock = DB::table('product_sales as ps')->where('manuf_id', Auth::user()->manu_id)
                 ->join('products as p', function ($join) {
                     $join->on('ps.product_id','p.product_id')
                         ->whereRaw('(ps.sale30qty) = 0');
@@ -94,10 +94,10 @@ class SlowStockController extends Controller
 
         }
         else {
-            $slowStock = DB::table('product_sales')->where('manu_id', Auth::user()->manu_id)
+            $slowStock = DB::table('product_sales as ps')->where('manuf_id', Auth::user()->manu_id)
                 ->join('products as p', function ($join) {
                     $join->on('ps.product_id','p.product_id')
-                        ->whereRaw('((ps.sale60qty+ps.sale30qty) = 0');
+                        ->whereRaw('(ps.sale60qty+ps.sale30qty) = 0');
                 })
                 //->where('p.product_itemName', 'LIKE', '%' . $searchName . '%')
                 ->select(
@@ -106,9 +106,12 @@ class SlowStockController extends Controller
                     'ps.SOH_qty',
                     'ps.cost_price',
                     DB::raw('ps.SOH_qty*ps.cost_price as sub_total'),
+					
                     'ps.last_sale_date'
 
                 )->OrderBy("sub_total", "desc")->paginate(10);
+
+            
 
             return $slowStock;
         }
@@ -140,7 +143,7 @@ class SlowStockController extends Controller
 
         }
         else {
-            $slowStock = DB::table('product_sales')->where('manu_id', Auth::user()->manu_id)
+            $slowStock = DB::table('product_sales as ps')->where('manuf_id', Auth::user()->manu_id)
                 ->join('products as p', function ($join) {
                     $join->on('ps.product_id','p.product_id')
                         ->whereRaw('(ps.sale60qty+ps.sale30qty+ps.sale90qty) = 0');
