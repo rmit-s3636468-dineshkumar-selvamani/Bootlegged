@@ -45,8 +45,8 @@
 
 
         <!-- Modal -->
-
-        <script src="js/modernizr.custom.js"></script>
+        <script type="text/javascript" src="{!! asset('js/checkout_stripe.js') !!}"></script>
+        <script src="/js/modernizr.custom.js"></script>
     </head>
 
     <style>
@@ -374,7 +374,8 @@
                                 class="action__text text-danger">Clear Cart</span></button>
                 </a>
 
-                <a href="#">
+                <a href="#" data-toggle="modal"
+                   data-target="#checkout" data-test="null" onmouseover="" style="cursor: pointer;">
                     <button class="action action--button action--buy "><span
                                 class="action__text">Checkout</span></button>
                 </a>
@@ -397,7 +398,13 @@
                         <div class="product__info">
 
 
-                            <img class="product__image" src="{{ asset('images/1.png') }}" alt="Product 1"/>
+                            <img class="product__image" src="{{ asset('images/1.png') }}" alt="Product 1" data-toggle="modal"
+                                 data-target="#prod_details" data-prodname="{{$product['item']['product_itemName']}}"
+                                 data-type="{{$product['item']['Listing_type']}}" data-total_qty="{{ $product['item']['Listing_qty'] }} "
+                                 data-unit=" ${{number_format($product['item']['Listing_unitPrice'], 2) }}"
+                                 data-total="${{number_format($product['item']['Listing_totalPrice'], 2)}}"
+                                 data-expiry="{{ $product['item']['Listing_expiry'] }}" data-vintage="{{ $product['item']['Listing_vintage'] }}"
+                                 data-condition="{{ $product['item']['Listing_condition'] }}" onmouseover="" style="cursor: pointer;"/>
                             <h6 class="product__name highlight"
                                 style="color: white">{{$product['item']['product_itemName']}}</h6>
                             <br>
@@ -428,7 +435,7 @@
 
 
                                 <button class="action action--button action--buy" type="submit"><i
-                                            class="fa fa-ban"></i><span
+                                            class="fas fa-redo"></i><span
                                             class="action__text">Update Quantity</span></button>
 
                             </form>
@@ -522,6 +529,11 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                            <button type="button" class="btn btn-primary"
+                                    style="background-color: rgba(211, 188, 63); border-color: rgba(211, 188, 63);"><i
+                                        class="fa fa-shopping-cart"></i>Add to Cart
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -551,14 +563,14 @@
                                     <tr>
                                         <div class="form-group">
                                             <td><label for="email">Email: </label></td>
-                                            <td><input type="email" id="email" class="form-control" required></td>
+                                            <td><input type="email" id="email" name="email" class="form-control" required></td>
                                         </div>
                                     </tr>
 
                                     <tr>
                                         <div class="form-group">
                                             <td><label for="card-name">Card Holder Name: </label></td>
-                                            <td><input type="text" id="card-name" class="form-control" required></td>
+                                            <td><input type="text" id="card-name" name="card-name" class="form-control" required></td>
                                         </div>
                                     </tr>
 
@@ -575,14 +587,14 @@
                                     <tr>
                                         <div class="form-group">
                                             <td><label for="card-number">Credit Card Number: </label></td>
-                                            <td><input type="text" id="card-number" class="form-control" required></td>
+                                            <td><input type="text" id="card-number" name="card-number" class="form-control" required></td>
                                         </div>
                                     </tr>
 
                                     <tr>
                                         <div class="form-group">
                                             <td><label for="card-expiry-month">Expiration Month: </label></td>
-                                            <td><input type="text" id="card-expiry-month" class="form-control" required>
+                                            <td><input type="text" id="card-expiry-month" name="card-expiry-month" class="form-control" required>
                                             </td>
                                         </div>
                                     </tr>
@@ -590,7 +602,7 @@
                                     <tr>
                                         <div class="form-group">
                                             <td><label for="card-expiry-year">Expiration Year: </label></td>
-                                            <td><input type="text" id="card-expiry-year" class="form-control" required>
+                                            <td><input type="text" id="card-expiry-year" name="card-expiry-year" class="form-control" required>
                                             </td>
                                         </div>
                                     </tr>
@@ -598,7 +610,7 @@
                                     <tr>
                                         <div class="form-group">
                                             <td><label for="card-ccv">CVC: </label></td>
-                                            <td><input type="text" id="card-cvc" class="form-control" required></td>
+                                            <td><input type="text" id="card-cvc" name="card-cvc" class="form-control" required></td>
                                         </div>
                                     </tr>
 
@@ -671,8 +683,12 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
             integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
             crossorigin="anonymous"></script>
-    <script type="text/javascript" src="/javascripts/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="{!! asset('js/checkout_stripe.js') !!}"></script>
 
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.js"
+            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+            crossorigin="anonymous"></script>
     </body>
 
 
