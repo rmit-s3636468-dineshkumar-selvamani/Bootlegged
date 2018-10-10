@@ -258,6 +258,7 @@ div.content {
   max-width: 200px ;
  
   height: 200px;
+  min-height: 200px;
 }
 
 .product__price{
@@ -373,7 +374,16 @@ div.content {
  
       <div class="starter-template" style="align-text:center">
        <form action="/filter" method="get">
-        <input type="text" class="typeahead form-control" name="search" id="search" placeholder="Search by product Name" autocomplete="on"  >
+              @if($prod_name[0] == '')
+                  <input type="text" class="typeahead form-control" name="search" id="search" placeholder="Search by product Name" autocomplete="on">
+                  @else
+        <input type="text" class="typeahead form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" name="search" id="search" placeholder="Search by product Name" autocomplete="on" >
+         @if ($errors->has('search'))
+                                     <div class="alert alert-danger">
+                                        <strong>{{ $errors->first('search') }}</strong>
+                                    </div>
+                                @endif
+        @endif
         <input type="submit" value="Submit" style="display: none">
         </form>
 
@@ -404,7 +414,10 @@ div.content {
 
 				<section class="grid">
 				<!-- Products -->
-
+         @if($prod_name[0] != '')
+        <h5>Showing results for : {{$prod_name[0]}}</h5><br><br>
+        @endif
+       
 				<?php $count = 0; ?>
 				@foreach($products as $item)
 					

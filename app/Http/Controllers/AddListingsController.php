@@ -42,13 +42,50 @@ class AddListingsController extends Controller
 
    public function insert(Request $request)
    {
+    if($request->get('expiry') != '')
+    {
+    $this->validate($request,[
+          'productname' => 'required|min:5|exists:products,product_itemName',
+          'product_quantity' => 'required|integer',
+          'unitprice' => 'required|between:0,99.99',
+          'totalprice' => 'required|between:0,99.99',
+          'expiry' => 'date_format:Y-m-d|after:tomorrow',
+          'productimage' => 'image',
+        ],[
+          'productname.exists' => ' The product name doesnt match with our record.',
+          'expiry.after' => 'Expiry date cant be in past',
+
+ 
+          'productimage.image' => ' Please upload a image file.'
+         
+        ]);
+
+    }
+    else
+    {
+      $this->validate($request,[
+          'productname' => 'required|min:5|exists:products,product_itemName',
+          'product_quantity' => 'required|integer',
+           'unitprice' => 'required|between:0,99.99',
+          'totalprice' => 'required|between:0,99.99',
+          'productimage' => 'image',
+        ],[
+          'productname.exists' => ' The product name doesnt match with our record.',
+         
+
+ 
+          'productimage.image' => ' Please upload a image file.'
+         
+        ]);
+
+
+
+    }
 
      $products = $request -> all();
 
      $product_id = DB::table('products')->where('product_itemName',$request->get('productname'))->pluck('product_id');
-      // $product_id = Product::
-          // where('product_itemName',$request -> input('productname','Corona Single 300ml'))-> pluck('product_id')
-          // ->first();
+    
 
      if($request->hasFile('productimage'))
             {
@@ -178,14 +215,12 @@ class AddListingsController extends Controller
 
                $product_cat1 = DB::table('products')->where('product_id',$id)->pluck('catone');
 
-               // $product_name = DB::table('products')->where('product_id',$id)->pluck('product_itemName');
+              
 
                $product_type = DB::table('categoryone')->where('id',$product_cat1)->pluck('cat1_name');
                $product_name = DB::table('products')->where('product_id',$id)->pluck('product_itemName');
 
-               // $prod = compact($product_type);
-
-                 // return Response::json(['success'=>true, 'info'=> $product_type[0]]);
+              
              
                 return view('AddListings',['product_type' => $product_type,'product_name' => $product_name]);
             

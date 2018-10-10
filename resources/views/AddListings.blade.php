@@ -202,6 +202,15 @@ span.twitter-typeahead
    
 @endif
       </header>
+      @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
      
       <div style="margin-top: -50px; color: black;">
@@ -215,7 +224,12 @@ span.twitter-typeahead
        @if($product_type[0] == '')
         <input type="text" style="width:227px;" name="productname"  class="typeahead form-control" id="search" placeholder="Search by product Name" autocomplete="on" required="required">
         @else
-         <input type="text" style="width:227px;" name="productname"  class="typeahead form-control" id="search" placeholder="Search by product Name" autocomplete="on" required="required" value="{{$product_name[0]}}">
+         <input type="text" style="width:227px;" name="productname"  class="typeahead form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" id="search" placeholder="Search by product Name" autocomplete="on" required="required" value="{{$product_name[0]}}">
+          @if ($errors->has('productname'))
+                                    <div class="alert alert-danger">
+                                        <strong>{{ $errors->first('productname') }}</strong>
+                                    </div>
+                                @endif
          @endif
         <p style = "color:black; font-size : 12px;">Cant find your product? Please <a style = "color:blue;" href="/newprod" >add</a> here.</p>
         
@@ -244,44 +258,54 @@ span.twitter-typeahead
   <div class="form-group row">
     <label for="product_quantity" style = "color:black" class="col-4 col-form-label">Product Quantity</label> 
     <div class="col-3">
-      <input id="product_quantity" required="required" name="product_quantity" type="number" class="form-control here">
+      <input id="product_quantity" required="required" name="product_quantity" type="number" value="{{old('product_quantity')}}" class="form-control here" required>
     </div>
   </div>
   <div class="form-group row">
     <label for="unitprice" style = "color:black" class="col-4 col-form-label">Product Unit Price</label> 
     <div class="col-3">
-      <input id="unitprice" required="required" name="unitprice" type="number" class="form-control here">
+      <input id="unitprice" required="required" name="unitprice" value="{{old('unitprice')}}" type="text" class="form-control here" required>
     </div>
   </div>
   <div class="form-group row">
     <label for="totalprice" style = "color:black" class="col-4 col-form-label">Product Total Price</label> 
     <div class="col-3">
-      <input id="totalprice" required="required" name="totalprice" type="number" class="form-control here">
+      <input id="totalprice" required="required" name="totalprice" value="{{old('totalprice')}}" type="text" class="form-control here" required>
     </div>
   </div>
   <div class="form-group row">
     <label for="expiry" style = "color:black" class="col-4 col-form-label">Product Expiry</label> 
     <div class="col-3">
-      <input id="expiry" name="expiry" type="text" class="form-control here" placeholder="YYYY-MM-DD">
+      <input id="expiry" name="expiry" type="text"  value="{{old('expiry')}}" class="form-control here{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="YYYY-MM-DD">
+       @if ($errors->has('expiry'))
+                                     <div class="alert alert-danger">
+                                        <strong>{{ $errors->first('expiry') }}</strong>
+                                    </div>
+                                @endif
     </div>
   </div>
   <div class="form-group row">
     <label for="vintage" style = "color:black" class="col-4 col-form-label">Vintage</label> 
     <div class="col-3">
-      <input id="vintage" name="vintage" type="text" class="form-control here" placeholder="eg. 20 Years">
+      <input id="vintage" name="vintage" type="text" class="form-control here" value="{{old('vintage')}}" placeholder="eg. 20 Years">
     </div>
   </div>
   <div class="form-group row">
     <label for="condition" style = "color:black" class="col-4 col-form-label">Product Condition</label> 
     <div class="col-3">
-      <input id="condition"  required="required" name="condition" type="text" class="form-control here">
+      <input id="condition"  required="required" value="{{old('condition')}}" name="condition" type="text"  class="form-control here">
     </div>
   </div>
   
   <div class="form-group row">
     <label for="productimage" style = "color:black" class="col-4 col-form-label">Product Image</label> 
     <div class="col-3">
-      <input id="productimage"  name="productimage" type="file" class="form-control here">
+      <input id="productimage"  name="productimage" type="file"  class="form-control here {{ $errors->has('email') ? ' is-invalid' : '' }}">
+        @if ($errors->has('productimage'))
+                                    <div class="alert alert-danger">
+                                        <strong>{{ $errors->first('productimage') }}</strong>
+                                    </div>
+                                @endif
     </div>
   </div>
   <div class="form-group row">

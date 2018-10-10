@@ -74,7 +74,24 @@ class MyListingsController extends Controller
 
     public function saveprod(Request $req)
     {
-     
+            
+             $this->validate($req,[
+          
+          'tqty' => 'required|integer',
+          // 'expiry' => 'date_format:Y-m-d|after:tomorrow',
+          'pimage' => 'image',
+        ],[
+          'tqty.integer' => 'Invalid Quantity type.',
+          'tqty.required' => 'Product Quantity cant be empty.',
+          // 'expiry.after' => 'Expiry date can not be in past.',
+
+ 
+          'pimage.image' => ' Please upload a image file.'
+         
+        ]);
+
+
+
             $image_name = Listings::where('id',$req->get('prodId'))->pluck('image');
        
 
@@ -128,6 +145,8 @@ class MyListingsController extends Controller
             
 
         return back()->with('message','Product Updated Successfully');
+
+             // return Response::json(['success' => '1']);
       
     }
 }

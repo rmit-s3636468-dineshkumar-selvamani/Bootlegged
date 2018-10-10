@@ -10,6 +10,48 @@ class AddNewProductController extends Controller
 {
     public function savenewprod(Request $req)
     {
+      if($req->get('expiry') != '')
+    {
+    $this->validate($req,[
+          'productname' => 'required|min:5',
+          'product_quantity' => 'required|integer',
+          'unitprice' => 'required|between:0,99.99',
+          'totalprice' => 'required|between:0,99.99',
+          'expiry' => 'date_format:Y-m-d|after:tomorrow',
+          
+        ],[
+          'productname.exists' => ' The product name doesnt match with our record.',
+          'expiry.after' => 'Expiry date cant be in past',
+
+ 
+       
+         
+        ]);
+
+    }
+    else
+    {
+      $this->validate($req,[
+          'productname' => 'required|min:5',
+          'product_quantity' => 'required|integer',
+           'unitprice' => 'required|between:0,99.99',
+          'totalprice' => 'required|between:0,99.99',
+          'productimage' => 'image',
+        ],[
+          'productname.exists' => ' The product name doesnt match with our record.',
+         
+
+ 
+          'productimage.image' => ' Please upload a image file.'
+         
+        ]);
+
+
+
+    }
+
+       
+
     	if(Auth::user()->type == "Manufacturer")
     	{
     		 Newproduct::create([

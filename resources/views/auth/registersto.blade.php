@@ -141,43 +141,52 @@
 
      <!-- Login Div -->
 
-        <div class="moving_size" style="height: 1150px;">
+        <div class="moving_size" style="height: 1450px;">
             <img src="Images/reg_pic.jpg" name="about_pic" class="about_pic" style="height:100%; ">
           
-         <div class="about" id="about" style="margin-top: -1090px;">
+         <div class="about" id="about" style="margin-top: -1390px;">
              <p style="font-size: 40px; margin-left: 120px; ">ENTER THE DETAILS</p>
          
           <form  action="{{ route('register_sto') }}" method="POST" id="register_form_sto" aria-label="{{ __('Register') }}" style="margin-top: 10px; margin-left: 130px;  ">
             @csrf
-                    <input class="form_box form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" type="email" name="store_email" placeholder="Email" id="store_email" required ><br>
+                    <input class="form_box form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" type="email" name="store_email" placeholder="Email" id="store_email" value="{{old('email')}}" required ><br>
                       @if ($errors->has('email'))
-                                    <span class="invalid-feedback" role="alert">
+                                    <div class="alert alert-danger col-8">
                                         <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
+                                    </div>
                                 @endif
-                    <input class="form_box form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" type="text" name="store_name" placeholder="Store Name" id="store_name" required><br>
-                     @if ($errors->has('name'))
-                                    <span class="invalid-feedback" role="alert">
+                    <input class="form_box form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" type="text" name="store_name" placeholder="Store Name" id="store_name" value="{{old('name')}}" required><br>
+                    @if ($errors->has('name'))
+                                    <div class="alert alert-danger col-8">
                                         <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
+                                    </div>
                                 @endif
                     <input class="form_box form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" type="Password" name="password" placeholder="Password" id="password" required><br>
                       @if ($errors->has('password'))
-                                    <span class="invalid-feedback" role="alert">
+                                    <div class="alert alert-danger col-8">
                                         <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
+                                    </div>
                                 @endif
                     <input class="form_box" type="Password" name="password_confirmation" placeholder="Confirm Password" id="password-confirm" required><br><br>
-                    <input class="form_box" type="text" name="store_address" placeholder="Address Line " id="store_address" required><br><br>
-                    <input class="form_box" type="text" name="store_suburb" placeholder="Suburb" id="store_suburb"required><br><br>
-                    <input class="form_box" type="text" name="store_state" placeholder="State(VIC,NSW,WA,QLD,SA,TAS)" id="store_state"required><br><br>
+                    <input class="form_box {{ $errors->has('store_address') ? ' is-invalid' : '' }}" type="text" name="store_address" placeholder="Address Line " id="store_address" value="{{old('store_address')}}" required><br><br>
+                     @if ($errors->has('store_address'))
+                                    <div class="alert alert-danger col-8">
+                                        <strong>{{ $errors->first('store_address') }}</strong>
+                                    </div>
+                                @endif
+                    <input class="form_box {{ $errors->has('store_suburb') ? ' is-invalid' : '' }}" type="text" name="store_suburb" placeholder="Suburb" id="store_suburb" value="{{old('store_suburb')}}" required><br><br>
+                     @if ($errors->has('store_suburb'))
+                                    <div class="alert alert-danger col-8">
+                                        <strong>{{ $errors->first('store_suburb') }}</strong>
+                                    </div>
+                                @endif
+                   
 
-
-             
-              <!-- <div class="col" style="margin-left: -14px; width: 345px; ">
+                    <div class="col" style="margin-left: -14px; width: 345px; ">
                 <div class="ui-select">
-                  <select id="user_time_zone" class="form-control">
-                    <option value="VIC" selected="selected">VIC</option>
+                  <select name="store_state" class="form-control" style="height: 45px; id="manu_state"">
+                    <option value="State" selected="selected">State</option>
+                    <option value="VIC">VIC</option>
                     <option value="NSW">NSW</option>
                     <option value="WA">WA</option>
                     <option value="QLD">QLD</option>
@@ -187,13 +196,39 @@
                   </select>
                 </div>
               </div>
-            <br> -->
+             <br>
+             
 
-                    <input class="form_box" type="number" name="store_postcode" placeholder="Post Code" id="store_postcode"required><br><br>
-                    <input class="form_box" type="number" name="store_phone" placeholder="Contact Number" required><br><br>
-                    <input class="form_box" type="text" name="store_abn" placeholder="ABN Number" id="store_abn"required><br><br>
-                    <input class="form_box" type="text" name="store_license" placeholder="Business License Number" id="store_license"required><br><br>
-                    <input class="form_box" type="text" name="store_Stripeid" placeholder="Stripe ID" id="store_Stripeid"required><br><br>
+                    <input class="form_box {{ $errors->has('store_postcode') ? ' is-invalid' : '' }}" type="number" name="store_postcode" placeholder="Post Code" id="store_postcode" value="{{old('store_postcode')}}" required><br><br>
+                     @if ($errors->has('store_postcode'))
+                                    <div class="alert alert-danger col-8">
+                                        <strong>{{ $errors->first('store_postcode') }}</strong>
+                                    </div>
+                                @endif
+                    <input class="form_box  {{ $errors->has('store_phone') ? ' is-invalid' : '' }}" type="number" name="store_phone" placeholder="Contact Number" value="{{old('store_phone')}}" required><br><br>
+                     @if ($errors->has('store_phone'))
+                                    <div class="alert alert-danger col-8">
+                                        <strong>{{ $errors->first('store_phone') }}</strong>
+                                    </div>
+                                @endif
+                    <input class="form_box {{ $errors->has('store_abn') ? ' is-invalid' : '' }}" type="number" name="store_abn" placeholder="ABN Number" id="store_abn" value="{{old('store_abn')}}" required><br><br>
+                     @if ($errors->has('store_abn'))
+                                    <div class="alert alert-danger col-8">
+                                        <strong>{{ $errors->first('store_abn') }}</strong>
+                                    </div>
+                                @endif
+                    <input class="form_box  {{ $errors->has('store_license') ? ' is-invalid' : '' }}" type="text" name="store_license" placeholder="Business License Number" id="store_license" value="{{old('store_license')}}" required><br><br>
+                     @if ($errors->has('store_license'))
+                                    <div class="alert alert-danger col-8">
+                                        <strong>{{ $errors->first('store_license') }}</strong>
+                                    </div>
+                                @endif
+                    <input class="form_box {{ $errors->has('store_Stripeid') ? ' is-invalid' : '' }}" type="text" name="store_Stripeid" placeholder="Stripe ID" id="store_Stripeid" value="{{old('store_Stripeid')}}" required><br><br>
+                     @if ($errors->has('store_Stripeid'))
+                                    <div class="alert alert-danger col-8">
+                                        <strong>{{ $errors->first('store_Stripeid') }}</strong>
+                                    </div>
+                                @endif
 
                   <br><br> <br>
                       
