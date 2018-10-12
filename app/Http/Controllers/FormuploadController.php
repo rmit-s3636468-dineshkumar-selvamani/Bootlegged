@@ -24,10 +24,19 @@ class FormuploadController extends Controller
     }
 
     public function upload(Request $request)
-    {   
-       if( $this->validate($request, array(
-      'file'   => 'max:10240|required|mimes:csv,xlsx',
-    ))){
+    {  
+
+
+        $this->validate($request,[
+           'file'   => 'max:10240|required|mimes:csv,xlsx',
+          
+        ],[
+          'file.mimes' => 'Upload the .csv or .xlsx file',
+          
+         
+        ]); 
+
+       
         if($request->file('file')->isValid()){
            
             $file = $request->file('file');
@@ -37,12 +46,10 @@ class FormuploadController extends Controller
         }
         else
         {
-            return back()->with('message', 'No file or wrong file Uploaded');
+            return back()->with('message', 'No file  Uploaded');
         }
-    }
-    else{
-         return back()->with('message', 'No file or wrong file Uploaded');
-    }
+    
+   
     }
 
 }
