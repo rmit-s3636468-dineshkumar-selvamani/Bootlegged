@@ -137,6 +137,7 @@ div.content {
   <a href="/mylistings" style="color: white;" >My Listing</a>
   <a href="/uploadchoose" class="active" >Add Listing</a>
   <a href="/history" style="color: white;">History</a>
+  <a href="slowstock" style="color: white;">Slow Movers</a>
   <a href="#contact" style="color: white;">Opportunities</a>
   <hr style="border-style: groove;
     border-width: 1px;"> 

@@ -56,6 +56,8 @@ Route::get('/editProfile', 'EditProfileController@index')->name('editProfile');
 Route::post('/store_editProfile', ['as' => 'store_editProfile', 'uses' => 'EditProfileController@saveStore']);
 Route::post('/manu_editrofile', ['as' => 'manu_editProfile', 'uses' => 'EditProfileController@saveManu']);
 Route::get('/history', 'HistoryController@index');
+Route::get('/slowstock', 'SlowStockController@index');
+Route::get('/addlistingFromSlow', 'AddListingsController@addFromSlow');
 
 //Add new product
 Route::post('/createnewprod', ['as' => 'createnewprod', 'uses' => 'AddNewProductController@savenewprod']);
