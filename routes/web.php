@@ -14,36 +14,22 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
-
-
-// Route::get('home', function(){
-//     return View('welcome'); // Your Blade template name
-// });
 Route::get('registerman', function(){
     return View('auth/registerman'); // Your Blade template name
 });
-
-
 Route::get('registersto', function(){
     return View('auth/registersto'); // Your Blade template name
 });
-
 Route::get('choose', function(){
     return View('choose'); // Your Blade template name
-});
-	
+});	
 Route::get('loginmanu', function(){
     return View('auth/loginmanu'); // Your Blade template name
 });
-
 Route::get('loginstor', function(){
     return View('auth/loginstor'); // Your Blade template name
 });
-
-
 Route::post('/register_man', ['as' => 'register_man', 'uses' => 'Auth\ManufacturerController@register']);
-
 Route::post('/register_sto', ['as' => 'register_sto', 'uses' => 'Auth\StoreController@register']);
 
 
@@ -54,49 +40,28 @@ Route::get('welcome', function () {
 });
 
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
-
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
-
 Route::get('/mylistings', 'MyListingsController@index')->name('mylistings');
-
 Route::get('/addlistings', 'AddListingsController@index')->name('addlistings');
-
-
 Route::get('/filter/{id}', 'HomeController@filter')->name("dashboard/filter");
 
 //For enter function in Auto suggest
 Route::get('/filter', 'HomeController@filterEnter')->name("dashboard/filter");
-
-
 Route::get('/filterName/{id}', 'HomeController@filterName')->name("dashboard/filter");
 
 //AUtocomplete
-
 Route::get('/user/find', 'HomeController@searchUsers');
- 
 Route::get('/editProfile', 'EditProfileController@index')->name('editProfile');
-
 Route::post('/store_editProfile', ['as' => 'store_editProfile', 'uses' => 'EditProfileController@saveStore']);
-
 Route::post('/manu_editrofile', ['as' => 'manu_editProfile', 'uses' => 'EditProfileController@saveManu']);
-
 Route::get('/history', 'HistoryController@index');
-
 Route::get('/slowstock', 'SlowStockController@index');
-
 Route::get('/addlistingFromSlow', 'AddListingsController@addFromSlow');
-
-
 
 //Add new product
 Route::post('/createnewprod', ['as' => 'createnewprod', 'uses' => 'AddNewProductController@savenewprod']);
-
-
 Route::post('create','AddListingsController@insert');
-
-
 
 //File Upload
 Route::get('uploadchoose', function(){
@@ -104,22 +69,15 @@ Route::get('uploadchoose', function(){
 });
 
 Route::get('/upload', 'FormuploadController@index');
-
 Route::post('upload', 'FormuploadController@upload');
-
 Route::get('/downloads', 'DownloadFileController@download');
 
-
 // Delete Product
-
 Route::post('removeproduct', 'MyListingsController@remove')->name('mylistings');
-
 Route::post('update', 'MyListingsController@saveprod')->name('mylistings');
-
 Route::get('newprod', function(){
     return View('newprod'); // Your Blade template name
 });
-
 
 //Autofill Product Type
 Route::get('/autofill/{id}', 'AddListingsController@autofillType')->name("Addlisting/");
