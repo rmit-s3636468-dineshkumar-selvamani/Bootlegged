@@ -461,14 +461,14 @@ div.content {
 				@endforeach
 				
 
+		</section>
+		</div><!-- /view -->
+
+
 				<?php if($count==0) { ?>
-				<h3> No products to display </h3>
+				<div style="margin-left:180px;"><center><h3> No products to display </h3></center></div>
 			<?php } ?>
 			
-
-
-							</section>
-		</div><!-- /view -->
 
 				
 		<!-- product compare wrapper -->
