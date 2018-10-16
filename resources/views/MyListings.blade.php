@@ -295,7 +295,7 @@ div.content {
              <img src = "{{url('storage/'.$item->image)}}" class="product__image"/>
           
           @else
-             <img class="product__image" src="{{ asset('images/1.png') }}" alt="Product 1" style="height: 160px; width: 160px;" />
+             <img class="product__image" src="{{ asset('Images/1.png') }}" alt="Product 1" style="height: 160px; width: 160px;" />
 
           @endif    
                                             <h6 class="product__price highlight" style="color: white">{{$item->product_itemName}}</h6><br>
