@@ -235,6 +235,7 @@ div.content {
   max-width: 200px ;
  
   height: 200px;
+  min-height: 200px;
 }
 
 .product__price{
@@ -308,7 +309,7 @@ div.content {
                                             <button class="action action--button action--buy" data-toggle="modal" 
                                         data-target="#remove" data-listid="{{$item->id}}" data-prodId="{{$item->id}}"  onmouseover="" style="cursor: pointer;" style="width:auto;"><i class="fa fa-check"></i><span class="action__text" style ="width: 80px;" >Remove</span></button>
 
-                                            <button class="action action--button action--buy" data-toggle="modal" 
+                                            <button class="action action--button action--buy" data-toggle="modal" id="updatebutton"
                                         data-target="#update" data-prodname="{{$item->product_itemName}}" data-type="{{$item->Listing_type}}" data-total_qty="{{ $item->Listing_qty }} " data-prodId="{{$item->id}}" data-listid="{{$item->id}}"
                                         data-unit="{{number_format($item->Listing_unitPrice, 2) }}" data-total="{{number_format($item->Listing_totalPrice, 2)}}" 
                                         data-expiry="{{ $item->Listing_expiry }}" data-vintage="{{ $item->Listing_vintage }}"
@@ -326,7 +327,7 @@ div.content {
     <!-- product compare wrapper -->
 
     <!-- Modal View for Edit -->
-    <div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade{{ $errors->has('update') ? ' is-invalid' : '' }}" id="update" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document" >
     <div class="modal-content">
       <div class="modal-header">
@@ -385,7 +386,7 @@ div.content {
 </div>
     </div>
 
-    
+        
         <script type="text/javascript">
         $('#update').on('show.bs.modal', function (event) {
 
@@ -415,8 +416,13 @@ div.content {
    modal.find('.modal-body #status').val(status);
   modal.find('.modal-body #prodId').val(id);
 })
+
+       
+
+
     </script>
 
+   
     <script type="text/javascript">
         $('#remove').on('show.bs.modal', function (event) {
 

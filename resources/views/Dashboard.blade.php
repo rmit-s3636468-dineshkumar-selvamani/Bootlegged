@@ -258,6 +258,7 @@ div.content {
   max-width: 200px ;
  
   height: 200px;
+  min-height: 200px;
 }
 
 .product__price{
@@ -266,7 +267,7 @@ div.content {
   /*max-height: 30px;*/
   max-width: 210px;
 
-  height :15px;
+  height :60px;
 }
 
 
@@ -355,9 +356,9 @@ div.content {
 		@include('sideNavBar')
 
    <!-- Compare basket -->
-		<div class="compare-basket">
+		<!-- <div class="compare-basket">
 			<button class="action action--button action--compare"><i class="fa fa-check"></i><span class="action__text">Compare</span></button>
-		</div>
+		</div> -->
 
 
 		<!-- Main view -->
@@ -372,8 +373,20 @@ div.content {
        <div class="container">
  
       <div class="starter-template" style="align-text:center">
-       
-        <input type="text" class="typeahead form-control" id="search" placeholder="Search by product Name" autocomplete="on"  >
+       <form action="/filter" method="get">
+              @if($prod_name[0] == '')
+                  <input type="text" class="typeahead form-control" name="search" id="search" placeholder="Search by product Name" autocomplete="on">
+                  @else
+        <input type="text" class="typeahead form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" name="search" id="search" placeholder="Search by product Name" autocomplete="on" >
+         @if ($errors->has('search'))
+                                     <div class="alert alert-danger">
+                                        <strong>{{ $errors->first('search') }}</strong>
+                                    </div>
+                                @endif
+        @endif
+        <input type="submit" value="Submit" style="display: none">
+        </form>
+
       </div>
        
 </div>
@@ -401,7 +414,10 @@ div.content {
 
 				<section class="grid">
 				<!-- Products -->
-
+         @if($prod_name[0] != '')
+        <h5>Showing results for : {{$prod_name[0]}}</h5><br><br>
+        @endif
+       
 				<?php $count = 0; ?>
 				@foreach($products as $item)
 					
@@ -436,7 +452,7 @@ div.content {
 						
 						
 					</div>
-					<label class="action action--compare-add"><input class="check-hidden" type="checkbox" /><i class="fa fa-plus"></i><i class="fa fa-check"></i><span class="action__text action__text--invisible">Add to compare</span></label>
+					<!-- <label class="action action--compare-add"><input class="check-hidden" type="checkbox" /><i class="fa fa-plus"></i><i class="fa fa-check"></i><span class="action__text action__text--invisible">Add to compare</span></label> -->
 
 				</div>
 					<?php $count++; ?>
@@ -595,9 +611,14 @@ div.content {
                         '<div class="list-group search-results-dropdown">'
                     ],
                     suggestion: function(data) {
+                      
+                   
                     return '<a href="/filterName/'+ data.product_id + '"><div style="font-weight:normal; margin-top:-10px ! important;" class="list-group-item">' + data.product_itemName + '</div></a></div>'
+                   
                     }
+
                 }
+
             });
         });
 
