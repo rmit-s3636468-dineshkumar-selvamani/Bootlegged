@@ -116,7 +116,7 @@ class HomeController extends Controller
             }
 
           
-        return view('dashboard')->with(['products'=>$products, 'prod_name' => $prod_name]);
+        return view('Dashboard')->with(['products'=>$products, 'prod_name' => $prod_name]);
 
           
         
@@ -142,7 +142,7 @@ class HomeController extends Controller
            ->paginate(9);
           
 
-        return view('dashboard')->with(['products'=>$products, 'prod_name' => $prod_name]);
+        return view('Dashboard')->with(['products'=>$products, 'prod_name' => $prod_name]);
 
             // return \App::make('redirect')->back()->with(['name'=>$name,'products'=>$products]);
         
@@ -178,7 +178,7 @@ class HomeController extends Controller
            
           $prod_name = DB::table('products')->where('product_itemName', '=', $request->get('search'))->pluck('product_itemName');
 
-        return view('dashboard')->with(['products'=>$products, 'prod_name' => $prod_name]);
+        return view('Dashboard')->with(['products'=>$products, 'prod_name' => $prod_name]);
 
             // return \App::make('redirect')->back()->with(['name'=>$name,'products'=>$products]);
         
