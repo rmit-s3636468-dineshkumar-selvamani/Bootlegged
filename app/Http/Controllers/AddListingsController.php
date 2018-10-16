@@ -12,6 +12,22 @@ use Response;
 
 class AddListingsController extends Controller
 {
+    public function addFromSlow(Request $request)
+    {
+
+        //Retrieve the name input field
+        $name = $request->p_name;
+
+        //Retrieve the username input field
+        $quantity = $request->quan;
+
+        //Retrieve the password input field
+        $costprice = $request->costprice;
+
+
+        return view('AddListings', compact('name', 'quantity', 'costprice'));
+    }
+
    /**
     * Create a new controller instance.
     *

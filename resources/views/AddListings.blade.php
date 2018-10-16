@@ -177,6 +177,7 @@ span.twitter-typeahead
   <a href="/mylistings" style="color: white;">My Listing</a>
   <a href="/uploadchoose" class="active">Add Listing</a>
   <a href="/history" style="color: white;">History</a>
+  <a href="slowstock" style="color: white;">Slow Movers</a>
   <a href="#contact" style="color: white;">Opportunities</a>
 
   <hr style="border-style: groove;
@@ -231,6 +232,7 @@ span.twitter-typeahead
                                     </div>
                                 @endif
          @endif
+
         <p style = "color:black; font-size : 12px;">Cant find your product? Please <a style = "color:blue;" href="/newprod" >add</a> here.</p>
         
       </div>
@@ -258,12 +260,14 @@ span.twitter-typeahead
   <div class="form-group row">
     <label for="product_quantity" style = "color:black" class="col-4 col-form-label">Product Quantity</label> 
     <div class="col-3">
+
       <input id="product_quantity" required="required" name="product_quantity" type="number" value="{{old('product_quantity')}}" class="form-control here" required>
     </div>
   </div>
   <div class="form-group row">
     <label for="unitprice" style = "color:black" class="col-4 col-form-label">Product Unit Price</label> 
     <div class="col-3">
+
       <input id="unitprice" required="required" name="unitprice" value="{{old('unitprice')}}" type="text" class="form-control here" required>
     </div>
   </div>
