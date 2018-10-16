@@ -132,3 +132,5 @@ Route::get('/removeItem/{id}', 'CartController@removeItem')->name('cart.remove')
 Route::get('/clearCart', 'CartController@clearCart')->name('cart.clear');
 // Cart Checkout
 Route::post('/checkout', 'CheckoutController@checkout')->name('cart.checkout');
+// Checkout Index
+Route::get('/checkoutIndex', 'CheckoutController@index')->name('checkout.index');

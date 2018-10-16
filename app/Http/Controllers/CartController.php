@@ -19,7 +19,7 @@ class CartController extends Controller
         }
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
-        session()->flash('success','Cart Loaded Succesfully!');
+        //session()->flash('success','Cart Loaded Succesfully!');
         //dd($cart);
         return view('/cart')->with(['products'=> $cart->items, 'totalQuantity'=>$cart->totalQuantity, 'totalPrice'=>$cart->totalPrice]);
     }
@@ -89,7 +89,4 @@ class CartController extends Controller
         return back();
     }
 
-    public function validateInput(){
-
-    }
 }
