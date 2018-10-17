@@ -1,6 +1,8 @@
 @extends('layouts.store')
 @section('content')
-
+    <header>
+        <script src="https://checkout.stripe.com/checkout.js"></script>
+    </header>
     <style>
 
         .StripeElement {
@@ -60,168 +62,50 @@
                             class="product__price highlight">Total Price : $ {{$totalPrice}}</span></button>
 
 
-                    <a href="{{route('cart.index')}}">
-                        <button class="action action--button action--buy "><span
-                                    class="product__price highlight text-white">Back to Cart</span></button>
-                    </a>
-                    <br><br>
-                    @include('partials.flash-message')
+                <a href="{{route('cart.index')}}">
+                    <button class="action action--button action--buy "><span
+                                class="product__price highlight text-white">Back to Cart</span></button>
+                </a>
+                <br><br>
+                @include('partials.flash-message')
             </div>
 
         </div>
         <section class="grid">
             <!-- Products -->
 
-
-            <div class="col-md-6 col-md-offset-3">
-                <h1>Payment Form</h1>
-                <div class="spacer"></div>
-
-                @if (session()->has('success_message'))
-                    <div class="alert alert-success">
-                        {{ session()->get('success_message') }}
-                    </div>
-                @endif
-
-                @if(count($errors) > 0)
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-                <form action="{{ url('/checkout') }}" method="POST" id="payment-form">
-                    {{ csrf_field() }}
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" class="form-control" id="email" name="email">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="name_on_card">Name on Card</label>
-                        <input type="text" class="form-control" id="name_on_card" name="name_on_card">
-                    </div>
-
-
-
-                    <div class="form-group">
-                        <label for="card-element">Credit Card</label>
-                        <div id="card-element">
-                            <!-- a Stripe Element will be inserted here. -->
-                        </div>
-
-                        <!-- Used to display form errors -->
-                        <div id="card-errors" role="alert"></div>
-                    </div>
-
-                    <div class="spacer"></div>
-
-                    <button type="submit" class="btn btn-success">Submit Payment</button>
+                <form action="/checkoutIndex" method="POST">
+                    <script
+                            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                            data-key="pk_test_TYooMQauvdEDq54NiTphI7jx"
+                            data-amount={{$totalPrice*100}}
+                            data-name="Bootlegged.com.au"
+                            data-description="Widget"
+                            data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                            data-locale="auto"
+                            data-zip-code="false">
+                    </script>
                 </form>
             </div>
         </section>
 
 
-        </section>
+    </section>
 
 
-        <script>
-            (function(){
-                // Create a Stripe client
-                var stripe = Stripe('{{config('services.stripe.key')}}');
-                (
-                // Create an instance of Elements
-                var elements = stripe.elements();
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+            integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
+            integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+            crossorigin="anonymous"></script>
 
-                // Custom styling can be passed to options when creating an Element.
-                // (Note that this demo uses a wider set of styles than the guide below.)
-                var style = {
-                    base: {
-                        color: '#32325d',
-                        lineHeight: '18px',
-                        fontFamily: '"Raleway", Helvetica, sans-serif',
-                        fontSmoothing: 'antialiased',
-                        fontSize: '16px',
-                        '::placeholder': {
-                            color: '#aab7c4'
-                        }
-                    },
-                    invalid: {
-                        color: '#fa755a',
-                        iconColor: '#fa755a'
-                    }
-                };
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.js"
+            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+            crossorigin="anonymous"></script>
 
-                // Create an instance of the card Element
-                var card = elements.create('card', {
-                    style: style,
-                    hidePostalCode: true
-                });
-
-                // Add an instance of the card Element into the `card-element` <div>
-                card.mount('#card-element');
-
-                // Handle real-time validation errors from the card Element.
-                card.addEventListener('change', function(event) {
-                    var displayError = document.getElementById('card-errors');
-                    if (event.error) {
-                        displayError.textContent = event.error.message;
-                    } else {
-                        displayError.textContent = '';
-                    }
-                });
-
-                // Handle form submission
-                var form = document.getElementById('payment-form');
-                form.addEventListener('submit', function(event) {
-                    event.preventDefault();
-
-                    var options = {
-                        name: document.getElementById('name_on_card').value,
-                    }
-
-                    stripe.createToken(card, options).then(function(result) {
-                        if (result.error) {
-                            // Inform the user if there was an error
-                            var errorElement = document.getElementById('card-errors');
-                            errorElement.textContent = result.error.message;
-                        } else {
-                            // Send the token to your server
-                            stripeTokenHandler(result.token);
-                        }
-                    });
-                });
-
-                function stripeTokenHandler(token) {
-                    // Insert the token ID into the form so it gets submitted to the server
-                    var form = document.getElementById('payment-form');
-                    var hiddenInput = document.createElement('input');
-                    hiddenInput.setAttribute('type', 'hidden');
-                    hiddenInput.setAttribute('name', 'stripeToken');
-                    hiddenInput.setAttribute('value', token.id);
-                    form.appendChild(hiddenInput);
-
-                    // Submit the form
-                    form.submit();
-                }
-            })();
-        </script>
-
-
-        <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
-                integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
-                crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
-                integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
-                crossorigin="anonymous"></script>
-
-        <script
-                src="https://code.jquery.com/jquery-3.3.1.js"
-                integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-                crossorigin="anonymous"></script>
 
     </body>
 

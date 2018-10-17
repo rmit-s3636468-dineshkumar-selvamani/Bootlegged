@@ -20,7 +20,7 @@ class CheckoutController
     {
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
-        return view('/checkout')->with(['totalQuantity'=>$cart->totalQuantity, 'totalPrice'=>$cart->totalPrice]);
+        return view('/checkout')->with(['products'=> $cart->items, 'totalQuantity'=>$cart->totalQuantity, 'totalPrice'=>$cart->totalPrice]);
     }
 
     /**
@@ -37,14 +37,14 @@ class CheckoutController
         $cart = new Cart($oldCart);
 
         Stripe::setApiKey(env('STRIPE_SECRET'));
-        dd($request->all());
+
 
         try {
-            $customer = Customer::create(array("email" => $request->email,"source"=>$request->stripeToken));
+
             $charge = Charge::create(array(
                 "amount" => $cart->totalPrice,
                 "currency" => "aud",
-                "source" => $request->stripeToken, // obtained with Stripe.js
+                "source" =>"{{env('STRIPE_KEY')}}", // obtained with Stripe.js
                 "description" => "Test Charge",
                 "name" => $request->input('name')
             ));
