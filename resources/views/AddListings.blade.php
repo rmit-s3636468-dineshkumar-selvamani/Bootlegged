@@ -274,7 +274,7 @@ span.twitter-typeahead
   <div class="form-group row">
     <label for="totalprice" style = "color:black" class="col-4 col-form-label">Product Total Price</label> 
     <div class="col-3">
-      <input id="totalprice" required="required" name="totalprice" value="{{old('totalprice')}}" type="text" class="form-control here" required>
+      <input id="totalprice" required="required" name="totalprice" value="{{old('totalprice')}}" type="text" class="form-control here" readonly>
     </div>
   </div>
   <div class="form-group row">
