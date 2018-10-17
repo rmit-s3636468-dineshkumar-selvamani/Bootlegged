@@ -52,20 +52,17 @@
             <div class="starter-template" style="text-align: center; margin-left: 10%; margin-right: 10%;">
 
 
-                    <button class="action action--button action--buy " disabled><span
-                                class="product__price highlight ">Total Item : X</span></button>
+                <button class="action action--button action--buy " disabled><span
+                            class="product__price highlight ">Total Item : {{$totalQuantity}}</span></button>
 
 
-                    <button class="action action--button action--buy "><span
-                                class="product__price highlight">Total Price : $ X</span></button>
+                <button class="action action--button action--buy "><span
+                            class="product__price highlight">Total Price : $ {{$totalPrice}}</span></button>
 
-                    <a href="{{route('cart.clear')}}" class="action action--button action--buy"><span
-                                class="product__price highlight text-danger">Clear Cart</span>
-                    </a>
 
-                    <a href="{{route('checkout.index')}}">
+                    <a href="{{route('cart.index')}}">
                         <button class="action action--button action--buy "><span
-                                    class="product__price highlight text-white">Checkout</span></button>
+                                    class="product__price highlight text-white">Back to Cart</span></button>
                     </a>
                     <br><br>
                     @include('partials.flash-message')

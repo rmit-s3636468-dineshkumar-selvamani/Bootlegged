@@ -18,7 +18,9 @@ class CheckoutController
 {
     public function index()
     {
-        return view('/checkout');
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+        return view('/checkout')->with(['totalQuantity'=>$cart->totalQuantity, 'totalPrice'=>$cart->totalPrice]);
     }
 
     /**
