@@ -137,8 +137,10 @@ div.content {
   <a href="/mylistings" style="color: white;" >My Listing</a>
   <a href="/uploadchoose" class="active" >Add Listing</a>
   <a href="/history" style="color: white;">History</a>
-  <a href="slowstock" style="color: white;">Slow Movers</a>
-  <a href="#contact" style="color: white;">Opportunities</a>
+         @if( Auth::user()->type == 'StoreOwner')
+             <a href="slowstock" style="color: white;">Slow Movers</a>
+             <a href="opportunities" style="color: white;">Opportunities</a>
+         @endif
   <hr style="border-style: groove;
     border-width: 1px;"> 
   <a href="/editProfile" style="color: white;">Edit Profile</a>
@@ -173,9 +175,15 @@ div.content {
           <form action = "{{URL::to('upload')}}" method = "post" enctype="multipart/form-data">  
             <label style="color: black; margin-left: 100px;">Select file to upload:</label>
             <input style="color: black;" type="file"  name="file" id="file">
+             @if ($errors->has('file'))
+                                     <div class="alert alert-danger">
+                                        <strong>{{ $errors->first('file') }}</strong>
+                                    </div>
+                                @endif
             <span id="error"></span>
             <div style=" margin-top: 30px;"> 
                <input type="submit" class="btn btn-info {{$errors->has('submit') ? 'has-error' : ''}}" value= "Upload" name="submit" id="submit"><span class="glyphicon glyphicon-arrow-up"></span>
+
               </div>
               
             <input type="hidden" name="_token" value="{{csrf_token()}}">

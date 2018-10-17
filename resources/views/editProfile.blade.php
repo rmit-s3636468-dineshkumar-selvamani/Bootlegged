@@ -149,8 +149,10 @@ div.content {
   <a href="/mylistings" style="color: white;">My Listing</a>
   <a href="/uploadchoose" style="color: white;">Add Listing</a>
   <a href="history" style="color: white;">History</a>
-  <a href="slowstock" style="color: white;">Slow Movers</a>
-  <a href="#contact" style="color: white;">Opportunities</a>
+            @if( Auth::user()->type == 'StoreOwner')
+                <a href="slowstock" style="color: white;">Slow Movers</a>
+                <a href="opportunities" style="color: white;">Opportunities</a>
+            @endif
   <hr style="border-style: groove;
     border-width: 1px;"> 
   <a href="/editProfile" class="active">Edit Profile</a>
@@ -190,8 +192,25 @@ div.content {
             <strong>ALERT : </strong> Do not refresh or move to any other page before you save the changes. 
           </div>
 
+
           <h3>Personal info</h3>
-          
+            @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+ @if(session()->has('message'))
+                 <div class="alert alert-info alert-dismissable">
+             
+            <i class="fa fa-coffee"></i>
+            <strong>MESSAGE : </strong> {{ session()->get('message') }}
+          </div>
+          @endif
           <form class="form-horizontal" role="form">
             <div class="form-group">
               <label class="col-lg-5 control-label">Business name:</label>
@@ -339,14 +358,30 @@ div.content {
  <form action="{{ route('manu_editProfile') }}" method="POST" id="manu_editProfile">
  @csrf
 
-    <div class="col-md-9 personal-info">
+    <div class="col-md-14 personal-info">
           <div class="alert alert-info alert-dismissable">
             <a class="panel-close close" data-dismiss="alert">×</a> 
             <i class="fa fa-coffee"></i>
             <strong>ALERT : </strong> Do not refresh or move to any other page before you save the changes. 
           </div>
           <h3>Personal info</h3>
-          
+           @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+ @if(session()->has('message'))
+                 <div class="alert alert-info alert-dismissable">
+             
+            <i class="fa fa-coffee"></i>
+            <strong>MESSAGE : </strong> {{ session()->get('message') }}
+          </div>
+          @endif
           <form class="form-horizontal" role="form">
             <div class="form-group">
               <label class="col-lg-5 control-label">Business name:</label>

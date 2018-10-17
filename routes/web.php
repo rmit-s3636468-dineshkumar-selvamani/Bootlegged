@@ -66,6 +66,10 @@ Route::get('/addlistings', 'AddListingsController@index')->name('addlistings');
 
 Route::get('/filter/{id}', 'HomeController@filter')->name("dashboard/filter");
 
+//For enter function in Auto suggest
+Route::get('/filter', 'HomeController@filterEnter')->name("dashboard/filter");
+
+
 Route::get('/filterName/{id}', 'HomeController@filterName')->name("dashboard/filter");
 
 //AUtocomplete
@@ -79,6 +83,8 @@ Route::post('/store_editProfile', ['as' => 'store_editProfile', 'uses' => 'EditP
 Route::post('/manu_editrofile', ['as' => 'manu_editProfile', 'uses' => 'EditProfileController@saveManu']);
 
 Route::get('/history', 'HistoryController@index');
+
+Route::get('/opportunities', 'OpportunityController@opportunityWithRanking')->name('opportunities');
 
 Route::get('/slowstock', 'SlowStockController@index');
 
@@ -117,7 +123,8 @@ Route::get('newprod', function(){
 });
 
 
-//Forget Password
+//Autofill Product Type
+Route::get('/autofill/{id}', 'AddListingsController@autofillType')->name("Addlisting/");
 
 
 //Cart Index

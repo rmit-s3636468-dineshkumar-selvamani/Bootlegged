@@ -19,8 +19,8 @@
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"> 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" type="text/css" href="css/demo.css" />
-		<link rel="stylesheet" type="text/css" href="css/component.css" />
+		<link rel="stylesheet" type="text/css" href="{{ asset('css/demo.css') }}" />
+		<link rel="stylesheet" type="text/css" href="{{ asset('css/component.css') }}" />
 
 
 
@@ -177,8 +177,10 @@ span.twitter-typeahead
   <a href="/mylistings" style="color: white;">My Listing</a>
   <a href="/uploadchoose" class="active">Add Listing</a>
   <a href="/history" style="color: white;">History</a>
-  <a href="slowstock" style="color: white;">Slow Movers</a>
-  <a href="#contact" style="color: white;">Opportunities</a>
+        @if( Auth::user()->type == 'StoreOwner')
+            <a href="slowstock" style="color: white;">Slow Movers</a>
+            <a href="opportunities" style="color: white;">Opportunities</a>
+        @endif
 
   <hr style="border-style: groove;
     border-width: 1px;"> 
@@ -203,6 +205,17 @@ span.twitter-typeahead
    
 @endif
       </header>
+      @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+     
       <div style="margin-top: -50px; color: black;">
   <form action = "/create" method = "post" enctype="multipart/form-data">
     <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
@@ -211,22 +224,26 @@ span.twitter-typeahead
     <div class="col-3">
       
         <div class="starter-template" style="align-text:center">
+       @if($product_type[0] == '')
+        <input type="text" style="width:227px;" name="productname"  class="typeahead form-control" id="search" placeholder="Search by product Name" autocomplete="on" required="required">
+        @else
+         <input type="text" style="width:227px;" name="productname"  class="typeahead form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" id="search" placeholder="Search by product Name" autocomplete="on" required="required" value="{{$product_name[0]}}">
+          @if ($errors->has('productname'))
+                                    <div class="alert alert-danger">
+                                        <strong>{{ $errors->first('productname') }}</strong>
+                                    </div>
+                                @endif
+         @endif
 
-          @if(isset($name))
-            <input type="text" style="width:227px;" value='{{$name}}' name="productname"  class="typeahead form-control" id="search">
-
-          @else
-        <input type="text" style="width:227px;" name="productname"  class="typeahead form-control" id="search" placeholder="Search by product Name" autocomplete="on" >
-          @endif
         <p style = "color:black; font-size : 12px;">Cant find your product? Please <a style = "color:blue;" href="/newprod" >add</a> here.</p>
-      
+        
       </div>
     </div>
   </div>
   <div class="form-group row">
     <label for="producttype"  style = "color:black" class="col-4 col-form-label">Product type</label> 
     <div class="col-3">
-      <select id="producttype" style="width:287px;" name="producttype" class="custom-select">
+     <!--  <select id="producttype" style="width:287px;" name="producttype" class="custom-select">
         <option value="Red Wine">Red Wine</option>
         <option value="White Wine">White Wine</option>
         <option value="Cider">Cider</option>
@@ -234,59 +251,67 @@ span.twitter-typeahead
         <option value="Spirits">Spirits</option>
         <option value="Sparkling">Sparkling</option>
         <option value="Pre-Mixed">Pre-Mixed</option>
-      </select>
+      </select> -->
+      @if($product_type[0] == '')
+           <input id="producttype" required="required" name="producttype" type="text" class="form-control here" readonly>
+      @else
+        <input id="producttype" required="required" name="producttype" type="text" class="form-control here" value="{{$product_type[0]}}" readonly>
+      @endif
     </div>
   </div> 
   <div class="form-group row">
     <label for="product_quantity" style = "color:black" class="col-4 col-form-label">Product Quantity</label> 
     <div class="col-3">
-      @if(isset($quantity))
-        <input id="product_quantity" required="required" name="product_quantity" type="number" class="form-control here" value="{{$quantity}}">
 
-      @else
-      <input id="product_quantity" required="required" name="product_quantity" type="number" class="form-control here">
-      @endif
+      <input id="product_quantity" required="required" name="product_quantity" type="number" value="{{old('product_quantity')}}" class="form-control here" required>
     </div>
   </div>
   <div class="form-group row">
     <label for="unitprice" style = "color:black" class="col-4 col-form-label">Product Unit Price</label> 
     <div class="col-3">
-      @if(isset($costprice))
-        <input id="unitprice" required="required" name="unitprice" type="number" class="form-control here" value="{{$costprice}}">
-      @else
-      <input id="unitprice" required="required" name="unitprice" type="number" class="form-control here">
-      @endif
+
+      <input id="unitprice" required="required" name="unitprice" value="{{old('unitprice')}}" type="text" class="form-control here" required>
     </div>
   </div>
   <div class="form-group row">
     <label for="totalprice" style = "color:black" class="col-4 col-form-label">Product Total Price</label> 
     <div class="col-3">
-      <input id="totalprice" required="required" name="totalprice" type="number" class="form-control here">
+      <input id="totalprice" required="required" name="totalprice" value="{{old('totalprice')}}" type="text" class="form-control here" readonly>
     </div>
   </div>
   <div class="form-group row">
     <label for="expiry" style = "color:black" class="col-4 col-form-label">Product Expiry</label> 
     <div class="col-3">
-      <input id="expiry" name="expiry" type="text" class="form-control here" placeholder="YYYY-MM-DD">
+      <input id="expiry" name="expiry" type="text"  value="{{old('expiry')}}" class="form-control here{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="YYYY-MM-DD">
+       @if ($errors->has('expiry'))
+                                     <div class="alert alert-danger">
+                                        <strong>{{ $errors->first('expiry') }}</strong>
+                                    </div>
+                                @endif
     </div>
   </div>
   <div class="form-group row">
     <label for="vintage" style = "color:black" class="col-4 col-form-label">Vintage</label> 
     <div class="col-3">
-      <input id="vintage" name="vintage" type="text" class="form-control here" placeholder="eg. 20 Years">
+      <input id="vintage" name="vintage" type="text" class="form-control here" value="{{old('vintage')}}" placeholder="eg. 20 Years">
     </div>
   </div>
   <div class="form-group row">
     <label for="condition" style = "color:black" class="col-4 col-form-label">Product Condition</label> 
     <div class="col-3">
-      <input id="condition"  required="required" name="condition" type="text" class="form-control here">
+      <input id="condition"  required="required" value="{{old('condition')}}" name="condition" type="text"  class="form-control here">
     </div>
   </div>
   
   <div class="form-group row">
     <label for="productimage" style = "color:black" class="col-4 col-form-label">Product Image</label> 
     <div class="col-3">
-      <input id="productimage"  name="productimage" type="file" class="form-control here">
+      <input id="productimage"  name="productimage" type="file"  class="form-control here {{ $errors->has('email') ? ' is-invalid' : '' }}">
+        @if ($errors->has('productimage'))
+                                    <div class="alert alert-danger">
+                                        <strong>{{ $errors->first('productimage') }}</strong>
+                                    </div>
+                                @endif
     </div>
   </div>
   <div class="form-group row">
@@ -298,6 +323,8 @@ span.twitter-typeahead
 </div>
 </div>
 </div>
+
+ 
  <script>
         $(document).ready(function() {
             var bloodhound = new Bloodhound({
@@ -327,14 +354,34 @@ span.twitter-typeahead
                         '<div class="list-group search-results-dropdown">'
                     ],
                     suggestion: function(data) {
-                    return '<div style="font-weight:normal; margin-top:-10px ! important;" class="list-group-item">' + data.product_itemName + '</div></div>'
+                    // return '<div style="font-weight:normal; margin-top:-10px ! important;" class="list-group-item">' + data.product_itemName + '</div></div>'
+
+                     return '<a href="/autofill/'+ data.product_id + '"><div style="font-weight:normal; margin-top:-10px ! important; color:black;" class="list-group-item">' + data.product_itemName + '</div></a></div>'
                     }
                 }
             });
         });
     </script>
+<script>
 
-    <!-- <script>  
+   document.getElementById(“unitprice”).oninput = function() {myFunction()};
+
+   document.getElementById(“product_quantity”).oninput = function() {myFunction()};
+
+function myFunction() {
+   var unit = document.getElementById(“unitprice”).value;
+   var quan = document.getElementById(“product_quantity”).value;
+   var unit1 = Number(unit);
+
+   var totalprice = Math.round((unit1 * quan) * 100) / 100 ;
+
+   document.getElementById(“totalprice”).value  =  totalprice;
+}
+
+</script>
+   
+
+   <!--  <script>  
  $(document).ready(function(){  
       $('#submit').click(function(){  
            var image_name = $('#productimage').val();  

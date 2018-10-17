@@ -74,7 +74,24 @@ class MyListingsController extends Controller
 
     public function saveprod(Request $req)
     {
-     
+            
+             $this->validate($req,[
+          
+          'tqty' => 'required|integer',
+          // 'expiry' => 'date_format:Y-m-d|after:tomorrow',
+          'pimage' => 'image',
+        ],[
+          'tqty.integer' => 'Invalid Quantity type.',
+          'tqty.required' => 'Product Quantity cant be empty.',
+          // 'expiry.after' => 'Expiry date can not be in past.',
+
+ 
+          'pimage.image' => ' Please upload a image file.'
+         
+        ]);
+
+
+
             $image_name = Listings::where('id',$req->get('prodId'))->pluck('image');
        
 
@@ -89,8 +106,10 @@ class MyListingsController extends Controller
                Listings::where('id',$req->get('prodId'))
                 ->update(['Listing_totalPrice' => $req->get('totalPrice'), 'Listing_unitPrice' => $req->get('unitPrice'),'Listing_type' => $req->get('type'),'Listing_qty' => $req->get('tqty'),'Listing_expiry' => $req->get('expiry'),'Listing_vintage' => $req->get('vintage'),'Listing_condition' => $req->get('condition'),'image' => $fileName, 'Listing_active' => $req -> get('status')]);
 
-                Storage::delete($image_name[0]);
-                unlink(storage_path('app/public/'.$image_name[0]));
+                if($image_name[0] != '')
+               { Storage::delete($image_name[0]);
+                 unlink(storage_path('app/public/'.$image_name[0]));
+                }
             }
 
             elseif($image_name == '')
@@ -126,6 +145,8 @@ class MyListingsController extends Controller
             
 
         return back()->with('message','Product Updated Successfully');
+
+             // return Response::json(['success' => '1']);
       
     }
 }

@@ -33,289 +33,278 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
 
 
-        <!-- Bootstrap core JavaScript
+		<!-- Bootstrap core JavaScript
     ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-        <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+		  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
 
-        <!-- Import typeahead.js -->
-        <script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
+    <!-- Import typeahead.js -->
+    <script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
+ 
+    <!-- TypeAhead -->
 
-        <!-- TypeAhead -->
+    
 
 
-        <!-- Modal -->
+		<!-- Modal -->
+		
+		<script src="js/modernizr.custom.js"></script>
+	</head>
 
-        <script src="js/modernizr.custom.js"></script>
-    </head>
+	<style>
+body {margin: 0;
+      /*background-color: rgb(26,27,31);*/
+      /*background-image: url(Images/back.jpg);*/
+      }
 
-    <style>
-        body {
-            margin: 0;
-            /*background-color: rgb(26,27,31);*/
-            /*background-image: url(Images/back.jpg);*/
-        }
+ul.topnav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
 
-        ul.topnav {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background-color: #333;
-        }
+ul.topnav li {float: left;}
 
-        ul.topnav li {
-            float: left;
-        }
+ul.topnav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
 
-        ul.topnav li a {
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-        }
+ul.topnav li a:hover:not(.active) {background-color: #111;}
 
-        ul.topnav li a:hover:not(.active) {
-            background-color: #111;
-        }
+ul.topnav li a.active {background: rgba(211, 188, 63);}
 
-        ul.topnav li a.active {
-            background: rgba(211, 188, 63);
-        }
+ul.topnav li.right {float: right;}
 
-        ul.topnav li.right {
-            float: right;
-        }
+@media screen and (max-width: 600px){
+    ul.topnav li.right, 
+    ul.topnav li {float: none;}
+}
 
-        @media screen and (max-width: 600px) {
-            ul.topnav li.right,
-            ul.topnav li {
-                float: none;
-            }
-        }
+#pagination{
+	display: inline-block;
+}
 
-        #pagination {
-            display: inline-block;
-        }
+.page-item.active .page-link {
+    z-index: 1;
+    color: black;
+    /*background-color: gold;*/
+    background: rgba(211, 188, 63);
+    border-color: gold;
+}
 
-        .page-item.active .page-link {
-            z-index: 1;
-            color: black;
-            /*background-color: gold;*/
-            background: rgba(211, 188, 63);
-            border-color: gold;
-        }
+.page-link {
+    position: relative;
+    display: block;
+    padding: .5rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: black;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+}
 
-        .page-link {
-            position: relative;
-            display: block;
-            padding: .5rem .75rem;
-            margin-left: -1px;
-            line-height: 1.25;
-            color: black;
-            background-color: #fff;
-            border: 1px solid #dee2e6;
-        }
+ .modal-content, .modal-header{
+  background-color: rgb(33,35,39);
+}
 
-        .modal-content, .modal-header {
-            background-color: rgb(33, 35, 39);
-        }
+body {
+  margin: 0;
+  font-family: "Lato", sans-serif;
+}
 
-        body {
-            margin: 0;
-            font-family: "Lato", sans-serif;
-        }
+.sidebar {
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: #f1f1f1;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(33,35,39);
+}
 
-        .sidebar {
-            margin: 0;
-            padding: 0;
-            width: 200px;
-            background-color: #f1f1f1;
-            position: fixed;
-            height: 100%;
-            overflow: auto;
-            background-color: rgb(33, 35, 39);
-        }
+.sidebar a {
+  display: block;
+  color: black;
+  padding: 16px;
+  text-decoration: none;
+}
+ 
+.sidebar a.active {
+  background-color: rgba(211, 188, 63);
+  color: black;
+}
 
-        .sidebar a {
-            display: block;
-            color: black;
-            padding: 16px;
-            text-decoration: none;
-        }
+.sidebar a:hover:not(.active) {
+  background-color: #555;
+  color: white;
+}
 
-        .sidebar a.active {
-            background-color: rgba(211, 188, 63);
-            color: black;
-        }
+div.content {
+  margin-left: 200px;
+  padding: 1px 16px;
+  height: 1000px;
+  color: white;
+}
 
-        .sidebar a:hover:not(.active) {
-            background-color: #555;
-            color: white;
-        }
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {float: left;}
+  div.content {margin-left: 0;}
+}
 
-        div.content {
-            margin-left: 200px;
-            padding: 1px 16px;
-            height: 1000px;
-            color: white;
-        }
+@media screen and (max-width: 400px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
+  }
+}
 
-        @media screen and (max-width: 700px) {
-            .sidebar {
-                width: 100%;
-                height: auto;
-                position: relative;
-            }
+.logo{
+                 
+                 visibility: visible;
+                 position: absolute;
+                 height: 125px;
+                 width: 175px;
+                 float: left;
+                 margin-top: -15px;
+                 margin-left: 10px;
 
-            .sidebar a {
-                float: left;
-            }
 
-            div.content {
-                margin-left: 0;
-            }
-        }
 
-        @media screen and (max-width: 400px) {
-            .sidebar a {
-                text-align: center;
-                float: none;
-            }
-        }
+                 
+             }
 
-        .logo {
+             .filter{
 
-            visibility: visible;
-            position: absolute;
-            height: 125px;
-            width: 175px;
-            float: left;
-            margin-top: -15px;
-            margin-left: 10px;
+              position: relative;
+              margin-left: 250px;
 
-        }
+             }
 
-        .filter {
+             
 
-            position: relative;
-            margin-left: 250px;
+.dropdown-submenu {
+    position: relative;
+}
 
-        }
+.dropdown-submenu>.dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -6px;
+    margin-left: -1px;
+    -webkit-border-radius: 0 6px 6px 6px;
+    -moz-border-radius: 0 6px 6px;
+    border-radius: 0 6px 6px 6px;       
+}
 
-        .dropdown-submenu {
-            position: relative;
-        }
+.dropdown-submenu:hover>.dropdown-menu {
+    display: block;
+}
 
-        .dropdown-submenu > .dropdown-menu {
-            top: 0;
-            left: 100%;
-            margin-top: -6px;
-            margin-left: -1px;
-            -webkit-border-radius: 0 6px 6px 6px;
-            -moz-border-radius: 0 6px 6px;
-            border-radius: 0 6px 6px 6px;
-        }
+.dropdown-submenu>a:after {
+    display: block;
+    content: " ";
+    float: right;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px 0 5px 5px;
+    border-left-color: #ccc;
+    margin-top: 5px;
+    margin-right: -10px;
+}
 
-        .dropdown-submenu:hover > .dropdown-menu {
-            display: block;
-        }
+.dropdown-submenu:hover>a:after {
+    border-left-color: #fff;
+}
 
-        .dropdown-submenu > a:after {
-            display: block;
-            content: " ";
-            float: right;
-            width: 0;
-            height: 0;
-            border-color: transparent;
-            border-style: solid;
-            border-width: 5px 0 5px 5px;
-            border-left-color: #ccc;
-            margin-top: 5px;
-            margin-right: -10px;
-        }
+.dropdown-submenu.pull-left {
+    float: none;
+}
 
-        .dropdown-submenu:hover > a:after {
-            border-left-color: #fff;
-        }
+.dropdown-submenu.pull-left>.dropdown-menu {
+    left: -100%;
+    margin-left: 10px;
+    -webkit-border-radius: 6px 0 6px 6px;
+    -moz-border-radius: 6px 0 6px 6px;
+    border-radius: 6px 0 6px 6px;
+}
 
-        .dropdown-submenu.pull-left {
-            float: none;
-        }
+  
 
-        .dropdown-submenu.pull-left > .dropdown-menu {
-            left: -100%;
-            margin-left: 10px;
-            -webkit-border-radius: 6px 0 6px 6px;
-            -moz-border-radius: 6px 0 6px 6px;
-            border-radius: 6px 0 6px 6px;
-        }
+.product__name{
 
-        .product__name {
+  min-height: 60px;
+  max-height: 80px;
+  max-width: 210px;
+  
+}
+.product__image{
 
-            min-height: 60px;
-            max-height: 80px;
-            max-width: 210px;
+  /*min-height: 260px;*/
+  /*max-height: 260px;*/
+  max-width: 200px ;
+ 
+  height: 200px;
+  min-height: 200px;
+}
 
-        }
+.product__price{
 
-        .product__image {
+  /*min-height: 30px;*/
+  /*max-height: 30px;*/
+  max-width: 210px;
 
-            /*min-height: 260px;*/
-            /*max-height: 260px;*/
-            max-width: 200px;
+  height :60px;
+}
 
-            height: 200px;
-        }
 
-        .product__price {
 
-            /*min-height: 30px;*/
-            /*max-height: 30px;*/
-            max-width: 210px;
 
-            height: 15px;
-        }
+/*.twitter-typeahead,
+        .tt-hint,
+        .tt-input,
+        .tt-menu{
+            width: auto ! important;
+            font-weight: normal;
+        
+        }*/
+/*Big Box*/
+.twitter-typeahead {
+      display: block;
+      width: 100%; //BS 3 needs this to inherit this for children
 
-        /*.twitter-typeahead,
-                .tt-hint,
-                .tt-input,
-                .tt-menu{
-                    width: auto ! important;
-                    font-weight: normal;
+      .tt-query,
+      .tt-hint {
+        margin-bottom: 0;
+      }
 
-                }*/
-        /*Big Box*/
-        .twitter-typeahead {
-            display: block;
-            width: 100%;
-
-        /
-        /
-        BS
-
-        3
-        needs this to inherit this for children
-        .tt-query,
-        .tt-hint {
-            margin-bottom: 0;
-        }
-
-        .tt-dropdown-menu {
-            z-index: @zindex-dropdown;
-            min-width: 326px;
-            padding: 5px 0;
-            margin: 2px 0 0;
-        / / override default ul font-size: @font-size-base;
-            text-align: left;
-        / / Ensures proper alignment if parent has it changed (e . g ., modal footer) background-color: @dropdown-bg;
-            border: 1px solid @dropdown-fallback-border;
-        / / IE8 fallback border: 1 px solid @dropdown-border;
-            border-radius: @border-radius-base;
-        . box-shadow(0 6 px 12 px rgba(0, 0, 0, .175));
-            background-clip: padding-box;
+      .tt-dropdown-menu {
+        z-index: @zindex-dropdown;
+        min-width: 326px;
+        padding: 5px 0;
+        margin: 2px 0 0; // override default ul
+        font-size: @font-size-base;
+        text-align: left; // Ensures proper alignment if parent has it changed (e.g., modal footer)
+        background-color: @dropdown-bg;
+        border: 1px solid @dropdown-fallback-border; // IE8 fallback
+        border: 1px solid @dropdown-border;
+        border-radius: @border-radius-base;
+        .box-shadow(0 6px 12px rgba(0, 0, 0, .175));
+        background-clip: padding-box;
 
         .tt-suggestions {
 
@@ -377,7 +366,9 @@
         <!-- Blueprint header -->
         <header class="bp-header cf">
 
+
             <h1>Market Place</h1>
+
 
         </header>
 
@@ -575,6 +566,7 @@
                 </div>
             </div>
         </div>
+
     </div>
     </div>
 
@@ -634,10 +626,14 @@
                     header: [
                         '<div class="list-group search-results-dropdown">'
                     ],
+
                     suggestion: function (data) {
                         return '<a href="/filterName/' + data.product_id + '"><div style="font-weight:normal; margin-top:-10px ! important;" class="list-group-item">' + data.product_itemName + '</div></a></div>'
+
                     }
+
                 }
+
             });
         });
 

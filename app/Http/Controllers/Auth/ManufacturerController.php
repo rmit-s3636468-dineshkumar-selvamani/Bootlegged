@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-
+use Illuminate\Http\Request;
 
 
 
@@ -57,7 +57,21 @@ class ManufacturerController extends Controller
             'manu_name' => 'required|string|max:255',
             'manu_email' => 'required|string|email|max:255|unique:Manufacturers',
             'password' => 'required|string|min:6|confirmed',
-        ]);
+            'manu_address' => 'required|string|min:3',
+            'manu_suburb' => 'required|string|min:3',
+            'manu_postcode' => 'required|integer|digits:4',
+            'manu_phone' => 'required|regex:/[0-9]{9}/',
+            'manu_abn' => 'required|integer|digits:11',
+            
+        ],[
+                'manu_name.required' => ' The first name field is required.',
+                'manu_email.email' => ' Not a valid email format.',
+               
+               
+
+
+
+    ]);
     }
 
     /**
@@ -66,8 +80,10 @@ class ManufacturerController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    protected function create(Request $data)
     {
+    
+
 
          $user = Manufacturer::create([
             'manu_email' => $data['manu_email'],

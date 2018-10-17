@@ -235,6 +235,7 @@ div.content {
   max-width: 200px ;
  
   height: 200px;
+  min-height: 200px;
 }
 
 .product__price{
@@ -258,8 +259,10 @@ div.content {
   <a href="/mylistings" class="active" >My Listing</a>
   <a href="/uploadchoose" style="color: white;">Add Listing</a>
   <a href="/history" style="color: white;">History</a>
-  <a href="slowstock" style="color: white;">Slow Movers</a>
-  <a href="#contact" style="color: white;">Opportunities</a>
+           @if( Auth::user()->type == 'StoreOwner')
+               <a href="slowstock" style="color: white;">Slow Movers</a>
+               <a href="opportunities" style="color: white;">Opportunities</a>
+           @endif
   <hr style="border-style: groove;
     border-width: 1px;"> 
   <a href="/editProfile" style="color: white;">Edit Profile</a>
@@ -294,7 +297,7 @@ div.content {
              <img src = "{{url('storage/'.$item->image)}}" class="product__image"/>
           
           @else
-             <img class="product__image" src="{{ asset('images/1.png') }}" alt="Product 1" style="height: 160px; width: 160px;" />
+             <img class="product__image" src="{{ asset('Images/1.png') }}" alt="Product 1" style="height: 160px; width: 160px;" />
 
           @endif    
                                             <h6 class="product__price highlight" style="color: white">{{$item->product_itemName}}</h6><br>
@@ -308,7 +311,7 @@ div.content {
                                             <button class="action action--button action--buy" data-toggle="modal" 
                                         data-target="#remove" data-listid="{{$item->id}}" data-prodId="{{$item->id}}"  onmouseover="" style="cursor: pointer;" style="width:auto;"><i class="fa fa-check"></i><span class="action__text" style ="width: 80px;" >Remove</span></button>
 
-                                            <button class="action action--button action--buy" data-toggle="modal" 
+                                            <button class="action action--button action--buy" data-toggle="modal" id="updatebutton"
                                         data-target="#update" data-prodname="{{$item->product_itemName}}" data-type="{{$item->Listing_type}}" data-total_qty="{{ $item->Listing_qty }} " data-prodId="{{$item->id}}" data-listid="{{$item->id}}"
                                         data-unit="{{number_format($item->Listing_unitPrice, 2) }}" data-total="{{number_format($item->Listing_totalPrice, 2)}}" 
                                         data-expiry="{{ $item->Listing_expiry }}" data-vintage="{{ $item->Listing_vintage }}"
@@ -326,7 +329,7 @@ div.content {
     <!-- product compare wrapper -->
 
     <!-- Modal View for Edit -->
-    <div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade{{ $errors->has('update') ? ' is-invalid' : '' }}" id="update" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document" >
     <div class="modal-content">
       <div class="modal-header">
@@ -385,7 +388,7 @@ div.content {
 </div>
     </div>
 
-    
+        
         <script type="text/javascript">
         $('#update').on('show.bs.modal', function (event) {
 
@@ -415,8 +418,29 @@ div.content {
    modal.find('.modal-body #status').val(status);
   modal.find('.modal-body #prodId').val(id);
 })
+
+       
+
+
     </script>
 
+   <script>
+
+   document.getElementById(“unitPrice”).oninput = function() {myFunction()};
+
+   document.getElementById(“tqty”).oninput = function() {myFunction()};
+
+function myFunction() {
+   var unit = document.getElementById(“unitPrice”).value;
+   var quan = document.getElementById(“tqty”).value;
+   var unit1 = Number(unit);
+
+   var totalprice = Math.round((unit1 * quan) * 100) / 100 ;
+
+   document.getElementById(“totalPrice”).value  =  totalprice;
+}
+
+</script>
     <script type="text/javascript">
         $('#remove').on('show.bs.modal', function (event) {
 

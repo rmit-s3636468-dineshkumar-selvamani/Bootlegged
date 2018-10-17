@@ -59,6 +59,49 @@ class EditProfileController extends Controller
    //      'title' => 'required|unique:posts|max:255',
    //      'body' => 'required',
    //  ]);
+			if($request->store_password == '')
+			{
+			 $this->validate($request,[
+			
+
+            'store_name' => 'required|string|max:255',
+            'store_email' => 'required|string|email|max:255',
+           
+            'store_address' => 'required|string|min:3',
+            'store_suburb' => 'required|string|min:3',
+            'store_postcode' => 'required|integer|digits:4',
+            'store_phone' => 'required|regex:/[0-9]{9}/',
+            'store_abn' => 'required|integer|digits:11',
+        ],[
+                'store_name.required' => ' The first name field is required.',
+                'store_email.email' => ' Not a valid email format.',
+                
+               
+
+
+
+    ]);
+			}
+			else
+			{	
+				 $this->validate($request,[
+			
+
+            'store_name' => 'required|string|max:255',
+            'store_email' => 'required|string|email|max:255',
+            'store_password' => 'string|confirmed',
+            'store_address' => 'required|string|min:3',
+            'store_suburb' => 'required|string|min:3',
+            'store_postcode' => 'required|integer|digits:4',
+            'store_phone' => 'required|regex:/[0-9]{9}/',
+            'store_abn' => 'required|integer|digits:11',
+        ],[
+                'store_name.required' => ' The first name field is required.',
+                'store_email.email' => ' Not a valid email format.',
+                
+     	 ]);
+
+			}
 
 			Store::where('store_id',Auth::user()->store_id)
           ->update(['store_name' => $request->store_name,
@@ -73,7 +116,7 @@ class EditProfileController extends Controller
           			'store_Stripeid' => $request->store_stripeid
           		]);
           if($request->store_password == '')
-          {
+          {			
 		          User::where('store_id',Auth::user()->store_id)
 		          ->update(['business_name' => $request->store_name,
 		          			'email' => $request->store_email
@@ -113,6 +156,50 @@ public function saveManu(Request $request)
    //      'title' => 'required|unique:posts|max:255',
    //      'body' => 'required',
    //  ]);
+
+		if($request->store_password == '')
+			{
+			 $this->validate($request,[
+			
+
+            'manu_name' => 'required|string|max:255',
+            'manu_email' => 'required|string|email|max:255',
+           
+            'manu_address' => 'required|string|min:3',
+            'manu_suburb' => 'required|string|min:3',
+            'manu_postcode' => 'required|integer|digits:4',
+            'manu_phone' => 'required|regex:/[0-9]{9}/',
+            'manu_abn' => 'required|integer|digits:11',
+        ],[
+                'manu_name.required' => ' The first name field is required.',
+                'manu_email.email' => ' Not a valid email format.',
+                
+               
+
+
+
+    ]);
+			}
+			else
+			{	
+				 $this->validate($request,[
+			
+
+            'manu_name' => 'required|string|max:255',
+            'manu_email' => 'required|string|email|max:255',
+            'manu_password' => 'string|confirmed',
+            'manu_address' => 'required|string|min:3',
+            'manu_suburb' => 'required|string|min:3',
+            'manu_postcode' => 'required|integer|digits:4',
+            'manu_phone' => 'required|regex:/[0-9]{9}/',
+            'manu_abn' => 'required|integer|digits:11',
+        ],[
+                'manu_name.required' => ' The first name field is required.',
+                'manu_email.email' => ' Not a valid email format.',
+                
+     	 ]);
+
+			}
 
 			Manufacturer::where('manu_id',Auth::user()->manu_id)
           ->update(['manu_name' => $request->manu_name,
