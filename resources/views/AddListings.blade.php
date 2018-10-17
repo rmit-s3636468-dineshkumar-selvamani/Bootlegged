@@ -178,8 +178,8 @@ span.twitter-typeahead
   <a href="/uploadchoose" class="active">Add Listing</a>
   <a href="/history" style="color: white;">History</a>
         @if( Auth::user()->type == 'StoreOwner')
-            <a href="slowstock" style="color: white;">Slow Movers</a>
-            <a href="opportunities" style="color: white;">Opportunities</a>
+            <a href="/slowstock" style="color: white;">Slow Movers</a>
+            <a href="/opportunities" style="color: white;">Opportunities</a>
         @endif
 
   <hr style="border-style: groove;
@@ -225,6 +225,7 @@ span.twitter-typeahead
     <div class="col-3">
       
         <div class="starter-template" style="align-text:center">
+
        @if($product_type[0] == '')
         <input type="text" style="width:227px;" name="productname"  class="typeahead form-control" id="search" placeholder="Search by product Name" autocomplete="on" required="required">
         @else
@@ -263,21 +264,27 @@ span.twitter-typeahead
   <div class="form-group row">
     <label for="product_quantity" style = "color:black" class="col-4 col-form-label">Product Quantity</label> 
     <div class="col-3">
-
+      @if($product_quantity[0] == '')
       <input id="product_quantity" required="required" name="product_quantity" type="number" value="{{old('product_quantity')}}" class="form-control here" required>
+      @else
+      <input id="product_quantity" required="required" name="product_quantity" type="number" value="{{$product_quantity}}" class="form-control here" required>
+      @endif
     </div>
   </div>
   <div class="form-group row">
     <label for="unitprice" style = "color:black" class="col-4 col-form-label">Product Unit Price</label> 
     <div class="col-3">
-
+       @if($costprice[0] == '')
       <input id="unitprice" required="required" name="unitprice" value="{{old('unitprice')}}" type="text" class="form-control here" required>
+      @else
+       <input id="unitprice" required="required" name="unitprice" value="{{$costprice}}" type="text" class="form-control here" required>
+       @endif
     </div>
   </div>
   <div class="form-group row">
     <label for="totalprice" style = "color:black" class="col-4 col-form-label">Product Total Price</label> 
     <div class="col-3">
-      <input id="totalprice" required="required" name="totalprice" value="{{old('totalprice')}}" type="text" class="form-control here" readonly>
+      <input id="totalprice" required="required" name="totalprice" value="{{old('totalprice')}}" type="text" class="form-control here" required>
     </div>
   </div>
   <div class="form-group row">

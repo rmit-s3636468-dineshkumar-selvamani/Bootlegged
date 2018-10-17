@@ -23,9 +23,14 @@ class AddListingsController extends Controller
 
         //Retrieve the password input field
         $costprice = $request->costprice;
+        //$product_name = DB::table('products')->where('product_id',$id)->pluck('product_itemName');
+        $product_cat1 = DB::table('products')->where('product_itemName',$name)->pluck('catone');
+        $product_type = DB::table('categoryone')->where('id',$product_cat1)->pluck('cat1_name');
+         $product_name = DB::table('products')->where('product_itemName',$name)->pluck('product_itemName');
+      
 
 
-        return view('AddListings', compact('name', 'quantity', 'costprice'));
+         return view('AddListings',['product_type' => $product_type,'product_name' => $product_name,'product_quantity' => $quantity, 'costprice' => $costprice]);
     }
 
    /**
@@ -52,8 +57,10 @@ class AddListingsController extends Controller
     // $product_type = DB::table('categoryone')->where('id',0)->pluck('cat1_name');
        $product_type = array('','');
        $product_name = array('','');
+       $product_quantity = array('','');
+       $costprice = array('','');
       // echo $product_type;
-       return view('AddListings',['product_type' => $product_type,'product_name' => $product_name]);
+       return view('AddListings',['product_type' => $product_type,'product_name' => $product_name, 'product_quantity' => $product_quantity,'costprice' => $costprice]);
    }
 
    public function insert(Request $request)
@@ -228,6 +235,8 @@ class AddListingsController extends Controller
 
           public function autofillType($id)
           {
+              $product_quantity = array('','');
+               $costprice = array('','');
 
                $product_cat1 = DB::table('products')->where('product_id',$id)->pluck('catone');
 
@@ -238,7 +247,7 @@ class AddListingsController extends Controller
 
               
              
-                return view('AddListings',['product_type' => $product_type,'product_name' => $product_name]);
+                return view('AddListings',['product_type' => $product_type,'product_name' => $product_name, 'product_quantity' => $product_quantity,'costprice' => $costprice]);
             
 
 
