@@ -274,7 +274,7 @@ span.twitter-typeahead
   <div class="form-group row">
     <label for="totalprice" style = "color:black" class="col-4 col-form-label">Product Total Price</label> 
     <div class="col-3">
-      <input id="totalprice" required="required" name="totalprice" value="{{old('totalprice')}}" type="text" class="form-control here" required>
+      <input id="totalprice" required="required" name="totalprice" value="{{old('totalprice')}}" type="text" class="form-control here" readonly>
     </div>
   </div>
   <div class="form-group row">
@@ -360,7 +360,23 @@ span.twitter-typeahead
             });
         });
     </script>
+<script>
 
+   document.getElementById(“unitprice”).oninput = function() {myFunction()};
+
+   document.getElementById(“product_quantity”).oninput = function() {myFunction()};
+
+function myFunction() {
+   var unit = document.getElementById(“unitprice”).value;
+   var quan = document.getElementById(“product_quantity”).value;
+   var unit1 = Number(unit);
+
+   var totalprice = Math.round((unit1 * quan) * 100) / 100 ;
+
+   document.getElementById(“totalprice”).value  =  totalprice;
+}
+
+</script>
    
 
    <!--  <script>  
