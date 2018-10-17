@@ -144,9 +144,9 @@ div.content {
   <hr style="border-style: groove;
     border-width: 1px;"> 
   <a href="/editProfile" style="color: white;">Edit Profile</a>
-  
-  <a href="#contact" style="color: white;">My Cart</a>
-  
+  @if( Auth::user()->type == 'StoreOwner')
+  <a href="/cart" style="color: white;">My Cart <span class="badge badge-warning">{{ Session::has('cart') ? Session::get('cart')->totalQuantity : '' }}</span></a>
+  @endif
   <a href="{{URL::to('logout')}}" style="color: white;">Logout</a>
 </div>
       <div class="view" style="margin-left: 14%;">
