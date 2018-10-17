@@ -426,18 +426,18 @@ div.content {
 
    <script>
 
-   document.getElementById(“unitPrice”).oninput = function() {myFunction()};
+   document.getElementById("unitPrice").oninput = function() {myFunction()};
 
-   document.getElementById(“tqty”).oninput = function() {myFunction()};
+   document.getElementById("tqty").oninput = function() {myFunction()};
 
 function myFunction() {
-   var unit = document.getElementById(“unitPrice”).value;
-   var quan = document.getElementById(“tqty”).value;
+   var unit = document.getElementById("unitPrice").value;
+   var quan = document.getElementById("tqty").value;
    var unit1 = Number(unit);
 
    var totalprice = Math.round((unit1 * quan) * 100) / 100 ;
 
-   document.getElementById(“totalPrice”).value  =  totalprice;
+   document.getElementById("totalPrice").value  =  totalprice;
 }
 
 </script>

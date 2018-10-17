@@ -7,20 +7,20 @@
 
 <!DOCTYPE html>
 <html lang="en" class="no-js">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-		<title>Bootlegged</title>
-		<meta name="description" content="Blueprint: A basic responsive product grid layout with comparison functionality" />
-		<meta name="keywords" content="blueprint, template, html, css, javascript, grid, layout, effect, product comparison" />
-		<meta name="author" content="Codrops" />
-		<link rel="shortcut icon" href="favicon.ico">
-		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Bootlegged</title>
+    <meta name="description" content="Blueprint: A basic responsive product grid layout with comparison functionality" />
+    <meta name="keywords" content="blueprint, template, html, css, javascript, grid, layout, effect, product comparison" />
+    <meta name="author" content="Codrops" />
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"> 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" type="text/css" href="{{ asset('css/demo.css') }}" />
-		<link rel="stylesheet" type="text/css" href="{{ asset('css/component.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/demo.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/component.css') }}" />
 
 
 
@@ -34,11 +34,11 @@
     <script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
  
 
-		<!-- Modernizr is used for flexbox fallback -->
-		<script src="js/modernizr.custom.js"></script>
-	</head>
+    <!-- Modernizr is used for flexbox fallback -->
+    <script src="js/modernizr.custom.js"></script>
+  </head>
 
-	<style>
+  <style>
 body {margin: 0;
 background-color: white;
 }
@@ -162,11 +162,11 @@ span.twitter-typeahead
 
 
 
-</style>	
+</style>  
 
-	<body>
+  <body>
 
-		
+    
     <div class="sidebar">
   <img style=" position: absolute; display: inline;" class="logo"  alt ="logo" src="/Images/logo1.png">
   <a  href="#home" style="margin-top: 90px; color: white; text-align: center;">Welcome,<br> {{Auth::user()->business_name}}</a>
@@ -265,9 +265,9 @@ span.twitter-typeahead
     <label for="product_quantity" style = "color:black" class="col-4 col-form-label">Product Quantity</label> 
     <div class="col-3">
       @if($product_quantity[0] == '')
-      <input id="product_quantity" required="required" name="product_quantity" type="number" value="{{old('product_quantity')}}" class="form-control here" required>
+      <input id="product_quantity" oninput='myFunction()' required="required" name="product_quantity" type="number" value="{{old('product_quantity')}}" class="form-control here" required>
       @else
-      <input id="product_quantity" required="required" name="product_quantity" type="number" value="{{$product_quantity}}" class="form-control here" required>
+      <input id="product_quantity" oninput='myFunction()' required="required" name="product_quantity" type="number" value="{{$product_quantity}}" class="form-control here" required>
       @endif
     </div>
   </div>
@@ -275,16 +275,16 @@ span.twitter-typeahead
     <label for="unitprice" style = "color:black" class="col-4 col-form-label">Product Unit Price</label> 
     <div class="col-3">
        @if($costprice[0] == '')
-      <input id="unitprice" required="required" name="unitprice" value="{{old('unitprice')}}" type="text" class="form-control here" required>
+      <input id="unitprice" oninput='myFunction()' required="required" name="unitprice" value="{{old('unitprice')}}" type="text" class="form-control here" required>
       @else
-       <input id="unitprice" required="required" name="unitprice" value="{{$costprice}}" type="text" class="form-control here" required>
+       <input id="unitprice" oninput='myFunction()' required="required" name="unitprice" value="{{$costprice}}" type="text" class="form-control here" required>
        @endif
     </div>
   </div>
   <div class="form-group row">
     <label for="totalprice" style = "color:black" class="col-4 col-form-label">Product Total Price</label> 
-    <div class="col-3">
-      <input id="totalprice" required="required" name="totalprice" value="{{old('totalprice')}}" type="text" class="form-control here" required>
+    <div class="col-3"> 
+      <input id="totalprice" required="required" name="totalprice" value="{{old('totalprice')}}" type="text" class="form-control here" readonly>
     </div>
   </div>
   <div class="form-group row">
@@ -372,24 +372,25 @@ span.twitter-typeahead
     </script>
 <script>
 
-   document.getElementById(“unitprice”).oninput = function() {myFunction()};
+  document.getElementById("unitprice").oninput = function(){myFunction();}
 
-   document.getElementById(“product_quantity”).oninput = function() {myFunction()};
+  document.getElementById("product_quantity").oninput = function(){myFunction();}
 
-function myFunction() {
-   var unit = document.getElementById(“unitprice”).value;
-   var quan = document.getElementById(“product_quantity”).value;
-   var unit1 = Number(unit);
+  function myFunction()
+  {
+    var unit = document.getElementById("unitprice").value;
+    var quan = document.getElementById("product_quantity").value;
+    var unit1 = Number(unit);
 
-   var totalprice = Math.round((unit1 * quan) * 100) / 100 ;
+    var totalprice = Math.round((unit1 * quan) *100) / 100 ;
 
-   document.getElementById(“totalprice”).value  =  totalprice;
-}
+    document.getElementById("totalprice").value = totalprice;
+  }
 
 </script>
    
 
-   <!--  <script>  
+  <!--   <script>  
  $(document).ready(function(){  
       $('#submit').click(function(){  
            var image_name = $('#productimage').val();  
@@ -414,5 +415,7 @@ function myFunction() {
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
-	</body>
+  </body>
 </html>
+
+
