@@ -360,7 +360,23 @@ span.twitter-typeahead
             });
         });
     </script>
+<script>
 
+   document.getElementById(“unitprice”).oninput = function() {myFunction()};
+
+   document.getElementById(“product_quantity”).oninput = function() {myFunction()};
+
+function myFunction() {
+   var unit = document.getElementById(“unitprice”).value;
+   var quan = document.getElementById(“product_quantity”).value;
+   var unit1 = Number(unit);
+
+   var totalprice = Math.round((unit1 * quan) * 100) / 100 ;
+
+   document.getElementById(“totalprice”).value  =  totalprice;
+}
+
+</script>
    
 
    <!--  <script>  
