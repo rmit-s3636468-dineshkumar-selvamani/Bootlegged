@@ -283,7 +283,6 @@
             <a class="active" href="slowstock" style="color: white;">Slow Movers</a>
             <a href="opportunities" style="color: white;">Opportunities</a>
         @endif
-        <a href="opportunities" style="color: white;">Opportunities</a>
         <hr style="border-style: groove;
     border-width: 1px;">
         <a href="/editProfile" style="color: white;">Edit Profile</a>
