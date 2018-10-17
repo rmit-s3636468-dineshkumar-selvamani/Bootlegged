@@ -21,7 +21,7 @@
                     
                     <tr>
                 <td><label>Unit Price: &nbsp;&nbsp;&nbsp;&nbsp;   $</label></td>
-                <td><input type="text" id="unitPrice" class="form-control here{{ $errors->has('unitPrice') ? ' is-invalid' : '' }}" name="unitPrice" style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39); " value="{{old('unitPrice')}}"></td>
+                <td><input type="text" id="unitPrice" class="form-control here{{ $errors->has('unitPrice') ? ' is-invalid' : '' }}" name="unitPrice" style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39); " value="{{old('unitPrice')}}" required></td>
                  @if ($errors->has('unitPrice'))
                                     <div class="alert alert-danger">
                                         <strong>{{ $errors->first('unitPrice') }}</strong>
@@ -31,7 +31,7 @@
 
                     <tr>
                 <td><label>Total Price:   &nbsp;&nbsp;   $</label></td>
-                <td><input type="text" name="totalPrice" class="form-control here {{ $errors->has('unitPrice') ? ' is-invalid' : '' }}" id="totalPrice" style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39); " value="{{old('totalPrice')}}"></td>
+                <td><input type="text" name="totalPrice" class="form-control here {{ $errors->has('unitPrice') ? ' is-invalid' : '' }}" id="totalPrice" style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39); " value="{{old('totalPrice')}}" readonly></td>
                 @if ($errors->has('totalPrice'))
                                     <div class="alert alert-danger">
                                         <strong>{{ $errors->first('totalPrice') }}</strong>
@@ -61,7 +61,7 @@
 
                     <tr>
                 <td><label>Condition: </label></td>
-                <td><input type="text" id="condition" name="condition" class="form-control here {{ $errors->has('condition') ? ' is-invalid' : '' }}" style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39); " value="{{old('condition')}}" ></td>
+                <td><input type="text" id="condition" name="condition" class="form-control here {{ $errors->has('condition') ? ' is-invalid' : '' }}" style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39); " value="{{old('condition')}}" required></td>
                 @if ($errors->has('condition'))
                                     <div class="alert alert-danger">
                                         <strong>{{ $errors->first('condition') }}</strong>
