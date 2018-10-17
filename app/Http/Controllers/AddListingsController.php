@@ -70,8 +70,8 @@ class AddListingsController extends Controller
     $this->validate($request,[
           'productname' => 'required|min:5|exists:products,product_itemName',
           'product_quantity' => 'required|integer',
-          'unitprice' => 'required|between:0,99.99',
-          'totalprice' => 'required|between:0,99.99',
+          'unitprice' => 'required|numeric',
+          'totalprice' => 'required|numeric',
           'expiry' => 'date_format:Y-m-d|after:tomorrow',
           'productimage' => 'image',
         ],[
@@ -89,8 +89,8 @@ class AddListingsController extends Controller
       $this->validate($request,[
           'productname' => 'required|min:5|exists:products,product_itemName',
           'product_quantity' => 'required|integer',
-           'unitprice' => 'required|between:0,99.99',
-          'totalprice' => 'required|between:0,99.99',
+           'unitprice' => 'required|numeric',
+          'totalprice' => 'required|numeric',
           'productimage' => 'image',
         ],[
           'productname.exists' => ' The product name doesnt match with our record.',
