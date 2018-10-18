@@ -89,4 +89,26 @@ class CartController extends Controller
         return back();
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function checkout(Request $request)
+    {
+        //dd($request->all());
+        try {
+            if (!Session::has('cart')) {
+                return redirect()->route('/cart');
+            }
+            $oldCart = Session::get('cart');
+            $cart = new Cart($oldCart);
+
+        } catch (\Exception $e) {
+            dd($e);
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+
+        Session::forget('cart');
+        return redirect()->back()->with('success', 'Successfully purchased products!');
+    }
 }

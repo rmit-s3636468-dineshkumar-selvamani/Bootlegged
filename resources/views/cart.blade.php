@@ -358,41 +358,24 @@
                                 class="product__price highlight text-danger">Clear Cart</span>
                     </a>
 
-                    <a href="{{route('checkout.index')}}">
-                        <button class="action action--button action--buy "><span
-                                    class="product__price highlight text-white">Checkout</span></button>
-                    </a>
-
-                    <form action="your-server-side-code" method="POST">
+                    <form action="{{route('cart.checkout')}}" method="POST">
+                        {{ csrf_field() }}
                         <script
                                 src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                                 data-key="pk_test_TYooMQauvdEDq54NiTphI7jx"
-                                data-amount="{{$totalPrice*100}}"
-                                data-name="Bootlegged.com.au"
-                                data-description="Widget"
-                                data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-                                data-locale="auto"
-                                data-zip-code="false">
-                        </script>
-                    </form>
-
-                    <button class="action action--button action--buy " href="{{'/checkoutIndex'}}" method="POST"><span
-                                class="product__price highlight text-white"></span>
-                        <script
-                                src="https://checkout.stripe.com/checkout.js"
-                                data-key="pk_test_TYooMQauvdEDq54NiTphI7jx"
-                                data-amount="{{$totalPrice*100}}"
+                                data-amount={{$totalPrice*100}}
                                         data-name="Bootlegged.com.au"
-                                data-description="Widget"
+                                data-description="Pay"
                                 data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
                                 data-locale="auto"
                                 data-zip-code="false">
                         </script>
-                        Checkout
-                    </button>
+                        <script>
 
-                    <form action="/checkoutIndex" method="POST">
-
+                            document.getElementsByClassName("stripe-button-el")[0].style.display = 'none';
+                        </script>
+                        <button class="action action--button action--buy "><span
+                                    class="product__price highlight text-white">Checkout</span></button>
                     </form>
                     <br><br>
                     @include('partials.flash-message')
@@ -424,7 +407,7 @@
                             style="color: white">{{$product['item']['product_itemName']}}</h6>
                         <br>
                         <h6 class="product__quantity highlight" style="color: green"> IN STOCK
-                            - {{$product['item']['Listing_qty']}} bottles</h6>
+                            : {{$product['item']['Listing_qty']}} bottles</h6>
 
                         <span class="product__price extra highlight">Type - {{$product['item']['Listing_type']}} </span>
                         <span class="product__price extra highlight">Unit Price - {{$product['item']['Listing_unitPrice']}} </span>
@@ -584,6 +567,8 @@
     <script>
         $("#cart-qty-form").validate();
     </script>
+
+
 
 
     <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
