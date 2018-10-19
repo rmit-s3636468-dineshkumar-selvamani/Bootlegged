@@ -363,6 +363,7 @@
                         <script
                                 src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                                 data-key="pk_test_TYooMQauvdEDq54NiTphI7jx"
+                                data-currency="AUD"
                                 data-amount={{$totalPrice*100}}
                                         data-name="Bootlegged.com.au"
                                 data-description="Pay"
