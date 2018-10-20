@@ -147,6 +147,7 @@ class CartController extends Controller
                 // Get Manufacturer ID from cart
                 $manu_ID = $cart->items[$x]["item"]["lmanu_id"];
 
+                // If the item sold is not from Manufacturer
                 if ($manu_ID == null) {
                     // Get Store ID from cart
                     $store_ID = $cart->items[$x]["item"]["lstore_id"];
@@ -154,9 +155,7 @@ class CartController extends Controller
                     $store_selling_id = Store::where('store_id', $store_ID)
                         ->first();
 
-                    $user_id = User::where('store_id', $store_ID)->pluck('id');
-
-                    // store into S_transaction from Store(Buyer)
+                    // store into S_transaction
                     $store_transaction_buyer = storeTransactions::create([
 
                         'storeSeller_id' => $store_selling_id->store_id,
@@ -171,21 +170,7 @@ class CartController extends Controller
                         'sTran_stripeFee' => 0
                     ]);
 
-                    // store into S_transaction from Store(Seller)
-                    $store_transaction_seller = storeTransactions::create([
-
-                        'storeSeller_id' => Auth::id(),
-                        'sTran_stripeId' => $user_id->store_Stripeid,
-                        'sTran_buyerId' => $store_selling_id->store_id,
-                        'sListingId' => $cart->items[$x]["item"]["id"],
-                        'sTran_date' => $today->format('Y-m-d h:i:s'),
-                        'sTran_qty' => $cart_buying_qty,
-                        'sTran_unitPrice' => $cart->items[$x]["item"]["Listing_unitPrice"],
-                        'sTran_totalPrice' => $cart_buying_qty * $cart->items[$x]["item"]["Listing_unitPrice"],
-                        'sTran_comission' => 0,
-                        'sTran_stripeFee' => 0
-                    ]);
-                    dd($store_transaction_buyer, $store_transaction_seller);
+                    //dd($store_transaction_buyer);
 
                 } else {
                     // Manufacturer as seller
@@ -212,22 +197,6 @@ class CartController extends Controller
                     ]);
                     //dd($manu_transaction);
 
-                    // store into S_transaction (Store as buyer)
-                    $store_transaction = storeTransactions::create([
-
-                        'storeSeller_id' => 0,
-                        'sTran_stripeId' => $manufacturer->manu_Stripeid,
-                        'sTran_buyerId' => Auth::id(),
-                        'sListingId' => $cart->items[$x]["item"]["id"],
-                        'sTran_date' => $today->format('Y-m-d h:i:s'),
-                        'sTran_qty' => $cart_buying_qty,
-                        'sTran_unitPrice' => $cart->items[$x]["item"]["Listing_unitPrice"],
-                        'sTran_totalPrice' => $cart_buying_qty * $cart->items[$x]["item"]["Listing_unitPrice"],
-                        'sTran_comission' => 0,
-                        'sTran_stripeFee' => 0
-                    ]);
-
-                    dd($manu_transaction, $store_transaction);
                 }
 
             }
@@ -236,10 +205,6 @@ class CartController extends Controller
             dd($e);
             return redirect()->back()->with('error', $e->getMessage());
         }
-
-
-
-
 
         Session::forget('cart');
         return redirect()->back()->with('success', 'Successfully purchased products!');
