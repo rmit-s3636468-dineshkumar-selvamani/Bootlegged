@@ -18,12 +18,12 @@ class DownloadFileController extends Controller
     }
 
     public function download(Request $request){
-        $file= public_path(). "/download/Test.xlsx";
+        $file= public_path(). "/download/Bootlegged_products.xlsx";
 
     $headers = array(
               'Content-Type: application/xlsx',
             );
 
-    return response()->download($file, 'Test.xlsx', $headers);
+    return response()->download($file, 'Bootlegged_products.xlsx', $headers);
     }
 }
