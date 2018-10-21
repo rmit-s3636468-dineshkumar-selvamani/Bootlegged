@@ -41,16 +41,20 @@ class HomeController extends Controller
     {   
         if(Auth::user()->type == "StoreOwner")
         {   
-            $products = DB::table('listings')
-            ->where('Listing_active',1)
-            ->where('lstore_id', '!=', Auth::user()->store_id )
-            ->orWhereNull('lstore_id')
-            ->join('products', 'products.product_id', '=', 'listings.lproduct_id')
-            ->paginate(3);
+           
+             $prod_name = array('','');
 
+           $products = DB::table('listings')
+            ->where('Listing_active', '=', 1)
+            ->where(function ($query) {
+                $query->where('lstore_id', '!=', Auth::user()->store_id )
+                      ->orWhereNull('lstore_id');
+            })
+             ->join('products', 'products.product_id', '=', 'listings.lproduct_id')
+           ->paginate(9);
            
 
-        return view('dashboard')-> with(['products'=>$products]);
+             return view('Dashboard')-> with(['products'=>$products, 'prod_name' => $prod_name]);
         
         }
 
@@ -79,10 +83,6 @@ class HomeController extends Controller
            return  DB::table('products')
             ->where('product_itemName', 'LIKE', '%'.$request->q.'%')
             ->get();
-          // return Product::where('product_itemName', 'LIKE', '%'.$request->q.'%')->get();
-
-
-            // return ProductListing::where('listing_type', 'LIKE', '%'.$request->q.'%')->distinct()->get(['listing_type']);
     }
  
 
@@ -91,28 +91,34 @@ class HomeController extends Controller
         if(Auth::user()->type == "StoreOwner")
         {   
             
-            $products = DB::table('listings')
-            // ->select('id','manu_id','product_id','mListing_type','mListing_qty','mListing_unitPrice','mListing_totalPrice','mListing_expiry','mListing_vintage','mListing_condition','mListing_active')
-            ->where([
-                        ['Listing_active', '=', '1'],
-                        ['Listing_type', '=', $id],
-                        //['lstore_id', '!=', Auth::user()->store_id]
-                      ])
-            // ->where('listing_active',1)
-            // ->where('listing_type','=',$id)
-            // ->where('lstore_id', '!=', 'Auth::user()->store_id' )
-            // ->orWhereNull('lstore_id')
-            
-            ->join('products', 'products.product_id', '=', 'listings.lproduct_id')
-            ->paginate(3);
-
-           
-           
           
+           
+             $products = DB::table('listings')
+            ->where('Listing_active', '=', 1)
+            ->where('Listing_type', '=', $id)
+            ->where(function ($query) {
+                $query->where('lstore_id', '!=', Auth::user()->store_id )
+                      ->orWhereNull('lstore_id');
+            })
+             ->join('products', 'products.product_id', '=', 'listings.lproduct_id')
+           ->paginate(9);
 
-        return view('dashboard')->with(['products'=>$products]);
+             $prod_name = DB::table('listings')->where('Listing_type', '=', $id)->pluck('Listing_type');
+           
+           if (DB::table('listings')->where('Listing_type', '=', $id)->select('Listing_type')->count() > 0) 
+           {
+                 $prod_name = DB::table('listings')->where('Listing_type', '=', $id)->pluck('Listing_type');
+            }   
 
-            // return \App::make('redirect')->back()->with(['name'=>$name,'products'=>$products]);
+           else
+            {
+                $prod_name = array('','');
+            }
+
+          
+        return view('Dashboard')->with(['products'=>$products, 'prod_name' => $prod_name]);
+
+          
         
         }    
     }
@@ -123,27 +129,56 @@ class HomeController extends Controller
         {   
 
 
-            
-            $products = DB::table('listings')
-            // ->select('id','manu_id','product_id','mListing_type','mListing_qty','mListing_unitPrice','mListing_totalPrice','mListing_expiry','mListing_vintage','mListing_condition','mListing_active')
-            ->where([
-                        ['Listing_active', '=', '1'],
-                        ['lproduct_id', '=', $id],
-                        // ['lstore_id', '!=', Auth::user()->store_id]
-                      ])
-            // ->where('listing_active',1)
-            // ->where('listing_type','=',$id)
-            // ->where('lstore_id', '!=', 'Auth::user()->store_id' )
-            // ->orWhereNull('lstore_id')
-            
-            ->join('products', 'products.product_id', '=', 'listings.lproduct_id')
-            ->paginate(3);
+             $prod_name = DB::table('products')->where('product_id', '=', $id)->pluck('product_itemName');
 
-           
-           
+           $products = DB::table('listings')
+            ->where('Listing_active', '=', 1)
+           ->where('lproduct_id', '=', $id)
+            ->where(function ($query) {
+                $query->where('lstore_id', '!=', Auth::user()->store_id )
+                      ->orWhereNull('lstore_id');
+            })
+             ->join('products', 'products.product_id', '=', 'listings.lproduct_id')
+           ->paginate(9);
           
 
-        return view('dashboard')->with(['products'=>$products]);
+        return view('Dashboard')->with(['products'=>$products, 'prod_name' => $prod_name]);
+
+            // return \App::make('redirect')->back()->with(['name'=>$name,'products'=>$products]);
+        
+        }    
+    }
+
+     public function filterEnter(Request $request)
+    {   
+
+         $this->validate($request,[
+          'search' => 'exists:products,product_itemName',
+          
+        ],[
+ 
+          'search.exists' => ' Please check the product name'
+         
+        ]);
+
+        if(Auth::user()->type == "StoreOwner")
+        {   
+
+           
+             $products = DB::table('listings')
+            ->where('Listing_active', '=', 1)
+           ->where('product_itemName', '=', $request->get('search'))
+            ->where(function ($query) {
+                $query->where('lstore_id', '!=', Auth::user()->store_id )
+                      ->orWhereNull('lstore_id');
+            })
+             ->join('products', 'products.product_id', '=', 'listings.lproduct_id')
+           ->paginate(9);
+
+           
+          $prod_name = DB::table('products')->where('product_itemName', '=', $request->get('search'))->pluck('product_itemName');
+
+        return view('Dashboard')->with(['products'=>$products, 'prod_name' => $prod_name]);
 
             // return \App::make('redirect')->back()->with(['name'=>$name,'products'=>$products]);
         

@@ -33,7 +33,7 @@
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
-                                @endif
+                            `    @endif
                             </div>
                         </div>
 
@@ -72,4 +72,6 @@
         </div>
     </div>
 </div>
+
+
 

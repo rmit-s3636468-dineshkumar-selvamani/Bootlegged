@@ -66,6 +66,10 @@ Route::get('/addlistings', 'AddListingsController@index')->name('addlistings');
 
 Route::get('/filter/{id}', 'HomeController@filter')->name("dashboard/filter");
 
+//For enter function in Auto suggest
+Route::get('/filter', 'HomeController@filterEnter')->name("dashboard/filter");
+
+
 Route::get('/filterName/{id}', 'HomeController@filterName')->name("dashboard/filter");
 
 //AUtocomplete
@@ -79,6 +83,8 @@ Route::post('/store_editProfile', ['as' => 'store_editProfile', 'uses' => 'EditP
 Route::post('/manu_editrofile', ['as' => 'manu_editProfile', 'uses' => 'EditProfileController@saveManu']);
 
 Route::get('/history', 'HistoryController@index');
+
+Route::get('/opportunities', 'OpportunityController@opportunityWithRanking')->name('opportunities');
 
 Route::get('/slowstock', 'SlowStockController@index');
 
@@ -117,6 +123,21 @@ Route::get('newprod', function(){
 });
 
 
-//Forget Password
+//Autofill Product Type
+Route::get('/autofill/{id}', 'AddListingsController@autofillType')->name("Addlisting/");
 
 
+//Cart Index
+Route::get('/cart', 'CartController@index')->name('cart.index');
+// Add item to cart
+Route::get('/addToCart/{id}', 'CartController@addToCart')->name('cart.add-item');
+// Minus quantity function
+Route::post('/updateItem', 'CartController@updateItem')->name('cart.update');
+// Remove Item
+Route::get('/removeItem/{id}', 'CartController@removeItem')->name('cart.remove');
+// Clear Cart
+Route::get('/clearCart', 'CartController@clearCart')->name('cart.clear');
+// Cart Checkout
+Route::post('/checkout', 'CheckoutController@checkout')->name('cart.checkout');
+// Checkout Index
+Route::get('/checkoutIndex', 'CheckoutController@index')->name('checkout.index');

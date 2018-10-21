@@ -258,6 +258,7 @@ div.content {
   max-width: 200px ;
  
   height: 200px;
+  min-height: 200px;
 }
 
 .product__price{
@@ -266,7 +267,7 @@ div.content {
   /*max-height: 30px;*/
   max-width: 210px;
 
-  height :15px;
+  height :60px;
 }
 
 
@@ -354,10 +355,6 @@ div.content {
 
 		@include('sideNavBar')
 
-   <!-- Compare basket -->
-		<div class="compare-basket">
-			<button class="action action--button action--compare"><i class="fa fa-check"></i><span class="action__text">Compare</span></button>
-		</div>
 
 
 		<!-- Main view -->
@@ -372,8 +369,20 @@ div.content {
        <div class="container">
  
       <div class="starter-template" style="align-text:center">
-       
-        <input type="text" class="typeahead form-control" id="search" placeholder="Search by product Name" autocomplete="on"  >
+       <form action="/filter" method="get">
+              @if($prod_name[0] == '')
+                  <input type="text" class="typeahead form-control" name="search" id="search" placeholder="Search by product Name" autocomplete="on">
+                  @else
+        <input type="text" class="typeahead form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" name="search" id="search" placeholder="Search by product Name" autocomplete="on" >
+         @if ($errors->has('search'))
+                                     <div class="alert alert-danger">
+                                        <strong>{{ $errors->first('search') }}</strong>
+                                    </div>
+                                @endif
+        @endif
+        <input type="submit" value="Submit" style="display: none">
+        </form>
+
       </div>
        
 </div>
@@ -401,12 +410,16 @@ div.content {
 
 				<section class="grid">
 				<!-- Products -->
-
+        <div>
+         @if($prod_name[0] != '')
+        <h5>Showing results for : {{$prod_name[0]}}</h5><br><br>
+        @endif
+       </div>
 				<?php $count = 0; ?>
 				@foreach($products as $item)
 					
 						
-				<div class="product" >
+				<div class="product">
 					<div class="product__info" data-toggle="modal" 
 					data-target="#prod_details" data-prodname="{{$item->product_itemName}}" data-type="{{$item->Listing_type}}" data-total_qty="{{ $item->Listing_qty }} " 
 					data-unit=" ${{number_format($item->Listing_unitPrice, 2) }}" data-total="${{number_format($item->Listing_totalPrice, 2)}}" 
@@ -418,7 +431,7 @@ div.content {
              <img src = "{{url('storage/'.$item->image)}}" class="product__image"/>
           
           @else
-             <img class="product__image" src="{{ asset('images/1.png') }}" alt="Product 1" style="height: 160px; width: 160px;" />
+             <img class="product__image" src="{{ asset('Images/1.png') }}" alt="Product 1" style="height: 160px; width: 160px;" />
 
           @endif			 			
 
@@ -431,12 +444,16 @@ div.content {
 						<span class="product__price extra highlight">Condition - {{$item->Listing_condition}} </span>
 						<span class="product__price highlight"> Price : $ {{number_format($item->Listing_totalPrice, 2)}}</span>
 						
-						<a href="/mylistings"><button class="action action--button action--buy" ><i class="fa fa-shopping-cart"></i><span class="action__text">Add to cart</span></button></a>
+					<a href="{{route('cart.add-item',['id' => $item -> id])}}">
+                               <button class="action action--button action--buy"><i
+                                           class="fa fa-shopping-cart"></i><span
+                                           class="action__text">Add to cart</span></button>
+                           </a>
 
 						
 						
 					</div>
-					<label class="action action--compare-add"><input class="check-hidden" type="checkbox" /><i class="fa fa-plus"></i><i class="fa fa-check"></i><span class="action__text action__text--invisible">Add to compare</span></label>
+					<!-- <label class="action action--compare-add"><input class="check-hidden" type="checkbox" /><i class="fa fa-plus"></i><i class="fa fa-check"></i><span class="action__text action__text--invisible">Add to compare</span></label> -->
 
 				</div>
 					<?php $count++; ?>
@@ -445,14 +462,14 @@ div.content {
 				@endforeach
 				
 
+							</section>
+		</div><!-- /view -->
+
 				<?php if($count==0) { ?>
-				<h3> No products to display </h3>
+				<div style="margin-left:180px;"><center><h3> No products to display </h3></center></div>
 			<?php } ?>
 			
 
-
-							</section>
-		</div><!-- /view -->
 
 				
 		<!-- product compare wrapper -->
@@ -595,9 +612,14 @@ div.content {
                         '<div class="list-group search-results-dropdown">'
                     ],
                     suggestion: function(data) {
+                      
+                   
                     return '<a href="/filterName/'+ data.product_id + '"><div style="font-weight:normal; margin-top:-10px ! important;" class="list-group-item">' + data.product_itemName + '</div></a></div>'
+                   
                     }
+
                 }
+
             });
         });
 

@@ -141,41 +141,53 @@
 
      <!-- Login Div -->
 
-        <div class="moving_size" style="height: 1150px;">
+        <div class="moving_size" style="height: 1450px;">
             <img src="Images/reg_pic.jpg" name="about_pic" class="about_pic" style="height:100%; ">
           
-         <div class="about" id="about" style="margin-top: -1090px;">
+         <div class="about" id="about" style="margin-top: -1390px;">
              <p style="font-size: 40px; margin-left: 120px; ">ENTER THE DETAILS</p>
+              
          
           <form  action="{{ route('register_man') }}" method="POST" id="register_form" aria-label="{{ __('Register') }}" style="margin-top: 10px; margin-left: 130px;  ">
             @csrf
-                    <input class="form_box form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" type="email" name="manu_email" placeholder="Email" id="manu_email" required ><br>
+                    <input class="form_box form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" type="email" name="manu_email" placeholder="Email" id="manu_email" value="{{old('manu_email')}}" required ><br>
                       @if ($errors->has('email'))
-                                    <span class="invalid-feedback" role="alert">
+                                    <div class="alert alert-danger col-8">
                                         <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
+                                    </div>
                                 @endif
-                    <input class="form_box form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" type="text" name="manu_name" placeholder="Business Name" id="manu_name" required><br>
+                    <input class="form_box form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" type="text" name="manu_name" placeholder="Business Name" id="manu_name" value="{{old('manu_name')}}" required><br>
                      @if ($errors->has('name'))
-                                    <span class="invalid-feedback" role="alert">
+                                    <div class="alert alert-danger col-8">
                                         <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
+                                    </div>
                                 @endif
                     <input class="form_box form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" type="Password" name="password" placeholder="Password" id="password" required><br>
                       @if ($errors->has('password'))
-                                    <span class="invalid-feedback" role="alert">
+                                    <div class="alert alert-danger col-8">
                                         <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
+                                    </div>
                                 @endif
                     <input class="form_box" type="Password" name="password_confirmation" placeholder="Confirm Password" id="password-confirm" required><br><br>
-                    <input class="form_box" type="text" name="manu_address" placeholder="Address Line " id="manu_address" required><br><br>
-                    <input class="form_box" type="text" name="manu_suburb" placeholder="Suburb" id="manu_suburb"required><br><br>
-                    <input class="form_box" type="text" name="manu_state" placeholder="State(VIC,NSW,WA,QLD,SA,TAS)" id="manu_state"required><br><br>
+                    <input class="form_box" type="text" name="manu_address" placeholder="Address Line " id="manu_address" value="{{old('manu_address')}}"required><br><br>
+                     @if ($errors->has('manu_address'))
+                                    <div class="alert alert-danger col-8">
+                                        <strong>{{ $errors->first('manu_address') }}</strong>
+                                    </div>
+                                @endif
+                    <input class="form_box" type="text" name="manu_suburb" placeholder="Suburb" id="manu_suburb" value="{{old('manu_suburb')}}" required><br><br>
+                     @if ($errors->has('manu_suburb'))
+                                    <div class="alert alert-danger col-8">
+                                        <strong>{{ $errors->first('manu_suburb') }}</strong>
+                                    </div>
+                                @endif
+                    <!-- <input class="form_box" type="text" name="manu_state" placeholder="State(VIC,NSW,WA,QLD,SA,TAS)" id="manu_state"required><br><br> -->
 
-                     <!-- <div class="col" style="margin-left: -14px; width: 345px; ">
+                     <div class="col" style="margin-left: -14px; width: 345px; ">
                 <div class="ui-select">
-                  <select id="user_time_zone" class="form-control">
-                    <option value="VIC" selected="selected">VIC</option>
+                  <select name="manu_state" class="form-control" style="height: 45px; id="manu_state"">
+                    <option value="State" selected="selected">State</option>
+                    <option value="VIC">VIC</option>
                     <option value="NSW">NSW</option>
                     <option value="WA">WA</option>
                     <option value="QLD">QLD</option>
@@ -185,12 +197,27 @@
                   </select>
                 </div>
               </div>
-            <br> -->
-                    <input class="form_box" type="number" name="manu_postcode" placeholder="Post Code" id="manu_postcode"required><br><br>
-                    <input class="form_box" type="number" name="manu_phone" placeholder="Contact Number" id="manu_phone"required><br><br>
-                     <input class="form_box" type="text" name="manu_abn" placeholder="ABN Number" id="manu_abn"required><br><br>
-                      <input class="form_box" type="text" name="manu_license" placeholder="Business License Number" id="manu_license"required><br><br>
-                       <input class="form_box" type="text" name="manu_Stripeid" placeholder="Stripe ID" id="manu_Stripeid"required><br><br>
+            <br>
+                    <input class="form_box {{ $errors->has('manu_postcode') ? ' is-invalid' : '' }}" type="number" name="manu_postcode" placeholder="Post Code" id="manu_postcode" value="{{old('manu_postcode')}}" required><br><br>
+                      @if ($errors->has('manu_postcode'))
+                                    <div class="alert alert-danger col-8">
+                                        <strong>{{ $errors->first('manu_postcode') }}</strong>
+                                    </div>
+                                @endif
+                    <input class="form_box {{ $errors->has('manu_phone') ? ' is-invalid' : '' }}" type="number" name="manu_phone" placeholder="Contact Number" id="manu_phone" value="{{old('manu_phone')}}" required><br><br>
+                    @if ($errors->has('manu_phone'))
+                                    <div class="alert alert-danger col-8">
+                                        <strong>{{ $errors->first('manu_phone') }}</strong>
+                                    </div>
+                                @endif
+                     <input class="form_box {{ $errors->has('manu_abn') ? ' is-invalid' : '' }}" type="number" name="manu_abn" placeholder="ABN Number" id="manu_abn" value="{{old('manu_abn')}}"  required><br><br>
+                    @if ($errors->has('manu_abn'))
+                                    <div class="alert alert-danger col-8">
+                                        <strong>{{ $errors->first('manu_abn') }}</strong>
+                                    </div>
+                                @endif
+                      <input class="form_box" type="text" name="manu_license" placeholder="Business License Number" id="manu_license" value="{{old('manu_license')}}" required><br><br>
+                       <input class="form_box" type="text" name="manu_Stripeid" placeholder="Stripe ID" id="manu_Stripeid" value="{{old('manu_Stripeid')}}" required><br><br>
 
                   <br><br> <br>
                       
