@@ -366,7 +366,7 @@
                                 data-currency="AUD"
                                 data-amount={{$totalPrice*100}}
                                         data-name="Bootlegged.com.au"
-                                data-description="Pay"
+                                data-description="Payment Gateway"
                                 data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
                                 data-locale="auto"
                                 data-zip-code="false">
