@@ -324,7 +324,7 @@
     <body>
 
 
-     <div class="sidebar">
+      <div class="sidebar">
   <img style=" position: absolute; display: inline;" class="logo"  alt ="logo" src="/Images/logo1.png">
   <a  href="#home" style="margin-top: 90px; color: white; text-align: center;">Welcome,<br> {{Auth::user()->business_name}}</a>
    
@@ -338,8 +338,7 @@
             <a href="slowstock" style="color: white;">Slow Movers</a>
             <a href="opportunities" style="color: white;">Opportunities</a>
         @endif
-
-  <hr style="border-style: groove;
+   <hr style="border-style: groove;
     border-width: 1px;"> 
   <a href="/editProfile" style="color: white;">Edit Profile</a>
   @if( Auth::user()->type == 'StoreOwner')
@@ -380,10 +379,26 @@
                                 class="product__price highlight text-danger">Clear Cart</span>
                     </a>
 
-                    <a href="{{route('checkout.index')}}">
+                    <form action="{{route('cart.checkout')}}" method="POST">
+                        {{ csrf_field() }}
+                        <script
+                                src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                data-key="pk_test_TYooMQauvdEDq54NiTphI7jx"
+                                data-currency="AUD"
+                                data-amount={{$totalPrice*100}}
+                                        data-name="Bootlegged.com.au"
+                                data-description="Pay"
+                                data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                                data-locale="auto"
+                                data-zip-code="false">
+                        </script>
+                        <script>
+
+                            document.getElementsByClassName("stripe-button-el")[0].style.display = 'none';
+                        </script>
                         <button class="action action--button action--buy "><span
                                     class="product__price highlight text-white">Checkout</span></button>
-                    </a>
+                    </form>
                     <br><br>
                     @include('partials.flash-message')
             </div>
@@ -414,7 +429,7 @@
                             style="color: white">{{$product['item']['product_itemName']}}</h6>
                         <br>
                         <h6 class="product__quantity highlight" style="color: green"> IN STOCK
-                            - {{$product['item']['Listing_qty']}} bottles</h6>
+                            : {{$product['item']['Listing_qty']}} bottles</h6>
 
                         <span class="product__price extra highlight">Type - {{$product['item']['Listing_type']}} </span>
                         <span class="product__price extra highlight">Unit Price - {{$product['item']['Listing_unitPrice']}} </span>
@@ -540,107 +555,6 @@
             </div>
         </div>
 
-        <div class="modal fade" id="checkout" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-             aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-
-                <div class="modal-content">
-                    <form action="{{ route('cart.checkout') }}" method="post" id="pa-form">
-                        {{ csrf_field() }}
-                        <div class="modal-header">
-
-                            <h5 class="modal-title" id="exampleModalLongTitle" style="color: white;">Payment
-                                Form</h5>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        </div>
-                        <div class="modal-body table-responsive">
-
-
-                            <table class="table table-dark">
-
-                                <tr>
-                                    <div class="form-group">
-                                        <td><label for="email">Email: </label></td>
-                                        <td><input type="email" id="email" name="email" class="form-control"
-                                                   required></td>
-                                    </div>
-                                </tr>
-
-                                <tr>
-                                    <div class="form-group">
-                                        <td><label for="card-name">Card Holder Name: </label></td>
-                                        <td><input type="text" id="card-name" name="card-name" class="form-control"
-                                                   required></td>
-                                    </div>
-                                </tr>
-
-                                <tr>
-                                    <div class="form-group">
-                                        <td><label for="address">Address: </label></td>
-                                        <td><input type="text" id="address" class="form-control form-control-lg"
-                                                   required
-                                                   name="address"></td>
-                                    </div>
-                                </tr>
-
-
-                                <tr>
-                                    <div class="form-group">
-                                        <td><label for="card-number">Credit Card Number: </label></td>
-                                        <td><input type="text" id="card-number" name="card-number"
-                                                   class="form-control" required></td>
-                                    </div>
-                                </tr>
-
-                                <tr>
-                                    <div class="form-group">
-                                        <td><label for="card-expiry-month">Expiration Month: </label></td>
-                                        <td><input type="text" id="card-expiry-month" name="card-expiry-month"
-                                                   class="form-control" required>
-                                        </td>
-                                    </div>
-                                </tr>
-
-                                <tr>
-                                    <div class="form-group">
-                                        <td><label for="card-expiry-year">Expiration Year: </label></td>
-                                        <td><input type="text" id="card-expiry-year" name="card-expiry-year"
-                                                   class="form-control" required>
-                                        </td>
-                                    </div>
-                                </tr>
-
-                                <tr>
-                                    <div class="form-group">
-                                        <td><label for="card-ccv">CVC: </label></td>
-                                        <td><input type="text" id="card-cvc" name="card-cvc" class="form-control"
-                                                   required></td>
-                                    </div>
-                                </tr>
-
-                                <tr>
-                                    <div id="card-element">
-                                        <!-- A Stripe Element will be inserted here. -->
-                                    </div>
-
-                                    <!-- Used to display form errors. -->
-                                    <div id="card-errors" role="alert"></div>
-
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-success btn-group-lg"
-                                    style="background-color: rgba(211, 188, 63); border-color: rgba(211, 188, 63);">
-                                Submit Payment
-                            </button>
-                        </div>
-
-                    </form>
-                </div>
-
-            </div>
-        </div>
 
     </section>
 
@@ -672,86 +586,11 @@
         })
     </script>
 
-    <script type="text/javascript">
-
-        $('#checkout').on('show.bs.modal', function (event) {
-
-
-            var button = $(event.relatedTarget) // Button that triggered the modal
-            var totalQty = button.data('totalQty') // Extract info from data-* attributes
-            var totalPrice = button.data('totalPrice')
-
-            var modal = $(this)
-
-            modal.find('.modal-title #totalQty').text(totalQty)
-            modal.find('.modal-body #totalPrice').val(totalPrice);
-
-        })
-    </script>
-
     <script>
         $("#cart-qty-form").validate();
     </script>
 
-    <script>
-        // Create a Stripe client.
-        var stripe = Stripe('pk_test_Ekz2ZwPAxCeRnHSoRTFTzBVp');
 
-        // Create an instance of Elements.
-        var elements = stripe.elements();
-
-        // Custom styling can be passed to options when creating an Element.
-        // (Note that this demo uses a wider set of styles than the guide below.)
-        var style = {
-            base: {
-                color: '#32325d',
-                lineHeight: '18px',
-                fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-                fontSmoothing: 'antialiased',
-                fontSize: '16px',
-                '::placeholder': {
-                    color: '#aab7c4'
-                }
-            },
-            invalid: {
-                color: '#fa755a',
-                iconColor: '#fa755a'
-            }
-        };
-
-        // Create an instance of the card Element.
-        var card = elements.create('card', {style: style});
-
-        // Add an instance of the card Element into the `card-element` <div>.
-        card.mount('#card-element');
-
-        // Handle real-time validation errors from the card Element.
-        card.addEventListener('change', function (event) {
-            var displayError = document.getElementById('card-errors');
-            if (event.error) {
-                displayError.textContent = event.error.message;
-            } else {
-                displayError.textContent = '';
-            }
-        });
-
-        // Handle form submission.
-        var form = document.getElementById('payment-form');
-        form.addEventListener('submit', function (event) {
-            event.preventDefault();
-
-            stripe.createToken(card).then(function (result) {
-                if (result.error) {
-                    // Inform the user if there was an error.
-                    var errorElement = document.getElementById('card-errors');
-                    errorElement.textContent = result.error.message;
-                } else {
-                    // Send the token to your server.
-                    stripeTokenHandler(result.token);
-                }
-            });
-        });
-    </script>
 
 
     <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
@@ -768,4 +607,3 @@
             crossorigin="anonymous"></script>
 
     </body>
-
