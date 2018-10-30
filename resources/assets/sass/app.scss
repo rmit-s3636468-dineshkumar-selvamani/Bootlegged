@@ -1,14 +1,314 @@
-
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
-
 // Variables
 @import 'variables';
-
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-.navbar-laravel {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+// 1. General
+.btn-primary {
+  background-color: gold !important;
+  border-color: gold !important;
+}
+
+.dropdown-toggle::after {
+  display: none;
+}
+
+// 2. Welcome
+#welcome-top-container {
+  background: url("/Images/homepage/bg_image_01.png");
+  -webkit-background-image: url("/Images/homepage/bg_image_01.png");
+  -webkit-background-size: cover;
+  background-repeat: no-repeat;
+  margin-bottom: 5rem;
+}
+
+.section-parallax {
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+}
+
+@-webkit-keyframes typing {
+  from {
+    width: 0;
+  }
+}
+
+@-webkit-keyframes blink-caret {
+  50% {
+    border-color: transparent;
+  }
+}
+
+.faq {
+  font: bold 300% Consolas, Monaco, monospace;
+  font-size: 32px;
+  border-right: .1em solid black;
+  width: 21em;
+  width: 34ch;
+  white-space: nowrap;
+  overflow: hidden;
+  -webkit-animation: typing 2s steps(21, end),
+  blink-caret .5s step-end infinite alternate;
+}
+
+.interested {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: center;
+  color: #555;
+  font-weight: 300;
+  font-size: 32px;
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: initial;
+  -webkit-transform: translate3d(0, 0, 0);
+}
+
+.interested:first-of-type {
+  animation: showup 5s infinite;
+}
+
+.interested:last-of-type {
+  width: 0;
+  animation: reveal 7s infinite;
+}
+
+.interested:last-of-type span {
+  margin-left: -355px;
+  animation: slidein 7s infinite;
+}
+
+@keyframes showup {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes slidein {
+  0% {
+    margin-left: -800px;
+  }
+  20% {
+    margin-left: -800px;
+  }
+  35% {
+    margin-left: 0;
+  }
+  100% {
+    margin-left: 0;
+  }
+}
+
+@keyframes reveal {
+  0% {
+    opacity: 0;
+    width: 0;
+  }
+  20% {
+    opacity: 1;
+    width: 0;
+  }
+  30% {
+    width: 355px;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    width: 355px;
+  }
+}
+
+@mixin btn-border-drawing($color: #ccc, $hover: black, $width: 2px, $vertical: top, $horizontal: left, $duration: 0.25s) {
+  box-shadow: inset 0 0 0 $width $color;
+  color: $color;
+  transition: color $duration $duration/3;
+  position: relative;
+
+  &::before,
+  &::after {
+    border: 0 solid transparent;
+    box-sizing: border-box;
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    width: 0;
+    height: 0;
+
+    #{$vertical}: 0;
+    #{$horizontal}: 0;
+  }
+
+  &::before {
+    $h-side: if($horizontal == 'left', 'right', 'left');
+
+    border-#{$vertical}-width: $width;
+    border-#{$h-side}-width: $width;
+  }
+
+  &::after {
+    $v-side: if($vertical == 'top', 'bottom', 'top');
+
+    border-#{$v-side}-width: $width;
+    border-#{$horizontal}-width: $width;
+  }
+
+  &:hover {
+    color: $hover;
+
+    &::before,
+    &::after {
+      border-color: $hover;
+      transition: border-color 0s, width $duration, height $duration;
+      width: 100%;
+      height: 100%;
+    }
+
+    &::before {
+      transition-delay: 0s, 0s, $duration;
+    }
+
+    &::after {
+      transition-delay: 0s, $duration, 0s;
+    }
+  }
+}
+
+.draw-border {
+  @include btn-border-drawing(gold, green, 4px, bottom, right);
+}
+
+.btn-login {
+  background: none;
+  border: none;
+  cursor: pointer;
+  line-height: 1.5;
+  font: 700 1.2rem 'Roboto Slab', sans-serif;
+  padding: 1em 2em;
+  letter-spacing: 0.05rem;
+
+  &:focus {
+    outline: 2px dotted gold;
+  }
+}
+
+.description-container {
+  margin-right: 25rem;
+}
+
+.side01 {
+  position: -ms-device-fixed;
+  clip-path: inset(25% 15% 25% 15%);
+  margin-left: -10%;
+  margin-top: -35%;
+}
+
+.side01content {
+  margin-top: 12%;
+}
+
+.dropdown-item {
+  background-color: gold;
+
+}
+
+@media screen and (max-width: 1060px) {
+  .description-container {
+    margin-right: 5rem;
+  }
+}
+
+// 3. Login
+#login-logo {
+  background: black;
+  border: gold;
+  height: 300px;
+  width: auto;
+}
+
+
+#body-login{
+  background: black !important;
+}
+
+#body-login.body {
+  width: auto;
+  margin: 0;
+  padding: 0;
+  background: black !important;
+}
+
+#body-login:before {
+  content: "";
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: -1;
+
+  display: block;
+  -webkit-background-image: url("/Images/login/background2.jpg");
+  background-image: url("/Images/login/background2.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: auto;
+  height: 600px;
+
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+}
+
+#login-container-fluid {
+  padding-right: 0px;
+  padding-left: 0px;
+}
+
+// 4. Register
+#register-body{
+  background: black !important;
+}
+
+#register-body.body {
+  width: auto;
+  margin: 0;
+  padding: 0;
+}
+
+#register-page:before {
+  content: "";
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: -1;
+
+  display: block;
+  -webkit-background-image: url("/Images/login/background.jpg");
+  background-image: url("/Images/login/background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: auto;
+  height: 600px;
+
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
 }

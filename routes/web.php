@@ -33,12 +33,8 @@ Route::get('choose', function(){
     return View('choose'); // Your Blade template name
 });
 	
-Route::get('loginmanu', function(){
-    return View('auth/loginmanu'); // Your Blade template name
-});
-
-Route::get('loginstor', function(){
-    return View('auth/loginstor'); // Your Blade template name
+Route::get('login', function(){
+    return View('auth/login'); // Your Blade template name
 });
 
 

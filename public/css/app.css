@@ -10471,9 +10471,372 @@ a.text-dark:focus {
   }
 }
 
-.navbar-laravel {
-  background-color: #fff;
-  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+.btn-primary {
+  background-color: gold !important;
+  border-color: gold !important;
+}
+
+.dropdown-toggle::after {
+  display: none;
+}
+
+#welcome-top-container {
+  background: url("/Images/homepage/bg_image_01.png");
+  -webkit-background-image: url("/Images/homepage/bg_image_01.png");
+  -webkit-background-size: cover;
+  background-repeat: no-repeat;
+  margin-bottom: 5rem;
+}
+
+.section-parallax {
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+}
+
+@-webkit-keyframes typing {
+  from {
+    width: 0;
+  }
+}
+
+@-webkit-keyframes blink-caret {
+  50% {
+    border-color: transparent;
+  }
+}
+
+.faq {
+  font: bold 300% Consolas, Monaco, monospace;
+  font-size: 32px;
+  border-right: .1em solid black;
+  width: 21em;
+  width: 34ch;
+  white-space: nowrap;
+  overflow: hidden;
+  -webkit-animation: typing 2s steps(21, end), blink-caret 0.5s step-end infinite alternate;
+}
+
+.interested {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: center;
+  color: #555;
+  font-weight: 300;
+  font-size: 32px;
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: initial;
+  -webkit-transform: translate3d(0, 0, 0);
+}
+
+.interested:first-of-type {
+  -webkit-animation: showup 5s infinite;
+          animation: showup 5s infinite;
+}
+
+.interested:last-of-type {
+  width: 0;
+  -webkit-animation: reveal 7s infinite;
+          animation: reveal 7s infinite;
+}
+
+.interested:last-of-type span {
+  margin-left: -355px;
+  -webkit-animation: slidein 7s infinite;
+          animation: slidein 7s infinite;
+}
+
+@-webkit-keyframes showup {
+  0% {
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes showup {
+  0% {
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes slidein {
+  0% {
+    margin-left: -800px;
+  }
+
+  20% {
+    margin-left: -800px;
+  }
+
+  35% {
+    margin-left: 0;
+  }
+
+  100% {
+    margin-left: 0;
+  }
+}
+
+@keyframes slidein {
+  0% {
+    margin-left: -800px;
+  }
+
+  20% {
+    margin-left: -800px;
+  }
+
+  35% {
+    margin-left: 0;
+  }
+
+  100% {
+    margin-left: 0;
+  }
+}
+
+@-webkit-keyframes reveal {
+  0% {
+    opacity: 0;
+    width: 0;
+  }
+
+  20% {
+    opacity: 1;
+    width: 0;
+  }
+
+  30% {
+    width: 355px;
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    width: 355px;
+  }
+}
+
+@keyframes reveal {
+  0% {
+    opacity: 0;
+    width: 0;
+  }
+
+  20% {
+    opacity: 1;
+    width: 0;
+  }
+
+  30% {
+    width: 355px;
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    width: 355px;
+  }
+}
+
+.draw-border {
+  -webkit-box-shadow: inset 0 0 0 4px gold;
+          box-shadow: inset 0 0 0 4px gold;
+  color: gold;
+  -webkit-transition: color 0.25s 0.08333333s;
+  transition: color 0.25s 0.08333333s;
+  position: relative;
+}
+
+.draw-border::before,
+.draw-border::after {
+  border: 0 solid transparent;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  content: '';
+  pointer-events: none;
+  position: absolute;
+  width: 0;
+  height: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.draw-border::before {
+  border-bottom-width: 4px;
+  border-left-width: 4px;
+}
+
+.draw-border::after {
+  border-top-width: 4px;
+  border-right-width: 4px;
+}
+
+.draw-border:hover {
+  color: green;
+}
+
+.draw-border:hover::before,
+.draw-border:hover::after {
+  border-color: green;
+  -webkit-transition: border-color 0s, width 0.25s, height 0.25s;
+  transition: border-color 0s, width 0.25s, height 0.25s;
+  width: 100%;
+  height: 100%;
+}
+
+.draw-border:hover::before {
+  -webkit-transition-delay: 0s, 0s, 0.25s;
+          transition-delay: 0s, 0s, 0.25s;
+}
+
+.draw-border:hover::after {
+  -webkit-transition-delay: 0s, 0.25s, 0s;
+          transition-delay: 0s, 0.25s, 0s;
+}
+
+.btn-login {
+  background: none;
+  border: none;
+  cursor: pointer;
+  line-height: 1.5;
+  font: 700 1.2rem 'Roboto Slab', sans-serif;
+  padding: 1em 2em;
+  letter-spacing: 0.05rem;
+}
+
+.btn-login:focus {
+  outline: 2px dotted gold;
+}
+
+.description-container {
+  margin-right: 25rem;
+}
+
+.side01 {
+  position: -ms-device-fixed;
+  -webkit-clip-path: inset(25% 15% 25% 15%);
+          clip-path: inset(25% 15% 25% 15%);
+  margin-left: -10%;
+  margin-top: -35%;
+}
+
+.side01content {
+  margin-top: 12%;
+}
+
+.dropdown-item {
+  background-color: gold;
+}
+
+@media screen and (max-width: 1060px) {
+  .description-container {
+    margin-right: 5rem;
+  }
+}
+
+#login-logo {
+  background: black;
+  border: gold;
+  height: 300px;
+  width: auto;
+}
+
+#body-login {
+  background: black !important;
+}
+
+#body-login.body {
+  width: auto;
+  margin: 0;
+  padding: 0;
+  background: black !important;
+}
+
+#body-login:before {
+  content: "";
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  display: block;
+  -webkit-background-image: url("/Images/login/background2.jpg");
+  background-image: url("/Images/login/background2.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: auto;
+  height: 600px;
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+}
+
+#login-container-fluid {
+  padding-right: 0px;
+  padding-left: 0px;
+}
+
+#register-body {
+  background: black !important;
+}
+
+#register-body.body {
+  width: auto;
+  margin: 0;
+  padding: 0;
+}
+
+#register-page:before {
+  content: "";
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  display: block;
+  -webkit-background-image: url("/Images/login/background.jpg");
+  background-image: url("/Images/login/background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: auto;
+  height: 600px;
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
 }
 

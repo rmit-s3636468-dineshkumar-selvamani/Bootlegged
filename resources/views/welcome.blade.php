@@ -1,186 +1,259 @@
-@extends('footer')
-@extends('faq')  
-@extends('about')    
+@include('layouts.master')
 
-        <!doctype html>
-        <html lang="{{ app()->getLocale() }}">
-        <head>
-          <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="HandheldFriendly" content="true">
-        <meta charset="utf-8">
+@section('title')
+    Bootlegged: Welcome
+@endsection
 
+@section('content')
+    <div class="py-5 text-center" id="welcome-top-container">
+        <div class="container py-5 mr-auto">
+            <div class="row">
+                <div class="col-md-8">
+                    <h1 class="mb-4 text-light text-left display-4">Welcome to</h1>
+                    <h1 class="mb-4 text-light text-left display-3">Bootlegged</h1>
+                    <p class="lead mb-5 text-light text-left description-container">Bootlegged is a peer to peer
+                        marketplace where buyers and
+                        sellers of alcoholic</p>
 
-
-        <title>Bootlegged</title>
-
-        <!-- Fonts -->
-
-        <link href="https://fonts.googleapis.com/css?family=Yrsa" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="css/app.css">
-        
-  
-
-        <!-- Styles -->
-        <style>
-        p{margin: 0px;}
-
-          html, body {
-              background-color: #fff;
-              color: #636b6f;
-              font-family: 'Yrsa', serif;
-              /*font-weight: 500;*/
-              height: 500px;
-              margin: 0;
-              background-image: url(Images/back.jpg);
-              background-repeat: no-repeat; 
-              /*background-size: 1440px 700px;*/
-              background-size: 100% 120%;
-              /*-webkit-background-size: cover;*/
-              -moz-background-size: cover;
-              -o-background-size: cover;
-              /*background-size: cover;*/
-              
-          }
-
-          /* Dropdown Button */
-          /* Tablet Landscape */
-@media screen and (max-width: 1060px) {
-    #primary { width:67%; }
-    #secondary { width:30%; margin-left:3%;}  
-}
-
-/* Tabled Portrait */
-@media screen and (max-width: 768px) {
-    #primary { width:100%; }
-    #secondary { width:100%; margin:0; border:none; }
-}
-/*img { max-width: 100%; }*/
-/*@media (min-width: 640px) { body {font-size:1rem;} } 
-@media (min-width:960px) { body {font-size:1.2rem;} } 
-@media (min-width:1100px) { body {font-size:1.5rem;} } */
-.dropbtn {
-   /* background-color: #3498DB;*/
-   background: rgba(230, 194, 0); 
-    color: white;
-    
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    width: 80px;
-    text-align: center;
-    display: inline;
-    font-size: 19px;
-}
-
-/* Dropdown button on hover & focus */
-.dropbtn:hover, .dropbtn:focus {
-    /*background-color: #2980B9;*/
-    background: rgba(211, 188, 63);
-
-
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-/* Links inside the dropdown */
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #ddd}
-
-/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
-.show {display:block;}
-          
-
-        </style>
-        </head>
-        <body> 
-
-        <div>
-                
-               <img style=" position: absolute; display: inline;" class="logo"  alt ="logo" src="/Images/logo1.png">
-
-         <!--       <div class="dropdown" style="float: right; margin-right: 80px; margin-top: 20px;">
-  <button onclick="myFunction()" class="dropbtn" >Login</button>
-  <div id="myDropdown" class="dropdown-content">
-    <a href="{{URL::to('loginmanu')}}">As Manufacturer</a>
-    <a href="{{URL::to('loginstor')}}">As Store Owner</a>
-    
-  </div> -->
-</div>  
-              <a href="{{URL::to('loginstor')}}" style="float: right;margin-right: 100px; font-size: 19px; text-decoration: none; vertical-align:middle; " id="log" class="button">Login</a>
-             
-              <a href="#contact" style="float: right;margin-right: 60px; font-size: 19px; text-decoration: none; " id="log">Contact</a>
-              <a href="#faq"  id="log" style=" font-size: 19px; float: right; text-decoration: none; margin-right: 50px; ">FAQ</a>
-              <a href="#about"  id="log" style=" font-size: 19px; float: right; text-decoration: none; margin-right: 50px; ">About</a>
-
-                
-              <a href="#home" id="log" style="float: right;  margin-right:50px ; font-size: 19px; text-decoration: none;">Home
-                   </a>
-                  
-         
-          </div>    
-
-          <div class="para" id="home">
-              <ul>
-            <p style="font-size: 40px; ">WELCOME TO BOOTLEGGED</p>
-            <p style="color: white; font-size: 20px;" >Bootlegged is a peer to peer marketplace where buyers and sellers of alcoholic <br> bevergaes meet.We find potiential buyers for your excess inventory and uncover <br>buying opportunities for you in real time</p>
-            </ul>
+                    <p>
+                        <a href="{{URL::to('login')}}" class="btn draw-border btn-login btn-lg float-left"
+                           role="button">Login <i
+                                    class="fas fa-angle-right"></i><i
+                                    class="fas fa-angle-right"></i><i
+                                    class="fas fa-angle-right"></i></a>
+                    </p>
+                </div>
+            </div>
         </div>
-
-      <!--About us -->
-      @yield('about')
+    </div>
 
 
-<!-- FAQ -->
-     @yield('faq')
+    <div class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7 ">
+                    <img class="img-fluid d-block side01" src="/Images/homepage/side_01.jpg"></div>
+                <div class="col-md-5 side01content">
+                    <div class="interested text-left">
+                        Interested?
+                        <br>Register with us below!</br>
+                    </div>
 
-<!-- Footer -->
-
-  @yield('footer')
-
-<script>
-  /* When the user clicks on the button, 
-toggle between hiding and showing the dropdown content */
-function myFunction() {
-    document.getElementById("myDropdown").classList.toggle("show");
-}
-
-// Close the dropdown menu if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
-}
-
-</script>
+                    <div class="dropdown">
+                        <button class="btn btn-lg btn-primary dropdown-toggle text-dark" id="dropdownMenuRegister"
+                                data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false" type="button">Register <i
+                                    class="fas fa-caret-down"></i></button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuRegister">
+                            <a class="dropdown-item" href="/registerman"><i class="fas fa-caret-right"></i> Register as
+                                Manufacturer</a>
+                            <a class="dropdown-item" href="/registersto"><i class="fas fa-caret-right"></i> Register as
+                                Store Manager</a>
+                        </div>
+                    </div>
 
 
-        </body>
-        </html>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="py-5 section-parallax" style="background-image: url(/Images/homepage/bg_image_02.png);">
+        <div class="container my-5 bg-light p-4">
+            <div class="row mx-auto">
+                <div class="col-md-12">
+                    <div class="mb-3 faq">Things that you would ask about...</div>
+                    <p class=""><i class="fas fa-question-circle"></i> Why should I purchase stock on BOOTLEGGED?</p>
+                    <p>BOOTLEGGED offers pricing below cost in order to move stock quickly. As stock approaches expiry
+                        prices will drop. BOOTLEGGED has inventory information relating to more outlets in Australia
+                        than any other marketplace.
+                        BOOTLEGGED connects shop owners and suppliers across a network. BOOTLEGGED may be used as an
+                        alternate supply chain for supplier out stocks, manufacturer cannot supply lines and
+                        discontinued lines.</p>
+                    <p class=""><i class="fas fa-question-circle"></i> What stock can I list on BOOTLEGGED?</p>
+                    <p class="">Any retail products and on-premise bulk sold in retail liquor and on-premise
+                        locations. Cold chain can be listed but at this stage no delivery option is available through
+                        the marketplace. The seller must arrange cold chain supply and ensure supply does not breach
+                        cold chain requirements for that product.</p>
+                    <p class=""><i class="fas fa-question-circle"></i> What fees are charged by BOOTLEGGED?</p>
+                    <p class="">A low $10 monthly fee for free stock transfers, free to list unlimited items for
+                        sale and free to buy. A 5% commission fee (ex GST) plus the credit card fee is applied to each
+                        transaction (ex GST). If an item list price exceeds $100 then the commission is CAPPED AT $5 per
+                        item over $100. There is no minimum commission.</p>
+                    <p class=""><i class="fas fa-question-circle"></i> How do I pay for stock bought on BOOTLEGGED?</p>
+                    <p class="">BOOTLEGGED uses a trusted third-party, Stripe, to provide integrated online
+                        merchant services for all standard and premium domestic credit cards.</p>
+                    <p class=""><i class="fas fa-question-circle"></i> How secure is the information I provide upon registration?</p>
+                    <p class="">The BOOTLEGGED platform is hosted in a Sydney-based data centre using Amazon Web
+                        Services. Our system applies industry standard security practices to ensure that data is
+                        securely managed. We use SSL to ensure that data transferred between our data centre and you is
+                        encrypted.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="py-5 text-center bg-transparent">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="mb-4 text-dark">Bootlegged Partners</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-6 p-1">
+                    <a href="#">
+                        <img class="d-block img-fluid" src="/images/logo1.png"> </a>
+                </div>
+                <div class="col-md-3 col-6 p-1">
+                    <a href="#">
+                        <img class="d-block img-fluid" src="/images/logo1.png"> </a>
+                </div>
+                <div class="col-md-3 col-6 p-1">
+                    <a href="#">
+                        <img class="d-block img-fluid" src="/images/logo1.png"> </a>
+                </div>
+                <div class="col-md-3 col-6 p-1">
+                    <a href="#">
+                        <img class="d-block img-fluid" src="/images/logo1.png"> </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+@include('partials.footer')
+
+@section('script')
+    <script type="text/javascript">
+        $(document).scroll(function () {
+            var height = $(".navbar").height();
+            if ($(this).scrollTop() > 450) {
+                $(".navbar").css("background-color", "black");
+            } else {
+                $(".navbar").css("background-color", "transparent");
+            }
+        });
+
+        $(document).ready(function () {
+            $("#myCarousel").on("slide.bs.carousel", function (e) {
+                var $e = $(e.relatedTarget);
+                var idx = $e.index();
+                var itemsPerSlide = 4;
+                var totalItems = $(".carousel-item").length;
+
+                if (idx >= totalItems - (itemsPerSlide - 1)) {
+                    var it = itemsPerSlide - (totalItems - idx);
+                    for (var i = 0; i < it; i++) {
+                        // append slides to end
+                        if (e.direction == "left") {
+                            $(".carousel-item")
+                                .eq(i)
+                                .appendTo(".carousel-inner");
+                        } else {
+                            $(".carousel-item")
+                                .eq(0)
+                                .appendTo($(this).find(".carousel-inner"));
+                        }
+                    }
+                }
+            });
+        });
+
+        var Messenger = function(el){
+            'use strict';
+            var m = this;
+
+            m.init = function(){
+                m.codeletters = "&#*+%?£@§$";
+                m.message = 0;
+                m.current_length = 0;
+                m.fadeBuffer = false;
+                m.messages = [
+                    'This is a message, which can be long and all.',
+                    'This could be another message.',
+                    'Also short ones work!',
+                    'Cool.'
+                ];
+
+                setTimeout(m.animateIn, 100);
+            };
+
+            m.generateRandomString = function(length){
+                var random_text = '';
+                while(random_text.length < length){
+                    random_text += m.codeletters.charAt(Math.floor(Math.random()*m.codeletters.length));
+                }
+
+                return random_text;
+            };
+
+            m.animateIn = function(){
+                if(m.current_length < m.messages[m.message].length){
+                    m.current_length = m.current_length + 2;
+                    if(m.current_length > m.messages[m.message].length) {
+                        m.current_length = m.messages[m.message].length;
+                    }
+
+                    var message = m.generateRandomString(m.current_length);
+                    $(el).html(message);
+
+                    setTimeout(m.animateIn, 20);
+                } else {
+                    setTimeout(m.animateFadeBuffer, 20);
+                }
+            };
+
+            m.animateFadeBuffer = function(){
+                if(m.fadeBuffer === false){
+                    m.fadeBuffer = [];
+                    for(var i = 0; i < m.messages[m.message].length; i++){
+                        m.fadeBuffer.push({c: (Math.floor(Math.random()*12))+1, l: m.messages[m.message].charAt(i)});
+                    }
+                }
+
+                var do_cycles = false;
+                var message = '';
+
+                for(var i = 0; i < m.fadeBuffer.length; i++){
+                    var fader = m.fadeBuffer[i];
+                    if(fader.c > 0){
+                        do_cycles = true;
+                        fader.c--;
+                        message += m.codeletters.charAt(Math.floor(Math.random()*m.codeletters.length));
+                    } else {
+                        message += fader.l;
+                    }
+                }
+
+                $(el).html(message);
+
+                if(do_cycles === true){
+                    setTimeout(m.animateFadeBuffer, 50);
+                } else {
+                    setTimeout(m.cycleText, 2000);
+                }
+            };
+
+            m.cycleText = function(){
+                m.message = m.message + 1;
+                if(m.message >= m.messages.length){
+                    m.message = 0;
+                }
+
+                m.current_length = 0;
+                m.fadeBuffer = false;
+                $(el).html('');
+
+                setTimeout(m.animateIn, 200);
+            };
+
+            m.init();
+        }
+
+        console.clear();
+        var messenger = new Messenger($('#messenger'));
+    </script>
+@endsection
