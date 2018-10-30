@@ -1,4 +1,4 @@
-
+@extends('layouts.master')
 
 @section('contents')
     <body id="register-body">
@@ -64,7 +64,7 @@
                         <input class="form-control" type="text" name="manu_Stripeid" placeholder="Stripe ID"
                                id="manu_Stripeid" required><br><br>
 
-                        <br><br> <br>
+                        <br><br>
 
 
                         <a href="">
