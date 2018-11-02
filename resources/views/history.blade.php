@@ -318,8 +318,8 @@
                             <tbody>
                             @foreach($salehistory as $item)
                                 <tr>
-                                    <?php $seller = \Illuminate\Support\Facades\DB::table('store')->where('store_id', $item->storeSeller_id)->first(); ?>
-                                    <td><?php print_r($seller->store_email)?></td>
+                                    <?php $seller = \Illuminate\Support\Facades\DB::table('users')->where('id', $item->sTran_buyerId)->first(); ?>
+                                    <td><?php print_r($seller->email)?></td>
                                     <?php
                                     $listing = \Illuminate\Support\Facades\DB::table('listings')->where('id', $item->sListingId)->first();
                                     $product = \Illuminate\Support\Facades\DB::table('products')->where('product_id', $listing->lproduct_id)->first()
