@@ -108,35 +108,33 @@ class CartController extends Controller
     public function checkout(Request $request)
     {
         //dd($request->all());
-      /**  try {
+        try {
             if (!Session::has('cart')) {
                 return redirect()->route('/cart');
             }
             $oldCart = Session::get('cart');
             $cart = new Cart($oldCart);
 
-            //dd($cart);
-            //dd($request);
             $today = new DateTime();
 
             // Loop each item in the cart
-            for ($x = 1; $x <= count($cart->items); $x++) {
+
+            foreach ($cart->items as $item) {
 
                 // Get Item ID
-                $item_ID = $cart->items[$x]["item"]["id"];
-
+                $item_ID = $item['item']['id'];
 
                 // Cart item Listing Quantity
-                $cart_item_qty = $cart->items[$x]["item"]["Listing_qty"];
+                $cart_item_qty = $item['item']['Listing_qty'];
 
                 // Cart item Buying Quantity
-                $cart_buying_qty = $cart->items[$x]["Listing_qty"];
+                $cart_buying_qty = $item['Listing_qty'];
 
-                // Cart Item[x] Listing_qty
+                // Cart Item Listing_qty
                 $update_qty = $cart_item_qty - $cart_buying_qty;
 
                 // Update total Price after update ListingQty
-                $update_total_price = $update_qty * $cart->items[$x]["item"]["Listing_unitPrice"];
+                $update_total_price = $update_qty * $item['item']['Listing_unitPrice'];
 
                 // Update Listings table in the database
                 Listings::where('id', $item_ID)
@@ -145,12 +143,12 @@ class CartController extends Controller
                     ]);
 
                 // Get Manufacturer ID from cart
-                $manu_ID = $cart->items[$x]["item"]["lmanu_id"];
+                $manu_ID = $item['item']['lmanu_id'];
 
                 // If the item sold is not from Manufacturer
                 if ($manu_ID == null) {
                     // Get Store ID from cart
-                    $store_ID = $cart->items[$x]["item"]["lstore_id"];
+                    $store_ID = $item['item']['lstore_id'];
 
                     $store_selling_id = Store::where('store_id', $store_ID)
                         ->first();
@@ -160,17 +158,16 @@ class CartController extends Controller
 
                         'storeSeller_id' => $store_selling_id->store_id,
                         'sTran_stripeId' => $store_selling_id->store_Stripeid,
-                        'sTran_buyerId' => Auth::id(),
-                        'sListingId' => $cart->items[$x]["item"]["id"],
+                        'sTran_buyerId' => Auth::user()->store_id(),
+                        'sListingId' => $item['item']['id'],
                         'sTran_date' => $today->format('Y-m-d h:i:s'),
                         'sTran_qty' => $cart_buying_qty,
-                        'sTran_unitPrice' => $cart->items[$x]["item"]["Listing_unitPrice"],
-                        'sTran_totalPrice' => $cart_buying_qty * $cart->items[$x]["item"]["Listing_unitPrice"],
+                        'sTran_unitPrice' => $item['item']['Listing_unitPrice'],
+                        'sTran_totalPrice' => $cart_buying_qty * $item['item']['Listing_unitPrice'],
                         'sTran_comission' => 0,
                         'sTran_stripeFee' => 0
                     ]);
 
-                    //dd($store_transaction_buyer);
 
                 } else {
                     // Manufacturer as seller
@@ -178,33 +175,30 @@ class CartController extends Controller
                         ->first();
 
                     $manu_ur_id = User::where('manu_id', $manu_ID)->value('id');
-                    //dd($user_id);
 
                     // store into M_transaction
                     $manu_transaction = manuTransactions::create([
 
                         'manuSeller_id' => $manufacturer->manu_id,
-                        'mTran_stripeId' => $manufacturer->manu_Stripeid,
+                        'stripeId' => $manufacturer->manu_Stripeid,
                         'mTran_buyerId' => Auth::id(),
                         'mTran_sellerId' => $manu_ur_id,
-                        'mListingId' => $cart->items[$x]["item"]["id"],
+                        'mListingId' => $item['item']['id'],
                         'mTran_date' => $today->format('Y-m-d h:i:s'),
                         'mTran_qty' => $cart_buying_qty,
-                        'mTran_unitPrice' => $cart->items[$x]["item"]["Listing_unitPrice"],
-                        'mTran_totalPrice' => $cart_buying_qty * $cart->items[$x]["item"]["Listing_unitPrice"],
+                        'mTran_unitPrice' => $item['item']['Listing_unitPrice'],
+                        'mTran_totalPrice' => $cart_buying_qty * $item['item']['Listing_unitPrice'],
                         'mTran_comission' => 0,
                         'mTran_stripeFee' => 0
                     ]);
-                    //dd($manu_transaction);
 
                 }
 
             }
 
         } catch (\Exception $e) {
-            dd($e);
             return redirect()->back()->with('error', $e->getMessage());
-        }*/
+        }
 
         Session::forget('cart');
         return redirect()->back()->with('success', 'Successfully purchased products!');
