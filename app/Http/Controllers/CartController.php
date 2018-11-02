@@ -158,7 +158,7 @@ class CartController extends Controller
 
                         'storeSeller_id' => $store_selling_id->store_id,
                         'sTran_stripeId' => $store_selling_id->store_Stripeid,
-                        'sTran_buyerId' => Auth::user()->store_id(),
+                        'sTran_buyerId' => Auth::id(),
                         'sListingId' => $item['item']['id'],
                         'sTran_date' => $today->format('Y-m-d h:i:s'),
                         'sTran_qty' => $cart_buying_qty,
