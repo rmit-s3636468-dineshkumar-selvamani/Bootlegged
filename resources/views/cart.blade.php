@@ -409,10 +409,7 @@
             @foreach($products as $product)
 
                 <div class="product">
-                    <div class="product__info">
-
-
-                        <img class="product__image" src="{{ asset('images/1.png') }}" alt="Product 1"
+                   <div class="product__info"
                              data-toggle="modal"
                              data-target="#prod_details" data-prodname="{{$product['item']['product_itemName']}}"
                              data-type="{{$product['item']['Listing_type']}}"
@@ -423,6 +420,11 @@
                              data-vintage="{{ $product['item']['Listing_vintage'] }}"
                              data-condition="{{ $product['item']['Listing_condition'] }}" onmouseover=""
                              style="cursor: pointer;"/>
+						@if($product['item']->image != '')
+          				<img src = "{{url('storage/'.$product['item']->image)}}" class="product__image"/>
+          				@else
+						<img class="product__image" src="{{ asset('Images/1.png') }}" alt="Product 1" style="height: 160px; width: 160px;" />
+						@endif	
 
 
                         <h6 class="product__name highlight"
