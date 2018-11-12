@@ -547,8 +547,6 @@ div.content {
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        
-        <button type="button" class="btn btn-primary" style="background-color: rgba(211, 188, 63); border-color: rgba(211, 188, 63);"><i class="fa fa-shopping-cart"></i>Add to Cart</button>
       </div>
     </div>
   </div>
