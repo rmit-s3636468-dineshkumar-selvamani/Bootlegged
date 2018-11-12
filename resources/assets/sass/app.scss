@@ -1,14 +1,361 @@
-
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
-
 // Variables
 @import 'variables';
-
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-.navbar-laravel {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+// 1. General
+.btn-primary {
+  background-color: gold !important;
+  border-color: gold !important;
+}
+
+.dropdown-toggle::after {
+  display: none;
+}
+
+.frontpage-body {
+  -webkit-background-image: url(/Images/homepage/bg_image_01.png);;
+  background-image: url(/Images/homepage/bg_image_01.png);;
+  -webkit-background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding-left: 0rem !important;
+  padding-right: 0rem !important;
+}
+
+.form-gap {
+  padding-top: 70px;
+}
+
+.form-container{
+margin-left: 25rem;
+  margin-right: 25rem;
+
+}
+
+.navbar-brand-auth{
+  top: 10%;
+  transform: translateX(-50%);
+  left: 50%;
+  position: absolute;
+}
+
+// 2. Welcome
+.btn-registerman {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.btn-registersto {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+@media screen and (max-width: 1060px) {
+  .text-w1 {
+font-size: 3.5em;
+  }
+
+  .text-w2 {
+    font-size: 2.5em;
+  }
+}
+
+.section-parallax {
+  background-image: url(/Images/login/background.jpg);
+  -webkit-background-image: url(/Images/login/background.jpg);
+  background-attachment: fixed;
+  -webkit-background-size: cover;
+  background-position: center;
+  margin-bottom: 3rem;
+}
+
+@-webkit-keyframes typing {
+  from {
+    width: 0;
+  }
+}
+
+@-webkit-keyframes blink-caret {
+  50% {
+    border-color: transparent;
+  }
+}
+
+.faq {
+  font: bold 300% Consolas, Monaco, monospace;
+  font-size: 32px;
+  border-right: .1em solid black;
+  width: 21em;
+  width: 34ch;
+  white-space: nowrap;
+  overflow: hidden;
+  -webkit-animation: typing 2s steps(21, end),
+  blink-caret .5s step-end infinite alternate;
+}
+
+.interested {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: center;
+  color: #555;
+  font-weight: 300;
+  font-size: 32px;
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: initial;
+  -webkit-transform: translate3d(0, 0, 0);
+}
+
+.interested:first-of-type {
+  animation: showup 5s infinite;
+}
+
+.interested:last-of-type {
+  width: 0;
+  animation: reveal 1s infinite;
+}
+
+.interested:last-of-type span {
+  margin-left: -355px;
+  animation: slidein 1s infinite;
+}
+
+@keyframes showup {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes slidein {
+  0% {
+    margin-left: -800px;
+  }
+  20% {
+    margin-left: -800px;
+  }
+  35% {
+    margin-left: 0;
+  }
+  100% {
+    margin-left: 0;
+  }
+}
+
+@keyframes reveal {
+  0% {
+    opacity: 0;
+    width: 0;
+  }
+  20% {
+    opacity: 1;
+    width: 0;
+  }
+  30% {
+    width: 355px;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    width: 355px;
+  }
+}
+
+@mixin btn-border-drawing($color: #ccc, $hover: black, $width: 2px, $vertical: top, $horizontal: left, $duration: 0.25s) {
+  box-shadow: inset 0 0 0 $width $color;
+  color: $color;
+  transition: color $duration $duration/3;
+  position: relative;
+
+  &::before,
+  &::after {
+    border: 0 solid transparent;
+    box-sizing: border-box;
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    width: 0;
+    height: 0;
+
+    #{$vertical}: 0;
+    #{$horizontal}: 0;
+  }
+
+  &::before {
+    $h-side: if($horizontal == 'left', 'right', 'left');
+
+    border-#{$vertical}-width: $width;
+    border-#{$h-side}-width: $width;
+  }
+
+  &::after {
+    $v-side: if($vertical == 'top', 'bottom', 'top');
+
+    border-#{$v-side}-width: $width;
+    border-#{$horizontal}-width: $width;
+  }
+
+  &:hover {
+    color: $hover;
+
+    &::before,
+    &::after {
+      border-color: $hover;
+      transition: border-color 0s, width $duration, height $duration;
+      width: 100%;
+      height: 100%;
+    }
+
+    &::before {
+      transition-delay: 0s, 0s, $duration;
+    }
+
+    &::after {
+      transition-delay: 0s, $duration, 0s;
+    }
+  }
+}
+
+.draw-border {
+  @include btn-border-drawing(gold, green, 4px, bottom, right);
+}
+
+.btn-login {
+  background: none;
+  border: none;
+  cursor: pointer;
+  line-height: 1.5;
+  font: 700 1.2rem 'Roboto Slab', sans-serif;
+  padding: 1em 2em;
+  letter-spacing: 0.05rem;
+
+  &:focus {
+    outline: 2px dotted gold;
+  }
+}
+
+.container2 {
+  padding-bottom: 6rem !important;
+}
+
+.description-container {
+  margin-right: 25rem;
+}
+
+.side01 {
+  position: -ms-device-fixed;
+  width: 70%;
+  height: auto;
+  margin-left: 6rem;
+}
+
+.side01content {
+  margin-top: 8%;
+}
+
+.dropdown-item {
+  background-color: gold;
+
+}
+
+@media screen and (max-width: 1060px) {
+  .description-container {
+    margin-right: 5rem;
+  }
+  .faq{
+    font-size: 1rem;
+  }
+
+}
+
+// 3. Login
+#login-logo {
+  background: black;
+  border: gold;
+  height: 300px;
+  width: auto;
+  border-radius: 10px;
+}
+
+.login-container {
+  margin-top: 5rem !important;
+}
+
+.login-form {
+  background: white !important;
+  border-radius: 10px;
+}
+
+@media screen and (max-width: 1060px) {
+  #login-logo {
+    height: 150px;
+    width: auto;
+  }
+}
+
+// 4. Register
+
+.registerman-body {
+  -webkit-background-image: url(/Images/login/background2.jpg);
+  background-image: url(/Images/login/background2.jpg);
+  -webkit-background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding-left: 0rem !important;
+  padding-right: 0rem !important;
+}
+
+.registersto-body {
+  -webkit-background-image: url(/Images/login/background_3.jpg);
+  background-image: url(/Images/login/background_3.jpg);
+  -webkit-background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding-left: 0rem !important;
+  padding-right: 0rem !important;
+}
+
+// 5. Sidebar
+.sidebar {
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: #212327;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
+
+.sidebar a {
+  display: block;
+  color: black;
+  padding: 16px;
+  text-decoration: none;
+}
+
+.sidebar a.active {
+  background-color: #D3BC3F;
+  color: black;
+}
+
+.sidebar a:hover:not(.active) {
+  background-color: #555;
+  color: white;
 }
