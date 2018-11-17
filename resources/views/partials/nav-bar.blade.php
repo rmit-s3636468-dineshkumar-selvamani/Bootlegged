@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark fixed-top animated faded-In" id="navbar">
+<nav class="navbar navbar-expand-md navbar-dark fixed-top animated faded-In" >
     <div class="container">
         <a class="navbar-brand" href="/">
             <img src={{ asset('Images/logo_gold.png') }} width="80" height="auto" class="d-inline-block align-top float-left" alt=""> </a>
@@ -7,7 +7,8 @@
         </button>
         <div class="collapse navbar-collapse text-center justify-content-md-start" id="navbar2SupportedContent">
             <ul class="navbar-nav">
-
+                <li class="nav-item active ">
+                    <a class="nav-link text-white" href="#login">Login</a>
                 <li class="nav-item active ">
                     <a class="nav-link text-white" href="#register">Register</a>
                 </li>
@@ -20,14 +21,12 @@
 </nav>
 
 <script type="text/javascript">
-    var prevScrollpos = window.pageYOffset;
-    window.onscroll = function() {
-        var currentScrollPos = window.pageYOffset;
-        if (prevScrollpos > currentScrollPos) {
-            document.getElementById("navbar").style.top = "0";
+    $(document).scroll(function () {
+        var height = $(".navbar").height();
+        if ($(this).scrollTop() > 470) {
+            $(".navbar").css("background-color", "black");
         } else {
-            document.getElementById("navbar").style.top = "-150px";
+            $(".navbar").css("background-color", "transparent");
         }
-        prevScrollpos = currentScrollPos;
-    }
+    });
 </script>

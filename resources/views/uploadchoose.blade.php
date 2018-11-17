@@ -214,7 +214,7 @@ div.content {
      <!-- Login Div -->
 
         <div class="moving_size" style="height: 500px;">
-            <img src="Images/reg_pic.jpg" name="about_pic" class="about_pic" style="height:900px; ">
+            <img src="Images/reg_pic.jpg" name="about_pic" class="about_pic" style="height:600px; ">
           
          <div class="about" id="about" style="margin-top: -470px; margin-left: 40px;">
              

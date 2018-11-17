@@ -224,7 +224,7 @@ span.twitter-typeahead
     <label for="producttype" style = "color:black" class="col-4 col-form-label">Product Name</label> 
     <div class="col-3">
       
-        <div class="starter-template" style="align-text:center">
+            <div class="starter-template" style="align-text:center">
 
        @if($product_type[0] == '')
         <input type="text" style="width:227px;" name="productname"  class="typeahead form-control" id="search" placeholder="Search by product Name" autocomplete="on" required="required">

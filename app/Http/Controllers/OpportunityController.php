@@ -136,6 +136,8 @@ class OpportunityController extends Controller
         //Set base url for pagination links to follow e.g custom/url?page=6
         $page->setPath($request->url());
 
+        //dd($tableData);
+
         return view('opportunities', compact('titles','currentColumn','tableData','page','groupName','currentPID'));
     }
 }

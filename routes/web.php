@@ -125,7 +125,7 @@ Route::get('/autofill/{id}', 'AddListingsController@autofillType')->name("Addlis
 
 //Cart Index
 Route::get('/cart', 'CartController@index')->name('cart.index');
-// Add item to cart
+// Add item to cart via get
 Route::get('/addToCart/{id}', 'CartController@addToCart')->name('cart.add-item');
 // Minus quantity function
 Route::post('/updateItem', 'CartController@updateItem')->name('cart.update');

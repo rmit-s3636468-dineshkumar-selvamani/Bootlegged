@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-    <div class="py-5 text-center section-parallax" >
+    <div class="py-5 text-center section-parallax" id="login" >
         <div class="container py-5 mr-auto">
             <div class="row">
                 <div class="col-md-8">

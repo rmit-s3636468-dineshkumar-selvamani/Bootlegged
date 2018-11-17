@@ -10499,6 +10499,10 @@ a.text-dark:focus {
   margin-right: 25rem;
 }
 
+.navbar {
+  background-color: black;
+}
+
 .navbar-brand-auth {
   top: 10%;
   -webkit-transform: translateX(-50%);
@@ -10507,11 +10511,24 @@ a.text-dark:focus {
   position: absolute;
 }
 
+@media screen and (max-width: 600px) {
+  .logo {
+    visibility: visible;
+    position: center;
+    height: 125px;
+    width: 175px;
+    float: left;
+    margin-top: -15px;
+    margin-left: 25%;
+  }
+}
+
 .btn-registerman {
   padding-top: 1rem;
   padding-bottom: 1rem;
   margin-top: 1rem;
   margin-bottom: 1rem;
+  width: 7.25cm;
 }
 
 .btn-registersto {
@@ -10519,6 +10536,7 @@ a.text-dark:focus {
   padding-bottom: 1rem;
   margin-top: 1rem;
   margin-bottom: 1rem;
+  width: 7.25cm;
 }
 
 @media screen and (max-width: 1060px) {
@@ -10787,6 +10805,9 @@ a.text-dark:focus {
 
 .container2 {
   padding-bottom: 6rem !important;
+  background-color: lightyellow;
+  border: black;
+  border-radius: 10px;
 }
 
 .description-container {
@@ -10794,14 +10815,16 @@ a.text-dark:focus {
 }
 
 .side01 {
+  border-radius: 10px;
+  margin-top: 5rem;
   position: -ms-device-fixed;
-  width: 70%;
+  width: 80%;
   height: auto;
   margin-left: 6rem;
 }
 
 .side01content {
-  margin-top: 8%;
+  margin-top: 13rem;
 }
 
 .dropdown-item {
@@ -10815,6 +10838,19 @@ a.text-dark:focus {
 
   .faq {
     font-size: 1rem;
+  }
+
+  .side01 {
+    margin-left: 2.5rem;
+  }
+
+  .side01content {
+    margin-left: 2.5rem;
+  }
+
+  .interested {
+    font-weight: 300;
+    font-size: 22px;
   }
 }
 
@@ -10835,10 +10871,28 @@ a.text-dark:focus {
   border-radius: 10px;
 }
 
+@media screen and (max-width: 600px) {
+  #login-logo {
+    height: 150px;
+    width: auto;
+  }
+
+  .login-form {
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 80%;
+  }
+}
+
 @media screen and (max-width: 1060px) {
   #login-logo {
     height: 150px;
     width: auto;
+  }
+
+  .login-form {
+    margin-left: 10%;
+    margin-right: 10%;
   }
 }
 
