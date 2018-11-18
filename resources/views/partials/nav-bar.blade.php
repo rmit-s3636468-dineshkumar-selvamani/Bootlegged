@@ -1,3 +1,4 @@
+@section('contents')
 <nav class="navbar navbar-expand-md navbar-dark fixed-top animated faded-In" >
     <div class="container">
         <a class="navbar-brand" href="/">
@@ -20,6 +21,7 @@
     </div>
 </nav>
 
+@section('script')
 <script type="text/javascript">
     $(document).scroll(function () {
         var height = $(".navbar").height();

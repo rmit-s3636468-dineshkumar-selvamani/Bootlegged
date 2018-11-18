@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@include('layouts.master')
 @extends('partials.nav-auth')
 
 @section('contents')
@@ -15,51 +15,100 @@
                         @csrf
 
                         <input class="form_box form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
-                               type="email" name="store_email" placeholder="Email" id="store_email" required><br>
+                               type="email" name="store_email" placeholder="Email" id="store_email" required>
                         @if ($errors->has('email'))
                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                         @endif
+                        <br>
 
                         <input class="form_box form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" type="text"
-                               name="store_name" placeholder="Store Name" id="store_name" required><br>
+                               name="store_name" placeholder="Store Name" id="store_name" required>
                         @if ($errors->has('name'))
                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('name') }}</strong>
                                     </span>
                         @endif
+                        <br>
 
                         <input class="form_box form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
-                               type="Password" name="password" placeholder="Password" id="password" required><br>
+                               type="Password" name="password" placeholder="Password" id="password" required>
                         @if ($errors->has('password'))
                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
                         @endif
+                        <br>
 
                         <input class="form-control" type="Password" name="password_confirmation"
                                placeholder="Confirm Password" id="password-confirm" required><br>
 
                         <input class="form-control" type="text" name="store_address" placeholder="Address Line "
-                               id="store_address" required><br>
+                               id="store_address" required>
+                        @if ($errors->has('store_address'))
+                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('store_address') }}</strong>
+                                    </span>
+                        @endif
+                        <br>
 
                         <input class="form-control" type="text" name="store_suburb" placeholder="Suburb"
                                id="store_suburb"
-                               required><br>
+                               required>
+                        @if ($errors->has('store_suburb'))
+                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('store_suburb') }}</strong>
+                                    </span>
+                        @endif
+                        <br>
 
-                        <input class="form-control" type="text" name="store_state"
-                               placeholder="State(VIC,NSW,WA,QLD,SA,TAS)"
-                               id="store_state" required><br>
+                        <div class="col col-state">
+                            <div class="ui-select">
+                                <select name="manu_state" class="form-control" id="manu_state">
+                                    <option value="State" selected="selected">State</option>
+                                    <option value="VIC">VIC</option>
+                                    <option value="NSW">NSW</option>
+                                    <option value="WA">WA</option>
+                                    <option value="QLD">QLD</option>
+                                    <option value="SA">SA</option>
+                                    <option value="TAS">TAS</option>
+
+                                </select>
+                            </div>
+                        </div>@if ($errors->has('manu_state'))
+                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('manu_state') }}</strong>
+                                    </span>
+                        @endif
+                        <br>
 
                         <input class="form-control" type="number" name="store_postcode" placeholder="Post Code"
-                               id="store_postcode" required><br>
+                               id="store_postcode" required>
+                        @if ($errors->has('store_postcode'))
+                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('store_postcode') }}</strong>
+                                    </span>
+                        @endif
+                        <br>
 
                         <input class="form-control" type="number" name="store_phone" placeholder="Contact Number"
-                               id="store_phone" required><br>
+                               id="store_phone" required>
+                        @if ($errors->has('store_phone'))
+                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('store_phone') }}</strong>
+                                    </span>
+                        @endif
+                        <br>
 
                         <input class="form-control" type="text" name="store_abn" placeholder="ABN Number" id="store_abn"
-                               required><br>
+                               required>
+                        @if ($errors->has('store_abn'))
+                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('store_abn') }}</strong>
+                                    </span>
+                        @endif
+                        <br>
 
                         <input class="form-control" type="text" name="store_license"
                                placeholder="Business License Number" id="store_license" required><br>
@@ -67,12 +116,14 @@
                         <input class="form-control" type="text" name="store_Stripeid" placeholder="Stripe ID"
                                id="store_Stripeid" required><br>
 
+                        <br>
+
 
                         <a href="">
                             <button type="submit" class="btn btn-primary btn-lg btn-block text-dark text-lg-center">
                                 <span>REGISTER </span></button>
                         </a>
-
+                        <br>
 
                     </form>
                 </div>
@@ -81,7 +132,7 @@
     </div>
     </body>
 
-
+@section('script')
     <script>
         /* When the user clicks on the button,
       toggle between hiding and showing the dropdown content */

@@ -37,6 +37,7 @@ margin-left: 25rem;
 
 .navbar{
   background-color: black;
+  height: 70px;
 }
 
 .navbar-brand-auth{
@@ -371,12 +372,15 @@ border-radius: 10px;
 }
 
 // 4. Register
+.col-state{
+  width: 25%;
+  margin-left: -2%;
+}
 
 .registerman-body {
   -webkit-background-image: url(/Images/login/background2.jpg);
   background-image: url(/Images/login/background2.jpg);
   -webkit-background-size: cover;
-  background-position: center;
   background-repeat: no-repeat;
   padding-left: 0rem !important;
   padding-right: 0rem !important;
@@ -386,10 +390,33 @@ border-radius: 10px;
   -webkit-background-image: url(/Images/login/background_3.jpg);
   background-image: url(/Images/login/background_3.jpg);
   -webkit-background-size: cover;
-  background-position: center;
   background-repeat: no-repeat;
   padding-left: 0rem !important;
   padding-right: 0rem !important;
+}
+
+@media (max-width: 575.98px) {
+  .col-state{
+    width: 8rem;
+    margin-left: -5%;
+  }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .col-state {
+    width: 8rem;
+    margin-left: -3%;
+  }
+
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .col-state {
+    width: 6rem;
+    margin-left: -3%;
+  }
+
 }
 
 // 5. Sidebar
