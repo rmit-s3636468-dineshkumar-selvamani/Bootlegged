@@ -12,6 +12,10 @@ use App\Store;
 use App\User;
 use DateTime;
 
+use Stripe\Stripe;
+use Stripe\Charge;
+use Stripe\Customer;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -115,6 +119,8 @@ class CartController extends Controller
             $oldCart = Session::get('cart');
             $cart = new Cart($oldCart);
 
+            $this->StripeCheckOut($request, $cart);
+
             $today = new DateTime();
 
             // Loop each item in the cart
@@ -202,5 +208,36 @@ class CartController extends Controller
 
         Session::forget('cart');
         return redirect()->back()->with('success', 'Successfully purchased products!');
+    }
+
+    private function StripeCheckOut(Request $request, Cart $cart)
+    {
+
+
+        Stripe::setApiKey(env('STRIPE_SECRET'));
+
+        $token = $_POST['stripeToken'];
+        $email = $_POST['stripeEmail'];
+
+        //dd($request->all(), $token);
+
+        try {
+            $customer = Customer::create(array("email" => $email));
+            $charge = Charge::create(array(
+                "amount" => $cart->totalPrice * 100,
+                "currency" => "aud",
+                "source" => $token,
+                "description" => "Test Charge",
+                "name" => $request->input('name'),
+                "receipt_email" => $email
+
+            ));
+
+        } catch (\Exception $e) {
+            dd($e);
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+
+        Session::forget('cart');
     }
 }
