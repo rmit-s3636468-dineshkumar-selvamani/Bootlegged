@@ -1,4 +1,4 @@
-@extends('layouts.store')
+@include('layouts.store')
 @section('content')
 
     <style>
@@ -324,29 +324,30 @@
     <body>
 
 
-      <div class="sidebar">
-  <img style=" position: absolute; display: inline;" class="logo"  alt ="logo" src="/Images/logo1.png">
-  <a  href="#home" style="margin-top: 90px; color: white; text-align: center;">Welcome,<br> {{Auth::user()->business_name}}</a>
-   
-  @if( Auth::user()->type == 'StoreOwner')
-  <a  href="/home" style="color: white;">Market Place</a>
-   @endif
-  <a href="/mylistings" style="color: white;">My Listing</a>
-  <a href="/uploadchoose" style="color: white;">Add Listing</a>
-  <a href="/history" style="color: white;">History</a>
+    <div class="sidebar">
+        <img style=" position: absolute; display: inline;" class="logo" alt="logo" src="/Images/logo1.png">
+        <a href="#home"
+           style="margin-top: 90px; color: white; text-align: center;">Welcome,<br> {{Auth::user()->business_name}}</a>
+
+        @if( Auth::user()->type == 'StoreOwner')
+            <a href="/home" style="color: white;">Market Place</a>
+        @endif
+        <a href="/mylistings" style="color: white;">My Listing</a>
+        <a href="/uploadchoose" style="color: white;">Add Listing</a>
+        <a href="/history" style="color: white;">History</a>
         @if( Auth::user()->type == 'StoreOwner')
             <a href="slowstock" style="color: white;">Slow Movers</a>
             <a href="opportunities" style="color: white;">Opportunities</a>
         @endif
-   <hr style="border-style: groove;
-    border-width: 1px;"> 
-  <a href="/editProfile" style="color: white;">Edit Profile</a>
-  @if( Auth::user()->type == 'StoreOwner')
-  <a href="/cart" style="color: white;" class="active">My Cart <span class="badge badge-warning">{{ Session::has('cart') ? Session::get('cart')->totalQuantity : '' }}</span></a>
-  @endif
-  <a href="{{URL::to('logout')}}" style="color: white;">Logout</a>
-</div>
-
+        <hr style="border-style: groove;
+    border-width: 1px;">
+        <a href="/editProfile" style="color: white;">Edit Profile</a>
+        @if( Auth::user()->type == 'StoreOwner')
+            <a href="/cart" style="color: white;" class="active">My Cart <span
+                        class="badge badge-warning">{{ Session::has('cart') ? Session::get('cart')->totalQuantity : '' }}</span></a>
+        @endif
+        <a href="{{URL::to('logout')}}" style="color: white;">Logout</a>
+    </div>
 
 
     <!-- Main view -->
@@ -367,38 +368,48 @@
             <div class="starter-template" style="text-align: center; margin-left: 10%; margin-right: 10%;">
                 @if(Session::has('cart'))
 
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button class="action action--button action--buy " disabled><span
+                                        class="product__price highlight ">Total Item : {{$totalQuantity}}</span></button>
 
-                    <button class="action action--button action--buy " disabled><span
-                                class="product__price highlight ">Total Item : {{$totalQuantity}}</span></button>
+                            <button class="action action--button action--buy "><span
+                                        class="product__price highlight">Total Price : $ {{$totalPrice}}</span></button>
+
+                            <a href="{{route('cart.clear')}}" class="action action--button action--buy"><span
+                                        class="product__price highlight text-danger">Clear Cart</span></a>
+
+                            <form action="{{route('cart.checkout')}}" method="POST" class="from stripe-form">
+                                {{ csrf_field() }}
+                                <script
+                                        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                        data-key="pk_test_Ekz2ZwPAxCeRnHSoRTFTzBVp"
+                                        data-currency="AUD"
+                                        data-amount={{$totalPrice*100}}
+                                                data-name="Bootlegged.com.au"
+                                        data-description="Pay"
+                                        data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                                        data-locale="auto"
+                                        data-zip-code="false">
+                                </script>
+                                <script>
+
+                                    document.getElementsByClassName("stripe-button-el")[0].style.display = 'none';
+                                </script>
+                                <button class="action action--button action--buy "><span
+                                            class="product__price highlight text-white">Checkout</span></button>
+                            </form>
+                        </div>
+
+                    </div>
 
 
-                    <button class="action action--button action--buy "><span
-                                class="product__price highlight">Total Price : $ {{$totalPrice}}</span></button>
 
-                    <a href="{{route('cart.clear')}}" class="action action--button action--buy"><span
-                                class="product__price highlight text-danger">Clear Cart</span>
-                    </a>
 
-                    <form action="{{route('cart.checkout')}}" method="POST">
-                        {{ csrf_field() }}
-                        <script
-                                src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                                data-key="pk_test_TYooMQauvdEDq54NiTphI7jx"
-                                data-currency="AUD"
-                                data-amount={{$totalPrice*100}}
-                                        data-name="Bootlegged.com.au"
-                                data-description="Pay"
-                                data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-                                data-locale="auto"
-                                data-zip-code="false">
-                        </script>
-                        <script>
 
-                            document.getElementsByClassName("stripe-button-el")[0].style.display = 'none';
-                        </script>
-                        <button class="action action--button action--buy "><span
-                                    class="product__price highlight text-white">Checkout</span></button>
-                    </form>
+
+
+
                     <br><br>
                     @include('partials.flash-message')
             </div>
@@ -409,7 +420,21 @@
             @foreach($products as $product)
 
                 <div class="product">
-                   <div class="product__info"
+                    <div class="product__info"
+                         />
+                    @if($product['item']->image != '')
+                        <img src="{{url('storage/'.$product['item']->image)}}" class="product__image"data-toggle="modal"
+                             data-target="#prod_details" data-prodname="{{$product['item']['product_itemName']}}"
+                             data-type="{{$product['item']['Listing_type']}}"
+                             data-total_qty="{{ $product['item']['Listing_qty'] }} "
+                             data-unit=" ${{number_format($product['item']['Listing_unitPrice'], 2) }}"
+                             data-total="${{number_format($product['item']['Listing_totalPrice'], 2)}}"
+                             data-expiry="{{ $product['item']['Listing_expiry'] }}"
+                             data-vintage="{{ $product['item']['Listing_vintage'] }}"
+                             data-condition="{{ $product['item']['Listing_condition'] }}" onmouseover=""
+                             style="cursor: pointer;"/>
+                    @else
+                        <img class="product__image" src="{{ asset('Images/1.png') }}" alt="Product 1"
                              data-toggle="modal"
                              data-target="#prod_details" data-prodname="{{$product['item']['product_itemName']}}"
                              data-type="{{$product['item']['Listing_type']}}"
@@ -420,56 +445,52 @@
                              data-vintage="{{ $product['item']['Listing_vintage'] }}"
                              data-condition="{{ $product['item']['Listing_condition'] }}" onmouseover=""
                              style="cursor: pointer;"/>
-						@if($product['item']->image != '')
-          				<img src = "{{url('storage/'.$product['item']->image)}}" class="product__image"/>
-          				@else
-						<img class="product__image" src="{{ asset('Images/1.png') }}" alt="Product 1" style="height: 160px; width: 160px;" />
-						@endif	
+                    @endif
 
 
-                        <h6 class="product__name highlight"
-                            style="color: white">{{$product['item']['product_itemName']}}</h6>
-                        <br>
-                        <h6 class="product__quantity highlight" style="color: green"> IN STOCK
-                            : {{$product['item']['Listing_qty']}} bottles</h6>
+                    <h6 class="product__name highlight"
+                        style="color: white">{{$product['item']['product_itemName']}}</h6>
+                    <br>
+                    <h6 class="product__quantity highlight" style="color: green"> IN STOCK
+                        : {{$product['item']['Listing_qty']}} bottles</h6>
 
-                        <span class="product__price extra highlight">Type - {{$product['item']['Listing_type']}} </span>
-                        <span class="product__price extra highlight">Unit Price - {{$product['item']['Listing_unitPrice']}} </span>
-                        <span class="product__price extra highlight">Expiry - {{$product['item']['Listing_expiry']}} </span>
-                        <span class="product__price extra highlight">Vintage - {{$product['item']['Listing_vintage']}} </span>
-                        <span class="product__price extra highlight">Condition - {{$product['item']['Listing_condition']}} </span>
-                        <span class="product__price highlight"> Price : $ {{$product['item']['Listing_unitPrice']}}
-                            each</span>
-                        <form method="post" action="{{ URL::to('/updateItem')}}" id="cart-qty-form">
-                            {{ csrf_field() }}
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
+                    <span class="product__price extra highlight">Type - {{$product['item']['Listing_type']}} </span>
+                    <span class="product__price extra highlight">Unit Price - {{$product['item']['Listing_unitPrice']}} </span>
+                    <span class="product__price extra highlight">Expiry - {{$product['item']['Listing_expiry']}} </span>
+                    <span class="product__price extra highlight">Vintage - {{$product['item']['Listing_vintage']}} </span>
+                    <span class="product__price extra highlight">Condition - {{$product['item']['Listing_condition']}} </span>
+                    <span class="product__price highlight"> Price : $ {{$product['item']['Listing_unitPrice']}}
+                        each</span>
+                    <form method="post" action="{{ URL::to('/updateItem')}}" id="cart-qty-form">
+                        {{ csrf_field() }}
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
                                         <span class="product__price highlight input-group-text"
                                         > Quantity</span>
-                                </div>
+                            </div>
 
-                                <input type="hidden" name="cart-id" value="{{$product['item']['id']}}">
-                                <input class="cart-item-qty product__price highlight input-group form-control text-center h-40"
-                                       min="1" max="{{$product['item']['Listing_qty']}}" type="number"
-                                       name="cart-item-qty"
-                                       value="{{$product['Listing_qty']}}" id="cart-item-id"
-                                       placeholder="{{$product['Listing_qty']}}" required></div>
-
-
-                            <button class="action action--button action--buy" type="submit"><i
-                                        class="fas fa-redo"></i><span
-                                        class="action__text">Update Quantity</span></button>
-
-                        </form>
-
-                        <a href="{{route('cart.remove',['id' => $product['item']['id']])}}">
-                            <button class="action action--button action--buy"><i
-                                        class="fa fa-ban"></i><span
-                                        class="action__text">Remove</span></button>
-                        </a>
+                            <input type="hidden" name="cart-id" value="{{$product['item']['id']}}">
+                            <input class="cart-item-qty product__price highlight input-group form-control text-center h-40"
+                                   min="1" max="{{$product['item']['Listing_qty']}}" type="number"
+                                   name="cart-item-qty"
+                                   value="{{$product['Listing_qty']}}" id="cart-item-id"
+                                   placeholder="{{$product['Listing_qty']}}" required></div>
 
 
-                    </div>
+                        <button class="action action--button action--buy" type="submit"><i
+                                    class="fas fa-redo"></i><span
+                                    class="action__text">Update Quantity</span></button>
+
+                    </form>
+
+                    <a href="{{route('cart.remove',['id' => $product['item']['id']])}}">
+                        <button class="action action--button action--buy"><i
+                                    class="fa fa-ban"></i><span
+                                    class="action__text">Remove</span></button>
+                    </a>
+
+
+                </div>
 
                 </div>
             @endforeach
@@ -587,12 +608,6 @@
             modal.find('.modal-body #condition').val(condition);
         })
     </script>
-
-    <script>
-        $("#cart-qty-form").validate();
-    </script>
-
-
 
 
     <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
