@@ -518,12 +518,10 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <a href="{{route('cart.add-item',['id' => $product[id]])}}">
-                    <button type="button" class="btn btn-primary"
-                            style="background-color: rgba(211, 188, 63); border-color: rgba(211, 188, 63);"><i
-                                class="fa fa-shopping-cart"></i>Add to Cart
-                    </button>
-                </a>
+                <button type="submit" class="btn btn-primary" id="id" onclick="window.location.href = '/addToCart/'+document.getElementById('id').value;"
+                        style="background-color: #D3BC3F; border-color: #D3BC3F;" ><i class="fa fa-shopping-cart"></i>Add
+                    to Cart
+                </button>
             </div>
         </div>
     </div>
@@ -542,6 +540,7 @@
         var expiry = button.data('expiry')
         var vintage = button.data('vintage')
         var condition = button.data('condition')
+        var id = button.data('id')
 
         var modal = $(this)
 
@@ -553,6 +552,7 @@
         modal.find('.modal-body #expiry').val(expiry);
         modal.find('.modal-body #vintage').val(vintage);
         modal.find('.modal-body #condition').val(condition);
+        modal.find('.modal-footer #id').val(id);
     })
 </script>
 

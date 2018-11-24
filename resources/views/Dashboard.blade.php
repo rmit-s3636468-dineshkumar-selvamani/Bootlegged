@@ -442,7 +442,7 @@
                          data-total="${{number_format($item->Listing_totalPrice, 2)}}"
                          data-expiry="{{ $item->Listing_expiry }}" data-vintage="{{ $item->Listing_vintage }}"
                          data-condition="{{ $item->Listing_condition }}"
-                         data-url="{{route('cart.add-item',['id' => $item -> id])}}" onmouseover=""
+                          onmouseover=""
                          style="cursor: pointer;">
 
                         @if($item->image != '')
@@ -516,7 +516,8 @@
 
 
 <!-- Modal -->
-<div class="modal fade pop-upBox" id="prod_details" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+<div class="modal fade" id="prod_details" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalCenterTitle"
      aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -526,13 +527,10 @@
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="pop-upForm" action="" method="post">
-                @csrf
                 <div class="modal-body table-responsive">
 
 
                     <table class="table table-dark">
-
                         <tr>
                             <td><label>Product Type: </label></td>
                             <td><input type="text" id="type"
@@ -585,13 +583,12 @@
                     </table>
                 </div>
                 <div class="modal-footer">
-
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary btn-addtocart"
-                            style="background-color: #D3BC3F; border-color: #D3BC3F;"><i
-                                class="fa fa-shopping-cart"></i>Add
+                    <button type="submit" class="btn btn-primary" id="id" onclick="window.location.href = '/addToCart/'+document.getElementById('id').value;"
+                            style="background-color: #D3BC3F; border-color: #D3BC3F;" ><i class="fa fa-shopping-cart"></i>Add
                         to Cart
                     </button>
+                    </form>
 
                 </div>
             </form>
@@ -599,16 +596,6 @@
     </div>
 </div>
 </div>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('.pop-upBox').click(function () {
-            var url = $(this).attr('data-url');
-
-            $("#pop-upForm").attr("action", url);
-        });
-    });
-</script>
 
 <script type="text/javascript">
     $('#prod_details').on('show.bs.modal', function (event) {
@@ -635,7 +622,7 @@
         modal.find('.modal-body #expiry').val(expiry);
         modal.find('.modal-body #vintage').val(vintage);
         modal.find('.modal-body #condition').val(condition);
-        modal.find('.modal-footer #addtocart').val(productid);
+        modal.find('.modal-footer #id').val(productid);
     })
 </script>
 
