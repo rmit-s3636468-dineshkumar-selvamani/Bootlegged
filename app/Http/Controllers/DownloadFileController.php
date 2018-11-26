@@ -7,11 +7,7 @@ use Illuminate\Http\Response;
 use Auth;
 class DownloadFileController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */ 
+    
     public function __construct()
     {
         $this->middleware('auth');

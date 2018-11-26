@@ -21,10 +21,6 @@ class CheckoutController
         return view('/checkout');
     }
 
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function checkout(Request $request)
     {
 

@@ -11,7 +11,8 @@
                     <tr>
                 
                 <td><label>Total Quantity: </label></td>
-                <td><input type="text" id="tqty" name="tqty" class="form-control here{{ $errors->has('tqty') ? ' is-invalid' : '' }}" style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39); " value="{{old('tqty')}}" required></td>
+                <td><input type="text" id="tqty" name="tqty" class="form-control here{{ $errors->has('tqty') ? ' is-invalid' : '' }}"  style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39); " value="{{old('tqty')}}" required></td>
+                <div id="tq"></div>
                  @if ($errors->has('tqty'))
                                     <div class="alert alert-danger">
                                         <strong id="tqty">{{ $errors->first('tqty') }}</strong>
@@ -22,6 +23,7 @@
                     <tr>
                 <td><label>Unit Price: &nbsp;&nbsp;&nbsp;&nbsp;   $</label></td>
                 <td><input type="text" id="unitPrice" class="form-control here{{ $errors->has('unitPrice') ? ' is-invalid' : '' }}" name="unitPrice" style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39); " value="{{old('unitPrice')}}" required></td>
+                <div id="up"></div>
                  @if ($errors->has('unitPrice'))
                                     <div class="alert alert-danger">
                                         <strong>{{ $errors->first('unitPrice') }}</strong>
@@ -42,6 +44,7 @@
                     <tr>
                 <td><label>Expiry: </label></td>
                 <td><input type="text" id="expiry" name="expiry" class="form-control here {{ $errors->has('expiry') ? ' is-invalid' : '' }}" style="background-color: rgb(33,35,39); color: white; border-color: rgb(33,35,39); " value="{{old('expiry')}}"></td>
+                <div id="ex"></div>
                 @if ($errors->has('expiry'))
                                     <div class="alert alert-danger">
                                         <strong id="expiry">{{ $errors->first('expiry') }}</strong>
