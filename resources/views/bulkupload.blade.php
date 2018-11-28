@@ -127,28 +127,7 @@ div.content {
 
   </style>
     <body>
-     <div class="sidebar">
-  <img style=" position: absolute; display: inline;" class="logo"  alt ="logo" src="/Images/logo1.png">
-  <a  href="#home" style="margin-top: 90px; color: white; text-align: center;">Welcome,<br> {{Auth::user()->business_name}}</a>
-   
-  @if( Auth::user()->type == 'StoreOwner')
-  <a  href="/home" style="color: white;">Market Place</a>
-   @endif
-  <a href="/mylistings" style="color: white;" >My Listing</a>
-  <a href="/uploadchoose" class="active" >Add Listing</a>
-  <a href="/history" style="color: white;">History</a>
-         @if( Auth::user()->type == 'StoreOwner')
-             <a href="slowstock" style="color: white;">Slow Movers</a>
-             <a href="opportunities" style="color: white;">Opportunities</a>
-         @endif
-  <hr style="border-style: groove;
-    border-width: 1px;"> 
-  <a href="/editProfile" style="color: white;">Edit Profile</a>
-  @if( Auth::user()->type == 'StoreOwner')
-  <a href="/cart" style="color: white;">My Cart <span class="badge badge-warning">{{ Session::has('cart') ? Session::get('cart')->totalQuantity : '' }}</span></a>
-  @endif
-  <a href="{{URL::to('logout')}}" style="color: white;">Logout</a>
-</div>
+    @include('sideNavBar')
       <div class="view" style="margin-left: 14%;">
       <!-- Blueprint header -->
       <header class="bp-header cf">
@@ -162,7 +141,7 @@ div.content {
           </div>
    
 @endif
-         <div class="downloadfile">
+         <div class="downloadfile text-center">
           <p> Please download the template given in the link below</p><br>
         <a href="/downloads">  Download Template </a><br><br> 
 
@@ -170,10 +149,10 @@ div.content {
       </div>
 
         <div class="container" style="color: black;">
-        <div class = "content">
+        <div class = "content text-center">
           <h1>File Upload</h1><br>
           <form action = "{{URL::to('upload')}}" method = "post" enctype="multipart/form-data">  
-            <label style="color: black; margin-left: 100px;">Select file to upload:</label>
+            <label style="color: black;">Select file to upload:</label>
             <input style="color: black;" type="file"  name="file" id="file">
              @if ($errors->has('file'))
                                      <div class="alert alert-danger">
