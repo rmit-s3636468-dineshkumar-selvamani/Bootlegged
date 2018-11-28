@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 class HistoryController extends Controller
 {
     public function index() {
-        //return 'Controller activated!';
+        
         if(Auth::user()->type == "StoreOwner") {
             $Sellertitles = array("Buyer","Product","Quantity","Unit Price","Sub Total","Date");
             $Buyertitles = array("Seller","Product","Quantity","Unit Price","Sub Total","Date");
@@ -46,18 +46,12 @@ class HistoryController extends Controller
 
     }
 
-    /*
-     * param tablename: the tablename need to be paginated
-     * param record: how much record showed in one page
-     * param sql: Select [] from products, only write the missing sql in []
-     *            remember to pass in the column name we need in database table
-     * return post: return the record number of data to be display
-    */
+    
     public function getTableData($tableName,$record,$sql){
         $posts = DB::table($tableName)
-            ->select(DB::raw($sql))
-            ->paginate($record);
-        //$posts = DB::select($sql)->paginate($recode);
+                     ->select(DB::raw($sql))
+                     ->paginate($record);
+        
         return $posts;
     }
 

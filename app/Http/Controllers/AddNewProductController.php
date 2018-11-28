@@ -11,51 +11,36 @@ class AddNewProductController extends Controller
     public function savenewprod(Request $req)
     {
       if($req->get('expiry') != '')
-    {
-    $this->validate($req,[
+      {
+          $this->validate($req,[
           'productname' => 'required|min:5',
           'product_quantity' => 'required|integer',
           'unitprice' => 'required|between:0,99.99',
           'totalprice' => 'required|between:0,99.99',
           'expiry' => 'date_format:Y-m-d|after:tomorrow',
-          
-        ],[
+           ],[
           'productname.exists' => ' The product name doesnt match with our record.',
           'expiry.after' => 'Expiry date cant be in past',
-
- 
-       
-         
         ]);
-
-    }
-    else
-    {
-      $this->validate($req,[
+      }
+      else
+      {
+          $this->validate($req,[
           'productname' => 'required|min:5',
           'product_quantity' => 'required|integer',
            'unitprice' => 'required|between:0,99.99',
           'totalprice' => 'required|between:0,99.99',
           'productimage' => 'image',
-        ],[
+           ],[
           'productname.exists' => ' The product name doesnt match with our record.',
-         
-
- 
           'productimage.image' => ' Please upload a image file.'
-         
-        ]);
+         ]);
+      }
 
-
-
-    }
-
-       
-
-    	if(Auth::user()->type == "Manufacturer")
+      if(Auth::user()->type == "Manufacturer")
     	{
-    		 Newproduct::create([
-    		'pmanu_id' => Auth::user()->manu_id,
+        	 Newproduct::create([
+        	 'pmanu_id' => Auth::user()->manu_id,
            'Product_name' => $req->get('productname'),
            'Product_type' =>  $req->get('producttype'),
            'Product_brand' => $req->get('product_brand'),
@@ -71,11 +56,11 @@ class AddNewProductController extends Controller
            
        ]);
     		 return back()->with('message','We will get back to you via mail once we verified the details you provided');
-    	}
+    }
     	else
     	{
-    		 Newproduct::create([
-    		'pstore_id' => Auth::user()->store_id,
+    		   Newproduct::create([
+    		   'pstore_id' => Auth::user()->store_id,
            'Product_name' => $req->get('productname'),
            'Product_type' =>  $req->get('producttype'),
            'Product_brand' => $req->get('product_brand'),

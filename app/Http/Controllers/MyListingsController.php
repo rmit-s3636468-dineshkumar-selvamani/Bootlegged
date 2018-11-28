@@ -12,11 +12,7 @@ use Illuminate\Support\Facades\Storage;
 
 class MyListingsController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */ 
+    
     public function __construct()
     {
         $this->middleware('auth');
@@ -24,37 +20,24 @@ class MyListingsController extends Controller
 
     protected $redirectTo = '/mylistings';
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {   
             if(Auth::user()->type == "StoreOwner")
             {
-            $products = Listings::where('lstore_id',Auth::user()->store_id )
-             ->join('products', 'products.product_id', '=', 'listings.lproduct_id')
-             ->paginate(9);
-            
-        //  // $products = DB::table('store_listings');
-
-
-
-        return view('MyListings')->with(['products'=>$products]);
-
+                $products = Listings::where('lstore_id',Auth::user()->store_id )
+                                     ->join('products', 'products.product_id', '=', 'listings.lproduct_id')
+                                     ->paginate(9);
+                
+                 return view('MyListings')->with(['products'=>$products]);
             }
             else
             {
                  $products = Listings::where('lmanu_id', '=', Auth::user()->manu_id ) 
-            ->join('products', 'products.product_id', '=', 'listings.lproduct_id')
-            ->paginate(9);
+                                        ->join('products', 'products.product_id', '=', 'listings.lproduct_id')
+                                        ->paginate(9);
          
-           
-
-            return view('MyListings')->with(['products'=>$products]);
+                return view('MyListings')->with(['products'=>$products]);
             }
-
 
     }
 
@@ -73,49 +56,39 @@ class MyListingsController extends Controller
     }
 
     public function saveprod(Request $req)
-    {
-            
-             $this->validate($req,[
-          
+    {     
+          $this->validate($req,[
           'tqty' => 'required|integer',
-          // 'expiry' => 'date_format:Y-m-d|after:tomorrow',
           'pimage' => 'image',
+          'expiry' => 'date_format:Y/m/d'
         ],[
           'tqty.integer' => 'Invalid Quantity type.',
           'tqty.required' => 'Product Quantity cant be empty.',
-          // 'expiry.after' => 'Expiry date can not be in past.',
-
- 
-          'pimage.image' => ' Please upload a image file.'
+          'pimage.image' => ' Please upload a image file.',
+          'expiry.date_format' => "Enter a valid Date(yyyy/mm/dd)"
          
         ]);
 
-
-
-            $image_name = Listings::where('id',$req->get('prodId'))->pluck('image');
+         $image_name = Listings::where('id',$req->get('prodId'))->pluck('image');
        
-
-            if($req->hasFile('pimage'))
-            {
-                    $file = $req->file('pimage');
-                 
-                $fileName = date("Ymdhisa").'.'.$file->getCLientOriginalExtension();
-                $req->file('pimage')->storeAs('public',$fileName);
+        if($req->hasFile('pimage'))
+        {
+            $file = $req->file('pimage');  
+            $fileName = date("Ymdhisa").'.'.$file->getCLientOriginalExtension();
+            $req->file('pimage')->storeAs('public',$fileName);
                 
+            Listings::where('id',$req->get('prodId'))
+                       ->update(['Listing_totalPrice' => $req->get('totalPrice'), 'Listing_unitPrice' => $req->get('unitPrice'),'Listing_type' => $req->get('type'),'Listing_qty' => $req->get('tqty'),'Listing_expiry' => $req->get('expiry'),'Listing_vintage' => $req->get('vintage'),'Listing_condition' => $req->get('condition'),'image' => $fileName, 'Listing_active' => $req -> get('status')]);
 
-               Listings::where('id',$req->get('prodId'))
-                ->update(['Listing_totalPrice' => $req->get('totalPrice'), 'Listing_unitPrice' => $req->get('unitPrice'),'Listing_type' => $req->get('type'),'Listing_qty' => $req->get('tqty'),'Listing_expiry' => $req->get('expiry'),'Listing_vintage' => $req->get('vintage'),'Listing_condition' => $req->get('condition'),'image' => $fileName, 'Listing_active' => $req -> get('status')]);
-
-                if($image_name[0] != '')
-               { Storage::delete($image_name[0]);
+            if($image_name[0] != '')
+            { Storage::delete($image_name[0]);
                  unlink(storage_path('app/public/'.$image_name[0]));
-                }
             }
+        }
 
-            elseif($image_name == '')
-            
-               
-            {      Listings::where('id',$req->get('prodId'))
+            elseif($image_name == '')   
+            {     
+                   Listings::where('id',$req->get('prodId'))
                              ->update(['Listing_totalPrice' => $req->get('totalPrice'),
                                      'Listing_unitPrice' => $req->get('unitPrice'),
                                      'Listing_type' => $req->get('type'),
@@ -125,13 +98,11 @@ class MyListingsController extends Controller
                                      'Listing_condition' => $req->get('condition'),
                                      'image' => '',
                                       'Listing_active' => $req -> get('status')]);
-
-
             }
-                else
-             {
+            else
+            {
                     Listings::where('id',$req->get('prodId'))
-                        ->update(['Listing_totalPrice' => $req->get('totalPrice'),
+                              ->update(['Listing_totalPrice' => $req->get('totalPrice'),
                                  'Listing_unitPrice' => $req->get('unitPrice'),
                                  'Listing_type' => $req->get('type'),
                                  'Listing_qty' => $req->get('tqty'),
@@ -140,13 +111,10 @@ class MyListingsController extends Controller
                                  'Listing_condition' => $req->get('condition'),
                                  'image' => $image_name[0], 
                                  'Listing_active' => $req -> get('status')]);
-
             }
             
 
-        return back()->with('message','Product Updated Successfully');
-
-             // return Response::json(['success' => '1']);
+        return back()->with('message','Product Updated Successfully');           
       
     }
 }
