@@ -22,3 +22,4 @@ Vue.component('autocomplete',require('./components/Autocomplete.vue'));
 const app = new Vue({
     el: '#app'
 });
+

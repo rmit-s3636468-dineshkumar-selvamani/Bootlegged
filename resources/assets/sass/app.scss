@@ -2,10 +2,14 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 // Variables
 @import 'variables';
+@import 'store';
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
 // 1. General
+body{
+  font-family:'Lato', Calibri, Arial, sans-serif !important;
+}
 .btn-primary {
   background-color: gold !important;
   border-color: gold !important;

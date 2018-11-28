@@ -20,6 +20,8 @@
 
     <script src="https://js.stripe.com/v3/"></script>
 
+
+
     <!-- Bootstrap core JavaScript
 ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -28,6 +30,8 @@
 
     <!-- Import typeahead.js -->
     <script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
+
+
 
     <!-- TypeAhead -->
 
@@ -114,14 +118,13 @@
     }
 
     .sidebar {
-        margin: 0;
+        margin: -64px;
         padding: 0;
         width: 200px;
-        background-color: #f1f1f1;
         position: fixed;
         height: 100%;
         overflow: auto;
-        background-color: rgb(33, 35, 39);
+        background-color: #212327;
     }
 
     .sidebar a {
@@ -331,12 +334,8 @@
     .tt-selectable
       @extend .list-group-item-action*/
 </style>
-<body>
-<nav>
 
-</nav>
-</body>
-<footer>
+@yield('content')
 
-</footer>
+@yield('script')
 </html>

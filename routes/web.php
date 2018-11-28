@@ -128,7 +128,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/clearCart', 'CartController@clearCart')->name('cart.clear');
 
     /* ----- StripeCheckout Controller ----- */
-
+    //Checkout Index
+    Route::get('/checkout', 'StripeCheckoutController@index')->name('checkout.index');
+    //Checkout function
+    Route::get('/checkoutFinal', 'StripeCheckoutController@checkout')->name('checkout.final');
 
     /* ----- Login Controller ----- */
     Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');

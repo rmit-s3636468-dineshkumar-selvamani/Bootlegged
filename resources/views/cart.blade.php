@@ -8,44 +8,6 @@
             /*background-image: url(Images/back.jpg);*/
         }
 
-        ul.topnav {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background-color: #333;
-        }
-
-        ul.topnav li {
-            float: left;
-        }
-
-        ul.topnav li a {
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-        }
-
-        ul.topnav li a:hover:not(.active) {
-            background-color: #111;
-        }
-
-        ul.topnav li a.active {
-            background: rgba(211, 188, 63);
-        }
-
-        ul.topnav li.right {
-            float: right;
-        }
-
-        @media screen and (max-width: 600px) {
-            ul.topnav li.right,
-            ul.topnav li {
-                float: none;
-            }
-        }
 
         #pagination {
             display: inline-block;
@@ -297,28 +259,6 @@
         .tt-selectable
           @extend .list-group-item-action*/
 
-        .StripeElement {
-            background-color: white;
-            height: 40px;
-            padding: 10px 12px;
-            border-radius: 4px;
-            border: 1px solid transparent;
-            box-shadow: 0 1px 3px 0 #e6ebf1;
-            -webkit-transition: box-shadow 150ms ease;
-            transition: box-shadow 150ms ease;
-        }
-
-        .StripeElement--focus {
-            box-shadow: 0 1px 3px 0 #cfd7df;
-        }
-
-        .StripeElement--invalid {
-            border-color: #fa755a;
-        }
-
-        .StripeElement--webkit-autofill {
-            background-color: #fefde5 !important;
-        }
     </style>
 
     <body>
@@ -379,7 +319,7 @@
                             <a href="{{route('cart.clear')}}" class="action action--button action--buy"><span
                                         class="product__price highlight text-danger">Clear Cart</span></a>
 
-                            <form action="{{route('cart.checkout')}}" method="POST" class="from stripe-form">
+                            <form action="{{route('checkout.final')}}" formaction="" class="from stripe-form">
                                 {{ csrf_field() }}
                                 <script
                                         src="https://checkout.stripe.com/checkout.js" class="stripe-button"
@@ -399,6 +339,8 @@
                                 <button class="action action--button action--buy "><span
                                             class="product__price highlight text-white">Checkout</span></button>
                             </form>
+                            <a class="action action--button action--buy" href="{{route('checkout.index')}}"><span
+                                        class="product__price highlight text-white">Checkout</span></a>
                         </div>
 
                     </div>
