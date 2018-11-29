@@ -1,10 +1,3 @@
-<!-- @extends('layouts.app')
-
-@section('content')
- -->
-
-
-
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 	<head>
@@ -19,72 +12,27 @@
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" href="{{ asset('css/demo.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('css/component.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}" />    
+
 
 
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-
-
-		<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
-
-
-  
-
-		<!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-		  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
 
     <!-- Import typeahead.js -->
     <script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
- 
-    <!-- TypeAhead -->
-
-    
-
-
-		<!-- Modal -->
 		
 		<script src="js/modernizr.custom.js"></script>
 	</head>
 
 	<style>
-body {margin: 0;
-      /*background-color: rgb(26,27,31);*/
-      /*background-image: url(Images/back.jpg);*/
+body {  margin: 0;
+        margin: 0;
+        font-family: "Lato", sans-serif;
       }
 
-ul.topnav {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-}
 
-ul.topnav li {float: left;}
-
-ul.topnav li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-ul.topnav li a:hover:not(.active) {background-color: #111;}
-
-ul.topnav li a.active {background: rgba(211, 188, 63);}
-
-ul.topnav li.right {float: right;}
-
-@media screen and (max-width: 600px){
-    ul.topnav li.right, 
-    ul.topnav li {float: none;}
-}
 
 #pagination{
 	display: inline-block;
@@ -113,10 +61,7 @@ ul.topnav li.right {float: right;}
   background-color: rgb(33,35,39);
 }
 
-body {
-  margin: 0;
-  font-family: "Lato", sans-serif;
-}
+
 
 .sidebar {
   margin: 0;
@@ -172,25 +117,19 @@ div.content {
 
 .logo{
                  
-                 visibility: visible;
-                 position: absolute;
-                 height: 125px;
-                 width: 175px;
-                 float: left;
-                 margin-top: -15px;
-                 margin-left: 10px;
+   visibility: visible;
+   position: absolute;
+   height: 125px;
+   width: 175px;
+   float: left;
+   margin-top: -15px;
+   margin-left: 10px;      
+      }
 
-
-
-                 
-             }
-
-             .filter{
-
-              position: relative;
-              margin-left: 250px;
-
-             }
+.filter{
+    position: relative;
+    margin-left: 250px;
+       }
 
              
 
@@ -252,35 +191,18 @@ div.content {
   
 }
 .product__image{
-
-  /*min-height: 260px;*/
-  /*max-height: 260px;*/
-  max-width: 200px ;
  
+  max-width: 200px ;
   height: 200px;
   min-height: 200px;
 }
 
 .product__price{
 
-  /*min-height: 30px;*/
-  /*max-height: 30px;*/
   max-width: 210px;
-
   height :60px;
 }
 
-
-
-
-/*.twitter-typeahead,
-        .tt-hint,
-        .tt-input,
-        .tt-menu{
-            width: auto ! important;
-            font-weight: normal;
-        
-        }*/
 /*Big Box*/
 .twitter-typeahead {
       display: block;
@@ -325,85 +247,52 @@ div.content {
         }
       }
     }
-
-
-
-
-/*Small box*/
-/*span.twitter-typeahead
-  width: 100%
-
-.tt-input
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075)
-
-.tt-menu
-  @extend .list-group
-  box-shadow: 0 5px 10px rgba(0,0,0,.2)
-  width: 100%
-
-.tt-suggestion
-  @extend .list-group-item
-
-.tt-selectable
-  @extend .list-group-item-action*/
 </style>
 
-	<body>
-
-		
-		
+<body>
 
 		@include('sideNavBar')
 
-
-
-		<!-- Main view -->
+  <!-- Main view -->
 		<div class="view" style="margin-left: 14%;">
 			<!-- Blueprint header -->
-			<header class="bp-header cf" >
-				
-				<h1>Market Place</h1>
-				
-			</header>
+			 <header class="bp-header cf" >	
+				<h1>Market Place</h1>	
+			 </header>
 
        <div class="container">
- 
-      <div class="starter-template" style="align-text:center">
-       <form action="/filter" method="get">
+          <div class="starter-template" style="align-text:center">
+              <form action="/filter" method="get">
               @if($prod_name[0] == '')
-                  <input type="text" class="typeahead form-control" name="search" id="search" placeholder="Search by product Name" autocomplete="on">
-                  @else
-        <input type="text" class="typeahead form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" name="search" id="search" placeholder="Search by product Name" autocomplete="on" >
-         @if ($errors->has('search'))
-                                     <div class="alert alert-danger">
-                                        <strong>{{ $errors->first('search') }}</strong>
-                                    </div>
-                                @endif
-        @endif
-        <input type="submit" value="Submit" style="display: none">
-        </form>
-
-      </div>
-       
-</div>
+                <input type="text" class="typeahead form-control" name="search" id="search" placeholder="Search by product Name" autocomplete="on">
+              @else
+               <input type="text" class="typeahead form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" name="search" id="search" placeholder="Search by product Name" autocomplete="on" >
+              @if ($errors->has('search'))
+                <div class="alert alert-danger">
+                    <strong>{{ $errors->first('search') }}</strong>
+                </div>
+              @endif
+              @endif
+              <input type="submit" value="Submit" style="display: none">
+              </form>
+          </div>
+       </div>
 <br><br>
 			
-  <div class="dropdown" style="margin-left: 550px; margin-top: 10px; display: inline; ">
+       <div class="dropdown" style="margin-left: 550px; margin-top: 10px; display: inline; ">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Filter by Type
             </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="/filter/Red Wine">Red Wine</a>
-            <a class="dropdown-item" href="/filter/White Wine">White Wine</a>
-            <a class="dropdown-item" href="/filter/Beer">Beer</a>
-            <a class="dropdown-item" href="/filter/Cider">Cider</a>
-            <a class="dropdown-item" href="/filter/Spirits">Spirits</a>
-            <a class="dropdown-item" href="/filter/Sparkling">Sparkling</a>
-            <a class="dropdown-item" href="/filter/Pre-Mixed">Pre-Mixed</a>
-          </div>
-        </div>  
-
-
+             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="/filter/Red Wine">Red Wine</a>
+                <a class="dropdown-item" href="/filter/White Wine">White Wine</a>
+                <a class="dropdown-item" href="/filter/Beer">Beer</a>
+                <a class="dropdown-item" href="/filter/Cider">Cider</a>
+                <a class="dropdown-item" href="/filter/Spirits">Spirits</a>
+                <a class="dropdown-item" href="/filter/Sparkling">Sparkling</a>
+                <a class="dropdown-item" href="/filter/Pre-Mixed">Pre-Mixed</a>
+             </div>
+      </div>  
 
 			<!-- Product grid -->
 			<section class="grid" style="margin-top: -70px;">
@@ -453,7 +342,7 @@ div.content {
 						
 						
 					</div>
-					<!-- <label class="action action--compare-add"><input class="check-hidden" type="checkbox" /><i class="fa fa-plus"></i><i class="fa fa-check"></i><span class="action__text action__text--invisible">Add to compare</span></label> -->
+					
 
 				</div>
 					<?php $count++; ?>
@@ -626,7 +515,7 @@ div.content {
  
 
 
-	<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+	
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 

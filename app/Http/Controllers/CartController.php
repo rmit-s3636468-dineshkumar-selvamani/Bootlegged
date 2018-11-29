@@ -23,13 +23,12 @@ class CartController extends Controller
     {
         if (!Session::has('cart')) {
             session()->flash('info', 'No item in cart!');
-            //dd($request);
+            
             return view('/cart')->with(['products' => null, 'totalQuantity' => 0, 'totalPrice' => 0]);
         }
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
-        //session()->flash('success','Cart Loaded Succesfully!');
-        //dd($cart);
+       
         return view('/cart')->with(['products' => $cart->items, 'totalQuantity' => $cart->totalQuantity, 'totalPrice' => $cart->totalPrice]);
     }
 
@@ -45,8 +44,7 @@ class CartController extends Controller
 
         $cart->add($product, $product->id);
         $request->session()->put('cart', $cart);
-        // To check whether the cart is storing the correct data
-        //dd($request->session()->get('cart'));
+       
         session()->flash('success', 'Item has been added successfully');
 
         return back();
@@ -101,13 +99,9 @@ class CartController extends Controller
         return back();
     }
 
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
+   
     public function checkout(Request $request)
     {
-        //dd($request->all());
         try {
             if (!Session::has('cart')) {
                 return redirect()->route('/cart');

@@ -340,7 +340,7 @@ div.content {
       </div>
      
       <div class="modal-body table-responsive">
-         <form action="{{URL::to('update')}}" method="post" enctype="multipart/form-data">
+         <form action="{{URL::to('update')}}" method="post"  enctype="multipart/form-data">
           {{csrf_field()}}
                 @include('modalTable')
        <input type="hidden" id="prodId" name="prodId" value="">
@@ -348,7 +348,7 @@ div.content {
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         
-        <button type="submit" class="btn btn-primary" style="background-color: rgba(211, 188, 63); border-color: rgba(211, 188, 63);"><i class="fa fa-check"></i>Save</button>
+        <button type="submit" id="submit" onclick="submitfun()" class="btn btn-primary" style="background-color: rgba(211, 188, 63); border-color: rgba(211, 188, 63);"><i class="fa fa-check"></i>Save</button>
          </form>        
       </div>
     </div>
@@ -425,11 +425,61 @@ div.content {
     </script>
 
    <script>
+    //Unit Price Validation
+   document.getElementById("unitPrice").onblur = function() {
+     var unit = document.getElementById("unitPrice").value;
+     var str = unit.toString();
+    if(!unit.match(/^-?[0-9]*[.][0-9]+$/)) {
+    
+    document.getElementById("up").innerHTML="Invalid Unit Price";
+    document.getElementById("up").style.color="Red";
+    document.getElementById("submit").disabled = true;  }
+  else
+  {
+    document.getElementById("up").innerHTML=null;
+    document.getElementById("submit").disabled = false; 
+  }
+  myFunction()
+  };
 
-   document.getElementById("unitPrice").oninput = function() {myFunction()};
+   
+  //Total Quantity Validation
+   document.getElementById("tqty").onblur = function() {
+    var quan = document.getElementById("tqty").value;
+    var str = quan.toString();
+    if(!str.match(/^[0-9]*$/)) {
+    
+    document.getElementById("tq").innerHTML="Invalid Total Quantity";
+    document.getElementById("tq").style.color="Red";
+    document.getElementById("submit").disabled = true;  }
+  else
+  {
+      document.getElementById("tq").innerHTML=null;
+    document.getElementById("submit").disabled = false; 
+  }
 
-   document.getElementById("tqty").oninput = function() {myFunction()};
+    myFunction()};
 
+    //To Validate Expiry Date
+    document.getElementById("expiry").onblur = function() {
+   var selectedText = document.getElementById('expiry').value;
+   var str = selectedText.toString();
+   var selectedDate = new Date(selectedText);
+   var now = new Date();
+   if (selectedDate < now) {
+    document.getElementById("ex").innerHTML="Expiry Date cant be in past";
+    document.getElementById("ex").style.color="Red";
+    document.getElementById("submit").disabled = true;  
+   }
+  else
+   {
+    document.getElementById("ex").innerHTML=null;
+    document.getElementById("submit").disabled = false; 
+   }
+  
+ }
+
+//Calculate Total Price
 function myFunction() {
    var unit = document.getElementById("unitPrice").value;
    var quan = document.getElementById("tqty").value;
@@ -439,6 +489,33 @@ function myFunction() {
 
    document.getElementById("totalPrice").value  =  totalprice;
 }
+
+//Validating onSubmit.
+function submitfun()
+{
+   var unit = document.getElementById("unitPrice").value;
+   var str = unit.toString();
+    if(!unit.match(/^-?[0-9]*[.][0-9]+$/)) {
+    document.getElementById("up").innerHTML="Invalid Unit Price";
+    document.getElementById("up").style.color="Red";
+    
+  }
+  else
+  {
+      document.getElementById("up").innerHTML=null;
+    
+  }
+
+  
+    
+   var quan = document.getElementById("tqty").value;
+}
+
+
+
+
+
+
 
 </script>
     <script type="text/javascript">

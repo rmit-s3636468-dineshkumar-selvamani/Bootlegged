@@ -185,7 +185,7 @@
 
                      <div class="col" style="margin-left: -14px; width: 345px; ">
                 <div class="ui-select">
-                  <select name="manu_state" class="form-control" style="height: 45px; id="manu_state"">
+                  <select name="manu_state" class="form-control" style="height: 45px; id="manu_state">
                     <option value="State" selected="selected">State</option>
                     <option value="VIC">VIC</option>
                     <option value="NSW">NSW</option>

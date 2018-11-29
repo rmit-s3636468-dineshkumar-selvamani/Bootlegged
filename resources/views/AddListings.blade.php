@@ -372,6 +372,17 @@ span.twitter-typeahead
     </script>
 <script>
 
+   window.onload=function() { 
+   var unit = document.getElementById("unitprice").value;
+    var quan = document.getElementById("product_quantity").value;
+    var unit1 = Number(unit);
+
+    var totalprice = Math.round((unit1 * quan) *100) / 100 ;
+
+    document.getElementById("totalprice").value = totalprice;
+}; 
+
+
   document.getElementById("unitprice").oninput = function(){myFunction();}
 
   document.getElementById("product_quantity").oninput = function(){myFunction();}
@@ -386,6 +397,8 @@ span.twitter-typeahead
 
     document.getElementById("totalprice").value = totalprice;
   }
+
+
 
 </script>
    

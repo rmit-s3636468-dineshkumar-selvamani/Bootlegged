@@ -7,40 +7,39 @@ use Illuminate\Http\Response;
 use Auth;
 class FormuploadController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */ 
     public function __construct()
     {
         $this->middleware('auth');
     }
 
     public function index()
-    {   
-            
+    {        
         return view('bulkupload');
     }
 
     public function upload(Request $request)
     {  
 
-
-        $this->validate($request,[
-           'file'   => 'max:10240|required|mimes:csv,xlsx',
-          
+       $this->validate($request,[
+           'file'   => 'max:10240|required|mimes:csv,xlsx',   
         ],[
           'file.mimes' => 'Upload the .csv or .xlsx file',
-          
-         
+             
         ]); 
 
        
         if($request->file('file')->isValid()){
            
             $file = $request->file('file');
-            $file->move ('uploads',$file->getClientOriginalName());
+            if( Auth::user()->type == "Manufacturer")
+            {
+                $file->move ('uploads',"m"."_".Auth::user()->manu_id."_".date('Y-m-d')."_".time()."_".$file->getClientOriginalName());
+            }
+            else
+            {
+                $file->move ('uploads',"s"."_".Auth::user()->store_id."_".date('Y-m-d')."_".time()."_".$file->getClientOriginalName());
+            }
+            
 
              return back()->with('message', 'File Uploaded Successfully');
         }
