@@ -60,10 +60,12 @@ class StoreController extends Controller
             'store_postcode' => 'required|integer|digits:4',
             'store_phone' => 'required|regex:/[0-9]{9}/',
             'store_abn' => 'required|integer|digits:11',
+            'store_state' => 'required|max:3'
             
         ],[
                 'store_name.required' => ' The first name field is required.',
                 'store_email.email' => ' Not a valid email format.',
+                'store_state.max' => 'Please select a state.'
                 
                
 

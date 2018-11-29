@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 
 
 
+
 class ManufacturerController extends Controller
 {
     /*
@@ -62,10 +63,12 @@ class ManufacturerController extends Controller
             'manu_postcode' => 'required|integer|digits:4',
             'manu_phone' => 'required|regex:/[0-9]{9}/',
             'manu_abn' => 'required|integer|digits:11',
+            'manu_state' => 'required|max:3'
             
         ],[
                 'manu_name.required' => ' The first name field is required.',
                 'manu_email.email' => ' Not a valid email format.',
+                'manu_state.max' => 'Please select the state'
                
                
 
@@ -80,7 +83,7 @@ class ManufacturerController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(Request $data)
+    protected function create(array $data)
     {
     
 

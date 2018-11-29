@@ -19,6 +19,7 @@ class FormuploadController extends Controller
 
     public function upload(Request $request)
     {  
+
        $this->validate($request,[
            'file'   => 'max:10240|required|mimes:csv,xlsx',   
         ],[
@@ -30,7 +31,15 @@ class FormuploadController extends Controller
         if($request->file('file')->isValid()){
            
             $file = $request->file('file');
-            $file->move ('uploads',$file->getClientOriginalName());
+            if( Auth::user()->type == "Manufacturer")
+            {
+                $file->move ('uploads',"m"."_".Auth::user()->manu_id."_".date('Y-m-d')."_".time()."_".$file->getClientOriginalName());
+            }
+            else
+            {
+                $file->move ('uploads',"s"."_".Auth::user()->store_id."_".date('Y-m-d')."_".time()."_".$file->getClientOriginalName());
+            }
+            
 
              return back()->with('message', 'File Uploaded Successfully');
         }
