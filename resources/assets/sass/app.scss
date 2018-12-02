@@ -1,5 +1,5 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css?family=Lato');
 // Variables
 @import 'variables';
 @import 'store';
@@ -8,7 +8,7 @@
 
 // 1. General
 body{
-  font-family:'Lato', Calibri, Arial, sans-serif !important;
+  font-family: "Lato", sans-serif !important;
 }
 .btn-primary {
   background-color: gold !important;
@@ -51,6 +51,10 @@ margin-left: 25rem;
   position: absolute;
 }
 
+.dropdown-container{
+  color: white;
+  background: #a2a2a2;
+}
 
 @media screen and (max-width: 600px){
   .logo{
@@ -62,6 +66,9 @@ margin-left: 25rem;
     float: left;
     margin-top: -15px;
     margin-left: 25%;
+
+  }
+  .img-responsive{
 
   }
 }
@@ -423,33 +430,6 @@ border-radius: 10px;
 
 }
 
-// 5. Sidebar
-.sidebar {
-  margin: 0;
-  padding: 0;
-  width: 200px;
-  background-color: #212327;
-  position: fixed;
-  height: 100%;
-  overflow: auto;
-}
-
-.sidebar a {
-  display: block;
-  color: black;
-  padding: 16px;
-  text-decoration: none;
-}
-
-.sidebar a.active {
-  background-color: #D3BC3F;
-  color: black;
-}
-
-.sidebar a:hover:not(.active) {
-  background-color: #555;
-  color: white;
-}
 
 // Cart/ Checkout page
 .stripe-form{

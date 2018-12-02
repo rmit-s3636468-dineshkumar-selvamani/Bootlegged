@@ -9,14 +9,14 @@
                 <h2 class="mb-3">Contact</h2>
                 <p>
                     <a href="tel:+03 - 123 456 7890" class="text-white">
-                        <i class="fa d-inline mr-3 text-secondary fa-phone"></i>+03 - 123 456 7</a>890</p>
+                        <i class="fa d-inline mr-3 text-secondary fa-phone"></i>+03 - 123 456 789</a></p>
                 <p>
                     <a href="mailto:info@bootlegged.com" class="text-white">
-                        <i class="fa d-inline mr-3 text-secondary fa-envelope-o"></i>info@bootlegged.com</a>
+                        <i class="fa d-inline mr-3 text-secondary fa-envelope"></i>info@bootlegged.com</a>
                 </p>
                 <p>
-                    <a href="https://goo.gl/maps/9qj7873okQs" class="text-white" target="_blank">
-                        <i class="fa d-inline mr-3 fa-map-marker text-secondary"></i>123 FLinders Street, M</a>elbourne
+                    <a href="https://maps.google.com" class="text-white" target="_blank">
+                        <i class="fa d-inline mr-3 fa-map-marker text-secondary"></i>123 Flinders Street, Melbourne</a>
                 </p>
             </div>
         </div>

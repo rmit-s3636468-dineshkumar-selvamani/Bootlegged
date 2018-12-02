@@ -11,8 +11,6 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 
 
-
-
 class ManufacturerController extends Controller
 {
     /*
@@ -26,7 +24,7 @@ class ManufacturerController extends Controller
     |
     */
 
-     use RegistersUsers;
+    use RegistersUsers;
 
     /**
      * Where to redirect users after registration.
@@ -48,7 +46,7 @@ class ManufacturerController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
@@ -62,30 +60,26 @@ class ManufacturerController extends Controller
             'manu_postcode' => 'required|integer|digits:4',
             'manu_phone' => 'required|regex:/[0-9]{9}/',
             'manu_abn' => 'required|integer|digits:11',
-            
-        ],[
-                'manu_name.required' => ' The first name field is required.',
-                'manu_email.email' => ' Not a valid email format.',
-               
-               
+
+        ], [
+            'manu_name.required' => ' The first name field is required.',
+            'manu_email.email' => ' Not a valid email format.',
 
 
-
-    ]);
+        ]);
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \App\User
      */
-    protected function create(Request $data)
+    protected function create(array $data)
     {
-    
 
 
-         $user = Manufacturer::create([
+        $user = Manufacturer::create([
             'manu_email' => $data['manu_email'],
             'manu_name' => $data['manu_name'],
             'manu_address' => $data['manu_address'],
@@ -93,15 +87,15 @@ class ManufacturerController extends Controller
             'manu_state' => $data['manu_state'],
             'manu_postcode' => $data['manu_postcode'],
             'manu_phone' => $data['manu_phone'],
-            'manu_abn' =>$data['manu_abn'],
-            'manu_license' =>$data['manu_license'],
-            'manu_Stripeid' =>$data['manu_Stripeid'],
+            'manu_abn' => $data['manu_abn'],
+            'manu_license' => $data['manu_license'],
+            'manu_Stripeid' => $data['manu_Stripeid'],
         ]);
         $myField = Manufacturer::where('manu_email', $data['manu_email'])->first()->manu_id;
         $user->userData = User::create([
-            
+
             // 'store_id' => 0,
-            'manu_id'=> $myField,
+            'manu_id' => $myField,
             'business_name' => $data['manu_name'],
             'email' => $data['manu_email'],
             'password' => Hash::make($data['password']),
@@ -111,12 +105,9 @@ class ManufacturerController extends Controller
         ]);
 
         return $user;
-       
 
 
-        
-        
-   }
+    }
 
 
 }
