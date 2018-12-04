@@ -1,5 +1,5 @@
 @include('layouts.store')
-
+@section('title', 'Add Listings')
 @section('content')
     @include('sideNavBar')
 

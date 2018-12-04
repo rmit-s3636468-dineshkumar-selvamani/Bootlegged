@@ -7,12 +7,13 @@
 @import '~bootstrap/scss/bootstrap';
 
 // 1. General
-body{
+body {
   font-family: "Lato", sans-serif !important;
 }
+
 .btn-primary {
-  background-color: gold !important;
-  border-color: gold !important;
+  background-color: #FFDD03 !important;
+  border-color: #FFDD03 !important;
 }
 
 .dropdown-toggle::after {
@@ -33,31 +34,31 @@ body{
   padding-top: 70px;
 }
 
-.form-container{
-margin-left: 25rem;
+.form-container {
+  margin-left: 25rem;
   margin-right: 25rem;
 
 }
 
-.navbar{
-  background-color: black;
+.navbar {
+  background-color: #151515;
   height: 70px;
 }
 
-.navbar-brand-auth{
+.navbar-brand-auth {
   top: 10%;
   transform: translateX(-50%);
   left: 50%;
   position: absolute;
 }
 
-.dropdown-container{
+.dropdown-container {
   color: white;
-  background: #a2a2a2;
+  background: #555555;
 }
 
-@media screen and (max-width: 600px){
-  .logo{
+@media screen and (max-width: 600px) {
+  .logo {
 
     visibility: visible;
     position: center;
@@ -68,12 +69,7 @@ margin-left: 25rem;
     margin-left: 25%;
 
   }
-  .img-responsive{
-
-  }
 }
-
-
 
 
 // 2. Welcome
@@ -95,7 +91,7 @@ margin-left: 25rem;
 
 @media screen and (max-width: 1060px) {
   .text-w1 {
-font-size: 3.5em;
+    font-size: 3.5em;
   }
 
   .text-w2 {
@@ -127,7 +123,7 @@ font-size: 3.5em;
 .faq {
   font: bold 300% Consolas, Monaco, monospace;
   font-size: 32px;
-  border-right: .1em solid black;
+  border-right: .1em solid #0A0A0A;
   width: 21em;
   width: 34ch;
   white-space: nowrap;
@@ -289,8 +285,8 @@ font-size: 3.5em;
 
 .container2 {
   padding-bottom: 6rem !important;
-  background-color: lightyellow;
-  border: black;
+  background-color: #FBFCD4;
+  border: #0A0A0A;
   border-radius: 10px;
 }
 
@@ -299,7 +295,7 @@ font-size: 3.5em;
 }
 
 .side01 {
-border-radius: 10px;
+  border-radius: 10px;
   margin-top: 5rem;
   position: -ms-device-fixed;
   width: 80%;
@@ -320,19 +316,19 @@ border-radius: 10px;
   .description-container {
     margin-right: 5rem;
   }
-  .faq{
+  .faq {
     font-size: 1rem;
   }
 
-  .side01{
+  .side01 {
     margin-left: 2.5rem;
   }
 
-  .side01content{
+  .side01content {
     margin-left: 2.5rem;
   }
 
-  .interested{
+  .interested {
     font-weight: 300;
     font-size: 22px;
   }
@@ -363,7 +359,7 @@ border-radius: 10px;
     width: auto;
   }
 
-  .login-form{
+  .login-form {
     margin-left: 10%;
     margin-right: 10%;
     width: 80%;
@@ -376,14 +372,14 @@ border-radius: 10px;
     width: auto;
   }
 
-  .login-form{
+  .login-form {
     margin-left: 10%;
     margin-right: 10%;
   }
 }
 
 // 4. Register
-.col-state{
+.col-state {
   width: 25%;
   margin-left: -2%;
 }
@@ -407,7 +403,7 @@ border-radius: 10px;
 }
 
 @media (max-width: 575.98px) {
-  .col-state{
+  .col-state {
     width: 8rem;
     margin-left: -5%;
   }
@@ -432,6 +428,6 @@ border-radius: 10px;
 
 
 // Cart/ Checkout page
-.stripe-form{
+.stripe-form {
   display: inline-flex !important;
 }

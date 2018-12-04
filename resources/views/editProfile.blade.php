@@ -1,5 +1,5 @@
 @include('layouts.store')
-
+@section('title', 'Edit Profile')
 @include('sideNavBar')
 @section('content')
     <div class="view" style="margin-left: 14%;">

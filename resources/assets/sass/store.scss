@@ -17,12 +17,15 @@
 .product__price{
 
   max-width: 210px;
-  height :60px;
 }
 
 .twitter-typeahead {
   display: block;
   width: 80%;
+}
+
+.modal-content, .modal-header {
+  background-color: #151515 !important;
 }
 
 // Sidebar
@@ -128,4 +131,10 @@
 // Checkout
 .checkout-container{
   margin-left: 200px !important;
+}
+
+.cart-list{
+  overflow: auto;
+  max-width: 400px;
+  max-height: 300px;
 }

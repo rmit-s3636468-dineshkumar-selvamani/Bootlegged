@@ -1,7 +1,6 @@
 @include('layouts.store')
-
+@section('title', 'Dashboard')
 @include('sideNavBar')
-
 
 @section('content')
     <!-- Main view -->
@@ -71,17 +70,7 @@
 
 
                     <div class="product">
-                        <div class="product__info" data-toggle="modal"
-                             data-target="#prod_details"
-                             data-productid="{{$item->id}}"
-                             data-prodname="{{$item->product_itemName}}"
-                             data-type="{{$item->Listing_type}}" data-total_qty="{{ $item->Listing_qty }} "
-                             data-unit=" ${{number_format($item->Listing_unitPrice, 2) }}"
-                             data-total="${{number_format($item->Listing_totalPrice, 2)}}"
-                             data-expiry="{{ $item->Listing_expiry }}" data-vintage="{{ $item->Listing_vintage }}"
-                             data-condition="{{ $item->Listing_condition }}"
-                             onmouseover=""
-                             style="cursor: pointer;">
+                        <div class="product__info" >
 
                             @if($item->image != '')
 
@@ -112,8 +101,19 @@
 
 
                         </div>
-                        <!-- <label class="action action--compare-add"><input class="check-hidden" type="checkbox" /><i class="fa fa-plus"></i><i class="fa fa-check"></i><span class="action__text action__text--invisible">Add to compare</span></label> -->
-
+                        <label class="action action--compare-add" data-toggle="modal"
+                               data-target="#prod_details"
+                               data-productid="{{$item->id}}"
+                               data-prodname="{{$item->product_itemName}}"
+                               data-type="{{$item->Listing_type}}" data-total_qty="{{ $item->Listing_qty }} "
+                               data-unit=" ${{number_format($item->Listing_unitPrice, 2) }}"
+                               data-total="${{number_format($item->Listing_totalPrice, 2)}}"
+                               data-expiry="{{ $item->Listing_expiry }}" data-vintage="{{ $item->Listing_vintage }}"
+                               data-condition="{{ $item->Listing_condition }}"
+                               onmouseover=""
+                               style="cursor: pointer;">
+                            <i class="fas fa-info-circle"></i>
+                        </label>
                     </div>
                     <?php $count++; ?>
 

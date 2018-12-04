@@ -12,12 +12,16 @@
 
 .product__price {
   max-width: 210px;
-  height: 60px;
 }
 
 .twitter-typeahead {
   display: block;
   width: 80%;
+}
+
+.modal-content,
+.modal-header {
+  background-color: #151515 !important;
 }
 
 .logo {
@@ -118,6 +122,12 @@
 
 .checkout-container {
   margin-left: 200px !important;
+}
+
+.cart-list {
+  overflow: auto;
+  max-width: 400px;
+  max-height: 300px;
 }
 
 /*!
@@ -10598,8 +10608,8 @@ body {
 }
 
 .btn-primary {
-  background-color: gold !important;
-  border-color: gold !important;
+  background-color: #FFDD03 !important;
+  border-color: #FFDD03 !important;
 }
 
 .dropdown-toggle::after {
@@ -10626,7 +10636,7 @@ body {
 }
 
 .navbar {
-  background-color: black;
+  background-color: #151515;
   height: 70px;
 }
 
@@ -10640,7 +10650,7 @@ body {
 
 .dropdown-container {
   color: white;
-  background: #a2a2a2;
+  background: #555555;
 }
 
 @media screen and (max-width: 600px) {
@@ -10705,7 +10715,7 @@ body {
 .faq {
   font: bold 300% Consolas, Monaco, monospace;
   font-size: 32px;
-  border-right: .1em solid black;
+  border-right: .1em solid #0A0A0A;
   width: 21em;
   width: 34ch;
   white-space: nowrap;
@@ -10937,8 +10947,8 @@ body {
 
 .container2 {
   padding-bottom: 6rem !important;
-  background-color: lightyellow;
-  border: black;
+  background-color: #FBFCD4;
+  border: #0A0A0A;
   border-radius: 10px;
 }
 

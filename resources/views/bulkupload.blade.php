@@ -1,4 +1,5 @@
 @include('layouts.store')
+@section('title', 'Bulk Upload')
 @section('content')
 
 

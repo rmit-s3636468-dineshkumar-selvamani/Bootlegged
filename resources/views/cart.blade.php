@@ -1,269 +1,6 @@
 @include('layouts.store')
+@section('title', 'Cart')
 @section('content')
-
-    <style>
-        body {
-            margin: 0;
-            /*background-color: rgb(26,27,31);*/
-            /*background-image: url(Images/back.jpg);*/
-        }
-
-
-        #pagination {
-            display: inline-block;
-        }
-
-        .page-item.active .page-link {
-            z-index: 1;
-            color: black;
-            /*background-color: gold;*/
-            background: rgba(211, 188, 63);
-            border-color: gold;
-        }
-
-        .page-link {
-            position: relative;
-            display: block;
-            padding: .5rem .75rem;
-            margin-left: -1px;
-            line-height: 1.25;
-            color: black;
-            background-color: #fff;
-            border: 1px solid #dee2e6;
-        }
-
-        .modal-content, .modal-header {
-            background-color: rgb(33, 35, 39);
-        }
-
-        body {
-            margin: 0;
-            font-family: "Lato", sans-serif;
-        }
-
-        .sidebar {
-            margin: 0;
-            padding: 0;
-            width: 200px;
-            background-color: #f1f1f1;
-            position: fixed;
-            height: 100%;
-            overflow: auto;
-            background-color: rgb(33, 35, 39);
-        }
-
-        .sidebar a {
-            display: block;
-            color: black;
-            padding: 16px;
-            text-decoration: none;
-        }
-
-        .sidebar a.active {
-            background-color: rgba(211, 188, 63);
-            color: black;
-        }
-
-        .sidebar a:hover:not(.active) {
-            background-color: #555;
-            color: white;
-        }
-
-        div.content {
-            margin-left: 200px;
-            padding: 1px 16px;
-            height: 1000px;
-            color: white;
-        }
-
-        @media screen and (max-width: 700px) {
-            .sidebar {
-                width: 100%;
-                height: auto;
-                position: relative;
-            }
-
-            .sidebar a {
-                float: left;
-            }
-
-            div.content {
-                margin-left: 0;
-            }
-        }
-
-        @media screen and (max-width: 400px) {
-            .sidebar a {
-                text-align: center;
-                float: none;
-            }
-        }
-
-        .logo {
-
-            visibility: visible;
-            position: absolute;
-            height: 125px;
-            width: 175px;
-            float: left;
-            margin-top: -15px;
-            margin-left: 10px;
-
-        }
-
-        .filter {
-
-            position: relative;
-            margin-left: 250px;
-
-        }
-
-        .dropdown-submenu {
-            position: relative;
-        }
-
-        .dropdown-submenu > .dropdown-menu {
-            top: 0;
-            left: 100%;
-            margin-top: -6px;
-            margin-left: -1px;
-            -webkit-border-radius: 0 6px 6px 6px;
-            -moz-border-radius: 0 6px 6px;
-            border-radius: 0 6px 6px 6px;
-        }
-
-        .dropdown-submenu:hover > .dropdown-menu {
-            display: block;
-        }
-
-        .dropdown-submenu > a:after {
-            display: block;
-            content: " ";
-            float: right;
-            width: 0;
-            height: 0;
-            border-color: transparent;
-            border-style: solid;
-            border-width: 5px 0 5px 5px;
-            border-left-color: #ccc;
-            margin-top: 5px;
-            margin-right: -10px;
-        }
-
-        .dropdown-submenu:hover > a:after {
-            border-left-color: #fff;
-        }
-
-        .dropdown-submenu.pull-left {
-            float: none;
-        }
-
-        .dropdown-submenu.pull-left > .dropdown-menu {
-            left: -100%;
-            margin-left: 10px;
-            -webkit-border-radius: 6px 0 6px 6px;
-            -moz-border-radius: 6px 0 6px 6px;
-            border-radius: 6px 0 6px 6px;
-        }
-
-        .product .product__info {
-            min-height: 00px;
-        }
-
-        .product__name {
-
-            min-height: 40px;
-            max-height: 50px;
-            max-width: 210px;
-
-        }
-
-        .product {
-
-            max-width: 210px;
-        }
-
-        /*.twitter-typeahead,
-                .tt-hint,
-                .tt-input,
-                .tt-menu{
-                    width: auto ! important;
-                    font-weight: normal;
-
-                }*/
-        /*Big Box*/
-        .twitter-typeahead {
-            display: block;
-            width: 100%;
-
-        /
-        /
-        BS
-
-        3
-        needs this to inherit this for children
-        .tt-query,
-        .tt-hint {
-            margin-bottom: 0;
-        }
-
-        .tt-dropdown-menu {
-            z-index: @zindex-dropdown;
-            min-width: 326px;
-            padding: 5px 0;
-            margin: 2px 0 0;
-        / / override default ul font-size: @font-size-base;
-            text-align: left;
-        / / Ensures proper alignment if parent has it changed (e . g ., modal footer) background-color: @dropdown-bg;
-            border: 1px solid @dropdown-fallback-border;
-        / / IE8 fallback border: 1 px solid @dropdown-border;
-            border-radius: @border-radius-base;
-        . box-shadow(0 6 px 12 px rgba(0, 0, 0, .175));
-            background-clip: padding-box;
-
-        .tt-suggestions {
-
-        .tt-suggestion {
-            padding: 3px 12px;
-            font-weight: normal;
-            line-height: @line-height-base;
-            color: @dropdown-link-color;
-            white-space: nowrap;
-        / / prevent links from randomly breaking onto new lines
-        }
-
-        .tt-suggestion.tt-cursor {
-            color: @dropdown-link-hover-color;
-            background-color: @dropdown-link-hover-bg;
-        }
-
-        .tt-suggestion p {
-            margin: 0;
-        }
-
-        /*Small box*/
-        /*span.twitter-typeahead
-          width: 100%
-
-        .tt-input
-          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075)
-
-        .tt-menu
-          @extend .list-group
-          box-shadow: 0 5px 10px rgba(0,0,0,.2)
-          width: 100%
-
-        .tt-suggestion
-          @extend .list-group-item
-
-        .tt-selectable
-          @extend .list-group-item-action*/
-
-    </style>
-
-    <body>
-
-
     @include('sideNavBar')
 
 
@@ -272,7 +9,6 @@
         <header class="bp-header cf" style="position: -ms-device-fixed; position: center; margin-bottom: -8%">
 
             <h1>Shopping Cart</h1>
-
 
         </header>
     </div>
@@ -288,7 +24,8 @@
                     <div class="row">
                         <div class="col-md-12">
                             <button class="action action--button action--buy " disabled><span
-                                        class="product__price highlight ">Total Item : {{$totalQuantity}}</span></button>
+                                        class="product__price highlight ">Total Item : {{$totalQuantity}}</span>
+                            </button>
 
                             <button class="action action--button action--buy "><span
                                         class="product__price highlight">Total Price : $ {{$totalPrice}}</span></button>
@@ -296,11 +33,11 @@
                             <a href="{{route('cart.clear')}}" class="action action--button action--buy"><span
                                         class="product__price highlight text-danger">Clear Cart</span></a>
 
-                            <form action="{{route('checkout.final')}}" formaction="" class="from stripe-form">
+                            <form action="{{route('checkout.final')}}" class="from stripe-form">
                                 {{ csrf_field() }}
                                 <script
                                         src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                                        data-key="pk_test_Ekz2ZwPAxCeRnHSoRTFTzBVp"
+                                        data-key={{env('STRIPE_KEY')}}
                                         data-currency="AUD"
                                         data-amount={{$totalPrice*100}}
                                                 data-name="Bootlegged.com.au"
@@ -316,18 +53,9 @@
                                 <button class="action action--button action--buy "><span
                                             class="product__price highlight text-white">Checkout</span></button>
                             </form>
-                            <a class="action action--button action--buy" href="{{route('checkout.index')}}"><span
-                                        class="product__price highlight text-white">Checkout</span></a>
                         </div>
 
                     </div>
-
-
-
-
-
-
-
 
                     <br><br>
                     @include('partials.flash-message')
@@ -339,78 +67,71 @@
             @foreach($products as $product)
 
                 <div class="product">
-                    <div class="product__info"
-                         />
-                    @if($product['item']->image != '')
-                        <img src="{{url('storage/'.$product['item']->image)}}" class="product__image"data-toggle="modal"
-                             data-target="#prod_details" data-prodname="{{$product['item']['product_itemName']}}"
-                             data-type="{{$product['item']['Listing_type']}}"
-                             data-total_qty="{{ $product['item']['Listing_qty'] }} "
-                             data-unit=" ${{number_format($product['item']['Listing_unitPrice'], 2) }}"
-                             data-total="${{number_format($product['item']['Listing_totalPrice'], 2)}}"
-                             data-expiry="{{ $product['item']['Listing_expiry'] }}"
-                             data-vintage="{{ $product['item']['Listing_vintage'] }}"
-                             data-condition="{{ $product['item']['Listing_condition'] }}" onmouseover=""
-                             style="cursor: pointer;"/>
-                    @else
-                        <img class="product__image" src="{{ asset('Images/1.png') }}" alt="Product 1"
-                             data-toggle="modal"
-                             data-target="#prod_details" data-prodname="{{$product['item']['product_itemName']}}"
-                             data-type="{{$product['item']['Listing_type']}}"
-                             data-total_qty="{{ $product['item']['Listing_qty'] }} "
-                             data-unit=" ${{number_format($product['item']['Listing_unitPrice'], 2) }}"
-                             data-total="${{number_format($product['item']['Listing_totalPrice'], 2)}}"
-                             data-expiry="{{ $product['item']['Listing_expiry'] }}"
-                             data-vintage="{{ $product['item']['Listing_vintage'] }}"
-                             data-condition="{{ $product['item']['Listing_condition'] }}" onmouseover=""
-                             style="cursor: pointer;"/>
-                    @endif
+                    <div class="product__info">
+                        @if($product['item']->image != '')
+                            <img src="{{url('storage/'.$product['item']->image)}}" class="product__image"
+                            />
+                        @else
+                            <img class="product__image" src="{{ asset('Images/1.png') }}" alt="Product 1"
+                            />
+                        @endif
 
 
-                    <h6 class="product__name highlight"
-                        style="color: white">{{$product['item']['product_itemName']}}</h6>
-                    <br>
-                    <h6 class="product__quantity highlight" style="color: green"> IN STOCK
-                        : {{$product['item']['Listing_qty']}} bottles</h6>
+                        <h6 class="product__name highlight"
+                            style="color: white">{{$product['item']['product_itemName']}}</h6>
+                        <br>
+                        <h6 class="product__quantity highlight" style="color: green"> IN STOCK
+                            : {{$product['item']['Listing_qty']}} bottles</h6>
 
-                    <span class="product__price extra highlight">Type - {{$product['item']['Listing_type']}} </span>
-                    <span class="product__price extra highlight">Unit Price - {{$product['item']['Listing_unitPrice']}} </span>
-                    <span class="product__price extra highlight">Expiry - {{$product['item']['Listing_expiry']}} </span>
-                    <span class="product__price extra highlight">Vintage - {{$product['item']['Listing_vintage']}} </span>
-                    <span class="product__price extra highlight">Condition - {{$product['item']['Listing_condition']}} </span>
-                    <span class="product__price highlight"> Price : $ {{$product['item']['Listing_unitPrice']}}
+                        <span class="product__price extra highlight">Type - {{$product['item']['Listing_type']}} </span>
+                        <span class="product__price extra highlight">Unit Price - {{$product['item']['Listing_unitPrice']}} </span>
+                        <span class="product__price extra highlight">Expiry - {{$product['item']['Listing_expiry']}} </span>
+                        <span class="product__price extra highlight">Vintage - {{$product['item']['Listing_vintage']}} </span>
+                        <span class="product__price extra highlight">Condition - {{$product['item']['Listing_condition']}} </span>
+                        <span class="product__price highlight"> Price : $ {{$product['item']['Listing_unitPrice']}}
                         each</span>
-                    <form method="post" action="{{ URL::to('/updateItem')}}" id="cart-qty-form">
-                        {{ csrf_field() }}
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
+                        <form method="post" action="{{ URL::to('/updateItem')}}" id="cart-qty-form">
+                            {{ csrf_field() }}
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
                                         <span class="product__price highlight input-group-text"
                                         > Quantity</span>
-                            </div>
+                                </div>
 
-                            <input type="hidden" name="cart-id" value="{{$product['item']['id']}}">
-                            <input class="cart-item-qty product__price highlight input-group form-control text-center h-40"
-                                   min="1" max="{{$product['item']['Listing_qty']}}" type="number"
-                                   name="cart-item-qty"
-                                   value="{{$product['Listing_qty']}}" id="cart-item-id"
-                                   placeholder="{{$product['Listing_qty']}}" required></div>
-
-
-                        <button class="action action--button action--buy" type="submit"><i
-                                    class="fas fa-redo"></i><span
-                                    class="action__text">Update Quantity</span></button>
-
-                    </form>
-
-                    <a href="{{route('cart.remove',['id' => $product['item']['id']])}}">
-                        <button class="action action--button action--buy"><i
-                                    class="fa fa-ban"></i><span
-                                    class="action__text">Remove</span></button>
-                    </a>
+                                <input type="hidden" name="cart-id" value="{{$product['item']['id']}}">
+                                <input class="cart-item-qty product__price highlight input-group form-control text-center h-40"
+                                       min="1" max="{{$product['item']['Listing_qty']}}" type="number"
+                                       name="cart-item-qty"
+                                       value="{{$product['Listing_qty']}}" id="cart-item-id"
+                                       placeholder="{{$product['Listing_qty']}}" required></div>
 
 
-                </div>
+                            <button class="action action--button action--buy" type="submit"><i
+                                        class="fas fa-redo"></i><span
+                                        class="action__text">Update Quantity</span></button>
 
+                        </form>
+
+                        <a href="{{route('cart.remove',['id' => $product['item']['id']])}}">
+                            <button class="action action--button action--buy"><i
+                                        class="fa fa-ban"></i><span
+                                        class="action__text">Remove</span></button>
+                        </a>
+
+
+                    </div>
+                    <label class="action action--compare-add" data-toggle="modal"
+                           data-target="#prod_details" data-prodname="{{$product['item']['product_itemName']}}"
+                           data-type="{{$product['item']['Listing_type']}}"
+                           data-total_qty="{{ $product['item']['Listing_qty'] }} "
+                           data-unit=" ${{number_format($product['item']['Listing_unitPrice'], 2) }}"
+                           data-total="${{number_format($product['item']['Listing_totalPrice'], 2)}}"
+                           data-expiry="{{ $product['item']['Listing_expiry'] }}"
+                           data-vintage="{{ $product['item']['Listing_vintage'] }}"
+                           data-condition="{{ $product['item']['Listing_condition'] }}" onmouseover=""
+                           style="cursor: pointer;">
+                        <i class="fas fa-info-circle"></i>
+                    </label>
                 </div>
             @endforeach
 

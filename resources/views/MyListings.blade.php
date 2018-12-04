@@ -7,7 +7,7 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
         <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-        <title>Bootlegged</title>
+        <title>Bootlegged - My Listings</title>
         <meta name="description" content="Blueprint: A basic responsive product grid layout with comparison functionality" />
         <meta name="keywords" content="blueprint, template, html, css, javascript, grid, layout, effect, product comparison" />
         <meta name="author" content="Codrops" />
