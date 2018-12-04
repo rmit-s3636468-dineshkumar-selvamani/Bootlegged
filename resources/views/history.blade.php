@@ -360,7 +360,7 @@
                                     <?php
                                     $listing = \Illuminate\Support\Facades\DB::table('listings')->where('id', $item->sListingId)->first();
                                     $product = \Illuminate\Support\Facades\DB::table('products')->where('product_id', $listing->lproduct_id)->first();
-                                    $seller = \Illuminate\Support\Facades\DB::table('store')->where('store_id', $item->storeSeller_id)->first();
+                                    $seller = \Illuminate\Support\Facades\DB::table('Store')->where('store_id', $item->storeSeller_id)->first();
                                     ?><td><?php print_r($seller->store_email)?></td>
 
                                     <td><?php print_r($product->product_itemName) ?></td>
