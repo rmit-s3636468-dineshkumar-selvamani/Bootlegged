@@ -137,7 +137,7 @@ class CheckoutController extends Controller
         }
 
         Session::forget('cart');
-        return redirect()->back()->with('success', 'Successfully purchased products!');
+        return redirect()->back()->with('success', 'Successfully purchased products! Check your sales history!');
     }
 
     /**
