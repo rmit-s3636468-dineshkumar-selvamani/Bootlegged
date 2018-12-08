@@ -64,9 +64,35 @@
 
     </style>
 
-    @section('content')
+@section('content')
     <body>
     @include('sideNavBar')
+
+    <body>
+    <div class="sidebar">
+        <img style=" position: absolute; display: inline;" class="logo" alt="logo" src="/Images/logo1.png">
+        <a href="#home"
+           style="margin-top: 90px; color: white; text-align: center;">Welcome,<br> {{Auth::user()->business_name}}</a>
+
+        @if( Auth::user()->type == 'StoreOwner')
+            <a href="/home" style="color: white;">Market Place</a>
+        @endif
+        <a href="/mylistings" style="color: white;">My Listing</a>
+        <a href="/uploadchoose" style="color: white;">Add Listing</a>
+        <a href="history" class="active" style="color: white;">History</a>
+        @if( Auth::user()->type == 'StoreOwner')
+            <a href="slowstock" style="color: white;">Slow Movers</a>
+            <a href="opportunities" style="color: white;">Opportunities</a>
+        @endif
+        <hr style="border-style: groove;
+    border-width: 1px;">
+        <a href="/editProfile" style="color: white;">Edit Profile</a>
+        @if( Auth::user()->type == 'StoreOwner')
+            <a href="/cart" style="color: white;">My Cart <span
+                        class="badge badge-warning">{{ Session::has('cart') ? Session::get('cart')->totalQuantity : '' }}</span></a>
+        @endif
+        <a href="{{URL::to('logout')}}" style="color: white;">Logout</a>
+    </div>
 
     <div class="view" style="margin-left: 150px">
         <!-- Blueprint header -->
@@ -150,7 +176,7 @@
                                     <?php
                                     $listing = \Illuminate\Support\Facades\DB::table('listings')->where('id', $item->sListingId)->first();
                                     $product = \Illuminate\Support\Facades\DB::table('products')->where('product_id', $listing->lproduct_id)->first();
-                                    $seller = \Illuminate\Support\Facades\DB::table('store')->where('store_id', $item->storeSeller_id)->first();
+                                    $seller = \Illuminate\Support\Facades\DB::table('Store')->where('store_id', $item->storeSeller_id)->first();
                                     ?>
                                     <td><?php print_r($seller->store_email)?></td>
 
