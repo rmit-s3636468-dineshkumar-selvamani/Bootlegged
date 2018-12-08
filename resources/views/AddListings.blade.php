@@ -1,5 +1,6 @@
 @include('layouts.store')
-@section('title', 'Add Listings')
+@section('title')
+    <title>Bootlegged - Add Listing</title>
 @section('content')
     @include('sideNavBar')
 

@@ -1,64 +1,10 @@
-<!-- @extends('layouts.app')
-@section('content')
-    -->
-    <!DOCTYPE html>
-    <html lang="en" class="no-js">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Bootlegged - History</title>
-        <meta name="description" content="Blueprint: A basic responsive product grid layout with comparison functionality" />
-        <meta name="keywords" content="blueprint, template, html, css, javascript, grid, layout, effect, product comparison" />
-        <meta name="author" content="Codrops" />
-        <link rel="shortcut icon" href="favicon.ico">
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" href="css/demo.css" />
-        <link rel="stylesheet" type="text/css" href="css/component.css" />
-        <!-- Modernizr is used for flexbox fallback -->
-        <script src="js/modernizr.custom.js"></script>
+@include('layouts.store')
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+@section('title')
+    <title>Bootlegged - History</title>
 
-
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    </head>
+@section('style')
     <style>
-        body {margin: 0;
-            /*background-color: rgb(26,27,31);*/
-            /*background-image: url(Images/back.jpg);*/
-        }
-
-        ul.topnav {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background-color: #333;
-        }
-
-        ul.topnav li {float: left;}
-
-        ul.topnav li a {
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-        }
-
-        ul.topnav li a:hover:not(.active) {background-color: #111;}
-
-        ul.topnav li a.active {background: rgba(211, 188, 63);}
-
-        ul.topnav li.right {float: right;}
-
-        @media screen and (max-width: 600px){
-            ul.topnav li.right,
-            ul.topnav li {float: none;}
-        }
 
         .button {
             display: inline-block;
@@ -66,7 +12,7 @@
             color: white;
             padding: 14px 20px;
             margin: 8px 0;
-            border: 2px solid ;
+            border: 2px solid;
             cursor: pointer;
             opacity: 0.9;
         }
@@ -88,12 +34,12 @@
             opacity: 0.9;
         }
 
-        #salesTable{
-            margin-top:10px
-            margin-left:300px
+        #salesTable {
+            margin-top: 10px
+            margin-left: 300px
         }
 
-        #pagination{
+        #pagination {
             display: inline-block;
         }
 
@@ -116,145 +62,9 @@
             border: 1px solid #dee2e6;
         }
 
-        .modal-content, .modal-header{
-            background-color: rgb(33,35,39);
-        }
-
-        body {
-            margin: 0;
-            font-family: "Lato", sans-serif;
-        }
-
-        .sidebar {
-            margin: 0;
-            padding: 0;
-            width: 200px;
-            background-color: #f1f1f1;
-            position: fixed;
-            height: 100%;
-            overflow: auto;
-            background-color: rgb(33,35,39);
-        }
-
-        .sidebar a {
-            display: block;
-            color: black;
-            padding: 16px;
-            text-decoration: none;
-        }
-
-        .sidebar a.active {
-            background-color: rgba(211, 188, 63);
-            color: black;
-        }
-
-        .sidebar a:hover:not(.active) {
-            background-color: #555;
-            color: white;
-        }
-
-        div.content {
-            margin-left: 200px;
-            padding: 1px 16px;
-            height: 1000px;
-            color: white;
-        }
-
-        @media screen and (max-width: 700px) {
-            .sidebar {
-                width: 100%;
-                height: auto;
-                position: relative;
-            }
-            .sidebar a {float: left;}
-            div.content {margin-left: 0;}
-        }
-
-        @media screen and (max-width: 400px) {
-            .sidebar a {
-                text-align: center;
-                float: none;
-            }
-        }
-
-        .logo{
-
-            visibility: visible;
-            position: absolute;
-            height: 125px;
-            width: 175px;
-            float: left;
-            margin-top: -15px;
-            margin-left: 10px;
-
-
-
-
-        }
-
-        .filter{
-
-            position: relative;
-            margin-left: 250px;
-
-        }
-
-
-
-        .dropdown-submenu {
-            position: relative;
-        }
-
-        .dropdown-submenu>.dropdown-menu {
-            top: 0;
-            left: 100%;
-            margin-top: -6px;
-            margin-left: -1px;
-            -webkit-border-radius: 0 6px 6px 6px;
-            -moz-border-radius: 0 6px 6px;
-            border-radius: 0 6px 6px 6px;
-        }
-
-        .dropdown-submenu:hover>.dropdown-menu {
-            display: block;
-        }
-
-        .dropdown-submenu>a:after {
-            display: block;
-            content: " ";
-            float: right;
-            width: 0;
-            height: 0;
-            border-color: transparent;
-            border-style: solid;
-            border-width: 5px 0 5px 5px;
-            border-left-color: #ccc;
-            margin-top: 5px;
-            margin-right: -10px;
-        }
-
-        .dropdown-submenu:hover>a:after {
-            border-left-color: #fff;
-        }
-
-        .dropdown-submenu.pull-left {
-            float: none;
-        }
-
-        .dropdown-submenu.pull-left>.dropdown-menu {
-            left: -100%;
-            margin-left: 10px;
-            -webkit-border-radius: 6px 0 6px 6px;
-            -moz-border-radius: 6px 0 6px 6px;
-            border-radius: 6px 0 6px 6px;
-        }
-
-        .product{
-            min-height: 430px;
-        }
-
     </style>
 
+    @section('content')
     <body>
     @include('sideNavBar')
 
@@ -279,7 +89,7 @@
 
             </header>
             <!-- Product grid -->
-            <section class="grid"  >
+            <section class="grid">
 
                 <div class="table-responsive mx-2" id="salesTable" style="...">
                     <table class="table table-striped table-sm">
@@ -303,7 +113,8 @@
                                     $listing = \Illuminate\Support\Facades\DB::table('listings')->where('id', $item->sListingId)->first();
                                     $product = \Illuminate\Support\Facades\DB::table('products')->where('product_id', $listing->lproduct_id)->first()
 
-                                    ?><td><?php print_r($product->product_itemName)?></td>
+                                    ?>
+                                    <td><?php print_r($product->product_itemName)?></td>
                                     <td>{{$item->sTran_qty}}</td>
                                     <td>${{$item->sTran_unitPrice}}</td>
                                     <td>${{$item->sTran_totalPrice}}</td>
@@ -340,7 +151,8 @@
                                     $listing = \Illuminate\Support\Facades\DB::table('listings')->where('id', $item->sListingId)->first();
                                     $product = \Illuminate\Support\Facades\DB::table('products')->where('product_id', $listing->lproduct_id)->first();
                                     $seller = \Illuminate\Support\Facades\DB::table('store')->where('store_id', $item->storeSeller_id)->first();
-                                    ?><td><?php print_r($seller->store_email)?></td>
+                                    ?>
+                                    <td><?php print_r($seller->store_email)?></td>
 
                                     <td><?php print_r($product->product_itemName) ?></td>
                                     <td>{{$item->sTran_qty}}</td>
@@ -360,7 +172,7 @@
                 </div>
 
                 {{-- paginate links --}}
-                <div class = "paginate">
+                <div class="paginate">
                     {{$tableData->links()}}
                 </div>
 
@@ -404,7 +216,8 @@
                                     $listing = \Illuminate\Support\Facades\DB::table('listings')->where('id', $item->mListingId)->first();
                                     $product = \Illuminate\Support\Facades\DB::table('products')->where('product_id', $listing->lproduct_id)->first()
 
-                                    ?><td><?php print_r($product->product_itemName)?></td>
+                                    ?>
+                                    <td><?php print_r($product->product_itemName)?></td>
                                     <td>{{$item->mTran_qty}}</td>
                                     <td>${{$item->mTran_unitPrice}}</td>
                                     <td>${{$item->mTran_totalPrice}}</td>
@@ -420,7 +233,7 @@
                     </table>
                 </div>
                 {{-- paginate links --}}
-                <div class = "paginate">
+                <div class="paginate">
                     {{$tableData->links()}}
                 </div>
             </section>
@@ -432,7 +245,7 @@
     <script>
         var button = document.getElementById('salesButton'); // Assumes element with id='button'
 
-        button.onclick = function() {
+        button.onclick = function () {
 
             var div = document.getElementById('purchasesTable');
             if (div.style.display !== 'none') {
@@ -450,7 +263,7 @@
         var button2 = document.getElementById('salesButton'); // Assumes element with id='button'
         var int = 0;
 
-        button.onclick = function() {
+        button.onclick = function () {
 
             var div = document.getElementById('salesTable');
             if (div.style.display !== 'none') {
@@ -467,7 +280,7 @@
 
     <script>
 
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             function disableButton() {
 
                 var button = document.getElementById('salesButton'); // Assumes element with id='button'

@@ -1,213 +1,23 @@
-<!-- @extends('layouts.app')
+@include('layouts.store')
+@section('title')
+    <title>Bootlegged - New Product</title>
+
+<style>
+
+
+    form {
+        padding-top: 80px;
+        padding-left: 300px;
+    }
+
+
+</style>
+@include('sideNavBar')
 
 @section('content')
-    -->
-
-
-
-    <!DOCTYPE html>
-    <html lang="en" class="no-js">
-    <head>
-        <meta charset="UTF-8"/>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Bootlegged - New Product</title>
-        <meta name="description"
-              content="Blueprint: A basic responsive product grid layout with comparison functionality"/>
-        <meta name="keywords"
-              content="blueprint, template, html, css, javascript, grid, layout, effect, product comparison"/>
-        <meta name="author" content="Codrops"/>
-        <link rel="shortcut icon" href="favicon.ico">
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
-              integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
-              crossorigin="anonymous">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" href="css/demo.css"/>
-        <link rel="stylesheet" type="text/css" href="css/component.css"/>
-
-
-        <!-- Bootstrap core JavaScript
-        ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-        <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
-
-        <!-- Import typeahead.js -->
-        <script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
-
-
-        <!-- Modernizr is used for flexbox fallback -->
-        <script src="js/modernizr.custom.js"></script>
-    </head>
-
-    <style>
-        body {
-            margin: 0;
-            background-color: white;
-        }
-
-        ul.topnav {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background-color: #333;
-        }
-
-        ul.topnav li {
-            float: left;
-        }
-
-        ul.topnav li a {
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-        }
-
-        ul.topnav li a:hover:not(.active) {
-            background-color: #111;
-        }
-
-        ul.topnav li a.active {
-            background: rgba(211, 188, 63);
-        }
-
-        ul.topnav li.right {
-            float: right;
-        }
-
-        @media screen and (max-width: 600px) {
-            ul.topnav li.right,
-            ul.topnav li {
-                float: none;
-            }
-        }
-
-        form {
-            padding-top: 80px;
-            padding-left: 300px;
-        }
-
-        .sidebar {
-            margin: 0;
-            padding: 0;
-            width: 200px;
-            background-color: #f1f1f1;
-            position: fixed;
-            height: 100%;
-            overflow: auto;
-            background-color: rgb(33, 35, 39);
-        }
-
-        .sidebar a {
-            display: block;
-            color: black;
-            padding: 16px;
-            text-decoration: none;
-        }
-
-        .sidebar a.active {
-            background-color: rgba(211, 188, 63);
-            color: black;
-        }
-
-        .sidebar a:hover:not(.active) {
-            background-color: #555;
-            color: white;
-        }
-
-        div.content {
-            margin-left: 200px;
-            padding: 1px 16px;
-            height: 1000px;
-            color: white;
-        }
-
-        @media screen and (max-width: 700px) {
-            .sidebar {
-                width: 100%;
-                height: auto;
-                position: relative;
-            }
-
-            .sidebar a {
-                float: left;
-            }
-
-            div.content {
-                margin-left: 0;
-            }
-        }
-
-        @media screen and (max-width: 400px) {
-            .sidebar a {
-                text-align: center;
-                float: none;
-            }
-        }
-
-        .logo {
-
-            visibility: visible;
-            position: absolute;
-            height: 125px;
-            width: 175px;
-            float: left;
-            margin-top: -15px;
-            margin-left: 10px;
-
-
-        }
-
-        span.twitter-typeahead
-        width:
-
-        100
-        %
-
-        .tt-input
-        box-shadow: inset
-
-        0
-        1
-        px
-
-        1
-        px
-
-        rgba
-        (
-        0
-        ,
-        0
-        ,
-        0
-        ,
-        0.075
-        )
-
-        .tt-menu
-
-        @extend .list-group
-        box-shadow: 0 5px 10px rgba(0,0,0,.2)
-        width: 100%
-
-        .tt-suggestion
-        @extend .list-group-item
-
-        .tt-selectable
-        @extend .list-group-item-action
-
-
-    </style>
-
     <body>
 
 
-    @include('sideNavBar')
     <div class="view" style="margin-left: 14%;">
         <!-- Blueprint header -->
         <header class="bp-header cf">

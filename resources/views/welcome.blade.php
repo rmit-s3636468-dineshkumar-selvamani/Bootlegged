@@ -1,6 +1,7 @@
 @include('layouts.master')
 @extends('partials.nav-bar')
-@section('title', 'Welcome')
+@section('title')
+    <title>Bootlegged - Welcome</title>
 
 @section('content')
     <div class="py-5 text-center section-parallax" id="login" >

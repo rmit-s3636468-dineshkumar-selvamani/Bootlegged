@@ -1,5 +1,6 @@
 @include('layouts.store')
-@section('title', 'Edit Profile')
+@section('title')
+    <title>Bootlegged - Edit Profile</title>
 @include('sideNavBar')
 @section('content')
     <div class="view" style="margin-left: 14%;">

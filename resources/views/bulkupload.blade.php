@@ -1,5 +1,6 @@
 @include('layouts.store')
-@section('title', 'Bulk Upload')
+@section('title')
+    <title>Bootlegged - Bulk Upload</title>
 @section('content')
 
 

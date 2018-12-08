@@ -1,5 +1,6 @@
 @include('layouts.store')
-@section('title', 'Opportunities')
+@section('title')
+    <title>Bootlegged - Oppotunities</title>
 @section('content')
 
 

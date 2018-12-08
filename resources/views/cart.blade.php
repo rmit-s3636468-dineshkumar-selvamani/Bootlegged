@@ -1,5 +1,6 @@
 @include('layouts.store')
-@section('title', 'Cart')
+@section('title')
+    <title>Bootlegged - Cart</title>
 @section('content')
     @include('sideNavBar')
 
